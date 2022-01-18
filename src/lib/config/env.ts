@@ -5,6 +5,6 @@ export const CONFIG = {
   },
 
   MOCKS: {
-    MOCK_USER: false,
+    MOCK_USER: process.env.REACT_APP_MOCK_USER,
   },
 };

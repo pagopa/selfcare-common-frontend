@@ -46,8 +46,7 @@ stages:
             parameters:
               nodeVersion: $(NODE_VERSION)
           - script: |
-              yarn generate
-              yarn build
+              yarn dist
             displayName: 'Build'
 
   - stage: Static_analysis
@@ -92,6 +91,5 @@ stages:
               nodeVersion: $(NODE_VERSION)
 
           - script: |
-              yarn generate
               yarn test:coverage --watchAll=false
             displayName: 'Unit tests exec'
