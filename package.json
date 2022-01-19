@@ -52,7 +52,7 @@
     "build": "yarn setTsConfigStart && react-scripts build",
     "clean:build": "rimraf build",
     "setTsConfigDist": "copyfiles tsconfigDist.json build && renamer --replace tsconfig.json build/tsconfigDist.json && copyfiles -u 1 build/tsconfig.json . && rimraf build/tsconfig.json",
-    "cpDistStatic": "copyfiles -u 2 src/lib/assets/** dist && copyfiles -u 2 src/lib/index.css dist && copyfiles package.json dist",
+    "cpDistStatic": "copyfiles -u 2 src/lib/assets/** dist && copyfiles -u 2 src/lib/index.css dist && copyfiles package.json README.md dist",
     "dist": "yarn setTsConfigDist && tsc && yarn cpDistStatic",
     "clean:dist": "rimraf dist",
     "test": "yarn setTsConfigStart && react-scripts test --testPathIgnorePatterns src/lib/redux/__tests__/store -i",
