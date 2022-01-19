@@ -4,7 +4,7 @@ import MDSpinner from 'react-md-spinner';
 import { useSelector } from 'react-redux';
 import { appStateSelectors } from '../../redux/slices/appStateSlice';
 
-export function LoadingOverlay() {
+export default function LoadingOverlay() {
   const theme = useTheme();
   const loading = useSelector(appStateSelectors.selectLoading);
 

@@ -2,7 +2,7 @@ import { Box, Grid } from '@mui/material';
 import ErrorBoundary from './lib/components/ErrorBoundary/ErrorBoundary';
 import Footer from './lib/components/Footer/Footer';
 import Header from './lib/components/Header/Header';
-import { LoadingOverlay } from './lib/components/Loading/LoadingOverlay';
+import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import withLogin from './lib/decorators/withLogin';
 
 const App = () => (
