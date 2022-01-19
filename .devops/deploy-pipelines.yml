@@ -15,6 +15,7 @@ variables:
   YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
   # Execute agents (jobs) on latest Ubuntu version.
   vmImageNameDefault: 'ubuntu-latest'
+  gitReference: ${{ replace(replace(variables['Build.SourceBranch'], 'refs/tags/', ''), 'refs/heads/', '') }}
 
 # Only manual activations are intended
 trigger: none
@@ -78,6 +79,12 @@ stages:
           - template: templates/node-job-setup/template.yaml@pagopaCommons
             parameters:
               nodeVersion: $(NODE_VERSION)
+              # On the assumption that this stage is executed only when Release stage is,
+              #  with this parameter we set the reference the deploy script must pull changes from.
+              # The branch/tag name is calculated from the source branch
+              #  ex: Build.SourceBranch=refs/heads/master --> master
+              #  ex: Build.SourceBranch=refs/tags/v1.2.3-RELEASE --> v1.2.3-RELEASE
+              gitReference: $(gitReference)
           - bash: |
               yarn dist
             displayName: 'Build files'
