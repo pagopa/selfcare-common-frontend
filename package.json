@@ -57,9 +57,8 @@
     "test": "yarn setTsConfigStart && react-scripts test --testPathIgnorePatterns src/lib/redux/__tests__/store -i",
     "test:coverage": "react-scripts test --testPathIgnorePatterns src/lib/redux/__tests__/store -i --coverage",
     "clean:coverage": "rimraf coverage",
-    "eject": "react-scripts eject",
-    "lint-autofix": "eslint . -c .eslintrc.js --ext .ts,.tsx --fix",
-    "lint": "eslint . -c .eslintrc.js --ext .ts,.tsx ",
+    "lint-autofix": "yarn setTsConfigStart && eslint . -c .eslintrc.js --ext .ts,.tsx --fix",
+    "lint": "yarn setTsConfigStart && eslint . -c .eslintrc.js --ext .ts,.tsx ",
     "prettify": "prettier --write \"./**/*.{ts,tsx}\""
   },
   "eslintConfig": {
