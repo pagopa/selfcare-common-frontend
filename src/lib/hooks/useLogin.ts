@@ -14,7 +14,7 @@ export const useLogin = () => {
   const setUser = (user: User) => dispatch(userActions.setLoggedUser(user));
 
   const attemptSilentLogin = async () => {
-    if (CONFIG.MOCKS.MOCK_USER) {
+    if (CONFIG.MOCKS.MOCK_USER === 'true') {
       setUser({
         uid: '0',
         taxCode: 'AAAAAA00A00A000A',
