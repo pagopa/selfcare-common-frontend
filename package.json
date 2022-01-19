@@ -54,7 +54,7 @@
     "cpDistStatic": "copyfiles -u 2 src/lib/assets/** dist && copyfiles -u 2 src/lib/index.css dist",
     "dist": "yarn setTsConfigDist && tsc && yarn cpDistStatic",
     "clean:dist": "rimraf dist",
-    "test": "react-scripts test --testPathIgnorePatterns src/lib/redux/__tests__/store -i",
+    "test": "yarn setTsConfigStart && react-scripts test --testPathIgnorePatterns src/lib/redux/__tests__/store -i",
     "test:coverage": "react-scripts test --testPathIgnorePatterns src/lib/redux/__tests__/store -i --coverage",
     "clean:coverage": "rimraf coverage",
     "eject": "react-scripts eject",
