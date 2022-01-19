@@ -1,12 +1,13 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { FunctionComponent, ReactNode, useEffect } from 'react';
-import { Provider, useDispatch } from 'react-redux';
-import { createStore } from '../../../redux/__tests__/store';
-import ErrorBoundary from '../ErrorBoundary';
-import { AppError, appStateActions } from '../../../redux/slices/appStateSlice';
-import { handleErrors } from '../../../services/errorService';
+import { Provider } from 'react-redux';
+import { createStore } from '../../redux/__tests__/store';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+import useErrorDispatcher from '../useErrorDispatcher';
+import { AppError } from '../../redux/slices/appStateSlice';
+import { handleErrors } from '../../services/errorService';
 
-jest.mock('../../../services/errorService');
+jest.mock('../../services/errorService');
 
 const renderApp = (content: ReactNode) => {
   const store = createStore();
@@ -107,10 +108,10 @@ test('Test not blocking error retriable', async () => {
 
 function buildChildComponent(childText: string, error: AppError) {
   return () => {
-    const dispatch = useDispatch();
+    const addError = useErrorDispatcher();
 
     useEffect(() => {
-      dispatch(appStateActions.addError(error));
+      addError(error);
     });
 
     return <>{childText}</>;
