@@ -2,13 +2,21 @@ import React from 'react';
 import { Avatar } from '@mui/material';
 
 type Props = {
-  customSrc?: string | undefined;
-  customAlt?: string | undefined;
-  customWidth?: string | undefined;
-  customHeight?: string | undefined;
-  loading?: boolean;
+  /** The id attribute added to the element */
   id?: string;
+  /** The logo src */
+  customSrc?: string | undefined;
+  /** The alt text showed instead of the image */
+  customAlt?: string | undefined;
+  /** Logo width */
+  customWidth?: string | undefined;
+  /** Logo height */
+  customHeight?: string | undefined;
+  /** If true it will not display the component */
+  loading?: boolean;
 };
+
+/** Avatar to use to load Organization logo */
 export default function CustomAvatar({
   customAlt,
   customSrc,

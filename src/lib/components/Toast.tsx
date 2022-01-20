@@ -1,17 +1,25 @@
 import { Alert, Grid, SvgIcon, Typography, Box, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
-import { ReactComponent as logo } from '../assets/confirmUserUpdate.svg';
+import { ReactComponent as confirmLogo } from '../assets/confirmUserUpdate.svg';
+
 type Props = {
+  /** The logo to be rendered. As default a confirm logo will be used */
+  logo?: React.ReactNode;
+  /** The toast title */
   title: string;
+  /** The toast body */
   message: React.ReactNode;
+  /** The function to be invoked when closing the toast */
   closeToast: React.MouseEventHandler<HTMLButtonElement>;
 };
+
 const CustomAlert = styled(Alert)({
   '.MuiAlert-icon': { display: 'none' },
 });
 
-export default function Toast({ title, message, closeToast }: Props) {
+/** Selfcare's toast */
+export default function Toast({ title, message, closeToast, logo = confirmLogo }: Props) {
   return (
     <Grid container justifyContent="end" px={2}>
       <Grid item xs={12} display="flex" justifyContent="flex-end">

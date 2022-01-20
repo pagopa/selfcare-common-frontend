@@ -18,11 +18,15 @@ const getLabelDisplayedRowsTo = (count: number, page: number, size: number) => {
 };
 
 type Props = {
+  /** The actual page */
   page: Page;
+  /** The actual sort applied */
   sort?: string;
+  /** The function to be invoked if the user change page */
   onPageRequest: (r: PageRequest) => void;
 };
 
+/** Selfcare custom table available pages component */
 export default function CustomPagination({ page, onPageRequest, sort }: Props) {
   const count = page.totalElements;
   const from = count === 0 ? 0 : page.number * page.size + 1;
@@ -44,13 +48,14 @@ export default function CustomPagination({ page, onPageRequest, sort }: Props) {
               page={page.number + 1}
               count={page.totalPages}
               renderItem={(props2) => <PaginationItem {...props2} sx={{ border: 'none' }} />}
-              onChange={(_event: React.ChangeEvent<unknown>, value: number) =>
-                (onPageRequest({
+              onChange={(_event: React.ChangeEvent<unknown>, value: number) => (
+                onPageRequest({
                   page: value - 1,
                   size: page.size,
                   sort,
-                }),window.scrollTo(0,0))
-              }
+                }),
+                window.scrollTo(0, 0)
+              )}
             />
           )}
         </Grid>

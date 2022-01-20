@@ -8,6 +8,10 @@ import { LOADING_TASK_LOGIN_CHECK } from '../utils/constants';
 // eslint-disable-next-line @typescript-eslint/ban-types
 type LoginProps = {};
 
+/** This feature is based on react-redux library and require to register the reducer build in userSlice into the application's redux store.
+This decorator has to be applied to components whose acces require an active session.
+Accessing to the components decorated with it without a session will brought to the login page.
+It's possible to modify the login path changing the value in CONFIG.login inside the index.tsx file  */
 export default function withLogin<T extends LoginProps>(
   WrappedComponent: React.ComponentType<T>
 ): React.ComponentType<T> {

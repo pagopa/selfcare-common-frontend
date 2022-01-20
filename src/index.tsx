@@ -1,10 +1,4 @@
-import 'react-app-polyfill/ie11';
-import 'core-js/es/object/values';
-import 'core-js/es/promise';
-import 'core-js/es/array';
-import 'core-js/stable/string';
-import 'core-js/stable/number';
-import 'core-js/stable/url-search-params';
+import './lib/common-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './lib/index.css';
@@ -12,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from '@pagopa/mui-italia/theme';
-import App from './App';
+import AppExample from './AppExample';
 import { createStore } from './lib/redux/__tests__/store';
 import { CONFIG } from './lib/config/env';
 
@@ -27,7 +21,7 @@ ReactDOM.render(
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <App />
+          <AppExample />
         </ThemeProvider>
       </BrowserRouter>
     </Provider>

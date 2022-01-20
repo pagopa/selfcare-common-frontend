@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import App from '../App';
+import AppExample from '../AppExample';
 import { Provider } from 'react-redux';
 import { createStore } from '../lib/redux/__tests__/store';
 import { verifyMockExecution as verifyLoginMockExecution } from '../lib/decorators/__mocks__/withLogin';
@@ -17,7 +17,7 @@ const renderApp = (
   render(
     <Router history={history}>
       <Provider store={store}>
-        <App />
+        <AppExample />
       </Provider>
     </Router>
   );

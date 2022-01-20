@@ -5,25 +5,34 @@ import { Grid } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 
 type Props = {
+  /** The title to show */
   title: string;
+  /** The subtitle to show */
   subTitle?: string;
+  /** The margin top of the title */
+  mtTitle?: number;
+  /** The margin bottom of the title */
   mbTitle?: GridSize;
-  mtGrid?: number;
+  /** The margin bottom of the subtitle */
   mbSubTitle?: number;
+  /** The variant of the Typografy used for the title */
   variantTitle?: Variant;
+  /** The variant of the Typografy used for the subtitle */
   variantSubTitle?: Variant;
 };
+
+/** Selfcare's page title */
 export default function TitleBox({
   title,
   subTitle,
   mbTitle = 2,
-  mtGrid,
+  mtTitle,
   mbSubTitle,
   variantTitle = 'h1',
   variantSubTitle = 'h5',
 }: Props) {
   return (
-    <Grid container mt={mtGrid}>
+    <Grid container mt={mtTitle}>
       <Grid item xs={12} mb={mbTitle}>
         <Typography variant={variantTitle}>{title}</Typography>
       </Grid>

@@ -1,3 +1,5 @@
+import * as env from 'env-var';
+
 export const CONFIG = {
   URL_FE: {
     LOGIN: '/auth/login',
@@ -5,6 +7,6 @@ export const CONFIG = {
   },
 
   MOCKS: {
-    MOCK_USER: process.env.REACT_APP_MOCK_USER,
+    MOCK_USER: env.get('REACT_APP_MOCK_USER').default('false').asBool(),
   },
 };

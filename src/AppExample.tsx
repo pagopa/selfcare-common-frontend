@@ -5,7 +5,7 @@ import Header from './lib/components/Header/Header';
 import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import withLogin from './lib/decorators/withLogin';
 
-const App = () => (
+const AppExample = () => (
   <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
     <Box
       sx={{
@@ -23,4 +23,4 @@ const App = () => (
   </ErrorBoundary>
 );
 
-export default withLogin(App);
+export default withLogin(AppExample);

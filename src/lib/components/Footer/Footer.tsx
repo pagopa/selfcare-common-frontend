@@ -2,9 +2,11 @@ import { Box, Grid, Link, SvgIcon, Typography } from '@mui/material';
 import { ReactComponent as logo } from '../../assets/logo_pago_pa.svg';
 
 type Props = {
+  /** The email to which the assistance button will ask to send an email */
   assistanceEmail?: string;
 };
 
+/** SelfCare Footer component */
 const Footer = ({ assistanceEmail }: Props) => (
   <Box
     component="footer"

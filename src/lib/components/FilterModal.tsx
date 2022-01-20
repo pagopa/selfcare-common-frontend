@@ -15,20 +15,31 @@ import { useTheme } from '@mui/material/styles';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 type Props = {
+  /** If the popup is to be displayed */
   open: boolean;
+  /** The function to be invoked when clicking on exit button or selecting a value */
   handleClose: React.MouseEventHandler<HTMLButtonElement>;
+  /** The popup title */
   title: string;
+  /** @see FilterModalConfig */
   filterModalConfig?: FilterModalConfig<any, any>;
+  /** The popup height */
   height?: string;
+  /** The popup minHeight */
   minHeight?: string;
 };
 export type FilterModalConfig<T, V> = {
+  /** The list of values between to which choose */
   data: Array<T>;
+  /** A function that will select the label to show */
   getLabel: (e: T) => string;
+  /** A function that will select the value to return when selecting an item */
   getValue: (e: T) => V;
+  /** The function invoked when selecting a value */
   onFilterChange: (v: V) => void;
 };
 
+/** Modal used to show a list of values from which to choose a single value */
 export default function FilterModal({
   open,
   handleClose,

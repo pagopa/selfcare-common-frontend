@@ -80,8 +80,8 @@ Selfcare's page title
 |------|------|-----------|-------------|
 | title | string | Y | The title to show |
 | subTitle | string | N | The subtitle to show |
+| mtTitle | number | N | The margin top of the title |
 | mbTitle | GridSize | N | The margin bottom of the title |
-| mtGrid | number | N | The margin top of the title |
 | mbSubTitle | number | N | The margin bottom of the subtitle |
 | variantTitle | Variant | N | The variant of the Typografy used for the title |
 | variantSubTitle | Variant | N | The variant of the Typografy used for the subtitle |
@@ -91,6 +91,7 @@ Selfcare's toast
 
 | Prop | Type | Mandatory | Description |
 |------|------|-----------|-------------|
+| logo | React.ReactNode | N | The logo to be rendered. As default a confirm logo will be used |
 | title | string | Y | The toast title |
 | message | React.ReactNode | Y | The toast body |
 | closeToast | React.MouseEventHandler<HTMLButtonElement> | Y | The function to be invoked when closing the toast |

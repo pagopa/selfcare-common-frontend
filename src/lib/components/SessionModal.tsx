@@ -6,18 +6,31 @@ import { useTheme } from '@mui/material/styles';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 type Props = {
+  /** If this component should be displayed or not */
   open: boolean;
+  /** The title to show in the popup */
   title: string;
+  /** The body to show in the popup */
   message: React.ReactNode;
+  /** If defined, it will render a confirm button using this function as behavior */
   onConfirm?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  /** The confirm label text */
   onConfirmLabel?: string;
+  /** The function invoked when clicking on close button or in the showed X icon */
   handleClose: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  /** If defined, it allow to set a different behavior when clicking on X icon */
   handleExit?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  /** Close button text */
   onCloseLabel?: string;
+  /** The popup height */
   height?: string;
+  /** The popup minHeight */
   minHeight?: string;
+  /** The popup width */
   width?: string;
 };
+
+/** Selfcare's popup */
 export default function SessionModal({
   open,
   title,
