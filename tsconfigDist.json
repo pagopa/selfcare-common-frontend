@@ -30,7 +30,8 @@
     "node_modules",
     "**/__tests__/*",
     "Dangerfile.ts",
-    "src/App.tsx",
+    "src/AppExample.tsx",
+    "src/examples/**/*",
     "src/index.tsx",
     "src/setupTests.ts"
   ]
