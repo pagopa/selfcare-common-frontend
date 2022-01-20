@@ -22,21 +22,21 @@ type Props = {
   /** The popup title */
   title: string;
   /** @see FilterModalConfig */
-  filterModalConfig?: FilterModalConfig<any, any>;
+  filterModalConfig?: FilterModalConfig<any>;
   /** The popup height */
   height?: string;
   /** The popup minHeight */
   minHeight?: string;
 };
-export type FilterModalConfig<T, V> = {
+export type FilterModalConfig<T> = {
   /** The list of values between to which choose */
   data: Array<T>;
   /** A function that will select the label to show */
   getLabel: (e: T) => string;
   /** A function that will select the value to return when selecting an item */
-  getValue: (e: T) => V;
+  getValue: (e: T) => string;
   /** The function invoked when selecting a value */
-  onFilterChange: (v: V) => void;
+  onFilterChange: (v: string) => void;
 };
 
 /** Modal used to show a list of values from which to choose a single value */
@@ -53,8 +53,8 @@ export default function FilterModal({
 
   const [valueRadio, setValueRadio] = React.useState<string>('');
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValueRadio(event.target.value);
+  const handleChange = (_: React.ChangeEvent<HTMLInputElement>, value: any) => {
+    setValueRadio(value);
   };
 
   const submitFilter = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

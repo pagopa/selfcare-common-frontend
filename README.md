@@ -53,8 +53,8 @@ FilterModalConfig fields:
 |-------|------|-----------|-------------|
 | data | Array<T> | Y | The list of values between to which choose |
 | getLabel | (e: T) => string | Y | A function that will select the label to show |
-| getValue | (e: T) => V | Y | A function that will select the value to return when selecting an item |
-| onFilterChange | (v: V) => void | Y | The function invoked when selecting a value |
+| getValue | (e: T) => string | Y | A function that will select the value to return when selecting an item |
+| onFilterChange | (v: string) => void | Y | The function invoked when selecting a value |
 
 ## SessionModal
 Selfcare's popup
@@ -91,10 +91,11 @@ Selfcare's toast
 
 | Prop | Type | Mandatory | Description |
 |------|------|-----------|-------------|
-| logo | React.ReactNode | N | The logo to be rendered. As default a confirm logo will be used |
+| open | boolean | Y | If this component should be displayed or not |
+| logo | React.ElementType | N | The logo to be rendered. As default a confirm logo will be used |
 | title | string | Y | The toast title |
 | message | React.ReactNode | Y | The toast body |
-| closeToast | React.MouseEventHandler<HTMLButtonElement> | Y | The function to be invoked when closing the toast |
+| closeToast | ()=>void | Y | The function to be invoked when closing the toast |
 
 # Common decorators used in pagopa/selfcare react projects
 ## withLogin

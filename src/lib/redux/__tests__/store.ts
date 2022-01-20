@@ -8,4 +8,8 @@ export const createStore = () =>
       user: userReducer,
       appState: appStateReducer,
     },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
   });
