@@ -17,7 +17,7 @@ variables:
 trigger:
   branches:
     include:
-      - main
+    - main
 pr:
   branches:
     include:
