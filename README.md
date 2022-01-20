@@ -54,7 +54,7 @@ FilterModalConfig fields:
 | data | Array<T> | Y | The list of values between to which choose |
 | getLabel | (e: T) => string | Y | A function that will select the label to show |
 | getValue | (e: T) => string | Y | A function that will select the value to return when selecting an item |
-| onFilterChange | (v: string) => void | Y | The function invoked when selecting a value |
+| onFilterChange | (v: V) => void | Y | The function invoked when selecting a value |
 
 ## SessionModal
 Selfcare's popup

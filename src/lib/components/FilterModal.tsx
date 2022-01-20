@@ -22,13 +22,13 @@ type Props = {
   /** The popup title */
   title: string;
   /** @see FilterModalConfig */
-  filterModalConfig?: FilterModalConfig<any>;
+  filterModalConfig?: FilterModalConfig<any, any>;
   /** The popup height */
   height?: string;
   /** The popup minHeight */
   minHeight?: string;
 };
-export type FilterModalConfig<T> = {
+export type FilterModalConfig<T, V> = {
   /** The list of values between to which choose */
   data: Array<T>;
   /** A function that will select the label to show */
@@ -36,7 +36,7 @@ export type FilterModalConfig<T> = {
   /** A function that will select the value to return when selecting an item */
   getValue: (e: T) => string;
   /** The function invoked when selecting a value */
-  onFilterChange: (v: string) => void;
+  onFilterChange: (v: V) => void;
 };
 
 /** Modal used to show a list of values from which to choose a single value */
