@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "esnext",
-    "module": "esnext",
+    "module": "commonjs",
     "lib": ["es6", "dom", "es2019"],
     "jsx": "react-jsx",
     "declaration": true,
@@ -22,7 +22,8 @@
     "allowJs": false,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": true
   },
   "include": ["src/**/*"],
   "exclude": [
