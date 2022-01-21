@@ -1,5 +1,5 @@
-import { Box, Grid, Link, SvgIcon, Typography } from '@mui/material';
-import { ReactComponent as logo } from '../../assets/logo_pago_pa.svg';
+import { Box, Grid, Link, Typography } from '@mui/material';
+import PagoPaIcon from '../icons/PagoPaIcon';
 
 type Props = {
   /** The email to which the assistance button will ask to send an email */
@@ -22,7 +22,7 @@ const Footer = ({ assistanceEmail }: Props) => (
   >
     <Grid container justifyContent={'center'} alignItems={'center'}>
       <Box sx={{ width: '90%', display: 'flex' }}>
-        <SvgIcon component={logo} viewBox="0 0 140 33" sx={{ width: '119px' }} />
+        <PagoPaIcon viewBox="0 0 140 33" sx={{ width: '119px' }} />
         <Box sx={{ textAlign: 'right', flexGrow: 1 }} pl={8}>
           <Typography
             component="div"
