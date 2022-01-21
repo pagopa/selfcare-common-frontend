@@ -9,7 +9,7 @@ type Props = {
   open: boolean;
   /** The logo to be rendered. As default a confirm logo will be used */
   logo?: React.ElementType;
-  /** The logo to be rendered. As default a confirm logo will be used */
+  /** The color used for the left border */
   leftBorderColor?: string;
   /** The toast title */
   title: string;
