@@ -89,6 +89,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         logo={FaultIcon}
         leftBorderColor="#C02927"
         onCloseToast={() => {
+          this.props.removeError(error);
           if (error.onClose) {
             error.onClose();
           }
