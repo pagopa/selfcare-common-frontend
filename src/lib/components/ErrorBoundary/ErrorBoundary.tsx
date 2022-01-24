@@ -6,6 +6,7 @@ import { createSelector } from 'reselect';
 import { AppError, appStateActions, appStateSelectors } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
 import SessionModal from '../SessionModal';
+import Toast from '../Toast';
 import BlockingErrorPage from './components/BlockingErrorPage';
 
 interface Props {
@@ -26,6 +27,13 @@ Errors dispatched will be notified using errorService
 To use this feature you have to put ErrorBOundary in your App as a child of a redux Provider component.
 In order to dispatch an error you have to use the custom hook useErrorDispatcher which will return a fuction to be used to dispatch the error. */
 class ErrorBoundary extends Component<Props & ConnectedProps> {
+  constructor(props: Props & ConnectedProps) {
+    super(props);
+    this.buildNotBlockingError.bind(this);
+    this.buildErrorModal.bind(this);
+    this.buildErrorToast.bind(this);
+  }
+
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.props.addError({
       id: uniqueId('uncaught-'),
@@ -50,7 +58,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
       return (
         <Fragment>
           {this.props.children}
-          {hasError && this.buildErrorModal(this.props.errors[0])}
+          {hasError && this.buildNotBlockingError(this.props.errors[0])}
         </Fragment>
       );
     } else {
@@ -61,6 +69,31 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         />
       );
     }
+  }
+
+  buildNotBlockingError(error: AppError): ReactNode {
+    if (!error.component || error.component === 'SessionModal') {
+      return this.buildErrorModal(error);
+    } else {
+      return this.buildErrorToast(error);
+    }
+  }
+
+  buildErrorToast(error: AppError) {
+    return (
+      <Toast
+        open={true}
+        title="Errore"
+        message="Spiacenti, qualcosa è andato storto."
+        // logo = confirmLogo,
+        leftBorderColor="#C02927"
+        onCloseToast={() => {
+          if (error.onClose) {
+            error.onClose();
+          }
+        }}
+      />
+    );
   }
 
   buildErrorModal(error: AppError) {
