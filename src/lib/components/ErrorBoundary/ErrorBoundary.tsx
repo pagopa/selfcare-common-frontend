@@ -7,6 +7,7 @@ import { AppError, appStateActions, appStateSelectors } from '../../redux/slices
 import { handleErrors } from '../../services/errorService';
 import SessionModal from '../SessionModal';
 import Toast from '../Toast';
+import FaultIcon from '../icons/FaultIcon';
 import BlockingErrorPage from './components/BlockingErrorPage';
 
 interface Props {
@@ -83,9 +84,9 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
     return (
       <Toast
         open={true}
-        title="Errore"
-        message="Spiacenti, qualcosa è andato storto."
-        // logo = confirmLogo,
+        title={error.displayableTitle ?? 'ERRORE'}
+        message={error.displayableDescription ?? 'Spiacenti, qualcosa è andato storto.'}
+        logo={FaultIcon}
         leftBorderColor="#C02927"
         onCloseToast={() => {
           if (error.onClose) {
