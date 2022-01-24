@@ -1,8 +1,8 @@
-import { AppBar, Button, SvgIcon, Toolbar } from '@mui/material';
+import { AppBar, Button, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import { Fragment } from 'react';
-import { ReactComponent as logo } from '../../assets/logo_pago_pa_mini.svg';
 import { CONFIG } from '../../config/env';
+import PagoPaMiniIcon from '../icons/PagoPaMiniIcon';
 import SubHeader from './subHeader/SubHeader';
 
 type HeaderProps = {
@@ -31,7 +31,7 @@ const Header = ({
       }}
     >
       <Toolbar sx={{ width: { xs: '100%', lg: '90%', minHeight: '48px !important' } }}>
-        <SvgIcon component={logo} viewBox="0 0 80 24" sx={{ width: '80px' }} />
+        <PagoPaMiniIcon viewBox="0 0 80 22" sx={{ width: '80px' }} />
         {onExitAction !== null ? (
           <Box sx={{ flexGrow: 1, textAlign: 'right' }}>
             <Button

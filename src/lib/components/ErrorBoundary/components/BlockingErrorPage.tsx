@@ -1,5 +1,5 @@
 import { Button, Grid, Typography, Box } from '@mui/material';
-import { ReactComponent as ErrorIllustration } from '../../../assets/error-illustration.svg';
+import ErrorIcon from '../../icons/ErrorIcon';
 
 type Props = {
   description?: string;
@@ -11,7 +11,7 @@ export default ({ description, assistanceEmail }: Props) => (
     <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
       <Grid container item justifyContent="center" mb={5}>
         <Grid item xs={6}>
-          <ErrorIllustration />
+          <ErrorIcon />
         </Grid>
       </Grid>
       <Grid container item justifyContent="center">

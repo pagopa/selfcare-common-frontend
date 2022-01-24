@@ -2,14 +2,14 @@ import React, { Fragment } from 'react';
 import { Alert, Grid, SvgIcon, Typography, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
-import { ReactComponent as confirmLogo } from '../assets/confirmUserUpdate.svg';
+import ConfirmIcon from './icons/ConfirmIcon';
 
 type Props = {
   /** If this component should be displayed or not */
   open: boolean;
   /** The logo to be rendered. As default a confirm logo will be used */
   logo?: React.ElementType;
-  /** The logo to be rendered. As default a confirm logo will be used */
+  /** The color used for the left border */
   leftBorderColor?: string;
   /** The toast title */
   title: string;
@@ -29,7 +29,7 @@ export default function Toast({
   title,
   message,
   onCloseToast,
-  logo = confirmLogo,
+  logo = ConfirmIcon,
   leftBorderColor = '#00CF86',
 }: Props) {
   return (

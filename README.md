@@ -93,9 +93,10 @@ Selfcare's toast
 |------|------|-----------|-------------|
 | open | boolean | Y | If this component should be displayed or not |
 | logo | React.ElementType | N | The logo to be rendered. As default a confirm logo will be used |
+| leftBorderColor | string | N | The color used for the left border. | 
 | title | string | Y | The toast title |
 | message | React.ReactNode | Y | The toast body |
-| closeToast | ()=>void | Y | The function to be invoked when closing the toast |
+| onCloseToast | ()=>void | Y | The function to be invoked when closing the toast |
 
 # Common decorators used in pagopa/selfcare react projects
 ## withLogin
