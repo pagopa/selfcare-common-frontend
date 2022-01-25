@@ -135,5 +135,6 @@ The error to be submitted has type AppError which has the following fields:
 | onRetry | () => void | N | If defined, in case of not blocking error, it will render a retry button which will execute this function |
 | onClose | () => void | N | If defined, in case of not blocking error, it will be executed when closing the popup |
 | toNotify | boolean | Y | If true, it will notify the error |
+| component | string | N | Can render a SessionModal or Toast component |
 
 ASIS the notify consists just on the console.error invocation

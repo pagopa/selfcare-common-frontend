@@ -33,6 +33,9 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
     this.buildNotBlockingError.bind(this);
     this.buildErrorModal.bind(this);
     this.buildErrorToast.bind(this);
+    this.handleClose.bind(this);
+    this.popError.bind(this);
+    this.retryError.bind(this);
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -88,12 +91,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         message={error.displayableDescription ?? 'Spiacenti, qualcosa è andato storto.'}
         logo={FaultIcon}
         leftBorderColor="#C02927"
-        onCloseToast={() => {
-          this.props.removeError(error);
-          if (error.onClose) {
-            error.onClose();
-          }
-        }}
+        onCloseToast={() => this.handleClose(error)}
       />
     );
   }
@@ -105,12 +103,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         title={error.displayableTitle ?? 'Errore'}
         message={error.displayableDescription ?? 'Spiacenti, qualcosa è andato storto.'}
         onConfirm={error.onRetry ? () => this.retryError(error) : undefined}
-        handleClose={() => {
-          this.popError(error);
-          if (error.onClose) {
-            error.onClose();
-          }
-        }}
+        handleClose={() => this.handleClose(error)}
       />
     );
   }
@@ -125,8 +118,14 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
   popError(error: AppError) {
     this.props.removeError(error);
   }
-}
 
+  handleClose(error: AppError) {
+    this.popError(error);
+    if (error.onClose) {
+      error.onClose();
+    }
+  }
+}
 const errorsSelector = createSelector(appStateSelectors.selectErrors, (errors) => errors);
 
 function mapStateToProps(state: any) {
