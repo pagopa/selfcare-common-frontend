@@ -6,6 +6,8 @@ import { createSelector } from 'reselect';
 import { AppError, appStateActions, appStateSelectors } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
 import SessionModal from '../SessionModal';
+import Toast from '../Toast';
+import FaultIcon from '../icons/FaultIcon';
 import BlockingErrorPage from './components/BlockingErrorPage';
 
 interface Props {
@@ -26,6 +28,16 @@ Errors dispatched will be notified using errorService
 To use this feature you have to put ErrorBOundary in your App as a child of a redux Provider component.
 In order to dispatch an error you have to use the custom hook useErrorDispatcher which will return a fuction to be used to dispatch the error. */
 class ErrorBoundary extends Component<Props & ConnectedProps> {
+  constructor(props: Props & ConnectedProps) {
+    super(props);
+    this.buildNotBlockingError.bind(this);
+    this.buildErrorModal.bind(this);
+    this.buildErrorToast.bind(this);
+    this.handleClose.bind(this);
+    this.popError.bind(this);
+    this.retryError.bind(this);
+  }
+
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.props.addError({
       id: uniqueId('uncaught-'),
@@ -50,7 +62,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
       return (
         <Fragment>
           {this.props.children}
-          {hasError && this.buildErrorModal(this.props.errors[0])}
+          {hasError && this.buildNotBlockingError(this.props.errors[0])}
         </Fragment>
       );
     } else {
@@ -63,6 +75,27 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
     }
   }
 
+  buildNotBlockingError(error: AppError): ReactNode {
+    if (!error.component || error.component === 'SessionModal') {
+      return this.buildErrorModal(error);
+    } else {
+      return this.buildErrorToast(error);
+    }
+  }
+
+  buildErrorToast(error: AppError) {
+    return (
+      <Toast
+        open={true}
+        title={error.displayableTitle ?? 'ERRORE'}
+        message={error.displayableDescription ?? 'Spiacenti, qualcosa è andato storto.'}
+        logo={FaultIcon}
+        leftBorderColor="#C02927"
+        onCloseToast={() => this.handleClose(error)}
+      />
+    );
+  }
+
   buildErrorModal(error: AppError) {
     return (
       <SessionModal
@@ -70,12 +103,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         title={error.displayableTitle ?? 'Errore'}
         message={error.displayableDescription ?? 'Spiacenti, qualcosa è andato storto.'}
         onConfirm={error.onRetry ? () => this.retryError(error) : undefined}
-        handleClose={() => {
-          this.popError(error);
-          if (error.onClose) {
-            error.onClose();
-          }
-        }}
+        handleClose={() => this.handleClose(error)}
       />
     );
   }
@@ -90,8 +118,14 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
   popError(error: AppError) {
     this.props.removeError(error);
   }
-}
 
+  handleClose(error: AppError) {
+    this.popError(error);
+    if (error.onClose) {
+      error.onClose();
+    }
+  }
+}
 const errorsSelector = createSelector(appStateSelectors.selectErrors, (errors) => errors);
 
 function mapStateToProps(state: any) {

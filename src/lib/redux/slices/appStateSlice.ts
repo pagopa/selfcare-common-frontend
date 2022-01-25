@@ -21,6 +21,8 @@ export type AppError = {
   onClose?: () => void;
   /** If true, it will notify the error */
   toNotify: boolean;
+  /** Can render a SessionModal or Toast component */
+  component?: 'SessionModal' | 'Toast';
 };
 
 interface AppStateState {

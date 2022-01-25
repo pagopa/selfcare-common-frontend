@@ -89,6 +89,7 @@ test('Test not blocking error retriable', async () => {
     techDescription: 'DUMMY',
     onRetry: retryMock,
     toNotify: true,
+    component: 'SessionModal',
   });
   renderApp(<Child />);
 
@@ -101,6 +102,31 @@ test('Test not blocking error retriable', async () => {
   fireEvent.click(exitButton);
   expect(retryMock.mock.calls.length).toBe(1);
 
+  checkClosedError(childText);
+});
+
+test('Test not blocking error toast', async () => {
+  const errorDisplayed = 'ERROR DESCRIPTION TO BE DISPLAYED';
+  const childText = 'DISPLAYED TEXT';
+  const Child: FunctionComponent = buildChildComponent(childText, {
+    id: 'id',
+    error: null,
+    blocking: false,
+    displayableTitle: 'Errore',
+    displayableDescription: errorDisplayed,
+    techDescription: 'DUMMY',
+    toNotify: true,
+    component: 'Toast',
+  });
+  renderApp(<Child />);
+
+  checkNotBlockingError(false, errorDisplayed);
+
+  screen.getByText(childText);
+  checkErrorServiceMockInvocation();
+  expect(screen.queryByText('Annulla')).toBeNull();
+  const exitButton = screen.getByTestId('CloseIcon');
+  fireEvent.click(exitButton);
   checkClosedError(childText);
 });
 

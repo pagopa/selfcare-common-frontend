@@ -22,9 +22,21 @@ export default () => {
       displayableDescription: 'Example of message body',
       toNotify: notify,
       blocking: false,
+      component: 'SessionModal',
       onRetry: () => {
         setTimeout(() => testNotBlockingError(notify), 1000);
       },
+    });
+  };
+
+  const testToastError = (notify: boolean) => {
+    addError({
+      id: 'TOAST_NOTIFY_ERROR',
+      error: new Error('PROVA'),
+      techDescription: `blocking error example having toast notify ${notify}`,
+      toNotify: notify,
+      component: 'Toast',
+      blocking: false,
     });
   };
 
@@ -42,6 +54,11 @@ export default () => {
       <Button onClick={() => testNotBlockingError(false)} variant="contained">
         Test NOT Blocking Error not notified
       </Button>
+
+      <Button onClick={() => testToastError(true)} variant="contained">
+        Test With Toast notification
+      </Button>
+
       <Button
         onClick={() => {
           throw new Error('Dummy error');
