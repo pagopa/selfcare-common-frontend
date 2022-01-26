@@ -4,6 +4,7 @@ export const CONFIG = {
   URL_FE: {
     LOGIN: '/auth/login',
     LOGOUT: '/auth/logout',
+    ASSISTANCE: '/assistenza',
   },
 
   MOCKS: {

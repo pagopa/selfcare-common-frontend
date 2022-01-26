@@ -1,4 +1,5 @@
 import { Button, Grid, Typography, Box } from '@mui/material';
+import { buildAssistanceURI } from '../../../services/assistanceService';
 import ErrorIcon from '../../icons/ErrorIcon';
 
 type Props = {
@@ -33,9 +34,9 @@ export default ({ description, assistanceEmail }: Props) => (
             <Button
               variant="contained"
               sx={{ width: '200px', alignSelf: 'center' }}
-              onClick={() => window.location.assign(`mailto:${assistanceEmail}`)}
+              onClick={() => window.location.assign(buildAssistanceURI(assistanceEmail))}
             >
-              Contatta l&quot;assistenza
+              Contatta l&apos;assistenza
             </Button>
           </Grid>
         </Grid>
