@@ -19,6 +19,10 @@ type Props = {
   variantTitle?: Variant;
   /** The variant of the Typografy used for the subtitle */
   variantSubTitle?: Variant;
+  /** The variant of the title font size */
+  titleFontSize?: string;
+  /** The variant of the subtitle font size */
+  subTitleFontSize?: string;
 };
 
 /** Selfcare's page title */
@@ -30,14 +34,16 @@ export default function TitleBox({
   mbSubTitle,
   variantTitle = 'h1',
   variantSubTitle = 'h5',
+  titleFontSize,
+  subTitleFontSize = '18px'
 }: Props) {
   return (
     <Grid container mt={mtTitle}>
       <Grid item xs={12} mb={mbTitle}>
-        <Typography variant={variantTitle}>{title}</Typography>
+        <Typography variant={variantTitle} sx={{fontSize: titleFontSize}}>{title}</Typography>
       </Grid>
       <Grid item xs={12} mb={mbSubTitle}>
-        <Typography variant={variantSubTitle} sx={{ fontSize: '18px' }}>
+        <Typography variant={variantSubTitle} sx={{ fontSize: subTitleFontSize }}>
           {subTitle}
         </Typography>
       </Grid>
