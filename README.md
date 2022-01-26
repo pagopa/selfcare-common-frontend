@@ -98,6 +98,17 @@ Selfcare's toast
 | message | React.ReactNode | Y | The toast body |
 | onCloseToast | ()=>void | Y | The function to be invoked when closing the toast |
 
+## Ending Page
+Selfcare's ending page
+
+| Prop | Type | Mandatory | Description |
+|------|------|-----------|-------------|
+| icon | React.ReactElement | N | The ending page icon |
+| title | string | Y | The ending page title |
+| description | string | Y | The ending page description | 
+| buttonLabel | string | N | The ending page button label if any |
+| onButtonClick | () => void | N | if defined it will show a button that will performe this action on click |
+
 # Common decorators used in pagopa/selfcare react projects
 ## withLogin
 This feature is based on react-redux library and require to register the reducer build in userSlice into the application's redux store.
