@@ -1,18 +1,19 @@
-import { Button, Grid, Typography, Box } from '@mui/material';
+import { Button, Grid, Typography, Box, SvgIconProps } from '@mui/material';
 import { buildAssistanceURI } from '../../../services/assistanceService';
 import ErrorIcon from '../../icons/ErrorIcon';
 
 type Props = {
   description?: string;
   assistanceEmail?: string;
+  icon?: React.ReactElement<SvgIconProps>;
 };
 
-export default ({ description, assistanceEmail }: Props) => (
+export default ({ description, assistanceEmail, icon }: Props) => (
   <Box sx={{ minHeight: '100vh' }} display="flex">
     <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
       <Grid container item justifyContent="center" mb={5}>
         <Grid item xs={6}>
-          <ErrorIcon />
+          {icon ?? <ErrorIcon /> }
         </Grid>
       </Grid>
       <Grid container item justifyContent="center">
