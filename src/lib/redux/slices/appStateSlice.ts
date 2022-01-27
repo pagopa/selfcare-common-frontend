@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ErrorInfo } from 'react';
+import { UserNotify } from '../../model/UserNotify';
 
 export type AppError = {
   /** The identifier used to recognize the error: it cannot be possible to have the same error id at the same time */
@@ -31,6 +32,7 @@ interface AppStateState {
     tasks: { [taskId: string]: boolean };
   };
   errors: Array<AppError>;
+  userNotifies: Array<UserNotify>;
 }
 
 const initialState: AppStateState = {
@@ -39,6 +41,7 @@ const initialState: AppStateState = {
     tasks: {},
   },
   errors: [],
+  userNotifies: [],
 };
 
 /* eslint-disable functional/immutable-data */
@@ -61,6 +64,12 @@ export const appStateSlice = createSlice({
     removeError: (state, action: PayloadAction<AppError>) => {
       state.errors = state.errors.filter((e) => e.id !== action.payload.id);
     },
+    addNotify: (state, action: PayloadAction<UserNotify>) => {
+      state.userNotifies.push(action.payload);
+    },
+    removeNotify: (state, action: PayloadAction<UserNotify>) => {
+      state.userNotifies = state.userNotifies.filter((e) => e.id !== action.payload.id);
+    },
   },
 });
 
@@ -70,4 +79,5 @@ export const appStateReducer = appStateSlice.reducer;
 export const appStateSelectors = {
   selectLoading: (state: any) => state.appState.loading.result,
   selectErrors: (state: any) => state.appState.errors,
+  selectNotifies: (state: any) => state.appState.userNotifies,
 };
