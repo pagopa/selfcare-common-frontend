@@ -16,7 +16,7 @@ type Props = {
 
 /** Selfcare's Ending Page */
 export default ({ description, onButtonClick, icon = <CheckIllustrationIcon />, title, buttonLabel }: Props) => (
-  <Box sx={{ minHeight: '100vh' }} display="flex">
+  <Box sx={{ minHeight: '100vh' }} display="flex" flexGrow={1}>
     <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
       <Grid container item justifyContent="center" mb={5}>
         <Grid item xs={6}>
