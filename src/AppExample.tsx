@@ -59,7 +59,7 @@ const AppExample = () => (
           <ToastExample />
         </Grid>
 
-        <Grid item xs={1}>
+        <Grid item xs={4}>
           <UseUserNotifyExample />
         </Grid>
       </Grid>

@@ -30,6 +30,7 @@ test('test Notify Through Toast', () => {
     id: 'EXAMPLE',
     title: 'TITLE',
     message: 'MESSAGE',
+    component: 'Toast',
   });
 
   expect(screen.queryByText('TITLE')).toBeNull();
@@ -41,4 +42,62 @@ test('test Notify Through Toast', () => {
   const exitButton = screen.getByTestId('CloseIcon');
   fireEvent.click(exitButton);
   expect(screen.queryByText('TITLE')).toBeNull();
+});
+
+test('test Notify Closing Through Popup', () => {
+  renderApp({
+    id: 'EXAMPLE',
+    title: 'TITLE',
+    message: 'MESSAGE',
+    component: 'SessionModal',
+  });
+
+  expect(screen.queryByText('EXAMPLE')).toBeNull();
+  const button = screen.getByText('NOTIFY');
+  fireEvent.click(button);
+  screen.getByText('TITLE');
+  screen.getByText('MESSAGE');
+
+  const exitButton = screen.getByTestId('ClearOutlinedIcon');
+  fireEvent.click(exitButton);
+  expect(screen.queryByText('EXAMPLE')).toBeNull();
+});
+
+test('test Notify Confirm Through Popup', () => {
+  renderApp({
+    id: 'EXAMPLE',
+    title: 'TITLE',
+    message: 'MESSAGE',
+    component: 'SessionModal',
+    confirmLabel: 'Conferma',
+  });
+
+  expect(screen.queryByText('EXAMPLE')).toBeNull();
+  const button = screen.getByText('NOTIFY');
+  fireEvent.click(button);
+  screen.getByText('TITLE');
+  screen.getByText('MESSAGE');
+
+  const confirmButton = screen.getByRole('button', { name: 'Conferma' });
+  fireEvent.click(confirmButton);
+  expect(screen.queryByText('EXAMPLE')).toBeNull();
+});
+
+test('test Notify Cancel Through Popup', () => {
+  renderApp({
+    id: 'EXAMPLE',
+    title: 'TITLE',
+    message: 'MESSAGE',
+    component: 'SessionModal',
+  });
+
+  expect(screen.queryByText('EXAMPLE')).toBeNull();
+  const button = screen.getByText('NOTIFY');
+  fireEvent.click(button);
+  screen.getByText('TITLE');
+  screen.getByText('MESSAGE');
+
+  const cancelButton = screen.getByRole('button', { name: 'Annulla' });
+  fireEvent.click(cancelButton);
+  expect(screen.queryByText('EXAMPLE')).toBeNull();
 });

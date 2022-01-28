@@ -138,3 +138,25 @@ The error to be submitted has type AppError which has the following fields:
 | component | string | N | Can render a SessionModal or Toast component |
 
 ASIS the notify consists just on the console.error invocation
+
+## UserNotifyHandle
+This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.
+It allows to dispatch User Notifies in order to display a pop up or a toast notification.
+
+To use this feature you have to put UserNotifyHandle in your App as a child of a redux Provider component.
+In order to dispatch a User Notify, you have to use the custom hook useUserNotify which will return a fuction to be used to dispatch the User Notify.
+
+The user notify to be submitted has type UserNotify which has the following fields:
+
+| Field | Type | Mandatory | Description |
+|-------|------|-----------|-------------|
+| id | string | Y | The identifier used to recognize the user notify: it cannot be possible to have the same error id at the same time |
+| title | string | Y | / The title to show in the popup or toast |
+| message | React.ReactNode | Y | The body to show in the popup or toast |
+| logo | React.ElementType | N | If component === 'Toast'. The logo to be rendered. As default a confirm logo will be used |
+| leftBorderColor | string | N | If component === 'Toast'. The color used for the left border |
+| onConfirm | () => void | N | If component === 'SessionModal'. If defined, it will render a confirm button which will execute this function |
+| confirmLabel | string | N | If component === 'SessionModal'. If present, this string will rappresent the confirm button label |
+| onClose | () => void | N | If defined, it will be executed when closing the popup |
+| closeLabel | string | N | If component === 'SessionModal'. The close button label |
+| component | string | N | Can render a SessionModal or Toast component |

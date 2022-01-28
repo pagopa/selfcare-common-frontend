@@ -77,7 +77,7 @@ export const appStateActions = appStateSlice.actions;
 export const appStateReducer = appStateSlice.reducer;
 
 export const appStateSelectors = {
-  selectLoading: (state: any) => state.appState.loading.result,
-  selectErrors: (state: any) => state.appState.errors,
-  selectNotifies: (state: any) => state.appState.userNotifies,
+  selectLoading: (state: { appState: AppStateState }) => state.appState.loading.result,
+  selectErrors: (state: { appState: AppStateState }) => state.appState.errors,
+  selectNotifies: (state: { appState: AppStateState }) => state.appState.userNotifies,
 };
