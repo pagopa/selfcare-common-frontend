@@ -25,7 +25,7 @@ interface ConnectedProps {
 It allows to dispatch errors in order to display a warning or the error page to the user.
 Errors dispatched will be notified using errorService
 
-To use this feature you have to put ErrorBOundary in your App as a child of a redux Provider component.
+To use this feature you have to put ErrorBoundary in your App as a child of a redux Provider component.
 In order to dispatch an error you have to use the custom hook useErrorDispatcher which will return a fuction to be used to dispatch the error. */
 class ErrorBoundary extends Component<Props & ConnectedProps> {
   constructor(props: Props & ConnectedProps) {

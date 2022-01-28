@@ -6,11 +6,13 @@ import SessionModalExample from './examples/SessionModalExample';
 import ToastExample from './examples/ToastExample';
 import UseErrorDispatcherExample from './examples/UseErrorDispatcherExample';
 import UseLoadingExample from './examples/UseLoadingExample';
+import UseUserNotifyExample from './examples/UseUserNotifyExample';
 import { TitleBox } from './lib';
 import ErrorBoundary from './lib/components/ErrorBoundary/ErrorBoundary';
 import Footer from './lib/components/Footer/Footer';
 import Header from './lib/components/Header/Header';
 import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
+import UserNotifyHandle from './lib/components/UserNotifyHandle';
 import withLogin from './lib/decorators/withLogin';
 
 const AppExample = () => (
@@ -23,6 +25,7 @@ const AppExample = () => (
       }}
     >
       <Header withSecondHeader={false} />
+      <UserNotifyHandle />
       <LoadingOverlay />
 
       <TitleBox title="Title example" subTitle="Subtitle example" />
@@ -54,6 +57,10 @@ const AppExample = () => (
 
         <Grid item xs={1}>
           <ToastExample />
+        </Grid>
+
+        <Grid item xs={4}>
+          <UseUserNotifyExample />
         </Grid>
       </Grid>
       <Footer assistanceEmail="assistenza@selfcare.it" />
