@@ -26,11 +26,13 @@ function buildChildComponent(userNotify: UserNotify) {
 }
 
 test('test Notify Through Toast', () => {
+  const onCloseMock = jest.fn();
   renderApp({
     id: 'EXAMPLE',
     title: 'TITLE',
     message: 'MESSAGE',
     component: 'Toast',
+    onClose: onCloseMock,
   });
 
   expect(screen.queryByText('TITLE')).toBeNull();
@@ -42,14 +44,18 @@ test('test Notify Through Toast', () => {
   const exitButton = screen.getByTestId('CloseIcon');
   fireEvent.click(exitButton);
   expect(screen.queryByText('TITLE')).toBeNull();
+
+  expect(onCloseMock).toBeCalledTimes(1);
 });
 
 test('test Notify Closing Through Popup', () => {
+  const onCloseMock = jest.fn();
   renderApp({
     id: 'EXAMPLE',
     title: 'TITLE',
     message: 'MESSAGE',
     component: 'SessionModal',
+    onClose: onCloseMock,
   });
 
   expect(screen.queryByText('EXAMPLE')).toBeNull();
@@ -61,15 +67,19 @@ test('test Notify Closing Through Popup', () => {
   const exitButton = screen.getByTestId('ClearOutlinedIcon');
   fireEvent.click(exitButton);
   expect(screen.queryByText('EXAMPLE')).toBeNull();
+
+  expect(onCloseMock).toBeCalledTimes(1);
 });
 
 test('test Notify Confirm Through Popup', () => {
+  const onConfirmMock = jest.fn();
   renderApp({
     id: 'EXAMPLE',
     title: 'TITLE',
     message: 'MESSAGE',
     component: 'SessionModal',
     confirmLabel: 'Conferma',
+    onConfirm: onConfirmMock,
   });
 
   expect(screen.queryByText('EXAMPLE')).toBeNull();
@@ -81,14 +91,18 @@ test('test Notify Confirm Through Popup', () => {
   const confirmButton = screen.getByRole('button', { name: 'Conferma' });
   fireEvent.click(confirmButton);
   expect(screen.queryByText('EXAMPLE')).toBeNull();
+
+  expect(onConfirmMock).toBeCalledTimes(1);
 });
 
 test('test Notify Cancel Through Popup', () => {
+  const onCloseMock = jest.fn();
   renderApp({
     id: 'EXAMPLE',
     title: 'TITLE',
     message: 'MESSAGE',
     component: 'SessionModal',
+    onClose: onCloseMock,
   });
 
   expect(screen.queryByText('EXAMPLE')).toBeNull();
@@ -100,4 +114,6 @@ test('test Notify Cancel Through Popup', () => {
   const cancelButton = screen.getByRole('button', { name: 'Annulla' });
   fireEvent.click(cancelButton);
   expect(screen.queryByText('EXAMPLE')).toBeNull();
+
+  expect(onCloseMock).toBeCalledTimes(1);
 });

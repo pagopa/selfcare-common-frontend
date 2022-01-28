@@ -12,5 +12,5 @@ export const createStore = () =>
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }).concat([logger]),
+      }).concat(process.env.NODE_ENV === 'development' ? [logger] : []),
   });
