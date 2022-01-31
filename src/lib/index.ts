@@ -27,3 +27,5 @@ export * from './components/ErrorBoundary/ErrorBoundary';
 
 export { default as LoadingOverlay } from './components/Loading/LoadingOverlay';
 export * from './components/Loading/LoadingOverlay';
+
+export { default as EndingPage } from './components/EndingPage';

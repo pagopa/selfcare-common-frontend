@@ -1,4 +1,5 @@
 import { Box, Grid, Link, Typography } from '@mui/material';
+import { buildAssistanceURI } from '../../services/assistanceService';
 import PagoPaIcon from '../icons/PagoPaIcon';
 
 type Props = {
@@ -95,7 +96,7 @@ const Footer = ({ assistanceEmail }: Props) => (
           </Link>
           {assistanceEmail && (
             <Link
-              href={`mailto:${assistanceEmail}`}
+              href={buildAssistanceURI(assistanceEmail)}
               underline="none"
               sx={{
                 margin: '10px',
