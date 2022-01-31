@@ -81,7 +81,7 @@ Selfcare's page title
 | title | string | Y | The title to show |
 | subTitle | string | N | The subtitle to show |
 | mtTitle | number | N | The margin top of the title |
-| mbTitle | GridSize | N | The margin bottom of the title |
+| mbTitle | number | N | The margin bottom of the title |
 | mbSubTitle | number | N | The margin bottom of the subtitle |
 | variantTitle | Variant | N | The variant of the Typografy used for the title |
 | variantSubTitle | Variant | N | The variant of the Typografy used for the subtitle |
