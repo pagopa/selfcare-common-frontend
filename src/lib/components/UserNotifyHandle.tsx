@@ -19,7 +19,7 @@ function UserNotifyHandle() {
   const openToast = hasNotify && notifies[0].component === 'Toast';
   const openModal = hasNotify && notifies[0].component === 'SessionModal';
 
-  if (hasNotify && notifies[0].id !== lastNotify.current?.id) {
+  if (hasNotify && notifies[0] !== lastNotify.current) {
     // eslint-disable-next-line functional/immutable-data
     lastNotify.current = notifies[0];
   }
