@@ -9,7 +9,6 @@ It allows to dispatch User Notifies in order to display a pop up or a toast noti
 
 To use this feature you have to put UserNotifyHandle in your App as a child of a redux Provider component.
 In order to dispatch a User Notify, you have to use the custom hook useUserNotify which will return a fuction to be used to dispatch the User Notify. */
-
 function UserNotifyHandle() {
   const dispatch = useDispatch();
   const notifies = useSelector(appStateSelectors.selectNotifies);
