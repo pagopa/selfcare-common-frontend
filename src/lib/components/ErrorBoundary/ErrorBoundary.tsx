@@ -62,7 +62,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
       return (
         <Fragment>
           {this.props.children}
-          {hasError && this.buildNotBlockingError(this.props.errors[0])}
+          {hasError && this.buildNotBlockingError(this.props.errors)}
         </Fragment>
       );
     } else {
@@ -75,12 +75,16 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
     }
   }
 
-  buildNotBlockingError(error: AppError): ReactNode {
-    if (!error.component || error.component === 'SessionModal') {
-      return this.buildErrorModal(error);
-    } else {
-      return this.buildErrorToast(error);
-    }
+  buildNotBlockingError(errors: Array<AppError>): ReactNode {
+    const errorModal = errors.find((e) => e.component === 'SessionModal');
+    const errorToast = errors.find((e) => e.component === 'Toast');
+
+    return (
+      <>
+        {errorModal && this.buildErrorModal(errorModal)}
+        {errorToast && this.buildErrorToast(errorToast)}
+      </>
+    );
   }
 
   buildErrorToast(error: AppError) {
