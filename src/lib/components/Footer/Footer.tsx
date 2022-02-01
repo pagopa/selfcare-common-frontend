@@ -5,10 +5,11 @@ import PagoPaIcon from '../icons/PagoPaIcon';
 type Props = {
   /** The email to which the assistance button will ask to send an email */
   assistanceEmail?: string;
+  onExit?: (exitAction: ()=>void) => void;
 };
 
 /** SelfCare Footer component */
-const Footer = ({ assistanceEmail }: Props) => (
+const Footer = ({ assistanceEmail, onExit = exitAction => exitAction()}: Props) => (
   <Box
     component="footer"
     sx={{
@@ -61,47 +62,51 @@ const Footer = ({ assistanceEmail }: Props) => (
           }}
           component="div"
         >
-          <Link
-            href="https://www.pagopa.it/it/privacy-policy/"
+           <Link
+            onClick={() => onExit(() => window.location.assign('https://www.pagopa.it/it/privacy-policy/'))}
             underline="none"
             sx={{
               marginRight: '10px',
               color: '#9BB7CB !important',
               textDecoration: 'none !important',
+              cursor: 'pointer'
             }}
           >
             {'Privacy Policy '}
           </Link>
           <Link
-            href="https://www.pagopa.it/it/termini-e-condizioni-di-utilizzo-del-sito/"
+            onClick={() => onExit(() => window.location.assign('https://www.pagopa.it/it/termini-e-condizioni-di-utilizzo-del-sito/'))}
             underline="none"
             sx={{
               margin: '10px',
               color: '#9BB7CB !important',
               textDecoration: 'none !important',
+              cursor: 'pointer'
             }}
           >
             {'Termini e condizioni d’uso del sito '}
           </Link>
           <Link
-            href="https://www.pagopa.it/static/781646994f1f8ddad2d95af3aaedac3d/Sicurezza-delle-informazioni_PagoPA-S.p.A..pdft"
+            onClick={() => onExit(() => window.location.assign('https://www.pagopa.it/static/781646994f1f8ddad2d95af3aaedac3d/Sicurezza-delle-informazioni_PagoPA-S.p.A..pdft'))}
             underline="none"
             sx={{
               marginRight: '10px',
               color: '#9BB7CB !important',
               textDecoration: 'none !important',
+              cursor: 'pointer'
             }}
           >
             {'Sicurezza delle informazioni '}
           </Link>
           {assistanceEmail && (
             <Link
-              href={buildAssistanceURI(assistanceEmail)}
+              onClick={() => onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))}
               underline="none"
               sx={{
                 margin: '10px',
                 color: '#9BB7CB !important',
                 textDecoration: 'none !important',
+                cursor: 'pointer'
               }}
             >
               {'Assistenza '}

@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { appStateActions } from '../redux/slices/appStateSlice';
 
-/** @see LoadingOverlay */
+/** @see {@link LoadingOverlay} */
 export default function (task: string): (loading: boolean) => void {
   const dispatch = useDispatch();
   const ref = useRef(uniqueId());

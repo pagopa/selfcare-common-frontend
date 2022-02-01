@@ -1,6 +1,6 @@
 // import React from 'react'
 // import { Box } from '@mui/material';
-import { GridSize, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Grid } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 
@@ -12,7 +12,7 @@ type Props = {
   /** The margin top of the title */
   mtTitle?: number;
   /** The margin bottom of the title */
-  mbTitle?: GridSize;
+  mbTitle?: number;
   /** The margin bottom of the subtitle */
   mbSubTitle?: number;
   /** The variant of the Typografy used for the title */
