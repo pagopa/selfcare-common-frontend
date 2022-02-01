@@ -21,7 +21,7 @@ type Props = {
   handleClose: React.MouseEventHandler<HTMLButtonElement>;
   /** The popup title */
   title: string;
-  /** @see FilterModalConfig */
+  /** @see {@link FilterModalConfig} */
   filterModalConfig?: FilterModalConfig<any, any>;
   /** The popup height */
   height?: string;

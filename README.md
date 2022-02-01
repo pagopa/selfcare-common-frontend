@@ -171,3 +171,19 @@ The user notify to be submitted has type UserNotify which has the following fiel
 | onClose | () => void | N | If defined, it will be executed when closing the popup |
 | closeLabel | string | N | If component === 'SessionModal'. The close button label |
 | component | string | N | Can render a SessionModal or Toast component |
+
+## UnloadEventHandler
+This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.
+It allows to intercept when the user try to exit from the current page and ask him if he wants to continue or not.
+
+To use this feature you have to put UnloadEventHandler in your App as a child of a redux Provider component.
+In order to use this feature you have to use the custom hook useUnloadEventInterceptor, which will return an object having the following keys:
+1.  registerUnloadEvent: an arrow function which takes two optional parameters to customize the title and the description of the pop-up opened when invoking the exitAction function (see below) and enable the functionality.
+2.  unregisterUnloadEvent: an arrow function to call in order to disable this functionality.
+
+If you wont to enable immediately this functionality when invoking the custom hook you can use the hook useUnloadEventInterceptorAndActivate, which will enable the functionality and will disable it when unmounting the component.
+
+In order to show a custom pop-up when the user trigger an exit action you have to use the custom hook useUnloadEventOnExit which will return an arrow function to invoke instead of the exit action passing to it the exitAction itself.
+
+When the exitAction is the Logout you can use the custom hook useUnloadEventLogout which is the customization of the useUnloadEventOnExit using the logout as an exit action.
+

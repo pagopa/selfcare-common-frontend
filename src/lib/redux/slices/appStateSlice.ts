@@ -33,6 +33,13 @@ interface AppStateState {
   };
   errors: Array<AppError>;
   userNotifies: Array<UserNotify>;
+  unloadEventConfiguration: {
+    enabled: boolean;
+    open: boolean;
+    title?: string;
+    description?: string;
+    exitAction?: () => void;
+  };
 }
 
 const initialState: AppStateState = {
@@ -42,6 +49,19 @@ const initialState: AppStateState = {
   },
   errors: [],
   userNotifies: [],
+  unloadEventConfiguration: {
+    enabled: false,
+    open: false,
+  },
+};
+
+const keepOnPage = (e: BeforeUnloadEvent) => {
+  const message =
+    "Warning!\n\nNavigating away from this page will delete your text if you haven't already saved it.";
+  e.preventDefault();
+  // eslint-disable-next-line functional/immutable-data
+  e.returnValue = message;
+  return message;
 };
 
 /* eslint-disable functional/immutable-data */
@@ -58,17 +78,47 @@ export const appStateSlice = createSlice({
         state.loading.result = Object.keys(state.loading.tasks).length > 0;
       }
     },
+
     addError: (state, action: PayloadAction<AppError>) => {
       state.errors.push(action.payload);
     },
     removeError: (state, action: PayloadAction<AppError>) => {
       state.errors = state.errors.filter((e) => e.id !== action.payload.id);
     },
+
     addNotify: (state, action: PayloadAction<UserNotify>) => {
       state.userNotifies.push(action.payload);
     },
     removeNotify: (state, action: PayloadAction<UserNotify>) => {
       state.userNotifies = state.userNotifies.filter((e) => e.id !== action.payload.id);
+    },
+
+    enableUnloadEventInterceptor: (
+      state,
+      action: PayloadAction<{
+        title?: string;
+        description?: string;
+      }>
+    ) => {
+        state.unloadEventConfiguration.open = false;
+        state.unloadEventConfiguration.enabled = true;
+        state.unloadEventConfiguration.title = action.payload.title;
+        state.unloadEventConfiguration.description = action.payload.description;
+        window.addEventListener('beforeunload', keepOnPage);
+    },
+    disableUnloadEventInterceptor: (state) => {
+        state.unloadEventConfiguration.open = false;
+        state.unloadEventConfiguration.enabled = false;
+        window.removeEventListener('beforeunload', keepOnPage);
+    },
+    openUnloadEventNotify: (state, action: PayloadAction<() => void>) => {
+        state.unloadEventConfiguration.open = true;
+        state.unloadEventConfiguration.exitAction = action.payload;
+    },
+    closeUnloadEventNotify: (state) => {
+        state.unloadEventConfiguration.open = false;
+        state.unloadEventConfiguration.exitAction = undefined;
+
     },
   },
 });
@@ -80,4 +130,5 @@ export const appStateSelectors = {
   selectLoading: (state: { appState: AppStateState }) => state.appState.loading.result,
   selectErrors: (state: { appState: AppStateState }) => state.appState.errors,
   selectNotifies: (state: { appState: AppStateState }) => state.appState.userNotifies,
+  selectUnloadEventConfiguration: (state: { appState: AppStateState }) => state.appState.unloadEventConfiguration,
 };
