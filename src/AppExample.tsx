@@ -16,12 +16,10 @@ import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import UnloadEventHandler from './lib/components/UnloadEventHandler';
 import UserNotifyHandle from './lib/components/UserNotifyHandle';
 import withLogin from './lib/decorators/withLogin';
-import { useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
-import { CONFIG } from './lib/config/env';
+import { useUnloadEventLogout } from './lib/hooks/useUnloadEventInterceptor';
 
 const AppExample = () => {
-  // const onLogout = useUnloadEventLogout();
-  const onExit = useUnloadEventOnExit();
+  const onLogout = useUnloadEventLogout();
   return (
     <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
       <Box
@@ -31,7 +29,7 @@ const AppExample = () => {
           minHeight: '100vh',
         }}
       >
-        <Header withSecondHeader={false} onExitAction={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT))} />
+        <Header withSecondHeader={false} onExitAction={onLogout} />
         <UserNotifyHandle />
         <LoadingOverlay />
         <UnloadEventHandler />
