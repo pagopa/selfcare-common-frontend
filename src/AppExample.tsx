@@ -16,10 +16,11 @@ import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import UnloadEventHandler from './lib/components/UnloadEventHandler';
 import UserNotifyHandle from './lib/components/UserNotifyHandle';
 import withLogin from './lib/decorators/withLogin';
-import { useUnloadEventLogout } from './lib/hooks/useUnloadEventInterceptor';
+import { useUnloadEventLogout, useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
 
 const AppExample = () => {
-  const onLogout = useUnloadEventLogout();
+  const onLogout = useUnloadEventLogout() ;
+  const onExit = useUnloadEventOnExit();
   return (
     <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
       <Box
@@ -73,7 +74,7 @@ const AppExample = () => {
             <UseUnloadEventInterceptorExample />
           </Grid>
         </Grid>
-        <Footer assistanceEmail="assistenza@selfcare.it" />
+        <Footer assistanceEmail="assistenza@selfcare.it" onExit={onExit} />
       </Box>
     </ErrorBoundary>
   );
