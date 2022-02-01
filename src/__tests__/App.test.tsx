@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import AppExample from '../AppExample';
 import { Provider } from 'react-redux';
-import { createStore } from '../lib/redux/__tests__/store';
+import { createStore } from '../store';
 import { verifyMockExecution as verifyLoginMockExecution } from '../lib/decorators/__mocks__/withLogin';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';

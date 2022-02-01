@@ -109,6 +109,52 @@ Selfcare's ending page
 | buttonLabel | string | N | The ending page button label if any |
 | onButtonClick | () => void | N | if defined it will show a button that will performe this action on click |
 
+# Utility functions
+## api-utils
+### onRedirectToLogin: (store: EnhancedStore) => void
+To show an error popup to inform of the not valid session
+
+### buildFetchApi = (timeoutMs: number = 300000) => fetch
+Return the implementation of fetch configured with a timeout
+
+### extractResponse <R>(response: t.Validation<TypeofApiResponse<any>>, successHttpStatus: number, onRedirectToLogin: () => void, notValidTokenHttpStatus: number | null = 401, notAuthorizedTokenHttpStatus: number | null = 403, emptyResponseHttpStatus: number | null = 404): Promise<R>
+Extract the response of a @pagopa/openapi-codegen-ts generated client rest invocation having status code successHttpStatus.
+If notValidTokenHttpStatus is not null and the returned status is equal to notValidTokenHttpStatus, it will call the onRedirectToLogin function and will schedule the redirect towards logout path.
+If notAuthorizedTokenHttpStatus is  not null and the returned status is equal to notAuthorizedTokenHttpStatus, it will throw an Error with message "Operation not allowed".
+If emptyResponseHttpStatus is  not null and the returned status is equal to emptyResponseHttpStatus, it will return a promise that resolve to null value.
+Other statuses will return will throw a generic error.
+
+## constants
+### STORAGE_KEY_USER: string
+The key used to store in the session storage the loggedUser in selfcare projects
+
+### STORAGE_KEY_TOKEN: string
+The key used to store in the session storage the logged user token in selfcare projects
+
+### roleLabels: { [key in UserRole]: { shortLabel: string; longLabel: string } }
+The short and long labels used for the roles of selfcare's projects
+
+## routes-utils
+### resolvePathVariables: (path: string, pathVariables: { [key: string]: string }): string
+It will resolve the path variables in path using the provided map
+
+## storage-utils
+### storageDelete: (key: string) => void
+It will delete a key from the local session storage
+
+### storageWrite: (key: string, value: StorageValue, type: StorageValueType) => void
+It will store a key/value pair in the local session storage
+
+### function storageRead: (key: string, type: StorageValueType) => void
+It will read a key from the local session storage
+
+## utils
+### formatDateAsLongString: (date: Date) => string
+It will return a string representing the provided date in the italian format gg mmm aaaa
+
+## fixSwagger20ArraySchemaDef.js
+An utility script to use when generating the stub through @pagopa/openapi-codegen-ts in order to handle the REST api whose operations returns an array of objects
+
 # Common decorators used in pagopa/selfcare react projects
 ## withLogin
 This feature is based on react-redux library and require to register the reducer build in userSlice into the application's redux store.

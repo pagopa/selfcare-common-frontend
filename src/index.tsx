@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from '@pagopa/mui-italia/theme';
 import AppExample from './AppExample';
-import { createStore } from './lib/redux/__tests__/store';
+import { createStore } from './store';
 import { CONFIG } from './lib/config/env';
 
 const store = createStore();
