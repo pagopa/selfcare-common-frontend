@@ -9,3 +9,4 @@ src/reportWebVitals.ts
 **/generated/**
 dist/**
 build/**
+src/lib/utils/fixSwagger20ArraySchemaDef.js

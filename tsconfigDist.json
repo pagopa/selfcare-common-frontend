@@ -34,6 +34,7 @@
     "src/AppExample.tsx",
     "src/examples/**/*",
     "src/index.tsx",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "src/store.ts"
   ]
 }

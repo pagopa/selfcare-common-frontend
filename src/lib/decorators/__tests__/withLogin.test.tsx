@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { storageDelete, storageWrite } from '../../utils/storage-utils';
 import { STORAGE_KEY_USER } from '../../utils/constants';
 import { User } from '../../model/User';
-import { createStore } from '../../redux/__tests__/store';
+import { createStore } from '../../../store';
 import withLogin from '../withLogin';
 
 const oldWindowLocation = global.window.location;

@@ -55,11 +55,11 @@
     "build": "yarn setTsConfigStart && react-scripts build",
     "clean:build": "rimraf build",
     "setTsConfigDist": "copyfiles tsconfigDist.json build && renamer --replace tsconfig.json build/tsconfigDist.json && copyfiles -u 1 build/tsconfig.json . && rimraf build/tsconfig.json",
-    "cpDistStatic": "copyfiles -u 2 src/lib/index.css dist && copyfiles package.json README.md CHANGELOG.md dist",
+    "cpDistStatic": "copyfiles -u 2 src/lib/index.css src/lib/utils/fixSwagger20ArraySchemaDef.js dist && copyfiles package.json README.md CHANGELOG.md dist",
     "dist": "yarn setTsConfigDist && tsc && yarn cpDistStatic",
     "clean:dist": "rimraf dist",
-    "test": "yarn setTsConfigStart && react-scripts test --testPathIgnorePatterns src/lib/redux/__tests__/store -i",
-    "test:coverage": "react-scripts test --testPathIgnorePatterns src/lib/redux/__tests__/store -i --coverage",
+    "test": "yarn setTsConfigStart && react-scripts test -i",
+    "test:coverage": "react-scripts test -i --coverage",
     "clean:coverage": "rimraf coverage",
     "lint-autofix": "yarn setTsConfigStart && eslint . -c .eslintrc.js --ext .ts,.tsx --fix",
     "lint": "yarn setTsConfigStart && eslint . -c .eslintrc.js --ext .ts,.tsx ",
@@ -112,7 +112,15 @@
     "coveragePathIgnorePatterns": [
       "src/index.tsx",
       "src/reportWebVitals.ts",
-      "src/api/generated"
+      "src/api/generated",
+      "src/examples/*",
+      "src/AppExample.tsx",
+      "src/lib/utils/fixSwagger20ArraySchemaDef.js",
+      "src/lib/common-polyfill.ts",
+      "src/lib/index.ts",
+      "src/lib/components/icons/*",
+      "src/lib/model/*",
+      "src/store.ts"
     ]
   }
 }

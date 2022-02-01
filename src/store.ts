@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import { appStateReducer } from '../slices/appStateSlice';
-import { userReducer } from '../slices/userSlice';
+import { appStateReducer } from './lib/redux/slices/appStateSlice';
+import { userReducer } from './lib/redux/slices/userSlice';
 
 export const createStore = () =>
   configureStore({
