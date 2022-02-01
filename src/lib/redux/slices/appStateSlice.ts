@@ -59,6 +59,9 @@ export const appStateSlice = createSlice({
       }
     },
     addError: (state, action: PayloadAction<AppError>) => {
+      if (!action.payload.component) {
+        action.payload.component = 'SessionModal';
+      }
       state.errors.push(action.payload);
     },
     removeError: (state, action: PayloadAction<AppError>) => {
