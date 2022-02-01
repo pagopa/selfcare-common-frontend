@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { MutableRefObject, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SessionModal, Toast } from '..';
 import { UserNotify } from '../model/UserNotify';
@@ -9,29 +9,24 @@ It allows to dispatch User Notifies in order to display a pop up or a toast noti
 
 To use this feature you have to put UserNotifyHandle in your App as a child of a redux Provider component.
 In order to dispatch a User Notify, you have to use the custom hook useUserNotify which will return a fuction to be used to dispatch the User Notify. */
-
 function UserNotifyHandle() {
   const dispatch = useDispatch();
   const notifies = useSelector(appStateSelectors.selectNotifies);
-  const lastNotify = useRef<UserNotify>();
+  const lastNotifyToast = useRef<UserNotify>();
+  const lastNotifyModal = useRef<UserNotify>();
 
-  const hasNotify = notifies.length > 0;
-  const openToast = hasNotify && notifies[0].component === 'Toast';
-  const openModal = hasNotify && notifies[0].component === 'SessionModal';
+  const { openModal, openToast } = updateCurrents(lastNotifyModal, lastNotifyToast, notifies);
 
-  if (hasNotify && notifies[0] !== lastNotify.current) {
-    // eslint-disable-next-line functional/immutable-data
-    lastNotify.current = notifies[0];
-  }
-  const notify = lastNotify.current;
+  const notifyModal = lastNotifyModal.current;
+  const notifyToast = lastNotifyToast.current;
 
-  const onClose = () => {
+  const onClose = (notify: UserNotify) => {
     dispatch(appStateActions.removeNotify(notify as UserNotify));
     if (notify?.onClose) {
       notify.onClose();
     }
   };
-  const onConfirm = () => {
+  const onConfirm = (notify: UserNotify) => {
     dispatch(appStateActions.removeNotify(notify as UserNotify));
     if (notify?.onConfirm) {
       notify.onConfirm();
@@ -42,23 +37,48 @@ function UserNotifyHandle() {
     <>
       <Toast
         open={openToast}
-        title={notify?.title ?? 'Notify Title'}
-        message={notify?.message}
-        logo={notify?.logo}
-        leftBorderColor={notify?.leftBorderColor}
-        onCloseToast={onClose}
+        title={notifyToast?.title ?? 'Notify Title'}
+        message={notifyToast?.message}
+        logo={notifyToast?.logo}
+        leftBorderColor={notifyToast?.leftBorderColor}
+        onCloseToast={() => onClose(notifyToast as UserNotify)}
       />
       <SessionModal
         open={openModal}
-        title={notify?.title ?? 'Notify Title'}
-        message={notify?.message}
-        onConfirm={onConfirm}
-        onConfirmLabel={notify?.confirmLabel}
-        handleClose={onClose}
-        onCloseLabel={notify?.closeLabel}
+        title={notifyModal?.title ?? 'Notify Title'}
+        message={notifyModal?.message}
+        onConfirm={() => onConfirm(notifyModal as UserNotify)}
+        onConfirmLabel={notifyModal?.confirmLabel}
+        handleClose={() => onClose(notifyModal as UserNotify)}
+        onCloseLabel={notifyModal?.closeLabel}
       />
     </>
   );
 }
 
 export default UserNotifyHandle;
+
+function updateCurrents(
+  lastNotifyModalRef: MutableRefObject<UserNotify | undefined>,
+  lastNotifyToastRef: MutableRefObject<UserNotify | undefined>,
+  notifies: Array<UserNotify>
+) {
+  const lastNotifyToast = notifies.find((e) => e.component === 'Toast');
+  const lastNotifySessionModal = notifies.find((e) => e.component === 'SessionModal');
+
+  const openToast: boolean = !!lastNotifyToast;
+  const openModal: boolean = !!lastNotifySessionModal;
+
+  if (lastNotifySessionModal && lastNotifySessionModal !== lastNotifyModalRef?.current) {
+    // eslint-disable-next-line functional/immutable-data
+    lastNotifyModalRef.current = lastNotifySessionModal;
+  }
+  if (lastNotifyToast && lastNotifyToast !== lastNotifyToastRef?.current) {
+    // eslint-disable-next-line functional/immutable-data
+    lastNotifyToastRef.current = lastNotifyToast;
+  }
+  return {
+    openToast,
+    openModal,
+  };
+}
