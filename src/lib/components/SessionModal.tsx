@@ -40,8 +40,8 @@ export default function SessionModal({
   handleClose,
   handleExit = handleClose,
   onCloseLabel = 'Annulla',
-  height = '16em',
-  minHeight = '16em',
+  height,
+  minHeight,
   width = '21.9em',
 }: Props) {
   const theme = useTheme();
