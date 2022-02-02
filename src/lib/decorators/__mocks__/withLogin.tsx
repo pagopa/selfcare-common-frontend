@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { User } from '../../model/User';
-import { userActions } from '../../redux/slices/userSlice';
+import { userActions, userSelectors } from '../../redux/slices/userSlice';
 
 export const mockedUser: User = {
   name: 'NAME',
@@ -17,8 +17,9 @@ export const verifyMockExecution = (state: any) => {
 
 export default (WrappedComponent: React.ComponentType<any>) => () => {
   const dispatch = useDispatch();
+  const loggedUser = useSelector(userSelectors.selectLoggedUser);
   useEffect(() => {
     dispatch(userActions.setLoggedUser(mockedUser));
   }, []);
-  return <WrappedComponent />;
+  return loggedUser ? <WrappedComponent /> : <></>;
 };
