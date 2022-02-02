@@ -86,7 +86,7 @@ describe('not enabled', () => {
   const checkButtonClick = async (buttonLabel: string, invokedUrl: string) => {
     const button = screen.getByText(buttonLabel);
     fireEvent.click(button);
-    expect(mockedLocation.assign).toBeCalledWith(invokedUrl);
+    await waitFor(() => expect(mockedLocation.assign).toBeCalledWith(invokedUrl));
   };
 
   test('logout', async () => {
@@ -115,12 +115,12 @@ describe('enabled', () => {
     renderApp(false);
     const startButton = screen.getByText('StartUnloadEventInterceptor');
     fireEvent.click(startButton);
-    checkBehavior(buttonLabel, invokedUrl);
+    await checkBehavior(buttonLabel, invokedUrl);
   };
 
   const baseTestStartEnabled = async (buttonLabel: string, invokedUrl: string) => {
     renderApp(true);
-    checkBehavior(buttonLabel, invokedUrl);
+    await checkBehavior(buttonLabel, invokedUrl);
   };
 
   const checkBehavior = async (buttonLabel: string, invokedUrl: string) => {
@@ -145,7 +145,7 @@ describe('enabled', () => {
   test('logoutStartEnabled', async () => {
     await baseTestStartEnabled('LOGOUT', '/auth/logout');
   });
-  
+
   test('exit', async () => {
     await baseTest('EXIT', 'http://dummyurl');
   });
