@@ -30,7 +30,7 @@ export const useUnloadEventInterceptorAndActivate = (title?: string, description
   useEffect(() => {
     registerUnloadEvent(title, description);
     return () => unregisterUnloadEvent();
-  });
+  }, []);
   return {
     registerUnloadEvent,
     unregisterUnloadEvent,

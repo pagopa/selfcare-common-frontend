@@ -2,7 +2,11 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../store';
 import UnloadEventHandler from './../../components/UnloadEventHandler';
-import { useUnloadEventOnExit, useUnloadEventLogout } from './../useUnloadEventInterceptor';
+import {
+  useUnloadEventOnExit,
+  useUnloadEventLogout,
+  useUnloadEventInterceptorAndActivate,
+} from './../useUnloadEventInterceptor';
 import UseUnloadEventInterceptorExample from './../../../examples/UseUnloadEventInterceptorExample';
 
 const oldWindowLocation = global.window.location;
@@ -26,9 +30,9 @@ afterAll(() => {
   Object.defineProperty(window, 'location', { value: oldWindowLocation });
 });
 
-const renderApp = () => {
+const renderApp = (startEnabled: boolean) => {
   const store = createStore();
-  const Child = buildChildComponent();
+  const Child = buildChildComponent(startEnabled);
   render(
     <Provider store={store}>
       <UnloadEventHandler />
@@ -39,8 +43,11 @@ const renderApp = () => {
   return store;
 };
 
-function buildChildComponent() {
+function buildChildComponent(startEnabled: boolean) {
   return () => {
+    if (startEnabled) {
+      useUnloadEventInterceptorAndActivate();
+    }
     const logout = useUnloadEventLogout();
     const onExit = useUnloadEventOnExit();
     return (
@@ -56,42 +63,67 @@ function buildChildComponent() {
 
 describe('not enabled', () => {
   const baseTest = async (buttonLabel: string, invokedUrl: string) => {
-    renderApp();
+    renderApp(false);
     await checkButtonClick(buttonLabel, invokedUrl);
   };
+
   const baseTestDisabledExplicitly = async (buttonLabel: string, invokedUrl: string) => {
-    renderApp();
+    renderApp(false);
     const startButton = screen.getByText('StartUnloadEventInterceptor');
     fireEvent.click(startButton);
     const endButton = screen.getByText('EndUnloadEventInterceptor');
     fireEvent.click(endButton);
     await checkButtonClick(buttonLabel, invokedUrl);
   };
+
+  const baseTestStartEnabled = async (buttonLabel: string, invokedUrl: string) => {
+    renderApp(true);
+    const endButton = screen.getByText('EndUnloadEventInterceptor');
+    fireEvent.click(endButton);
+    await checkButtonClick(buttonLabel, invokedUrl);
+  };
+
   const checkButtonClick = async (buttonLabel: string, invokedUrl: string) => {
     const button = screen.getByText(buttonLabel);
     fireEvent.click(button);
-    expect(mockedLocation.assign).toBeCalledWith(invokedUrl);
+    await waitFor(() => expect(mockedLocation.assign).toBeCalledWith(invokedUrl));
   };
+
   test('logout', async () => {
     await baseTest('LOGOUT', '/auth/logout');
   });
   test('logoutDisabledExplicitly', async () => {
     await baseTestDisabledExplicitly('LOGOUT', '/auth/logout');
   });
+  test('logoutStartEnabled', async () => {
+    await baseTestStartEnabled('LOGOUT', '/auth/logout');
+  });
+
   test('exit', async () => {
     await baseTest('EXIT', 'http://dummyurl');
   });
   test('exitDisabledExplicitly', async () => {
     await baseTestDisabledExplicitly('EXIT', 'http://dummyurl');
   });
+  test('exitStartEnabled', async () => {
+    await baseTestStartEnabled('EXIT', 'http://dummyurl');
+  });
 });
 
 describe('enabled', () => {
   const baseTest = async (buttonLabel: string, invokedUrl: string) => {
-    renderApp();
+    renderApp(false);
     const startButton = screen.getByText('StartUnloadEventInterceptor');
     fireEvent.click(startButton);
+    await checkBehavior(buttonLabel, invokedUrl);
+  };
 
+  const baseTestStartEnabled = async (buttonLabel: string, invokedUrl: string) => {
+    renderApp(true);
+    await checkBehavior(buttonLabel, invokedUrl);
+  };
+
+  const checkBehavior = async (buttonLabel: string, invokedUrl: string) => {
     const button = screen.getByText(buttonLabel);
     fireEvent.click(button);
 
@@ -106,10 +138,18 @@ describe('enabled', () => {
     fireEvent.click(screen.getByText('Esci'));
     expect(mockedLocation.assign).toBeCalledWith(invokedUrl);
   };
+
   test('logout', async () => {
     await baseTest('LOGOUT', '/auth/logout');
   });
+  test('logoutStartEnabled', async () => {
+    await baseTestStartEnabled('LOGOUT', '/auth/logout');
+  });
+
   test('exit', async () => {
     await baseTest('EXIT', 'http://dummyurl');
+  });
+  test('exitStartEnabled', async () => {
+    await baseTestStartEnabled('EXIT', 'http://dummyurl');
   });
 });
