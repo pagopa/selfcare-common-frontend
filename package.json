@@ -64,7 +64,7 @@
     "lint-autofix": "yarn setTsConfigStart && eslint . -c .eslintrc.js --ext .ts,.tsx --fix",
     "lint": "yarn setTsConfigStart && eslint . -c .eslintrc.js --ext .ts,.tsx ",
     "prettify": "prettier --write \"./**/*.{ts,tsx}\"",
-    "version": "auto-changelog -p --config .auto-changelog.json --tag-pattern \\d+\\.\\d+.\\d+$ --unreleased --unreleased --ignore-commit-pattern \"Bump version to\" --starting-version v1.0.0 && git add CHANGELOG.md"
+    "version": "auto-changelog -p --config .auto-changelog.json --tag-pattern \\d+\\.\\d+.\\d+$ --unreleased --ignore-commit-pattern \"Bump version to\" --starting-version v1.0.0 && git add CHANGELOG.md"
   },
   "eslintConfig": {
     "extends": [
