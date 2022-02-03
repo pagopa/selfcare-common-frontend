@@ -51,6 +51,8 @@ export default function FilterModal({
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
+  React.useEffect(() => setValueRadio(''), [open]);
+
   const [valueRadio, setValueRadio] = React.useState<string>('');
 
   const handleChange = (_: React.ChangeEvent<HTMLInputElement>, value: any) => {
