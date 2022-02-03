@@ -17,9 +17,10 @@ import UnloadEventHandler from './lib/components/UnloadEventHandler';
 import UserNotifyHandle from './lib/components/UserNotifyHandle';
 import withLogin from './lib/decorators/withLogin';
 import { useUnloadEventLogout, useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
+import AnalyticsExample from './examples/AnalyticsExample';
 
 const AppExample = () => {
-  const onLogout = useUnloadEventLogout() ;
+  const onLogout = useUnloadEventLogout();
   const onExit = useUnloadEventOnExit();
   return (
     <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
@@ -70,8 +71,12 @@ const AppExample = () => {
             <UseUserNotifyExample />
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <UseUnloadEventInterceptorExample />
+          </Grid>
+
+          <Grid item xs={2}>
+            <AnalyticsExample />
           </Grid>
         </Grid>
         <Footer assistanceEmail="assistenza@selfcare.it" onExit={onExit} />
