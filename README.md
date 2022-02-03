@@ -275,3 +275,7 @@ This feature allows the automatic enabling of the [analytics feature](#analytics
 The tool used is [OneTrust](#https://www.onetrust.it/), and in order to be able to use it, you have:
 1. to put the [script](#https://about.gitlab.com/handbook/marketing/inbound-marketing/digital-experience/onetrust-cookie-consent/#implementation) tag obtained when registering to the service inside the head section of your index.html file.
 2. import the consentManagementConfigure.ts script inside your index.ts file (after the configuration of the common library)
+
+| Key | Type | Description | DefaultValue |
+|-----|------|-------------|--------------|
+| COOKIE_GROUP_ANALYTICS | string | The cookie group configured for the analytics tool. MixPanel's cookies are configured as default by OneTrust with C0004 group, or as Targeting Cookies | C0004 |

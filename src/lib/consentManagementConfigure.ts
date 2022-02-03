@@ -1,3 +1,4 @@
+import { CONFIG } from './config/env';
 import { initAnalytics } from './services/analyticsService';
 
 declare const OneTrust: any;
@@ -5,7 +6,7 @@ declare const OnetrustActiveGroups: string;
 const global = window as any;
 
 // target cookies (Mixpanel)
-const targCookiesGroup = 'C0004';
+const targCookiesGroup = CONFIG.CONSENT.COOKIE_GROUP_ANALYTICS;
 
 // OneTrust callback at first time
 // eslint-disable-next-line functional/immutable-data
