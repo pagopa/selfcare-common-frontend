@@ -1,4 +1,0 @@
-{
-  "issuePattern": "SELC-(\\d+)",
-  "issueUrl": "https://pagopa.atlassian.net/browse/{id}"
-}

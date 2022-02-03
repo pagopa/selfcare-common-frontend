@@ -1,0 +1,8 @@
+{
+  "issuePattern": "SELC-(\\d+)",
+  "issueUrl": "https://pagopa.atlassian.net/browse/{id}",
+  "tagPattern": "\\d+\\.\\d+.\\d+$",
+  "unreleased": true,
+  "ignoreCommitPattern": "Bump version to",
+  "startingVersion": "v1.0.0"
+}
