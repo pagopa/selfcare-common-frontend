@@ -18,6 +18,7 @@ import UserNotifyHandle from './lib/components/UserNotifyHandle';
 import withLogin from './lib/decorators/withLogin';
 import { useUnloadEventLogout, useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
 import AnalyticsExample from './examples/AnalyticsExample';
+import './lib/consentManagementConfigure';
 
 const AppExample = () => {
   const onLogout = useUnloadEventLogout();

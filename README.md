@@ -10,6 +10,7 @@ In order to use these components it's necessary to set the following keys of the
 | URL_FE.ASSISTANCE | string | The url of the assistance page | /assistenza |
 | MOCKS.MOCK_USER | boolean | If the application should configure a logged mocked User usable in DEV environment | false |
 | ANALYTICS.* |  | See [analitics feature](#analytics) | |
+| CONSENT.* |  | See [consent management feature](#consent-management) | |
 
 # Common components used to build pagopa/selfcare react projects
 ## Header
@@ -250,6 +251,8 @@ When the exitAction is the Logout you can use the custom hook useUnloadEventLogo
 This feature allow to track the application events through an analytics tool.
 The actual version of the library make use of [mixpanel tool](https://mixpanel.com/) to handle the tracking.
 
+In order to start the analytics you have to call the initAnalytics method imported from the service/analyticsService module, otherwise this feature will be ignored
+
 This feature can be configured with the following keys of the [CONFIG](#Configuration) object (each key has the ANALYTCS. prefix):
 
 | Key | Type | Description | DefaultValue |
@@ -265,3 +268,10 @@ This feature can be configured with the following keys of the [CONFIG](#Configur
 | PROPERTY_BLACKLIST | Array<string> | If the ip should be sent | ["$current_url", "$initial_referrer", "$referrer"] |
 | ADDITIONAL_PROPERTIES | {[key: string]: string} | An object containing a fixed set of properties to send every time, overridden if the actual event will report the same properties | {} |
 | ADDITIONAL_PROPERTIES_IMPORTANT | {[key: string]: string} | As ADDITIONAL_PROPERTIES, but these properties will take the precedence overriding events conflicting properties | {} |
+
+## Consent management
+This feature allows the automatic enabling of the [analytics feature](#analytics) only when the user accept to send that data.
+
+The tool used is [OneTrust](#https://www.onetrust.it/), and in order to be able to use it, you have:
+1. to put the [script](#https://about.gitlab.com/handbook/marketing/inbound-marketing/digital-experience/onetrust-cookie-consent/#implementation) tag obtained when registering to the service inside the head section of your index.html file.
+2. import the consentManagementConfigure.ts script inside your index.ts file (after the configuration of the common library)
