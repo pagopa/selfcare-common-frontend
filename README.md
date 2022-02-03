@@ -1,3 +1,16 @@
+# SelfCare's common components & features
+This library contains utility, components and features built for the selfcare project.
+
+# Configuration
+In order to use these components it's necessary to set the following keys of the CONFIG object imported from /config/env as first things inside the application:
+
+| Key | Type | Description | DefaultValue |
+| URL_FE.LOGIN | string | The url of the login page | /auth/login |
+| URL_FE.LOGOUT | string | The url of the logout page | /auth/logout |
+| URL_FE.ASSISTANCE | string | The url of the assistance page | /assistenza |
+| MOCKS.MOCK_USER | boolean | If the application should configure a logged mocked User usable in DEV environment | false |
+| ANALYTICS.* |  | See [analitics feature](#analytics) | |
+
 # Common components used to build pagopa/selfcare react projects
 ## Header
 SelfCare Header component
@@ -160,7 +173,7 @@ An utility script to use when generating the stub through @pagopa/openapi-codege
 This feature is based on react-redux library and require to register the reducer build in userSlice into the application's redux store.
 This decorator has to be applied to components whose acces require an active session.
 Accessing to the components decorated with it without a session will brought to the login page.
-It's possible to modify the login path changing the value in CONFIG.login inside the index.tsx file
+It's possible to modify the login path changing the value in [CONFIG.URL_FE.LOGIN](#Configuration) inside the index.tsx file
 
 # Common features used in pagopa/selfcare react projects
 ## LoadingOverlay
@@ -194,7 +207,7 @@ The error to be submitted has type AppError which has the following fields:
 | toNotify | boolean | Y | If true, it will notify the error |
 | component | string | N | Can render a SessionModal or Toast component |
 
-ASIS the notify consists just on the console.error invocation
+The error will be notified as a GENERIC_ERROR through the [analytcs feature](#analytics)
 
 ## UserNotifyHandle
 This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.
@@ -233,3 +246,22 @@ In order to show a custom pop-up when the user trigger an exit action you have t
 
 When the exitAction is the Logout you can use the custom hook useUnloadEventLogout which is the customization of the useUnloadEventOnExit using the logout as an exit action.
 
+## Analytics
+This feature allow to track the application events through an analytics tool.
+The actual version of the library make use of [mixpanel tool](https://mixpanel.com/) to handle the tracking.
+
+This feature can be configured with the following keys of the [CONFIG](#Configuration) object (each key has the ANALYTCS. prefix):
+
+| Key | Type | Description | DefaultValue |
+|-----|------|-------------|--------------|
+| ENABLED | boolean | If disabled, it will do nothing (except for event having name GENERIC_ERROR, if disabled, these events will be printed through console.error) | false |
+| MOCK | boolean | If true, it will print the event through the console.log function | false |
+| DEBUG | boolean | If the mixpanel's debug feature should be enabled | false |
+| TOKEN | string | The token to use when sending event data | |
+| API_HOST | string | The url where to send mixpanel events | `https://api-eu.mixpanel.com` |
+| PERSISTENCE | string | Where to store session data, possible values are cookie or localStorage | localStorage |
+| LOG_IP | boolean | If the ip should be sent | false |
+| LOG_IP | boolean | If the ip should be sent | false |
+| PROPERTY_BLACKLIST | Array<string> | If the ip should be sent | ["$current_url", "$initial_referrer", "$referrer"] |
+| ADDITIONAL_PROPERTIES | {[key: string]: string} | An object containing a fixed set of properties to send every time, overridden if the actual event will report the same properties | {} |
+| ADDITIONAL_PROPERTIES_IMPORTANT | {[key: string]: string} | As ADDITIONAL_PROPERTIES, but these properties will take the precedence overriding events conflicting properties | {} |
