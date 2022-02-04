@@ -1,11 +1,11 @@
 import mixpanel from 'mixpanel-browser';
 import { CONFIG } from '../config/env';
-
-export const GENERIC_EVENT = 'GENERIC_EVENT';
+import { AppError } from '../redux/slices/appStateSlice';
 
 // eslint-disable-next-line functional/no-let
 let init = false;
 
+/** To call in order to start the analytics service, otherwise no event will be sent */
 export const initAnalytics = (): void => {
   if (CONFIG.ANALYTCS.ENABLE) {
     init = true;
@@ -24,6 +24,7 @@ export const initAnalytics = (): void => {
   }
 };
 
+/** To notify an event through the analytics tool */
 export const trackEvent = (event_name: string, properties?: any): void => {
   if (CONFIG.ANALYTCS.ENABLE && init) {
     if (CONFIG.ANALYTCS.MOCK) {
@@ -42,7 +43,14 @@ export const trackEvent = (event_name: string, properties?: any): void => {
         console.log(event_name, properties);
       }
     }
-  } else if (event_name === GENERIC_EVENT) {
-    console.error(properties);
+  }
+};
+
+/** To notify an error through the analytics tool */
+export const trackAppError = (error: AppError): void => {
+  if (CONFIG.ANALYTCS.ENABLE && init) {
+    trackEvent('GENERIC_ERROR', error);
+  } else {
+    console.error(error);
   }
 };

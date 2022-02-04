@@ -23,4 +23,8 @@ export const CONFIG = {
     ADDITIONAL_PROPERTIES: {},
     ADDITIONAL_PROPERTIES_IMPORTANT: {},
   },
+
+  CONSENT: {
+    COOKIE_GROUP_ANALYTICS: 'C0004',
+  },
 };
