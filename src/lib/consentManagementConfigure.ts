@@ -3,14 +3,14 @@ import { initAnalytics } from './services/analyticsService';
 
 declare const OneTrust: any;
 declare const OnetrustActiveGroups: string;
-const global = window as any;
+declare const window: any;
 
 // target cookies (Mixpanel)
 const targCookiesGroup = CONFIG.CONSENT.COOKIE_GROUP_ANALYTICS;
 
 // OneTrust callback at first time
 // eslint-disable-next-line functional/immutable-data
-global.OptanonWrapper = function () {
+window.OptanonWrapper = function () {
   OneTrust.OnConsentChanged(function () {
     const activeGroups = OnetrustActiveGroups;
     if (activeGroups.indexOf(targCookiesGroup) > -1) {
