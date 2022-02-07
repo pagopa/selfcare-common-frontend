@@ -16,9 +16,14 @@ beforeAll(() => {
   mixpanel.track = jest.fn();
 });
 
+afterAll(() => {
+  console.log = oldConsoleLog;
+  console.error = oldConsoleError;
+});
+
 const eventName = 'PROVA';
 const eventBody = { PROP1: 'VAL1', PROP2: 'VAL2' };
-const trackEventTest = () => trackEvent(eventName, eventBody);
+const trackEventTest = (callback?: () => void) => trackEvent(eventName, eventBody, callback);
 
 const appError: AppError = {
   id: 'ERROR',
@@ -29,13 +34,26 @@ const appError: AppError = {
 };
 const trackErrorTest = () => trackAppError(appError);
 
+let expectedCallback = undefined;
+let expectedTrackOptions = undefined;
+
 describe('test if not init', () => {
   test('test event', () => {
     trackEventTest();
-
+    checkTrackEventResult();
+  });
+  const checkTrackEventResult = () => {
     checkNoEventSent();
     checkNoEventInConsole();
     checkNoErrorInConsole();
+  };
+
+  test('test callback', () => {
+    const callback = jest.fn();
+    trackEventTest(callback);
+
+    checkTrackEventResult();
+    expect(callback).toBeCalledTimes(1);
   });
 
   test('test error', () => {
@@ -53,14 +71,27 @@ describe('test if disabled', () => {
     CONFIG.ANALYTCS.ENABLE = false;
 
     initAnalytics();
+
+    expectedCallback = undefined;
+    expectedTrackOptions = undefined;
   });
 
   test('test event', () => {
     trackEventTest();
-
+    checkTrackEventResult();
+  });
+  const checkTrackEventResult = () => {
     checkNoEventSent();
     checkNoEventInConsole();
     checkNoErrorInConsole();
+  };
+
+  test('test callback', () => {
+    const callback = jest.fn();
+    trackEventTest(callback);
+
+    checkTrackEventResult();
+    expect(callback).toBeCalledTimes(1);
   });
 
   test('test error', () => {
@@ -79,15 +110,28 @@ describe('test if mocked', () => {
     CONFIG.ANALYTCS.MOCK = true;
 
     initAnalytics();
+
+    expectedCallback = undefined;
+    expectedTrackOptions = undefined;
   });
 
   test('test event', () => {
     trackEventTest();
-
+    checkTrackEventResult();
+  });
+  const checkTrackEventResult = () => {
     checkNoEventSent();
     checkNoErrorInConsole();
 
     checkEventInConsole();
+  };
+
+  test('test callback', () => {
+    const callback = jest.fn();
+    trackEventTest(callback);
+
+    checkTrackEventResult();
+    expect(callback).toBeCalledTimes(1);
   });
 
   test('test error', () => {
@@ -104,15 +148,54 @@ describe('test regular send', () => {
     CONFIG.ANALYTCS.ENABLE = true;
     CONFIG.ANALYTCS.MOCK = false;
     initAnalytics();
+
+    expectedCallback = undefined;
+    expectedTrackOptions = undefined;
+
+    mixpanel.track = jest
+      .fn()
+      .mockImplementation(
+        (_eventName: string, _property: any, _options: any, callback) => callback && callback()
+      );
   });
 
   test('test event', () => {
     trackEventTest();
-
+    checkTrackEventResult();
+  });
+  const checkTrackEventResult = () => {
     checkNoEventInConsole();
     checkNoErrorInConsole();
 
     checkEventSent();
+  };
+
+  test('test callback', () => {
+    const callback = jest.fn();
+    expectedCallback = expect.any(Function);
+    expectedTrackOptions = { send_immediately: true };
+    trackEventTest(callback);
+
+    checkTrackEventResult();
+    expect(callback).toBeCalledTimes(1);
+  });
+
+  test('test callback in error', () => {
+    const error = new Error();
+    const callback = jest.fn().mockImplementation(() => {
+      throw error;
+    });
+    expectedCallback = expect.any(Function);
+    expectedTrackOptions = { send_immediately: true };
+    trackEventTest(callback);
+
+    checkNoEventInConsole();
+    expect(console.error).toBeCalledWith(
+      'Something gone wrong while calling trackEvent PROVA callback',
+      error
+    );
+    checkEventSent();
+    expect(callback).toBeCalledTimes(1);
   });
 
   test('test error', () => {
@@ -133,17 +216,50 @@ describe('test regular send library in error', () => {
     (mixpanel.track as jest.Mock).mockImplementation(() => {
       throw new Error('DUMMY ERROR');
     });
+
+    expectedCallback = undefined;
+    expectedTrackOptions = undefined;
   });
 
   test('test event', () => {
     trackEventTest();
-
+    checkTrackEventResult();
+  });
+  const checkTrackEventResult = () => {
     checkEventSent();
     checkEventInConsole();
     expect(console.error).toBeCalledWith(
       'Something gone wrong while sending data to mixpanel:',
       new Error('DUMMY ERROR')
     );
+  };
+
+  test('test callback', () => {
+    const callback = jest.fn();
+    expectedCallback = expect.any(Function);
+    expectedTrackOptions = { send_immediately: true };
+    trackEventTest(callback);
+
+    checkTrackEventResult();
+    expect(callback).toBeCalledTimes(1);
+  });
+
+  test('test callback when analytics called it even if in error', () => {
+    (mixpanel.track as jest.Mock).mockImplementation(
+      (_eventName: string, _property: any, _options: any, callback) => {
+        if (callback) {
+          callback();
+        }
+        throw new Error('DUMMY ERROR');
+      }
+    );
+    const callback = jest.fn();
+    expectedCallback = expect.any(Function);
+    expectedTrackOptions = { send_immediately: true };
+    trackEventTest(callback);
+
+    checkTrackEventResult();
+    expect(callback).toBeCalledTimes(1);
   });
 
   test('test error', () => {
@@ -164,7 +280,12 @@ const checkNoEventSent = () => {
   expect(mixpanel.track).toBeCalledTimes(0);
 };
 const checkEventSent = () => {
-  expect(mixpanel.track).toBeCalledWith(eventName, eventBody);
+  expect(mixpanel.track).toBeCalledWith(
+    eventName,
+    eventBody,
+    expectedTrackOptions,
+    expectedCallback
+  );
 };
 
 const checkNoEventInConsole = () => {
@@ -179,7 +300,7 @@ const checkNoErrorInConsole = () => {
 };
 
 const checkErrorEventSent = () => {
-  expect(mixpanel.track).toBeCalledWith('GENERIC_ERROR', appError);
+  expect(mixpanel.track).toBeCalledWith('GENERIC_ERROR', appError, undefined, undefined);
 };
 const checkErrorEventInConsole = () => {
   expect(console.log).toBeCalledWith('GENERIC_ERROR', appError);
