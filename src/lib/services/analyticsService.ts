@@ -33,7 +33,12 @@ export const trackAppError = (error: AppError): void => {
   }
 };
 
-/** To notify an event through the analytics tool */
+/**
+ * To notify an event through the analytics tool:
+ * @property event_name: the name of the event
+ * @property properties: the additional payload sent with the event
+ * @property callback: an action taken when the track has completed (If the action taken immediately after the track is an exit action from the application, it's better to use this callback to perform the exit, in order to give to mixPanel the time to send the event)
+ */
 export const trackEvent = (event_name: string, properties?: any, callback?: () => void): void => {
   if (CONFIG.ANALYTCS.ENABLE && init) {
     if (CONFIG.ANALYTCS.MOCK) {

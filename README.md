@@ -269,6 +269,11 @@ This feature can be configured with the following keys of the [CONFIG](#Configur
 | ADDITIONAL_PROPERTIES | {[key: string]: string} | An object containing a fixed set of properties to send every time, overridden if the actual event will report the same properties | {} |
 | ADDITIONAL_PROPERTIES_IMPORTANT | {[key: string]: string} | As ADDITIONAL_PROPERTIES, but these properties will take the precedence overriding events conflicting properties | {} |
 
+In order track an event (once the initAnalytics method has been invoked) you have to call the trackEvent(event_name: string, properties?: any, callback?: () => void)=> void method where:
+* event_name: the name of the event
+* properties: the additional payload sent with the event
+* callback: an action taken when the track has completed (If the action taken immediately after the track is an exit action from the application, it's better to use this callback to perform the exit, in order to give to mixPanel the time to send the event)
+
 ## Consent management
 This feature allows the automatic enabling of the [analytics feature](#analytics) only when the user accept to send that data.
 
