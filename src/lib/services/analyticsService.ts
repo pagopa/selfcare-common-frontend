@@ -78,7 +78,6 @@ const trackEventThroughAnalyticTool = (
       }
     : undefined;
   try {
-    const prova = mixpanel;
     mixpanel.track(
       event_name,
       {
