@@ -13,7 +13,7 @@ In order to use this feature you have to use the custom hook useUnloadEventInter
 export default function UnloadEventHandler() {
   const dispatch = useDispatch();
   const unloadEventconfiguration = useSelector(appStateSelectors.selectUnloadEventConfiguration);
-  const {unregisterUnloadEvent} = useUnloadEventInterceptor();
+  const { unregisterUnloadEvent } = useUnloadEventInterceptor();
 
   const onClose = () => {
     dispatch(appStateActions.closeUnloadEventNotify());
@@ -29,7 +29,7 @@ export default function UnloadEventHandler() {
       open={unloadEventconfiguration.enabled && unloadEventconfiguration.open}
       title={unloadEventconfiguration.title ?? 'Vuoi davvero uscire?'}
       message={
-        unloadEventconfiguration.description ?? 'Se esci, la richiesta di assistenza andrà persa.'
+        unloadEventconfiguration.description ?? 'Se esci, le modifiche apportate andranno perse.'
       }
       onConfirm={onConfirm}
       onConfirmLabel={'Esci'}
