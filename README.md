@@ -5,6 +5,7 @@ This library contains [utilities](#utilities), [components](#components), [decor
 In order to use these components it's necessary to set the following keys of the CONFIG object imported from /config/env as first things inside the application:
 
 | Key | Type | Description | DefaultValue |
+|-----|------|-------------|--------------|
 | URL_FE.LOGIN | string | The url of the login page | /auth/login |
 | URL_FE.LOGOUT | string | The url of the logout page | /auth/logout |
 | URL_FE.ASSISTANCE | string | The url of the assistance page | /assistenza |
