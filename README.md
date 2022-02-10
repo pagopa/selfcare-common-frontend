@@ -1,5 +1,5 @@
 # SelfCare's common components & features
-This library contains utility, components and features built for the selfcare project.
+This library contains [utilities](#utilities), [components](#components), [decorators](#decorators), [custom hooks](#custom-hooks) and [features](#features) built for the selfcare project.
 
 # Configuration
 In order to use these components it's necessary to set the following keys of the CONFIG object imported from /config/env as first things inside the application:
@@ -12,7 +12,7 @@ In order to use these components it's necessary to set the following keys of the
 | ANALYTICS.* |  | See [analitics feature](#analytics) | |
 | CONSENT.* |  | See [consent management feature](#consent-management) | |
 
-# Common components used to build pagopa/selfcare react projects
+# Components
 ## Header
 SelfCare Header component
 
@@ -123,7 +123,7 @@ Selfcare's ending page
 | buttonLabel | string | N | The ending page button label if any |
 | onButtonClick | () => void | N | if defined it will show a button that will performe this action on click |
 
-# Utility functions
+# Utilities
 ## api-utils
 ### onRedirectToLogin: (store: EnhancedStore) => void
 To show an error popup to inform of the not valid session
@@ -169,14 +169,20 @@ It will return a string representing the provided date in the italian format gg 
 ## fixSwagger20ArraySchemaDef.js
 An utility script to use when generating the stub through @pagopa/openapi-codegen-ts in order to handle the REST api whose operations returns an array of objects
 
-# Common decorators used in pagopa/selfcare react projects
+# Decorators
 ## withLogin
 This feature is based on react-redux library and require to register the reducer build in userSlice into the application's redux store.
 This decorator has to be applied to components whose acces require an active session.
 Accessing to the components decorated with it without a session will brought to the login page.
 It's possible to modify the login path changing the value in [CONFIG.URL_FE.LOGIN](#Configuration) inside the index.tsx file
 
-# Common features used in pagopa/selfcare react projects
+# Custom Hooks
+## useFakePagination
+Custom hook used to simulate paginated resources when the external service doesn't implement it, caching values when filter doesn't change and serving them a page at time.
+Cached values are stored using useRef, so they are local to the component using this hook.
+The sorting actually is applied using string representation
+
+# Features
 ## LoadingOverlay
 This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.
 It allows to draw a loader when an async task to wait is running.
