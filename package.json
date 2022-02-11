@@ -121,8 +121,7 @@
       "src/lib/common-polyfill.ts",
       "src/lib/index.ts",
       "src/lib/components/icons/*",
-      "src/lib/model/*",
-      "src/store.ts"
+      "src/lib/model/*"
     ]
   }
 }
