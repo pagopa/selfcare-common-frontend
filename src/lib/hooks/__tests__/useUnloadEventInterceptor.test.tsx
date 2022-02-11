@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { createStore } from '../../../store';
+import { createStore } from '../../../examples/redux/store';
 import UnloadEventHandler from './../../components/UnloadEventHandler';
 import {
   useUnloadEventOnExit,

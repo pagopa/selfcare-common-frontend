@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { createStore } from '../../../store';
+import { createStore } from '../../../examples/redux/store';
 import { appStateActions } from '../../redux/slices/appStateSlice';
 import LoadingOverlay from '../../components/Loading/LoadingOverlay';
 
