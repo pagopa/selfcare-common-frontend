@@ -177,11 +177,20 @@ This decorator has to be applied to components whose acces require an active ses
 Accessing to the components decorated with it without a session will brought to the login page.
 It's possible to modify the login path changing the value in [CONFIG.URL_FE.LOGIN](#Configuration) inside the index.tsx file
 
+## withRetrievedValue
+Decorator to retrieve a value and serve it once ready to the decorated component.
+It's recommended to use it together with [useReduxCachedValue](#usereduxcachedvalue)
+See withRetrievedValue.test.tsx file for an axample.
+
 # Custom Hooks
 ## useFakePagination
 Custom hook used to simulate paginated resources when the external service doesn't implement it, caching values when filter doesn't change and serving them a page at time.
 Cached values are stored using useRef, so they are local to the component using this hook.
 The sorting actually is applied using string representation
+
+## useReduxCachedValue
+It will return a method that only at the very first invocation it will call the retrieverService only the first time, storing the obtained values, and returning always cached values.
+See useReduxCachedValue.test.tsx file for an example
 
 # Features
 ## LoadingOverlay

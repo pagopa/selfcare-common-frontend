@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useErrorDispatcher from '../hooks/useErrorDispatcher';
 import { AppError } from '../redux/slices/appStateSlice';
 
+/** Decorator to retrieve a value and serve it once ready to the decorated component */
 export default function withRetrievedValue<
   ENTITY_TYPE extends Record<string, any>,
   PROP_NAME extends string,
