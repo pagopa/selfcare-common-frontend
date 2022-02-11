@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { FunctionComponent, ReactNode, useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from '../../../store';
+import { createStore } from '../../../examples/redux/store';
 import UserNotifyHandle from '../../components/UserNotifyHandle';
 import useUserNotify from '../useUserNotify';
 import { UserNotify } from '../../model/UserNotify';

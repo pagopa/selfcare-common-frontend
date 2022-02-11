@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { FunctionComponent, ReactNode, useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from '../../../store';
+import { createStore } from '../../../examples/redux/store';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import useErrorDispatcher from '../useErrorDispatcher';
 import { AppError } from '../../redux/slices/appStateSlice';

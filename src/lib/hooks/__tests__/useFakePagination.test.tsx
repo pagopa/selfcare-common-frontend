@@ -3,35 +3,17 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { PageRequest } from '../../model/PageRequest';
 import { PageResource } from '../../model/PageResource';
 import useFakePagination from '../useFakePagination';
+import { fetchTestData } from '../../../examples/services/testService';
 
 type CustomType = {
   prop1: string;
   prop2: number;
 };
 
-const fetchData = (): Promise<Array<CustomType>> => {
-  return new Promise((resolve) =>
-    resolve([
-      {
-        prop1: 'z',
-        prop2: 5,
-      },
-      {
-        prop1: 'b',
-        prop2: 200,
-      },
-      {
-        prop1: 'g',
-        prop2: 25,
-      },
-    ])
-  );
-};
-
 let spyFetch: () => Promise<Array<CustomType>>;
 
 beforeEach(() => {
-  spyFetch = jest.fn(fetchData);
+  spyFetch = jest.fn(fetchTestData);
 });
 
 const renderApp = () => {
