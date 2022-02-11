@@ -223,6 +223,8 @@ The error to be submitted has type AppError which has the following fields:
 | onClose | () => void | N | If defined, in case of not blocking error, it will be executed when closing the popup |
 | toNotify | boolean | Y | If true, it will notify the error |
 | component | string | N | Can render a SessionModal or Toast component |
+| autoclosable | string | N | If component === 'Toast'. The notify will be autoclosed using this configuration, as default timer. If none, it will not be closed automatically. If timer, it will be closed after autocloseMilliseconds milliseconds |
+| autocloseMilliseconds | boolean | N | If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 2000 |
 
 The error will be notified as a GENERIC_ERROR through the [analytcs feature](#analytics)
 
@@ -247,6 +249,8 @@ The user notify to be submitted has type UserNotify which has the following fiel
 | onClose | () => void | N | If defined, it will be executed when closing the popup |
 | closeLabel | string | N | If component === 'SessionModal'. The close button label |
 | component | string | N | Can render a SessionModal or Toast component |
+| autoclosable | string | N | If component === 'Toast'. The notify will be autoclosed using this configuration, as default timer. If none, it will not be closed automatically. If timer, it will be closed after autocloseMilliseconds milliseconds |
+| autocloseMilliseconds | boolean | N | If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 2000 |
 
 ## UnloadEventHandler
 This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.

@@ -88,6 +88,9 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
   }
 
   buildErrorToast(error: AppError) {
+    if (error.autoclosable === 'timer') {
+      setTimeout(() => this.handleClose(error), error.autocloseMilliseconds);
+    }
     return (
       <Toast
         open={true}

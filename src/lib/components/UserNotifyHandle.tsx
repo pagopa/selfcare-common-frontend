@@ -15,11 +15,6 @@ function UserNotifyHandle() {
   const lastNotifyToast = useRef<UserNotify>();
   const lastNotifyModal = useRef<UserNotify>();
 
-  const { openModal, openToast } = updateCurrents(lastNotifyModal, lastNotifyToast, notifies);
-
-  const notifyModal = lastNotifyModal.current;
-  const notifyToast = lastNotifyToast.current;
-
   const onClose = (notify: UserNotify) => {
     dispatch(appStateActions.removeNotify(notify as UserNotify));
     if (notify?.onClose) {
@@ -32,6 +27,16 @@ function UserNotifyHandle() {
       notify.onConfirm();
     }
   };
+
+  const { openModal, openToast } = updateCurrents(
+    lastNotifyModal,
+    lastNotifyToast,
+    notifies,
+    onClose
+  );
+
+  const notifyModal = lastNotifyModal.current;
+  const notifyToast = lastNotifyToast.current;
 
   return (
     <>
@@ -61,7 +66,8 @@ export default UserNotifyHandle;
 function updateCurrents(
   lastNotifyModalRef: MutableRefObject<UserNotify | undefined>,
   lastNotifyToastRef: MutableRefObject<UserNotify | undefined>,
-  notifies: Array<UserNotify>
+  notifies: Array<UserNotify>,
+  onClose: (notify: UserNotify) => void
 ) {
   const lastNotifyToast = notifies.find((e) => e.component === 'Toast');
   const lastNotifySessionModal = notifies.find((e) => e.component === 'SessionModal');
@@ -76,6 +82,10 @@ function updateCurrents(
   if (lastNotifyToast && lastNotifyToast !== lastNotifyToastRef?.current) {
     // eslint-disable-next-line functional/immutable-data
     lastNotifyToastRef.current = lastNotifyToast;
+
+    if (lastNotifyToast.autoclosable === 'timer') {
+      setTimeout(() => onClose(lastNotifyToast), lastNotifyToast.autocloseMilliseconds);
+    }
   }
   return {
     openToast,

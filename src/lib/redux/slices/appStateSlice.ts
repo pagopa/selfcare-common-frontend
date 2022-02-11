@@ -1,30 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ErrorInfo } from 'react';
+import { AppError } from '../../model/AppError';
 import { UserNotify } from '../../model/UserNotify';
 
-export type AppError = {
-  /** The identifier used to recognize the error: it cannot be possible to have the same error id at the same time */
-  id: string;
-  /** The Error thrown */
-  error: Error;
-  errorInfo?: ErrorInfo;
-  /** If true, this error will show the error page, not allowing the user to do anything, otherwise it will show a closable popup */
-  blocking: boolean;
-  /** A description of the error to send when notifying the error */
-  techDescription: string;
-  /** A text to show as title of the popup when a not blocking error occurs */
-  displayableTitle?: string;
-  /** A text to show as body of the popup when a not blocking error occurs */
-  displayableDescription?: string;
-  /** If defined, in case of not blocking error, it will render a retry button which will execute this function */
-  onRetry?: () => void;
-  /** If defined, in case of not blocking error, it will be executed when closing the popup */
-  onClose?: () => void;
-  /** If true, it will notify the error */
-  toNotify: boolean;
-  /** Can render a SessionModal or Toast component */
-  component?: 'SessionModal' | 'Toast';
-};
+// for retrocompatibility
+export type { AppError } from '../../model/AppError';
 
 interface AppStateState {
   loading: {
@@ -83,6 +62,19 @@ export const appStateSlice = createSlice({
       if (!action.payload.component) {
         action.payload.component = 'SessionModal';
       }
+
+      if (action.payload.component === 'Toast') {
+        if (action.payload.autoclosable === undefined) {
+          action.payload.autoclosable = 'timer';
+        }
+        if (
+          action.payload.autoclosable === 'timer' &&
+          (!action.payload.autocloseMilliseconds || action.payload.autocloseMilliseconds < 0)
+        ) {
+          action.payload.autocloseMilliseconds = 2000;
+        }
+      }
+
       state.errors.push(action.payload);
     },
     removeError: (state, action: PayloadAction<AppError>) => {
@@ -90,6 +82,18 @@ export const appStateSlice = createSlice({
     },
 
     addNotify: (state, action: PayloadAction<UserNotify>) => {
+      if (action.payload.component === 'Toast') {
+        if (action.payload.autoclosable === undefined) {
+          action.payload.autoclosable = 'timer';
+        }
+        if (
+          action.payload.autoclosable === 'timer' &&
+          (!action.payload.autocloseMilliseconds || action.payload.autocloseMilliseconds < 0)
+        ) {
+          action.payload.autocloseMilliseconds = 2000;
+        }
+      }
+
       state.userNotifies.push(action.payload);
     },
     removeNotify: (state, action: PayloadAction<UserNotify>) => {
@@ -103,25 +107,24 @@ export const appStateSlice = createSlice({
         description?: string;
       }>
     ) => {
-        state.unloadEventConfiguration.open = false;
-        state.unloadEventConfiguration.enabled = true;
-        state.unloadEventConfiguration.title = action.payload.title;
-        state.unloadEventConfiguration.description = action.payload.description;
-        window.addEventListener('beforeunload', keepOnPage);
+      state.unloadEventConfiguration.open = false;
+      state.unloadEventConfiguration.enabled = true;
+      state.unloadEventConfiguration.title = action.payload.title;
+      state.unloadEventConfiguration.description = action.payload.description;
+      window.addEventListener('beforeunload', keepOnPage);
     },
     disableUnloadEventInterceptor: (state) => {
-        state.unloadEventConfiguration.open = false;
-        state.unloadEventConfiguration.enabled = false;
-        window.removeEventListener('beforeunload', keepOnPage);
+      state.unloadEventConfiguration.open = false;
+      state.unloadEventConfiguration.enabled = false;
+      window.removeEventListener('beforeunload', keepOnPage);
     },
     openUnloadEventNotify: (state, action: PayloadAction<() => void>) => {
-        state.unloadEventConfiguration.open = true;
-        state.unloadEventConfiguration.exitAction = action.payload;
+      state.unloadEventConfiguration.open = true;
+      state.unloadEventConfiguration.exitAction = action.payload;
     },
     closeUnloadEventNotify: (state) => {
-        state.unloadEventConfiguration.open = false;
-        state.unloadEventConfiguration.exitAction = undefined;
-
+      state.unloadEventConfiguration.open = false;
+      state.unloadEventConfiguration.exitAction = undefined;
     },
   },
 });
@@ -133,5 +136,6 @@ export const appStateSelectors = {
   selectLoading: (state: { appState: AppStateState }) => state.appState.loading.result,
   selectErrors: (state: { appState: AppStateState }) => state.appState.errors,
   selectNotifies: (state: { appState: AppStateState }) => state.appState.userNotifies,
-  selectUnloadEventConfiguration: (state: { appState: AppStateState }) => state.appState.unloadEventConfiguration,
+  selectUnloadEventConfiguration: (state: { appState: AppStateState }) =>
+    state.appState.unloadEventConfiguration,
 };
