@@ -22,4 +22,11 @@ export type AppError = {
   toNotify: boolean;
   /** Can render a SessionModal or Toast component */
   component?: 'SessionModal' | 'Toast';
+  /** If component === 'Toast'. The notify will be autoclosed using this configuration, as default timer.
+   * If none, it will not be closed automatically.
+   * If timer, it will be closed after autocloseMilliseconds milliseconds
+   */
+  autoclosable?: 'none' | 'timer';
+  /** If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 2000 */
+  autocloseMilliseconds?: number;
 };

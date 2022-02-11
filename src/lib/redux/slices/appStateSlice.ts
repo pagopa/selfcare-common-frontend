@@ -62,6 +62,19 @@ export const appStateSlice = createSlice({
       if (!action.payload.component) {
         action.payload.component = 'SessionModal';
       }
+
+      if (action.payload.component === 'Toast') {
+        if (action.payload.autoclosable === undefined) {
+          action.payload.autoclosable = 'timer';
+        }
+        if (
+          action.payload.autoclosable === 'timer' &&
+          (!action.payload.autocloseMilliseconds || action.payload.autocloseMilliseconds < 0)
+        ) {
+          action.payload.autocloseMilliseconds = 2000;
+        }
+      }
+
       state.errors.push(action.payload);
     },
     removeError: (state, action: PayloadAction<AppError>) => {
@@ -80,6 +93,7 @@ export const appStateSlice = createSlice({
           action.payload.autocloseMilliseconds = 2000;
         }
       }
+
       state.userNotifies.push(action.payload);
     },
     removeNotify: (state, action: PayloadAction<UserNotify>) => {
