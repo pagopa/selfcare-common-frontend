@@ -5,10 +5,15 @@ import useLoading from './useLoading';
 
 /** It will return a method that only at the very first invocation it will call the retrieverService only the first time, storing the obtained values, and returning always cached values */
 const useReduxCachedValue = <T extends Record<string, any> | Array<any>>(
+  /** The name of the entity, used just for logging purpose */
   entity: string,
+  /** The service that will retrieve the value */
   retrieverService: () => Promise<T>,
-  reduxSelector: (state: any) => T,
+  /** The selector to verify if a value already exists */
+  reduxSelector: (state: any) => T | undefined,
+  /** The action to store the value */
   reduxSetterAction: PayloadActionCreator<T>,
+  /** If true, it will always retrieve and store the new value */
   alwaysRetrieve?: boolean
 ): (() => Promise<T>) => {
   const dispatch = useDispatch();
