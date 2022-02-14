@@ -1,4 +1,4 @@
-import { PayloadActionCreator } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOADING_TASK_RETRIEVE_CACHED_VALUES } from '../utils/constants';
 import useLoading from './useLoading';
@@ -12,7 +12,7 @@ const useReduxCachedValue = <T extends Record<string, any> | Array<any>>(
   /** The selector to verify if a value already exists */
   reduxSelector: (state: any) => T | undefined,
   /** The action to store the value */
-  reduxSetterAction: PayloadActionCreator<T>,
+  reduxSetterAction: (value: T) => PayloadAction<any>,
   /** If true, it will always retrieve and store the new value */
   alwaysRetrieve?: boolean
 ): (() => Promise<T>) => {

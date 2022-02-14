@@ -214,7 +214,7 @@ The arguments to provide to the custom hook are the following:
 | entity | string | Y | The name of the entity, used just for logging purpose |
 | retrieverService | () => Promise`<T>` | Y | The service that will retrieve the value |
 | reduxSelector | (state: any) => T | undefined | Y | The selector to verify if a value already exists |
-| reduxSetterAction | PayloadActionCreator`<T>` | Y | The action to store the value |
+| reduxSetterAction | (value: T) => PayloadAction`<any>` | Y | The action to store the value |
 | alwaysRetrieve | boolean | N | If true, it will always retrieve and store the new value |
 
 # Features
