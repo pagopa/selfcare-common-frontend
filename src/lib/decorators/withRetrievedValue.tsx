@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import useErrorDispatcher from '../hooks/useErrorDispatcher';
-import { AppError } from '../redux/slices/appStateSlice';
+import { AppError } from '../model/AppError';
 
 /** Decorator to retrieve a value and serve it once ready to the decorated component */
 export default function withRetrievedValue<
@@ -8,10 +8,16 @@ export default function withRetrievedValue<
   PROP_NAME extends string,
   PROPS extends Record<PROP_NAME, ENTITY_TYPE>
 >(
+  /** The name of the prop to which serve the value when available */
   propEntityName: PROP_NAME,
+  /** A function that will return an other function to retrieve the expected value. This for allow the use of custom hook  */
   getRetrieverService: () => () => Promise<ENTITY_TYPE>,
+  /** The component to decore */
   WrappedComponent: React.ComponentType<PROPS>,
-  onError?: (appError: AppError) => void
+  /** What to do in case of error. As default, it will use the feature ErrorBoundary */
+  onError?: (appError: AppError) => void,
+  /** A component to show while waiting for the value */
+  onLoading?: ReactNode
 ) {
   const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
@@ -42,10 +48,10 @@ export default function withRetrievedValue<
       }
     }, []);
 
-    return (
-      value !== undefined && (
-        <WrappedComponent {...(props as PROPS)} {...{ [propEntityName]: value }} />
-      )
+    return value !== undefined ? (
+      <WrappedComponent {...(props as PROPS)} {...{ [propEntityName]: value }} />
+    ) : (
+      onLoading ?? <></>
     );
   };
 
