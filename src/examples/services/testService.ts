@@ -1,6 +1,6 @@
 import TestData from '../model/TestData';
 
-const mockedTestData: Array<TestData> = [
+export const mockedTestData: Array<TestData> = [
   {
     prop1: 'z',
     prop2: 5,
