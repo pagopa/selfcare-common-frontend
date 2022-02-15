@@ -212,9 +212,10 @@ The arguments to provide to the custom hook are the following:
 | Prop | Type | Mandatory | Description |
 |------|------|-----------|-------------|
 | entity | string | Y | The name of the entity, used just for logging purpose |
-| retrieverService | (args?: RETRIEVER_ARGS) => Promise`<T>` | Y | The service that will retrieve the value |
-| reduxSelector | (state: any) => T | undefined | Y | The selector to verify if a value already exists |
-| reduxSetterAction | (value: T) => PayloadAction`<any>` | Y | The action to store the value |
+| retrieverService | (retrieverServiceArgs?: RETRIEVER_ARGS) => Promise`<T>` | Y | The service that will retrieve the value |
+| reduxSelector | (state: any) => T | undefined | Y | The selector to read the value from redux |
+| reduxSetterAction | (value: T, retrieverServiceArgs?: RETRIEVER_ARGS) => PayloadAction`<any>` | Y | The action to store the value |
+| selectedValuePredicate2Retrieve | (value: T, args?: RETRIEVER_ARGS) => boolean | N | An optional predicate evaluated when reduxSelector returned some value in order to compare it against the retrieverServiceArgs and evaluate if retrieverService should be called again |
 | alwaysRetrieve | boolean | N | If true, it will always retrieve and store the new value |
 
 # Features

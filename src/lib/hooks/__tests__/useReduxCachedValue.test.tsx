@@ -4,7 +4,7 @@ import useReduxCachedValue from '../useReduxCachedValue';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../examples/redux/store';
 import { testActions, testSelectors } from '../../../examples/redux/slices/testSlice';
-import { fetchTestData } from '../../../examples/services/testService';
+import { fetchTestData, mockedTestData } from '../../../examples/services/testService';
 import TestData from '../../../examples/model/TestData';
 
 let spyFetch: () => Promise<Array<TestData>>;
@@ -13,7 +13,10 @@ beforeEach(() => {
   spyFetch = jest.fn(fetchTestData);
 });
 
-const renderApp = (retrieveServiceArgs?: any) => {
+const renderApp = (
+  retrieveServiceArgs?: any,
+  reduxSelectedPredicate?: (selected: Array<TestData>, retrieveServiceArgs?: any) => boolean
+) => {
   const store = createStore();
 
   const Component = () => {
@@ -22,7 +25,8 @@ const renderApp = (retrieveServiceArgs?: any) => {
         'TEST',
         spyFetch,
         testSelectors.selectTestCustomData,
-        testActions.setTestCustomData
+        testActions.setTestCustomData,
+        reduxSelectedPredicate
       );
     const [values, setValues] = useState<Array<TestData>>([]);
 
@@ -55,7 +59,8 @@ const renderApp = (retrieveServiceArgs?: any) => {
 
 test('test', async () => {
   const retrieverServiceArg = 'PROVA';
-  renderApp(retrieverServiceArg);
+  const reduxSelectedPredicateMock = jest.fn(() => false);
+  renderApp(retrieverServiceArg, reduxSelectedPredicateMock);
 
   await waitFor(() => screen.getByText('no data'));
 
@@ -64,14 +69,19 @@ test('test', async () => {
 
   await fetchAndCheck(fetchButton);
 
-  fireEvent.click(clearButton);
-
-  await waitFor(() => expect(screen.queryByText('(1)z_5')).toBeNull());
+  await clear(clearButton);
 
   await fetchAndCheck(fetchButton);
 
-  expect(spyFetch).toBeCalledTimes(1);
-  expect(spyFetch).toBeCalledWith(retrieverServiceArg);
+  checkMockInvocationTimes(1, 1, reduxSelectedPredicateMock, retrieverServiceArg); // reduxSelectedPredicateMock called just once, because at the first click there are no entities, so the predicate is not called
+
+  reduxSelectedPredicateMock.mockImplementation(() => true);
+
+  await clear(clearButton);
+
+  await fetchAndCheck(fetchButton);
+
+  checkMockInvocationTimes(2, 2, reduxSelectedPredicateMock, retrieverServiceArg);
 });
 
 const fetchAndCheck = async (fetchButton: HTMLElement) => {
@@ -80,4 +90,23 @@ const fetchAndCheck = async (fetchButton: HTMLElement) => {
   await waitFor(() => screen.getByText('(1)z_5'));
   screen.getByText('(2)b_200');
   screen.getByText('(3)g_25');
+};
+
+const clear = async (clearButton: HTMLElement) => {
+  fireEvent.click(clearButton);
+
+  await waitFor(() => expect(screen.queryByText('(1)z_5')).toBeNull());
+};
+
+const checkMockInvocationTimes = (
+  expectedRetrieverServiceTimes: number,
+  expectedReduxSelectedPredicateTimes: number,
+  reduxSelectedPredicateMock: jest.Mock,
+  retrieverServiceArg?: any
+) => {
+  expect(spyFetch).toBeCalledTimes(expectedRetrieverServiceTimes);
+  expect(spyFetch).toBeCalledWith(retrieverServiceArg);
+
+  expect(reduxSelectedPredicateMock).toBeCalledWith(mockedTestData, retrieverServiceArg);
+  expect(reduxSelectedPredicateMock).toBeCalledTimes(expectedReduxSelectedPredicateTimes);
 };
