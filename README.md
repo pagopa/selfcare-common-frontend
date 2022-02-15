@@ -204,9 +204,15 @@ Cached values are stored using useRef, so they are local to the component using 
 The sorting actually is applied using string representation
 
 ## useReduxCachedValue
-See [useReduxCachedValueTranscoded](#usereduxcachedvaluetranscoded) when RETRIEVED_VALUE === RETRIEVER_ARGS
+See [useReduxCachedValueParametricRetrieverTranscoded](#usereduxcachedvaluetranscoded) when there is not RETRIEVER_ARGS and RETRIEVED_VALUE === RETRIEVER_ARGS
+
+## useReduxCachedValueParametricRetriever
+See [useReduxCachedValueParametricRetrieverTranscoded](#usereduxcachedvaluetranscoded) when RETRIEVED_VALUE === RETRIEVER_ARGS
 
 ## useReduxCachedValueTranscoded
+See [useReduxCachedValueParametricRetrieverTranscoded](#usereduxcachedvaluetranscoded) when there is not RETRIEVER_ARGS
+
+## useReduxCachedValueParametricRetrieverTranscoded
 It will return a method that will call the retrieverService only when there are not storing values, or a condition on them is not more verified.
 See useReduxCachedValue.test.tsx file for an example.
 
