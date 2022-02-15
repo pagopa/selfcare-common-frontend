@@ -3,8 +3,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LOADING_TASK_RETRIEVE_CACHED_VALUES } from '../utils/constants';
 import useLoading from './useLoading';
 
-/** @see {useReduxCachedValue} when RETRIEVED_VALUE === STORED_VALUE */
-const useReduxCachedValue = <RETRIEVED_VALUE, RETRIEVER_ARGS>(
+/** @see {useReduxCachedValue} when there is not RETRIEVER_ARGS and RETRIEVED_VALUE === STORED_VALUE */
+const useReduxCachedValue = <RETRIEVED_VALUE extends Record<string, any>>(
+  entity: string,
+  retrieverService: () => Promise<RETRIEVED_VALUE>,
+  reduxSelector: (state: any) => RETRIEVED_VALUE | undefined,
+  reduxSetterAction: (value: RETRIEVED_VALUE) => PayloadAction<any>,
+  selectedValuePredicate2Retrieve?: (value: RETRIEVED_VALUE) => boolean,
+  alwaysRetrieve?: boolean
+): (() => Promise<RETRIEVED_VALUE>) =>
+  useReduxCachedValueParametricRetriever(
+    entity,
+    retrieverService,
+    reduxSelector,
+    reduxSetterAction,
+    selectedValuePredicate2Retrieve,
+    alwaysRetrieve
+  ) as () => Promise<RETRIEVED_VALUE>;
+
+/** @see {useReduxCachedValueParametricRetrieverTranscoded} when RETRIEVED_VALUE === STORED_VALUE */
+const useReduxCachedValueParametricRetriever = <RETRIEVED_VALUE, RETRIEVER_ARGS>(
   entity: string,
   retrieverService: (retrieverServiceArgs: RETRIEVER_ARGS) => Promise<RETRIEVED_VALUE>,
   reduxSelector: (state: any) => RETRIEVED_VALUE | undefined,
@@ -15,7 +33,7 @@ const useReduxCachedValue = <RETRIEVED_VALUE, RETRIEVER_ARGS>(
   selectedValuePredicate2Retrieve?: (value: RETRIEVED_VALUE, args: RETRIEVER_ARGS) => boolean,
   alwaysRetrieve?: boolean
 ): ((retrieverServiceArgs: RETRIEVER_ARGS) => Promise<RETRIEVED_VALUE>) =>
-  useReduxCachedValueTranscoded(
+  useReduxCachedValueParametricRetrieverTranscoded(
     entity,
     retrieverService,
     reduxSelector,
@@ -25,8 +43,32 @@ const useReduxCachedValue = <RETRIEVED_VALUE, RETRIEVER_ARGS>(
     alwaysRetrieve
   );
 
+/** @see {useReduxCachedValueParametricRetrieverTranscoded} when there is not RETRIEVER_ARGS */
+export const useReduxCachedValueTranscoded = <RETRIEVED_VALUE, STORED_VALUE>(
+  entity: string,
+  retrieverService: () => Promise<RETRIEVED_VALUE>,
+  reduxSelector: (state: any) => STORED_VALUE | undefined,
+  reduxSetterAction: (value: RETRIEVED_VALUE) => PayloadAction<STORED_VALUE>,
+  selectedValue2RetrievedValue: (value: STORED_VALUE) => RETRIEVED_VALUE,
+  selectedValuePredicate2Retrieve?: (value: STORED_VALUE) => boolean,
+  alwaysRetrieve?: boolean
+): (() => Promise<RETRIEVED_VALUE>) =>
+  useReduxCachedValueParametricRetrieverTranscoded(
+    entity,
+    retrieverService,
+    reduxSelector,
+    reduxSetterAction,
+    selectedValue2RetrievedValue,
+    selectedValuePredicate2Retrieve,
+    alwaysRetrieve
+  ) as () => Promise<RETRIEVED_VALUE>;
+
 /** It will return a method that will call the retrieverService only when there are not storing values, or a condition on them is not more verified */
-export const useReduxCachedValueTranscoded = <RETRIEVED_VALUE, STORED_VALUE, RETRIEVER_ARGS>(
+export const useReduxCachedValueParametricRetrieverTranscoded = <
+  RETRIEVED_VALUE,
+  STORED_VALUE,
+  RETRIEVER_ARGS
+>(
   /** The name of the entity, used just for logging purpose */
   entity: string,
   /** The service that will retrieve the value */
