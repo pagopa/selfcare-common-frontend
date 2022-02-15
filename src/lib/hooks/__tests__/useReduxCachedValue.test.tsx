@@ -13,21 +13,26 @@ beforeEach(() => {
   spyFetch = jest.fn(fetchTestData);
 });
 
-const renderApp = () => {
+const renderApp = (retrieveServiceArgs?: any) => {
   const store = createStore();
 
   const Component = () => {
-    const fetchValues: () => Promise<Array<TestData>> = useReduxCachedValue(
-      'TEST',
-      spyFetch,
-      testSelectors.selectTestCustomData,
-      testActions.setTestCustomData
-    );
+    const fetchValues: (retrieveServiceArgs?: any) => Promise<Array<TestData>> =
+      useReduxCachedValue(
+        'TEST',
+        spyFetch,
+        testSelectors.selectTestCustomData,
+        testActions.setTestCustomData
+      );
     const [values, setValues] = useState<Array<TestData>>([]);
 
     return (
       <div>
-        <button onClick={() => fetchValues().then((nextValues) => setValues(nextValues))}>
+        <button
+          onClick={() =>
+            fetchValues(retrieveServiceArgs).then((nextValues) => setValues(nextValues))
+          }
+        >
           Retrieve Values
         </button>
         <button onClick={() => setValues([])}>Clear</button>
@@ -49,7 +54,8 @@ const renderApp = () => {
 };
 
 test('test', async () => {
-  renderApp();
+  const retrieverServiceArg = 'PROVA';
+  renderApp(retrieverServiceArg);
 
   await waitFor(() => screen.getByText('no data'));
 
@@ -65,6 +71,7 @@ test('test', async () => {
   await fetchAndCheck(fetchButton);
 
   expect(spyFetch).toBeCalledTimes(1);
+  expect(spyFetch).toBeCalledWith(retrieverServiceArg);
 });
 
 const fetchAndCheck = async (fetchButton: HTMLElement) => {
