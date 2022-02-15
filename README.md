@@ -204,18 +204,26 @@ Cached values are stored using useRef, so they are local to the component using 
 The sorting actually is applied using string representation
 
 ## useReduxCachedValue
-It will return a method that only at the very first invocation it will call the retrieverService only the first time, storing the obtained values, and returning always cached values.
+See [useReduxCachedValueTranscoded](#usereduxcachedvaluetranscoded) when RETRIEVED_VALUE === RETRIEVER_ARGS
+
+## useReduxCachedValueTranscoded
+It will return a method that will call the retrieverService only when there are not storing values, or a condition on them is not more verified.
 See useReduxCachedValue.test.tsx file for an example.
+
+Given the following type parametes:
+* RETRIEVED_VALUE the type desired
+* STORED_VALUE the type stored
 
 The arguments to provide to the custom hook are the following:
 
 | Prop | Type | Mandatory | Description |
 |------|------|-----------|-------------|
 | entity | string | Y | The name of the entity, used just for logging purpose |
-| retrieverService | (retrieverServiceArgs?: RETRIEVER_ARGS) => Promise`<T>` | Y | The service that will retrieve the value |
-| reduxSelector | (state: any) => T | undefined | Y | The selector to read the value from redux |
-| reduxSetterAction | (value: T, retrieverServiceArgs?: RETRIEVER_ARGS) => PayloadAction`<any>` | Y | The action to store the value |
-| selectedValuePredicate2Retrieve | (value: T, args?: RETRIEVER_ARGS) => boolean | N | An optional predicate evaluated when reduxSelector returned some value in order to compare it against the retrieverServiceArgs and evaluate if retrieverService should be called again |
+| retrieverService | (retrieverServiceArgs?: RETRIEVER_ARGS) => Promise`<RETRIEVED_VALUE>` | Y | The service that will retrieve the value |
+| reduxSelector | (state: any) => STORED_VALUE | undefined | Y | The selector to read the value from redux |
+| reduxSetterAction | (value: RETRIEVED_VALUE, retrieverServiceArgs?: RETRIEVER_ARGS) => PayloadAction`<STORED_VALUE>` | Y | The action to store the value |
+| selectedValue2RetrievedValue | (value: STORED_VALUE) => RETRIEVED_VALUE | Y | A function called to transform STORED_VALUE into RETRIEVED_VALUE and called when hitting the cache |
+| selectedValuePredicate2Retrieve | (value: STORED_VALUE, args?: RETRIEVER_ARGS) => boolean | N | An optional predicate evaluated when reduxSelector returned some value in order to compare it against the retrieverServiceArgs and evaluate if retrieverService should be called again |
 | alwaysRetrieve | boolean | N | If true, it will always retrieve and store the new value |
 
 # Features
