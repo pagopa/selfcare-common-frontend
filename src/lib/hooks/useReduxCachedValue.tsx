@@ -39,7 +39,7 @@ export const useReduxCachedValueTranscoded = <RETRIEVED_VALUE, STORED_VALUE, RET
     retrieverServiceArgs: RETRIEVER_ARGS
   ) => PayloadAction<STORED_VALUE>,
   /** A function called to transform STORED_VALUE into RETRIEVED_VALUE and called when hitting the cache */
-  selectedValue2RetrievedValue: (value: STORED_VALUE) => RETRIEVED_VALUE,
+  selectedValue2RetrievedValue: (value: STORED_VALUE, args: RETRIEVER_ARGS) => RETRIEVED_VALUE,
   /** An optional predicate evaluated when reduxSelector returned some value in order to compare it against the retrieverServiceArgs and evaluate if retrieverService should be called again  */
   selectedValuePredicate2Retrieve?: (value: STORED_VALUE, args: RETRIEVER_ARGS) => boolean,
   /** If true, it will always retrieve and store the new value */
@@ -67,7 +67,9 @@ export const useReduxCachedValueTranscoded = <RETRIEVED_VALUE, STORED_VALUE, RET
         })
         .finally(() => setLoading(false));
     } else {
-      return new Promise((resolve) => resolve(selectedValue2RetrievedValue(entities)));
+      return new Promise((resolve) =>
+        resolve(selectedValue2RetrievedValue(entities, retrieverServiceArgs))
+      );
     }
   };
 };
