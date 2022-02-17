@@ -48,6 +48,7 @@ export const appStateSlice = createSlice({
   name: 'appState',
   initialState,
   reducers: {
+    // LoadingOverlay actions
     setLoading: (state, action: PayloadAction<{ task: string; loading: boolean }>) => {
       if (action.payload.loading) {
         state.loading.result = true;
@@ -58,6 +59,7 @@ export const appStateSlice = createSlice({
       }
     },
 
+    // ErrorBoundary actions
     addError: (state, action: PayloadAction<AppError>) => {
       if (!action.payload.component) {
         action.payload.component = 'SessionModal';
@@ -81,7 +83,12 @@ export const appStateSlice = createSlice({
       state.errors = state.errors.filter((e) => e.id !== action.payload.id);
     },
 
+    // UserNotifyHandle actions
     addNotify: (state, action: PayloadAction<UserNotify>) => {
+      if (!action.payload.component) {
+        action.payload.component = 'SessionModal';
+      }
+
       if (action.payload.component === 'Toast') {
         if (action.payload.autoclosable === undefined) {
           action.payload.autoclosable = 'timer';
@@ -100,6 +107,7 @@ export const appStateSlice = createSlice({
       state.userNotifies = state.userNotifies.filter((e) => e.id !== action.payload.id);
     },
 
+    // UnloadEventHandler actions
     enableUnloadEventInterceptor: (
       state,
       action: PayloadAction<{
