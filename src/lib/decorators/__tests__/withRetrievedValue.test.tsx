@@ -8,19 +8,20 @@ import { testActions, testSelectors } from '../../../examples/redux/slices/testS
 import { fetchTestData } from '../../../examples/services/testService';
 import TestData from '../../../examples/model/TestData';
 
-let spyFetch: () => Promise<Array<TestData>>;
+let spyFetch: jest.Mock<Promise<Array<TestData>>>;
 
 beforeEach(() => {
   spyFetch = jest.fn(fetchTestData);
 });
 
-const renderApp = () => {
+const renderApp = (cachedRetrieve: boolean) => {
   const store = createStore();
 
   const Component = (props: {
     testValues: Array<TestData>;
     prop2: string;
     prop3Optional?: number;
+    reload: () => void;
   }) => {
     return (
       <div>
@@ -32,6 +33,7 @@ const renderApp = () => {
               ))
             : 'no data'}
         </div>
+        <button onClick={props.reload}>reload</button>
       </div>
     );
   };
@@ -46,7 +48,7 @@ const renderApp = () => {
 
   const WithRetrievedTestDataComponent = withRetrievedValue(
     'testValues',
-    getUseReduxCachedTestData,
+    cachedRetrieve ? getUseReduxCachedTestData : () => spyFetch,
     Component
   );
 
@@ -57,8 +59,8 @@ const renderApp = () => {
   );
 };
 
-test('test', async () => {
-  renderApp();
+const baseBehavior = async (cachedRetrieve: boolean) => {
+  renderApp(cachedRetrieve);
 
   await waitFor(() => screen.getByText('(1)z_5'));
   screen.getByText('(2)b_200');
@@ -67,4 +69,30 @@ test('test', async () => {
   screen.getByText('PROVA');
 
   expect(spyFetch).toBeCalledTimes(1);
+
+  spyFetch.mockImplementation(
+    () => new Promise((resolve) => resolve([{ prop1: 'RELOAD_P1', prop2: -5 }]))
+  );
+
+  const reloadButton = screen.getByRole('button', { name: 'reload' });
+  fireEvent.click(reloadButton);
+
+  if (cachedRetrieve) {
+    await waitFor(() => screen.getByText('(1)z_5'));
+    screen.getByText('(2)b_200');
+    screen.getByText('(3)g_25');
+    expect(spyFetch).toBeCalledTimes(1);
+  } else {
+    await waitFor(() => screen.getByText('(1)RELOAD_P1_-5'));
+
+    expect(spyFetch).toBeCalledTimes(2);
+  }
+};
+
+test('test using cached retrieve', async () => {
+  await baseBehavior(true);
+});
+
+test('test using not cached retrieve', async () => {
+  await baseBehavior(false);
 });
