@@ -178,8 +178,10 @@ Accessing to the components decorated with it without a session will brought to 
 It's possible to modify the login path changing the value in [CONFIG.URL_FE.LOGIN](#Configuration) inside the index.tsx file
 
 ## withRetrievedValue
-Decorator to retrieve a value and serve it once ready to the decorated component.
-Using it together with [useReduxCachedValue](#usereduxcachedvalue) will allow to build a component which will use centralized and cached data
+Decorator to retrieve a value and serve it once ready to the decorated component, moreover it will provide the decorated component a function to re-execute the retrieve method.
+
+Using it together with [useReduxCachedValue](#usereduxcachedvalue) will allow to build a component which will use centralized and cached data (the reload function in this case will call again the function that will retrieve cached data).
+
 See withRetrievedValue.test.tsx file for an example.
 
 Given the following type parameters:

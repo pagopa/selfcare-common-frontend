@@ -23,12 +23,12 @@ export default function withRetrievedValue<
 
   const ComponentWithParties = (props: PROPS) => {
     const [value, setValue] = useState<ENTITY_TYPE>();
-    const cachedRetrieve = getRetrieverService();
+    const retrieverService = getRetrieverService();
 
     const addError = useErrorDispatcher();
 
     const doRetrieve = (): void => {
-      cachedRetrieve()
+      retrieverService()
         .then((v) => setValue(v))
         .catch((reason) =>
           (onError ?? addError)({
@@ -49,7 +49,11 @@ export default function withRetrievedValue<
     }, []);
 
     return value !== undefined ? (
-      <WrappedComponent {...(props as PROPS)} {...{ [propEntityName]: value }} />
+      <WrappedComponent
+        {...(props as PROPS)}
+        {...{ [propEntityName]: value }}
+        reload={doRetrieve}
+      />
     ) : (
       onLoading ?? <></>
     );
@@ -58,5 +62,5 @@ export default function withRetrievedValue<
   // eslint-disable-next-line functional/immutable-data
   ComponentWithParties.displayName = `withRetrieve${propEntityName}(${displayName})`;
 
-  return ComponentWithParties as React.ComponentType<Omit<PROPS, PROP_NAME>>;
+  return ComponentWithParties as React.ComponentType<Omit<PROPS, PROP_NAME | 'reload'>>;
 }
