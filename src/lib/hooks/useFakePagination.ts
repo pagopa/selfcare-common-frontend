@@ -72,7 +72,10 @@ const useFakePagination = <T extends Record<string, any>>(
     if (!filterChanged && cachedData.current) {
       checkAndApplySort(pageRequest.sort);
       return new Promise((resolve) =>
-        resolve(extractPageRequest(cachedData.current as Array<T>, pageRequest))
+        setTimeout(
+          () => resolve(extractPageRequest(cachedData.current as Array<T>, pageRequest)),
+          100
+        )
       );
     } else {
       return fetch().then((results) => {
