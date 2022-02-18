@@ -26,4 +26,6 @@ export type UserNotify = {
   closeLabel?: string;
   /** Can render a SessionModal or Toast component */
   component?: 'SessionModal' | 'Toast';
+  /** The SessionModal or Toast width */
+  width?: string | undefined;
 };

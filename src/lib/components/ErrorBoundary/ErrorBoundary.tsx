@@ -99,6 +99,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         logo={FaultIcon}
         leftBorderColor="#C02927"
         onCloseToast={() => this.handleClose(error)}
+        width={error.width}
       />
     );
   }
@@ -111,6 +112,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         message={error.displayableDescription ?? 'Spiacenti, qualcosa è andato storto.'}
         onConfirm={error.onRetry ? () => this.retryError(error) : undefined}
         handleClose={() => this.handleClose(error)}
+        width={error.width}
       />
     );
   }

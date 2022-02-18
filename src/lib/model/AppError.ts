@@ -29,4 +29,6 @@ export type AppError = {
   autoclosable?: 'none' | 'timer';
   /** If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 2000 */
   autocloseMilliseconds?: number;
+  /** The SessionModal or Toast width */
+  width?: string | undefined;
 };

@@ -47,6 +47,7 @@ function UserNotifyHandle() {
         logo={notifyToast?.logo}
         leftBorderColor={notifyToast?.leftBorderColor}
         onCloseToast={() => onClose(notifyToast as UserNotify)}
+        width={notifyToast?.width}
       />
       <SessionModal
         open={openModal}
@@ -56,6 +57,7 @@ function UserNotifyHandle() {
         onConfirmLabel={notifyModal?.confirmLabel}
         handleClose={() => onClose(notifyModal as UserNotify)}
         onCloseLabel={notifyModal?.closeLabel}
+        width={notifyModal?.width}
       />
     </>
   );
