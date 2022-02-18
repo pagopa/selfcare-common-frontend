@@ -112,6 +112,7 @@ Selfcare's toast
 | title | string | Y | The toast title |
 | message | React.ReactNode | Y | The toast body |
 | onCloseToast | ()=>void | Y | The function to be invoked when closing the toast |
+| width | string | N | The toast width |
 
 ## Ending Page
 Selfcare's ending page
