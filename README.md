@@ -1,10 +1,11 @@
 # SelfCare's common components & features
-This library contains utility, components and features built for the selfcare project.
+This library contains [utilities](#utilities), [components](#components), [decorators](#decorators), [custom hooks](#custom-hooks) and [features](#features) built for the selfcare project.
 
 # Configuration
 In order to use these components it's necessary to set the following keys of the CONFIG object imported from /config/env as first things inside the application:
 
 | Key | Type | Description | DefaultValue |
+|-----|------|-------------|--------------|
 | URL_FE.LOGIN | string | The url of the login page | /auth/login |
 | URL_FE.LOGOUT | string | The url of the logout page | /auth/logout |
 | URL_FE.ASSISTANCE | string | The url of the assistance page | /assistenza |
@@ -12,7 +13,7 @@ In order to use these components it's necessary to set the following keys of the
 | ANALYTICS.* |  | See [analitics feature](#analytics) | |
 | CONSENT.* |  | See [consent management feature](#consent-management) | |
 
-# Common components used to build pagopa/selfcare react projects
+# Components
 ## Header
 SelfCare Header component
 
@@ -56,16 +57,16 @@ Modal used to show a list of values from which to choose a single value
 | Prop | Type | Mandatory | Description |
 |------|------|-----------|-------------|
 | open | boolean | Y | If the popup is to be displayed |
-| handleClose | React.MouseEventHandler<HTMLButtonElement> | Y | The function to be invoked when clicking on exit button or selecting a value |
+| handleClose | React.MouseEventHandler`<HTMLButtonElement>` | Y | The function to be invoked when clicking on exit button or selecting a value |
 | title | string | Y | The popup title |
-| filterModalConfig | FilterModalConfig<any, any> | N | See below  |
+| filterModalConfig | FilterModalConfig`<any, any>` | N | See below  |
 | height | string | N | The popup height |
 | minHeight | string | N | The popup minHeight |
 
 FilterModalConfig fields:
 | Field | Type | Mandatory | Description |
 |-------|------|-----------|-------------|
-| data | Array<T> | Y | The list of values between to which choose |
+| data | Array`<T>` | Y | The list of values between to which choose |
 | getLabel | (e: T) => string | Y | A function that will select the label to show |
 | getValue | (e: T) => string | Y | A function that will select the value to return when selecting an item |
 | onFilterChange | (v: V) => void | Y | The function invoked when selecting a value |
@@ -78,10 +79,10 @@ Selfcare's popup
 | open | boolean | Y | If this component should be displayed or not |
 | title | string | Y | The title to show in the popup |
 | message | React.ReactNode | Y | The body to show in the popup |
-| onConfirm | React.MouseEventHandler<HTMLButtonElement> | N | If defined, it will render a confirm button using this function as behavior |
+| onConfirm | React.MouseEventHandler`<HTMLButtonElement>` | N | If defined, it will render a confirm button using this function as behavior |
 | onConfirmLabel | string | N | The confirm label text |
-| handleClose | React.MouseEventHandler<HTMLButtonElement> | Y | The function invoked when clicking on close button or in the showed X icon |
-| handleExit | React.MouseEventHandler<HTMLButtonElement> | N | If defined, it allow to set a different behavior when clicking on X icon |
+| handleClose | React.MouseEventHandler`<HTMLButtonElement>` | Y | The function invoked when clicking on close button or in the showed X icon |
+| handleExit | React.MouseEventHandler`<HTMLButtonElement>` | N | If defined, it allow to set a different behavior when clicking on X icon |
 | onCloseLabel | string | N | Close button text |
 | height | string | N | The popup height |
 | minHeight | string | N | The popup minHeight |
@@ -111,6 +112,7 @@ Selfcare's toast
 | title | string | Y | The toast title |
 | message | React.ReactNode | Y | The toast body |
 | onCloseToast | ()=>void | Y | The function to be invoked when closing the toast |
+| width | string | N | The toast width |
 
 ## Ending Page
 Selfcare's ending page
@@ -123,7 +125,7 @@ Selfcare's ending page
 | buttonLabel | string | N | The ending page button label if any |
 | onButtonClick | () => void | N | if defined it will show a button that will performe this action on click |
 
-# Utility functions
+# Utilities
 ## api-utils
 ### onRedirectToLogin: (store: EnhancedStore) => void
 To show an error popup to inform of the not valid session
@@ -131,7 +133,7 @@ To show an error popup to inform of the not valid session
 ### buildFetchApi = (timeoutMs: number = 300000) => fetch
 Return the implementation of fetch configured with a timeout
 
-### extractResponse <R>(response: t.Validation<TypeofApiResponse<any>>, successHttpStatus: number, onRedirectToLogin: () => void, notValidTokenHttpStatus: number | null = 401, notAuthorizedTokenHttpStatus: number | null = 403, emptyResponseHttpStatus: number | null = 404): Promise<R>
+### extractResponse `<R>`(response: t.Validation`<TypeofApiResponse<any>>`, successHttpStatus: number, onRedirectToLogin: () => void, notValidTokenHttpStatus: number | null = 401, notAuthorizedTokenHttpStatus: number | null = 403, emptyResponseHttpStatus: number | null = 404): Promise`<R>`
 Extract the response of a @pagopa/openapi-codegen-ts generated client rest invocation having status code successHttpStatus.
 If notValidTokenHttpStatus is not null and the returned status is equal to notValidTokenHttpStatus, it will call the onRedirectToLogin function and will schedule the redirect towards logout path.
 If notAuthorizedTokenHttpStatus is  not null and the returned status is equal to notAuthorizedTokenHttpStatus, it will throw an Error with message "Operation not allowed".
@@ -169,14 +171,71 @@ It will return a string representing the provided date in the italian format gg 
 ## fixSwagger20ArraySchemaDef.js
 An utility script to use when generating the stub through @pagopa/openapi-codegen-ts in order to handle the REST api whose operations returns an array of objects
 
-# Common decorators used in pagopa/selfcare react projects
+# Decorators
 ## withLogin
 This feature is based on react-redux library and require to register the reducer build in userSlice into the application's redux store.
 This decorator has to be applied to components whose acces require an active session.
 Accessing to the components decorated with it without a session will brought to the login page.
 It's possible to modify the login path changing the value in [CONFIG.URL_FE.LOGIN](#Configuration) inside the index.tsx file
 
-# Common features used in pagopa/selfcare react projects
+## withRetrievedValue
+Decorator to retrieve a value and serve it once ready to the decorated component, moreover it will provide the decorated component a function to re-execute the retrieve method.
+
+Using it together with [useReduxCachedValue](#usereduxcachedvalue) will allow to build a component which will use centralized and cached data (the reload function in this case will call again the function that will retrieve cached data).
+
+See withRetrievedValue.test.tsx file for an example.
+
+Given the following type parameters:
+* ENTITY_TYPE extends Record`<string, any>`,
+* PROP_NAME extends string,
+* PROPS extends Record`<PROP_NAME, ENTITY_TYPE>`
+
+The arguments to provide to the decorator are the following:
+
+| Prop | Type | Mandatory | Description |
+|------|------|-----------|-------------|
+| propEntityName | PROP_NAME | Y | The name of the prop to which serve the value when available |
+| getRetrieverService | () => () => Promise`<ENTITY_TYPE>` | Y | A function that will return an other function to retrieve the expected value. This for allow the use of custom hook  |
+| WrappedComponent | React.ComponentType`<PROPS>` | Y | The component to decore |
+| onError | (appError: AppError) => void | N | What to do in case of error. As default, it will use the feature ErrorBoundary |
+| onLoading | ReactNode | N | A component to show while waiting for the value |
+
+# Custom Hooks
+## useFakePagination
+Custom hook used to simulate paginated resources when the external service doesn't implement it, caching values when filter doesn't change and serving them a page at time.
+Cached values are stored using useRef, so they are local to the component using this hook.
+The sorting actually is applied using string representation
+
+## useReduxCachedValue
+See [useReduxCachedValueParametricRetrieverTranscoded](#usereduxcachedvaluetranscoded) when there is not RETRIEVER_ARGS and RETRIEVED_VALUE === RETRIEVER_ARGS
+
+## useReduxCachedValueParametricRetriever
+See [useReduxCachedValueParametricRetrieverTranscoded](#usereduxcachedvaluetranscoded) when RETRIEVED_VALUE === RETRIEVER_ARGS
+
+## useReduxCachedValueTranscoded
+See [useReduxCachedValueParametricRetrieverTranscoded](#usereduxcachedvaluetranscoded) when there is not RETRIEVER_ARGS
+
+## useReduxCachedValueParametricRetrieverTranscoded
+It will return a method that will call the retrieverService only when there are not storing values, or a condition on them is not more verified.
+See useReduxCachedValue.test.tsx file for an example.
+
+Given the following type parametes:
+* RETRIEVED_VALUE the type desired
+* STORED_VALUE the type stored
+
+The arguments to provide to the custom hook are the following:
+
+| Prop | Type | Mandatory | Description |
+|------|------|-----------|-------------|
+| entity | string | Y | The name of the entity, used just for logging purpose |
+| retrieverService | (retrieverServiceArgs: RETRIEVER_ARGS) => Promise`<RETRIEVED_VALUE>` | Y | The service that will retrieve the value |
+| reduxSelector | (state: any) => STORED_VALUE | undefined | Y | The selector to read the value from redux |
+| reduxSetterAction | (value: RETRIEVED_VALUE, retrieverServiceArgs: RETRIEVER_ARGS) => PayloadAction`<STORED_VALUE>` | Y | The action to store the value |
+| selectedValue2RetrievedValue | (value: STORED_VALUE, args: RETRIEVER_ARGS) => RETRIEVED_VALUE | Y | A function called to transform STORED_VALUE into RETRIEVED_VALUE and called when hitting the cache |
+| selectedValuePredicate2Retrieve | (value: STORED_VALUE, retrieverServiceArgs: RETRIEVER_ARGS) => boolean | N | An optional predicate evaluated when reduxSelector returned some value in order to compare it against the retrieverServiceArgs and evaluate if retrieverService should be called again |
+| alwaysRetrieve | boolean | N | If true, it will always retrieve and store the new value |
+
+# Features
 ## LoadingOverlay
 This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.
 It allows to draw a loader when an async task to wait is running.
@@ -207,6 +266,9 @@ The error to be submitted has type AppError which has the following fields:
 | onClose | () => void | N | If defined, in case of not blocking error, it will be executed when closing the popup |
 | toNotify | boolean | Y | If true, it will notify the error |
 | component | string | N | Can render a SessionModal or Toast component |
+| autoclosable | string | N | If component === 'Toast'. The notify will be autoclosed using this configuration, as default timer. If none, it will not be closed automatically. If timer, it will be closed after autocloseMilliseconds milliseconds |
+| autocloseMilliseconds | boolean | N | If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 2000 |
+| width | string | N | The SessionModal or Toast width |
 
 The error will be notified as a GENERIC_ERROR through the [analytcs feature](#analytics)
 
@@ -231,6 +293,9 @@ The user notify to be submitted has type UserNotify which has the following fiel
 | onClose | () => void | N | If defined, it will be executed when closing the popup |
 | closeLabel | string | N | If component === 'SessionModal'. The close button label |
 | component | string | N | Can render a SessionModal or Toast component |
+| autoclosable | string | N | If component === 'Toast'. The notify will be autoclosed using this configuration, as default timer. If none, it will not be closed automatically. If timer, it will be closed after autocloseMilliseconds milliseconds |
+| autocloseMilliseconds | boolean | N | If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 2000 |
+| width | string | N | The SessionModal or Toast width |
 
 ## UnloadEventHandler
 This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.
@@ -265,9 +330,14 @@ This feature can be configured with the following keys of the [CONFIG](#Configur
 | PERSISTENCE | string | Where to store session data, possible values are cookie or localStorage | localStorage |
 | LOG_IP | boolean | If the ip should be sent | false |
 | LOG_IP | boolean | If the ip should be sent | false |
-| PROPERTY_BLACKLIST | Array<string> | If the ip should be sent | ["$current_url", "$initial_referrer", "$referrer"] |
+| PROPERTY_BLACKLIST | Array`<string>` | If the ip should be sent | ["$current_url", "$initial_referrer", "$referrer"] |
 | ADDITIONAL_PROPERTIES | {[key: string]: string} | An object containing a fixed set of properties to send every time, overridden if the actual event will report the same properties | {} |
 | ADDITIONAL_PROPERTIES_IMPORTANT | {[key: string]: string} | As ADDITIONAL_PROPERTIES, but these properties will take the precedence overriding events conflicting properties | {} |
+
+In order track an event (once the initAnalytics method has been invoked) you have to call the trackEvent(event_name: string, properties?: any, callback?: () => void)=> void method where:
+* event_name: the name of the event
+* properties: the additional payload sent with the event
+* callback: an action taken when the track has completed (If the action taken immediately after the track is an exit action from the application, it's better to use this callback to perform the exit, in order to give to mixPanel the time to send the event)
 
 ## Consent management
 This feature allows the automatic enabling of the [analytics feature](#analytics) only when the user accept to send that data.

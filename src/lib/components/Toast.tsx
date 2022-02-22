@@ -17,6 +17,8 @@ type Props = {
   message: React.ReactNode;
   /** The function to be invoked when closing the toast */
   onCloseToast: () => void;
+  /** The toast width */
+  width?: string | undefined;
 };
 
 const CustomAlert = styled(Alert)({
@@ -31,6 +33,7 @@ export default function Toast({
   onCloseToast,
   logo = ConfirmIcon,
   leftBorderColor = '#00CF86',
+  width = '376px',
 }: Props) {
   return (
     <Fragment>
@@ -43,7 +46,7 @@ export default function Toast({
             bottom: '64px',
             right: '64px',
             zIndex: 100,
-            width: '376px',
+            width: { width },
             backgroundColor: 'white',
             borderLeft: `4px solid ${leftBorderColor} !important`,
             borderRadius: '5px',

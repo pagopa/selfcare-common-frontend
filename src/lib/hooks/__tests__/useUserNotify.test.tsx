@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { FunctionComponent, ReactNode, useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from '../../../store';
+import { createStore } from '../../../examples/redux/store';
 import UserNotifyHandle from '../../components/UserNotifyHandle';
 import useUserNotify from '../useUserNotify';
 import { UserNotify } from '../../model/UserNotify';
@@ -24,6 +23,23 @@ function buildChildComponent(userNotify: UserNotify) {
     return <button onClick={() => addNotify(userNotify)}>NOTIFY</button>;
   };
 }
+
+test('test default component rendered', () => {
+  renderApp({
+    id: 'EXAMPLE',
+    title: 'TITLE',
+    message: 'MESSAGE',
+  });
+
+  expect(screen.queryByText('EXAMPLE')).toBeNull();
+  const button = screen.getByText('NOTIFY');
+  fireEvent.click(button);
+  screen.getByText('TITLE');
+  screen.getByText('MESSAGE');
+
+  screen.getByTestId('ClearOutlinedIcon');
+  screen.getByRole('button', { name: 'Annulla' });
+});
 
 test('test Notify Through Toast', () => {
   const onCloseMock = jest.fn();
