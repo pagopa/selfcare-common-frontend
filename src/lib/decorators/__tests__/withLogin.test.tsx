@@ -1,7 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { storageDelete, storageWrite } from '../../utils/storage-utils';
-import { STORAGE_KEY_USER } from '../../utils/constants';
+import { storageUserOps } from '../../utils/storage';
 import { User } from '../../model/User';
 import { createStore } from '../../../examples/redux/store';
 import withLogin from '../withLogin';
@@ -24,7 +24,7 @@ afterAll(() => {
 
 // clean storage after each test
 afterEach(() => {
-  storageDelete(STORAGE_KEY_USER);
+  storageUserOps.delete();
   mockedLocation.assign.mockReset();
 });
 
@@ -49,7 +49,7 @@ const mockUser = (): User => {
     email: 'a@a.aa',
   };
 
-  storageWrite(STORAGE_KEY_USER, user, 'object');
+  storageUserOps.write(user);
 
   return user;
 };

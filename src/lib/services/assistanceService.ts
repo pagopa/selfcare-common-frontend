@@ -1,11 +1,10 @@
 import isEmpty from 'lodash/isEmpty';
 import { CONFIG } from '../config/env';
-import { storageRead } from '../utils/storage-utils';
-import { STORAGE_KEY_USER } from '../utils/constants';
+import { storageUserOps } from '../utils/storage';
 import { trackEvent } from './analyticsService';
 
 export const buildAssistanceURI = (assistanceEmail?: string) => {
-  const sessionStorageUser = storageRead(STORAGE_KEY_USER, 'object');
+  const sessionStorageUser = storageUserOps.read();
 
   if (isEmpty(sessionStorageUser)) {
     trackEvent('CUSTOMER_CARE_MAILTO');

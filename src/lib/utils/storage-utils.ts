@@ -45,14 +45,18 @@ export function storageRead(key: string, type: StorageValueType, local?: boolean
   return parseFn[type]();
 }
 
-export type StorageOps = {
+export type StorageOps<T> = {
   delete: () => void;
-  read: () => StorageValue;
-  write: (value: StorageValue) => void;
+  read: () => T;
+  write: (value: T) => void;
 };
 
 /** Build an object with a complete set of operation to perform on the same key */
-export function storageOpsBuilder(key: string, type: StorageValueType, local: boolean): StorageOps {
+export function storageOpsBuilder<T extends StorageValue>(
+  key: string,
+  type: StorageValueType,
+  local: boolean
+): StorageOps<T> {
   return {
     delete: () => storageDelete(key, local),
     read: () => storageRead(key, type, local),
