@@ -44,3 +44,18 @@ export function storageRead(key: string, type: StorageValueType, local?: boolean
 
   return parseFn[type]();
 }
+
+export type StorageOps = {
+  delete: () => void;
+  read: () => StorageValue;
+  write: (value: StorageValue) => void;
+};
+
+/** Build an object with a complete set of operation to perform on the same key */
+export function storageOpsBuilder(key: string, type: StorageValueType, local: boolean): StorageOps {
+  return {
+    delete: () => storageDelete(key, local),
+    read: () => storageRead(key, type, local),
+    write: (value) => storageWrite(key, value, type, local),
+  };
+}

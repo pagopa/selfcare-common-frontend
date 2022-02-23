@@ -141,12 +141,6 @@ If emptyResponseHttpStatus is  not null and the returned status is equal to empt
 Other statuses will return will throw a generic error.
 
 ## constants
-### STORAGE_KEY_USER: string
-The key used to store in the session storage the loggedUser in selfcare projects
-
-### STORAGE_KEY_TOKEN: string
-The key used to store in the session storage the logged user token in selfcare projects
-
 ### roleLabels: { [key in UserRole]: { shortLabel: string; longLabel: string } }
 The short and long labels used for the roles of selfcare's projects
 
@@ -163,9 +157,12 @@ If local is true, it will use the local session storage instead.
 It will store a key/value pair in the session storage.
 If local is true, it will use the local session storage instead.
 
-### function storageRead: (key: string, type: StorageValueType, local?: boolean) => void
+### storageRead: (key: string, type: StorageValueType, local?: boolean) => void
 It will read a key from the session storage.
 If local is true, it will use the local session storage instead.
+
+### storageOpsBuilder(key: string, type: StorageValueType, local: boolean): StorageOps
+It will build an object containing a complete set of operation to perform on the same key.
 
 ## utils
 ### formatDateAsLongString: (date: Date) => string
@@ -173,6 +170,13 @@ It will return a string representing the provided date in the italian format gg 
 
 ## fixSwagger20ArraySchemaDef.js
 An utility script to use when generating the stub through @pagopa/openapi-codegen-ts in order to handle the REST api whose operations returns an array of objects
+
+## storage
+### storageTokenOps
+An object containing a complete set of operation on the storage regarding the key used to store in the storage the loggedUser token in selfcare projects.
+
+### storageUserOps
+An object containing a complete set of operation on the storage regarding the key used to store in the storage the loggedUser in selfcare projects.
 
 # Decorators
 ## withLogin
