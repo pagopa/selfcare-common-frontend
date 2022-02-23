@@ -155,14 +155,17 @@ The short and long labels used for the roles of selfcare's projects
 It will resolve the path variables in path using the provided map
 
 ## storage-utils
-### storageDelete: (key: string) => void
-It will delete a key from the local session storage
+### storageDelete: (key: string, local?: boolean) => void
+It will delete a key from the session storage.
+If local is true, it will use the local session storage instead.
 
-### storageWrite: (key: string, value: StorageValue, type: StorageValueType) => void
-It will store a key/value pair in the local session storage
+### storageWrite: (key: string, value: StorageValue, type: StorageValueType, local?: boolean) => void
+It will store a key/value pair in the session storage.
+If local is true, it will use the local session storage instead.
 
-### function storageRead: (key: string, type: StorageValueType) => void
-It will read a key from the local session storage
+### function storageRead: (key: string, type: StorageValueType, local?: boolean) => void
+It will read a key from the session storage.
+If local is true, it will use the local session storage instead.
 
 ## utils
 ### formatDateAsLongString: (date: Date) => string
