@@ -17,7 +17,7 @@ const toPageResource = <T>(
   },
 });
 
-const extractPageRequest = <T extends Record<string, any>>(
+export const extractPageRequest = <T extends Record<string, any>>(
   data: Array<T>,
   pageRequest: PageRequest
 ): PageResource<T> => {
@@ -32,7 +32,7 @@ const extractPageRequest = <T extends Record<string, any>>(
   );
 };
 
-const applySort = <T extends Record<string, any>>(data: Array<T>, sort: string) => {
+export const applySort = <T extends Record<string, any>>(data: Array<T>, sort: string) => {
   const sortConfiguration: Array<{ key: string; asc: boolean }> = sort.split(' ').map((order) => {
     const [key, direction] = order.split(',');
     return { key, asc: direction === 'asc' };
