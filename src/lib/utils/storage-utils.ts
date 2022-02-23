@@ -2,13 +2,13 @@
 type StorageValue = string | number | object;
 type StorageValueType = 'string' | 'number' | 'object';
 
-/** It will delete a key from the local session storage */
+/** It will delete a key from the session storage. If local is true, it will use the local session storage instead. */
 export function storageDelete(key: string, local?: boolean) {
   const storage: Storage = local ? window.localStorage : window.sessionStorage;
   storage.removeItem(key);
 }
 
-/** It will store a key/value pair in the local session storage */
+/** It will store a key/value pair in the session storage. If local is true, it will use the local session storage instead. */
 export function storageWrite(
   key: string,
   value: StorageValue,
@@ -27,7 +27,7 @@ export function storageWrite(
   storage.setItem(key, stringified);
 }
 
-/** It will read a key from the local session storage */
+/** It will read a key from the session storage. If local is true, it will use the local session storage instead. */
 export function storageRead(key: string, type: StorageValueType, local?: boolean) {
   const storage: Storage = local ? window.localStorage : window.sessionStorage;
   const value: string | null = storage.getItem(key);
