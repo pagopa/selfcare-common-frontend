@@ -72,7 +72,9 @@ export default function SessionModal({
 
           <Grid container item>
             <Grid item xs={12} my={3}>
-              <Typography variant="body2">{message}</Typography>
+              <Typography component="div" variant="body2">
+                {message}
+              </Typography>
             </Grid>
           </Grid>
 
@@ -89,7 +91,7 @@ export default function SessionModal({
             </Grid>
           )}
 
-          <Grid item xs={12} mb={3} mt={onConfirm ? 0 : 7}>
+          <Grid item xs={12} mb={3} mt={0}>
             <Button onClick={handleClose} sx={{ width: '100%' }} color="primary" variant="outlined">
               {onCloseLabel}
             </Button>
