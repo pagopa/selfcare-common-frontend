@@ -80,6 +80,7 @@ Selfcare's popup
 | title | string | Y | The title to show in the popup |
 | message | React.ReactNode | Y | The body to show in the popup |
 | onConfirm | React.MouseEventHandler`<HTMLButtonElement>` | N | If defined, it will render a confirm button using this function as behavior |
+| onConfirmEnabled | boolean | N | If the confirm button should be enabled. Default true |
 | onConfirmLabel | string | N | The confirm label text |
 | handleClose | React.MouseEventHandler`<HTMLButtonElement>` | Y | The function invoked when clicking on close button or in the showed X icon |
 | handleExit | React.MouseEventHandler`<HTMLButtonElement>` | N | If defined, it allow to set a different behavior when clicking on X icon |

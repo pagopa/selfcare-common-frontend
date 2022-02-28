@@ -14,6 +14,8 @@ type Props = {
   message: React.ReactNode;
   /** If defined, it will render a confirm button using this function as behavior */
   onConfirm?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  /** If the confirm button should be enabled. Default true */
+  onConfirmEnabled?: boolean;
   /** The confirm label text */
   onConfirmLabel?: string;
   /** The function invoked when clicking on close button or in the showed X icon */
@@ -36,6 +38,7 @@ export default function SessionModal({
   title,
   message,
   onConfirm,
+  onConfirmEnabled = true,
   onConfirmLabel = 'Riprova',
   handleClose,
   handleExit = handleClose,
@@ -85,6 +88,7 @@ export default function SessionModal({
                 color="primary"
                 variant="contained"
                 onClick={onConfirm}
+                disabled={!onConfirmEnabled}
               >
                 {onConfirmLabel}
               </Button>
