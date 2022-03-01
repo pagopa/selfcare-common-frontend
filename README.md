@@ -114,6 +114,17 @@ Selfcare's toast
 | message | React.ReactNode | Y | The toast body |
 | onCloseToast | ()=>void | Y | The function to be invoked when closing the toast |
 | width | string | N | The toast width |
+| wrapped | boolean | N | If true, it will not position itself as fixed. Default false |
+| bottom | string | N | If not wrapped, the pixel from the bottom of the viewport where to place the toast. Default "64px" |
+| rigth | string | N | If not wrapped, the pixel from the right side of the viewport where to place the toast. Default "64px" |
+
+## ToastWrapper
+To stack multiple Toast component. Each Toast should have the prop wrapped setted to true
+
+| Prop | Type | Mandatory | Description |
+|------|------|-----------|-------------|
+| bottom | string | N | The pixel from the bottom of the viewport where to place the toast. Default "64px" |
+| rigth | string | N | The pixel from the right side of the viewport where to place the toast. Default "64px" |
 
 ## Ending Page
 Selfcare's ending page
@@ -302,7 +313,7 @@ The user notify to be submitted has type UserNotify which has the following fiel
 | closeLabel | string | N | If component === 'SessionModal'. The close button label |
 | component | string | N | Can render a SessionModal or Toast component |
 | autoclosable | string | N | If component === 'Toast'. The notify will be autoclosed using this configuration, as default timer. If none, it will not be closed automatically. If timer, it will be closed after autocloseMilliseconds milliseconds |
-| autocloseMilliseconds | boolean | N | If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 2000 |
+| autocloseMilliseconds | boolean | N | If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 10000 |
 | width | string | N | The SessionModal or Toast width |
 
 ## UnloadEventHandler

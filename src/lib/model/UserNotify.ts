@@ -12,7 +12,7 @@ export type UserNotify = {
    * If timer, it will be closed after autocloseMilliseconds milliseconds
    */
   autoclosable?: 'none' | 'timer';
-  /** If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 2000 */
+  /** If component === 'Toast' and autoclosable === 'timer'. The millisecond after which close the notify. As default 10000 */
   autocloseMilliseconds?: number;
   /** If component === 'Toast'. The color used for the left border */
   leftBorderColor?: string;

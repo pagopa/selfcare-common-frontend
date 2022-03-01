@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SessionModal, Toast } from '..';
 import { UserNotify } from '../model/UserNotify';
 import { appStateActions, appStateSelectors } from '../redux/slices/appStateSlice';
+import ToastWrapper from './ToastWrapper';
 
 /** This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.
 It allows to dispatch User Notifies in order to display a pop up or a toast notification.
@@ -12,7 +13,7 @@ In order to dispatch a User Notify, you have to use the custom hook useUserNotif
 function UserNotifyHandle() {
   const dispatch = useDispatch();
   const notifies = useSelector(appStateSelectors.selectNotifies);
-  const lastNotifyToast = useRef<UserNotify>();
+  const lastNotifiesToast = useRef<Array<UserNotify>>([]);
   const lastNotifyModal = useRef<UserNotify>();
 
   const onClose = (notify: UserNotify) => {
@@ -30,25 +31,31 @@ function UserNotifyHandle() {
 
   const { openModal, openToast } = updateCurrents(
     lastNotifyModal,
-    lastNotifyToast,
+    lastNotifiesToast,
     notifies,
     onClose
   );
 
   const notifyModal = lastNotifyModal.current;
-  const notifyToast = lastNotifyToast.current;
+  const notifiesToast = lastNotifiesToast.current;
 
   return (
     <>
-      <Toast
-        open={openToast}
-        title={notifyToast?.title ?? 'Notify Title'}
-        message={notifyToast?.message}
-        logo={notifyToast?.logo}
-        leftBorderColor={notifyToast?.leftBorderColor}
-        onCloseToast={() => onClose(notifyToast as UserNotify)}
-        width={notifyToast?.width}
-      />
+      <ToastWrapper>
+        {notifiesToast.map((n) => (
+          <Toast
+            key={n.id}
+            wrapped={true}
+            open={openToast}
+            title={n.title}
+            message={n.message}
+            logo={n.logo}
+            leftBorderColor={n.leftBorderColor}
+            onCloseToast={() => onClose(n)}
+            width={n.width}
+          />
+        ))}
+      </ToastWrapper>
       <SessionModal
         open={openModal}
         title={notifyModal?.title ?? 'Notify Title'}
@@ -67,27 +74,29 @@ export default UserNotifyHandle;
 
 function updateCurrents(
   lastNotifyModalRef: MutableRefObject<UserNotify | undefined>,
-  lastNotifyToastRef: MutableRefObject<UserNotify | undefined>,
+  lastNotifiesToastRef: MutableRefObject<Array<UserNotify>>,
   notifies: Array<UserNotify>,
   onClose: (notify: UserNotify) => void
 ) {
-  const lastNotifyToast = notifies.find((e) => e.component === 'Toast');
+  const lastNotifiesToast = notifies.filter((e) => e.component === 'Toast');
   const lastNotifySessionModal = notifies.find((e) => e.component === 'SessionModal');
 
-  const openToast: boolean = !!lastNotifyToast;
+  const openToast: boolean = lastNotifiesToast.length > 0;
   const openModal: boolean = !!lastNotifySessionModal;
 
   if (lastNotifySessionModal && lastNotifySessionModal !== lastNotifyModalRef?.current) {
     // eslint-disable-next-line functional/immutable-data
     lastNotifyModalRef.current = lastNotifySessionModal;
   }
-  if (lastNotifyToast && lastNotifyToast !== lastNotifyToastRef?.current) {
+  if (openToast) {
     // eslint-disable-next-line functional/immutable-data
-    lastNotifyToastRef.current = lastNotifyToast;
+    lastNotifiesToastRef.current = lastNotifiesToast;
 
-    if (lastNotifyToast.autoclosable === 'timer') {
-      setTimeout(() => onClose(lastNotifyToast), lastNotifyToast.autocloseMilliseconds);
-    }
+    lastNotifiesToast.forEach((n) => {
+      if (n.autoclosable === 'timer') {
+        setTimeout(() => onClose(n), n.autocloseMilliseconds);
+      }
+    });
   }
   return {
     openToast,
