@@ -1,15 +1,19 @@
 import { Button } from '@mui/material';
+import { useRef } from 'react';
 import useUserNotify from '../lib/hooks/useUserNotify';
 
 export default () => {
   const addNotify = useUserNotify();
+  const counter = useRef(0);
 
   const testUserNotifyToast = () => {
+    // eslint-disable-next-line functional/immutable-data
+    counter.current = counter.current + 1;
     addNotify({
       component: 'Toast',
       id: 'NOTIFY_EXAMPLE',
       title: 'A USER NOTIFY',
-      message: 'NOTIFY THROUGH TOAST!',
+      message: `NOTIFY THROUGH TOAST! (${counter.current})`,
     });
   };
 

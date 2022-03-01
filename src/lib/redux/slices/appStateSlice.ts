@@ -61,6 +61,7 @@ export const appStateSlice = createSlice({
 
     // ErrorBoundary actions
     addError: (state, action: PayloadAction<AppError>) => {
+      action.payload.id = `${action.payload.id}_${Date.now()}`;
       if (!action.payload.component) {
         action.payload.component = 'SessionModal';
       }
@@ -85,6 +86,7 @@ export const appStateSlice = createSlice({
 
     // UserNotifyHandle actions
     addNotify: (state, action: PayloadAction<UserNotify>) => {
+      action.payload.id = `${action.payload.id}_${Date.now()}`;
       if (!action.payload.component) {
         action.payload.component = 'SessionModal';
       }
@@ -97,7 +99,7 @@ export const appStateSlice = createSlice({
           action.payload.autoclosable === 'timer' &&
           (!action.payload.autocloseMilliseconds || action.payload.autocloseMilliseconds < 0)
         ) {
-          action.payload.autocloseMilliseconds = 2000;
+          action.payload.autocloseMilliseconds = 10000;
         }
       }
 

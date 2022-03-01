@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { CSSProperties, Fragment } from 'react';
 import { Alert, Grid, SvgIcon, Typography, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,6 +19,12 @@ type Props = {
   onCloseToast: () => void;
   /** The toast width */
   width?: string | undefined;
+  /** If true, it will not position itself as fixed */
+  wrapped?: boolean;
+  /** If not wrapped, the pixel from the bottom of the viewport where to place the toast. Default "64px" */
+  bottom?: string;
+  /** If not wrapped, the pixel from the right side of the viewport where to place the toast. Default "64px" */
+  right?: string;
 };
 
 const CustomAlert = styled(Alert)({
@@ -34,7 +40,14 @@ export default function Toast({
   logo = ConfirmIcon,
   leftBorderColor = '#00CF86',
   width = '376px',
+  wrapped = false,
+  bottom = '64px',
+  right = '64px',
 }: Props) {
+  const positionStyle: CSSProperties = !wrapped
+    ? { position: 'fixed', bottom, right, zIndex: 100 }
+    : { marginTop: 2 };
+
   return (
     <Fragment>
       {open && (
@@ -42,10 +55,7 @@ export default function Toast({
           className="userToast"
           variant="outlined"
           sx={{
-            position: 'fixed',
-            bottom: '64px',
-            right: '64px',
-            zIndex: 100,
+            ...positionStyle,
             width: { width },
             backgroundColor: 'white',
             borderLeft: `4px solid ${leftBorderColor} !important`,
