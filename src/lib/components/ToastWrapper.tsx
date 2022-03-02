@@ -13,7 +13,6 @@ type Props = {
 export default function ToastWrapper({ children, bottom = '64px', right = '64px' }: Props) {
   return (
     <Fragment>
-      (
       <Box
         sx={{
           position: 'fixed',
