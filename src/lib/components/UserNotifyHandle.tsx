@@ -60,7 +60,7 @@ function UserNotifyHandle() {
         open={openModal}
         title={notifyModal?.title ?? 'Notify Title'}
         message={notifyModal?.message}
-        onConfirm={() => onConfirm(notifyModal as UserNotify)}
+        onConfirm={notifyModal?.onConfirm ? () => onConfirm(notifyModal as UserNotify) : undefined}
         onConfirmLabel={notifyModal?.confirmLabel}
         handleClose={() => onClose(notifyModal as UserNotify)}
         onCloseLabel={notifyModal?.closeLabel}
