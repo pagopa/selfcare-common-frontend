@@ -34,6 +34,8 @@ const initialState: AppStateState = {
   },
 };
 
+const defaultToastNotifyTimeoutMs = 10000;
+
 const keepOnPage = (e: BeforeUnloadEvent) => {
   const message =
     "Warning!\n\nNavigating away from this page will delete your text if you haven't already saved it.";
@@ -74,7 +76,7 @@ export const appStateSlice = createSlice({
           action.payload.autoclosable === 'timer' &&
           (!action.payload.autocloseMilliseconds || action.payload.autocloseMilliseconds < 0)
         ) {
-          action.payload.autocloseMilliseconds = 2000;
+          action.payload.autocloseMilliseconds = defaultToastNotifyTimeoutMs;
         }
       }
 
@@ -99,7 +101,7 @@ export const appStateSlice = createSlice({
           action.payload.autoclosable === 'timer' &&
           (!action.payload.autocloseMilliseconds || action.payload.autocloseMilliseconds < 0)
         ) {
-          action.payload.autocloseMilliseconds = 10000;
+          action.payload.autocloseMilliseconds = defaultToastNotifyTimeoutMs;
         }
       }
 
