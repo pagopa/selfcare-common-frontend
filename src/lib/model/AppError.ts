@@ -13,7 +13,7 @@ export type AppError = {
   /** A text to show as title of the popup when a not blocking error occurs */
   displayableTitle?: string;
   /** A text to show as body of the popup when a not blocking error occurs */
-  displayableDescription?: string;
+  displayableDescription?: React.ReactNode;
   /** If defined, in case of not blocking error, it will render a retry button which will execute this function */
   onRetry?: () => void;
   /** If defined, in case of not blocking error, it will be executed when closing the popup */
