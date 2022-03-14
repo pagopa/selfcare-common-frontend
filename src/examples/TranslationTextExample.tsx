@@ -1,42 +1,65 @@
-import { initReactI18next, Trans } from 'react-i18next';
-// import { Link } from 'react-router-dom';
-import i18n from 'i18next';
-
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    // the translations
-    // (tip move them in a JSON file and import them,
-    // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
-    resources: {
-      en: {
-        translation: {
-          nameTitle: 'Elena',
-        },
-      },
-    },
-    lng: 'en', // if you're using a language detector, do not define the lng option
-    fallbackLng: 'en',
-
-    interpolation: {
-      escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
-    },
-  });
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+// import { SessionModal } from '../lib';
 
 export default function TranslationTextExample() {
-  const person = { name: 'Henry', age: 21 };
-  const { name } = person;
-  const messages = ['message one', 'message two'];
+  const [open, setOpen] = useState(false);
 
-  // const { t } = useTranslation('myNamespace');
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const { t } = useTranslation();
   return (
     <>
-      <Trans>Hello {{ firstname: person.name }}.</Trans>
-      <Trans>Hello {{ name }}</Trans>
-      <Trans i18nKey="newMessages" count={messages.length}>
-        You got {{ count: messages.length }} messages.
-      </Trans>
+      <Button onClick={handleClickOpen} variant="contained">
+        {t('session modal button')}
+      </Button>
+      {/* <SessionModal
+        open={open}
+        title={t('labelTitle')}
+        message="Body example"
+        handleClose={() => setOpen(false)}
+        onConfirm={() => {
+          setOpen(false);
+          setTimeout(() => setOpen(true), 1000);
+        }}
+      /> */}
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{t('labelTitle')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Box>
+              Test Descrizione con <strong>{t('boldDescriptionText')}</strong>
+            </Box>
+            <Box>{t('boldDescriptionTwo')}</Box>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
