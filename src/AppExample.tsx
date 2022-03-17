@@ -18,6 +18,8 @@ import UserNotifyHandle from './lib/components/UserNotifyHandle';
 import withLogin from './lib/decorators/withLogin';
 import { useUnloadEventLogout, useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
 import AnalyticsExample from './examples/AnalyticsExample';
+import TranslationTextExample from './examples/TranslationTextExample';
+
 import './lib/consentManagementConfigure';
 
 const AppExample = () => {
@@ -78,6 +80,9 @@ const AppExample = () => {
 
           <Grid item xs={2}>
             <AnalyticsExample />
+          </Grid>
+          <Grid item xs={2}>
+            <TranslationTextExample />
           </Grid>
         </Grid>
         <Footer assistanceEmail="assistenza@selfcare.it" onExit={onExit} />
