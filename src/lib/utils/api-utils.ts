@@ -62,9 +62,18 @@ export const extractResponse = async <R>(
       return new Promise((resolve) => resolve(null as unknown as R));
     } else {
       console.error(JSON.stringify(response.right));
-      throw new Error(
+      const error = new Error(
         `Unexpected HTTP status! Expected ${successHttpStatus} obtained ${response.right.status}`
       );
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // eslint-disable-next-line functional/immutable-data
+      error.httpStatus = response.right.status;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // eslint-disable-next-line functional/immutable-data
+      error.httpBody = response.right.value;
+      throw error;
     }
   } else {
     console.error('Something gone wrong while fetching data');
