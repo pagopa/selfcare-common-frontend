@@ -8,6 +8,8 @@ import {
   useUnloadEventInterceptorAndActivate,
 } from './../useUnloadEventInterceptor';
 import UseUnloadEventInterceptorExample from './../../../examples/UseUnloadEventInterceptorExample';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
 const oldWindowLocation = global.window.location;
 
@@ -33,12 +35,15 @@ afterAll(() => {
 const renderApp = (startEnabled: boolean) => {
   const store = createStore();
   const Child = buildChildComponent(startEnabled);
+  const history = createMemoryHistory();
   render(
-    <Provider store={store}>
-      <UnloadEventHandler />
-      <UseUnloadEventInterceptorExample />
-      <Child />
-    </Provider>
+    <Router history={history}>
+      <Provider store={store}>
+        <UnloadEventHandler />
+        <UseUnloadEventInterceptorExample />
+        <Child />
+      </Provider>
+    </Router>
   );
   return store;
 };

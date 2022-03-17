@@ -1,6 +1,16 @@
 # SelfCare's common components & features
 This library contains [utilities](#utilities), [components](#components), [decorators](#decorators), [custom hooks](#custom-hooks) and [features](#features) built for the selfcare project.
 
+# Localization
+This libray has been built using react-i18next and string inside of it are also localizated.
+Actually the library contains the only "it" translation.
+The translations for the keys of the common components can be overwritten using the resources used during configuration.
+In order to configure it call the method configureI18n of the module locale/locale-utils which accept the following parameters:
+| Param | Type | Mandatory | Description |
+|-------|------|-----------|-------------|
+| resources | Y | { [lang: string]: any } | a map containing the language as key and the map containing the key/translated messages as value. These values overwrite common's component keys if desired |
+| defaultLanguage | N | string | as default it language |
+
 # Configuration
 In order to use these components it's necessary to set the following keys of the CONFIG object imported from /config/env as first things inside the application:
 
