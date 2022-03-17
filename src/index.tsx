@@ -9,7 +9,7 @@ import theme from '@pagopa/mui-italia/theme';
 import AppExample from './AppExample';
 import { createStore } from './examples/redux/store';
 import { CONFIG } from './lib/config/env';
-import './i18n';
+import './examples/locale';
 
 const store = createStore();
 
