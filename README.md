@@ -98,7 +98,6 @@ Selfcare's popup
 | height | string | N | The popup height |
 | minHeight | string | N | The popup minHeight |
 | width | string | N | The popup width |
-| t | TFunction<'translation', undefined> | Y | The translation prop |
 
 ## TitleBox
 Selfcare's page title
