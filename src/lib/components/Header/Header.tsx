@@ -1,6 +1,7 @@
 import { AppBar, Button, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CONFIG } from '../../config/env';
 import PagoPaMiniIcon from '../icons/PagoPaMiniIcon';
 import SubHeader from './subHeader/SubHeader';
@@ -19,36 +20,39 @@ const Header = ({
   withSecondHeader,
   onExitAction = () => window.location.assign(CONFIG.URL_FE.LOGOUT),
   subHeaderChild,
-}: HeaderProps) => (
-  <Fragment>
-    <AppBar
-      position="relative"
-      sx={{
-        alignItems: 'center',
-        height: '48px',
-        backgroundColor: 'primary.dark',
-        boxShadow: 'none',
-      }}
-    >
-      <Toolbar sx={{ width: { xs: '100%', lg: '90%', minHeight: '48px !important' } }}>
-        <PagoPaMiniIcon viewBox="0 0 80 22" sx={{ width: '80px' }} />
-        {onExitAction !== null ? (
-          <Box sx={{ flexGrow: 1, textAlign: 'right' }}>
-            <Button
-              variant="contained"
-              sx={{ width: '88px', backgroundColor: '#004C99', height: '32px' }}
-              onClick={onExitAction}
-            >
-              Esci
-            </Button>
-          </Box>
-        ) : (
-          ''
-        )}
-      </Toolbar>
-    </AppBar>
-    {withSecondHeader === true ? <SubHeader>{subHeaderChild}</SubHeader> : ''}
-  </Fragment>
-);
+}: HeaderProps) => {
+  const { t } = useTranslation();
+  return (
+    <Fragment>
+      <AppBar
+        position="relative"
+        sx={{
+          alignItems: 'center',
+          height: '48px',
+          backgroundColor: 'primary.dark',
+          boxShadow: 'none',
+        }}
+      >
+        <Toolbar sx={{ width: { xs: '100%', lg: '90%', minHeight: '48px !important' } }}>
+          <PagoPaMiniIcon viewBox="0 0 80 22" sx={{ width: '80px' }} />
+          {onExitAction !== null ? (
+            <Box sx={{ flexGrow: 1, textAlign: 'right' }}>
+              <Button
+                variant="contained"
+                sx={{ width: '88px', backgroundColor: '#004C99', height: '32px' }}
+                onClick={onExitAction}
+              >
+                {t('common.header.exitButton')}
+              </Button>
+            </Box>
+          ) : (
+            ''
+          )}
+        </Toolbar>
+      </AppBar>
+      {withSecondHeader === true ? <SubHeader>{subHeaderChild}</SubHeader> : ''}
+    </Fragment>
+  );
+};
 
 export default Header;

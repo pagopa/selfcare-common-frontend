@@ -8,10 +8,14 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { useState } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
+import { TFunction, Trans } from 'react-i18next';
+import i18n from '../lib/locale/locale-utils';
 // import { SessionModal } from '../lib';
 
-export default function TranslationTextExample() {
+type Props = {
+  t: TFunction<'translation', undefined>;
+};
+export default function TranslationTextExample({ t }: Props) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -21,9 +25,9 @@ export default function TranslationTextExample() {
   const handleClose = () => {
     setOpen(false);
   };
-  const { t, i18n } = useTranslation();
+  // local use of Hook
+  // const { t, i18n } = useTranslation();
   const obj = { name: 'Jon', surname: 'Smith' };
-
   return (
     <>
       <Button onClick={handleClickOpen} variant="contained">

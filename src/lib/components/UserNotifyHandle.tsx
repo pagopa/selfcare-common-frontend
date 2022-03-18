@@ -1,4 +1,5 @@
 import { MutableRefObject, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { SessionModal, Toast } from '..';
 import { UserNotify } from '../model/UserNotify';
@@ -38,7 +39,7 @@ function UserNotifyHandle() {
 
   const notifyModal = lastNotifyModal.current;
   const notifiesToast = lastNotifiesToast.current;
-
+  const { t } = useTranslation();
   return (
     <>
       <ToastWrapper>
@@ -65,6 +66,7 @@ function UserNotifyHandle() {
         handleClose={() => onClose(notifyModal as UserNotify)}
         onCloseLabel={notifyModal?.closeLabel}
         width={notifyModal?.width}
+        t={t}
       />
     </>
   );

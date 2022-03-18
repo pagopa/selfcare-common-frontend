@@ -1,4 +1,5 @@
 import { Box, Grid } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import CustomAvatarExample from './examples/CustomAvatarExample';
 import CustomPaginationExample from './examples/CustomPaginationExample';
 import FilterModalExample from './examples/FilterModalExample';
@@ -25,6 +26,7 @@ import './lib/consentManagementConfigure';
 const AppExample = () => {
   const onLogout = useUnloadEventLogout();
   const onExit = useUnloadEventOnExit();
+  const { t } = useTranslation();
   return (
     <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
       <Box
@@ -82,7 +84,7 @@ const AppExample = () => {
             <AnalyticsExample />
           </Grid>
           <Grid item xs={2}>
-            <TranslationTextExample />
+            <TranslationTextExample t={t} />
           </Grid>
         </Grid>
         <Footer assistanceEmail="assistenza@selfcare.it" onExit={onExit} />

@@ -4,6 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import { TFunction } from 'react-i18next';
 
 type Props = {
   /** If this component should be displayed or not */
@@ -30,19 +31,22 @@ type Props = {
   minHeight?: string;
   /** The popup width */
   width?: string;
+  /** The translation prop */
+  t: TFunction<'translation', undefined>;
 };
 
 /** Selfcare's popup */
 export default function SessionModal({
+  t,
   open,
   title,
   message,
   onConfirm,
   onConfirmEnabled = true,
-  onConfirmLabel = 'Riprova',
+  onConfirmLabel = t('common.sessionModal.confirmButton'),
   handleClose,
   handleExit = handleClose,
-  onCloseLabel = 'Annulla',
+  onCloseLabel = t('common.sessionModal.closeButton'),
   height,
   minHeight,
   width = '21.9em',

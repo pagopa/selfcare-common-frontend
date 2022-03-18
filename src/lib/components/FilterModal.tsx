@@ -13,6 +13,7 @@ import Dialog from '@mui/material/Dialog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   /** If the popup is to be displayed */
@@ -55,6 +56,7 @@ export default function FilterModal({
 
   const [valueRadio, setValueRadio] = React.useState<string>('');
 
+  const { t } = useTranslation();
   const handleChange = (_: React.ChangeEvent<HTMLInputElement>, value: any) => {
     setValueRadio(value);
   };
@@ -82,7 +84,7 @@ export default function FilterModal({
                 <ClearOutlinedIcon />
               </IconButton>
               <Typography variant="h5" sx={{ fontSize: '18px', fontWeight: '600' }}>
-                {`Filtra per ${title}`}
+                {`${t('common.filterModal.title')} ${title}`}
               </Typography>
             </Grid>
           </Grid>
@@ -114,7 +116,7 @@ export default function FilterModal({
               variant="contained"
               onClick={submitFilter}
             >
-              Filtra
+              {t('common.filterModal.button')}
             </Button>
           </Grid>
         </Box>

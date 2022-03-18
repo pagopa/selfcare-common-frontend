@@ -1,7 +1,7 @@
 const descriptionEn = 'bold description';
 
 export default {
-  'session modal button': 'Open Session Modal',
+  'session modal button': 'Translate Example Session Modal',
   labelTitle: 'name Title',
   boldDescriptionText: ' Test Description with bold text',
   boldDescriptionTwo: `view ${descriptionEn}`,
