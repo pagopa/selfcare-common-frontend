@@ -8,14 +8,14 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { useState } from 'react';
-import { TFunction, Trans } from 'react-i18next';
+import { TFunction, Trans, withTranslation } from 'react-i18next';
 import i18n from '../lib/locale/locale-utils';
-// import { SessionModal } from '../lib';
 
 type Props = {
   t: TFunction<'translation', undefined>;
 };
-export default function TranslationTextExample({ t }: Props) {
+
+function TranslationTextExample({ t }: Props) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -25,7 +25,7 @@ export default function TranslationTextExample({ t }: Props) {
   const handleClose = () => {
     setOpen(false);
   };
-  // local use of Hook
+  // in case of Functional Component is recommended the use of Hook useTranslation();
   // const { t, i18n } = useTranslation();
   const obj = { name: 'Jon', surname: 'Smith' };
   return (
@@ -33,17 +33,6 @@ export default function TranslationTextExample({ t }: Props) {
       <Button onClick={handleClickOpen} variant="contained">
         {t('session modal button')}
       </Button>
-      {/* <SessionModal
-        open={open}
-        title={t('labelTitle')}
-        message="Body example"
-        handleClose={() => setOpen(false)}
-        onConfirm={() => {
-          setOpen(false);
-          setTimeout(() => setOpen(true), 1000);
-        }}
-      /> */}
-
       <Dialog
         open={open}
         onClose={handleClose}
@@ -79,16 +68,6 @@ export default function TranslationTextExample({ t }: Props) {
                 })}
               </strong>
             </Box>
-            {/* <Box> // non funziona
-              {t('key', {
-                what: 'prima parte',
-                how: (
-                  <>
-                    <strong>test</strong>
-                  </>
-                ),
-              })}
-            </Box> */}
             <Box>
               <Trans i18nKey="key2">
                 {/* xx: is the default text */}
@@ -96,7 +75,6 @@ export default function TranslationTextExample({ t }: Props) {
               </Trans>
             </Box>
             <Box>{t('nesting1')}</Box>
-            {/* joinArray concatena gli elementi dell'arrai con quanto definito dopo, in questo caso uno sapzio. joinArrays: ',' inserisce una virgola */}
             <Box>{t('arrayJoinWithInterpolation', { myVar: 'interpolate', joinArrays: ' ' })}</Box>
             <Box>
               {t('arrayOfObjects.0.name')}
@@ -117,3 +95,5 @@ export default function TranslationTextExample({ t }: Props) {
     </>
   );
 }
+
+export default withTranslation()(TranslationTextExample);
