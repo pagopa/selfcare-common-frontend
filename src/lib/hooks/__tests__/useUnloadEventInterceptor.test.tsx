@@ -10,6 +10,7 @@ import {
 import UseUnloadEventInterceptorExample from './../../../examples/UseUnloadEventInterceptorExample';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import './../../../examples/locale';
 
 const oldWindowLocation = global.window.location;
 
