@@ -1,6 +1,16 @@
 # SelfCare's common components & features
 This library contains [utilities](#utilities), [components](#components), [decorators](#decorators), [custom hooks](#custom-hooks) and [features](#features) built for the selfcare project.
 
+# Localization
+This libray has been built using react-i18next and string inside of it are also localizated.
+Actually the library contains the only "it" translation.
+The translations for the keys of the common components can be overwritten using the resources used during configuration.
+In order to configure it call the method configureI18n of the module locale/locale-utils which accept the following parameters:
+| Param | Type | Mandatory | Description |
+|-------|------|-----------|-------------|
+| resources | Y | { [lang: string]: any } | a map containing the language as key and the map containing the key/translated messages as value. These values overwrite common's component keys if desired |
+| defaultLanguage | N | string | as default it language |
+
 # Configuration
 In order to use these components it's necessary to set the following keys of the CONFIG object imported from /config/env as first things inside the application:
 
@@ -134,7 +144,7 @@ Selfcare's ending page
 |------|------|-----------|-------------|
 | icon | React.ReactElement | N | The ending page icon |
 | title | string | Y | The ending page title |
-| description | string | Y | The ending page description | 
+| description | React.ReactNode | Y | The ending page description | 
 | buttonLabel | string | N | The ending page button label if any |
 | onButtonClick | () => void | N | if defined it will show a button that will performe this action on click |
 
@@ -281,7 +291,7 @@ The error to be submitted has type AppError which has the following fields:
 | blocking | boolean | Y | If true, this error will show the error page, not allowing the user to do anything, otherwise it will show a closable popup |
 | techDescription | string | Y | A description of the error to send when notifying the error |
 | displayableTitle | string | N | A text to show as title of the popup when a not blocking error occurs |
-| displayableDescription | string | N | A text to show as body of the popup when a not blocking error occurs |
+| displayableDescription | React.ReactNode | N | A text to show as body of the popup when a not blocking error occurs |
 | onRetry | () => void | N | If defined, in case of not blocking error, it will render a retry button which will execute this function |
 | onClose | () => void | N | If defined, in case of not blocking error, it will be executed when closing the popup |
 | toNotify | boolean | Y | If true, it will notify the error |

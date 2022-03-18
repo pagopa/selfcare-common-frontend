@@ -5,6 +5,7 @@ import { createStore } from '../examples/redux/store';
 import { verifyMockExecution as verifyLoginMockExecution } from '../lib/decorators/__mocks__/withLogin';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
+import '../examples/locale';
 
 jest.mock('../lib/decorators/withLogin');
 

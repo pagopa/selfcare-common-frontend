@@ -76,7 +76,7 @@ export default function Toast({
               <Typography pt={1} pb={1} sx={{ fontSize: '15px', fontWeight: '600' }}>
                 {title}
               </Typography>
-              <Typography>{message}</Typography>
+              <Typography component="div">{message}</Typography>
             </Grid>
             <Grid item xs={2}>
               <IconButton onClick={onCloseToast}>

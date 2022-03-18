@@ -7,15 +7,21 @@ type Props = {
   /** The ending page title */
   title: string;
   /** The ending page description */
-  description: string;
+  description: React.ReactNode;
   /** The ending page button label if any */
-  buttonLabel?:string;
+  buttonLabel?: string;
   /** if defined it will show a button that will performe this action on click */
   onButtonClick?: () => void;
 };
 
 /** Selfcare's Ending Page */
-export default ({ description, onButtonClick, icon = <CheckIllustrationIcon />, title, buttonLabel }: Props) => (
+export default ({
+  description,
+  onButtonClick,
+  icon = <CheckIllustrationIcon />,
+  title,
+  buttonLabel,
+}: Props) => (
   <Box sx={{ minHeight: '100vh' }} display="flex" flexGrow={1}>
     <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
       <Grid container item justifyContent="center" mb={5}>
@@ -30,9 +36,7 @@ export default ({ description, onButtonClick, icon = <CheckIllustrationIcon />, 
       </Grid>
       <Grid container item justifyContent="center" mb={7} mt={1}>
         <Grid item xs={6}>
-          <Typography>
-            {description}
-          </Typography>
+          <Typography component="div">{description}</Typography>
         </Grid>
       </Grid>
       {onButtonClick && (

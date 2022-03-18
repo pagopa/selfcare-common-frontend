@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useStore } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { CONFIG } from '../config/env';
 import { appStateActions } from '../redux/slices/appStateSlice';
 import { appStateSelectors } from './../redux/slices/appStateSlice';
@@ -10,12 +11,30 @@ import { appStateSelectors } from './../redux/slices/appStateSlice';
  */
 export const useUnloadEventInterceptor = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const onExit = useUnloadEventOnExit();
+
+  const unblockHistory = useRef<() => void>(() => {});
+
   const registerUnloadEvent = (title?: string, description?: string) => {
     dispatch(appStateActions.enableUnloadEventInterceptor({ title, description }));
+
+    if (history) {
+      // if not using ReactRouter, it will be undefined
+      // eslint-disable-next-line functional/immutable-data
+      unblockHistory.current = history.block((tx) => {
+        onExit(() => {
+          unblockHistory.current();
+          history.push(tx);
+        });
+        return false;
+      });
+    }
   };
 
   const unregisterUnloadEvent = () => {
     dispatch(appStateActions.disableUnloadEventInterceptor());
+    unblockHistory.current();
   };
 
   return {
@@ -40,9 +59,9 @@ export const useUnloadEventInterceptorAndActivate = (title?: string, description
 /** In order to show a custom pop-up when the user trigger an exit action you have to use the custom hook useUnloadEventOnExit which will return an arrow function to invoke instead of the exit action passing to it the exitAction itself. */
 export const useUnloadEventOnExit = () => {
   const dispatch = useDispatch();
-  const eventconfiguration = useSelector(appStateSelectors.selectUnloadEventConfiguration);
+  const store = useStore();
   return (exitAction: () => void) => {
-    if (eventconfiguration.enabled) {
+    if (appStateSelectors.selectUnloadEventConfiguration(store.getState()).enabled) {
       dispatch(appStateActions.openUnloadEventNotify(exitAction));
     } else {
       exitAction();

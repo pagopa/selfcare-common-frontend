@@ -4,7 +4,7 @@ import EndingPage from '../../EndingPage';
 import ErrorIcon from '../../icons/ErrorIcon';
 
 type Props = {
-  description?: string;
+  description?: React.ReactNode;
   assistanceEmail?: string;
 };
 export default ({ description, assistanceEmail }: Props) => {
