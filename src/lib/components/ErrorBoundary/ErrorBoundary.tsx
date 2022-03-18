@@ -117,7 +117,6 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         onConfirm={error.onRetry ? () => this.retryError(error) : undefined}
         handleClose={() => this.handleClose(error)}
         width={error.width}
-        t={this.props.t}
       />
     );
   }

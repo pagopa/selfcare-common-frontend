@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import { TFunction } from 'react-i18next';
+import { TFunction, withTranslation } from 'react-i18next';
 
 type Props = {
   /** If this component should be displayed or not */
@@ -31,12 +31,11 @@ type Props = {
   minHeight?: string;
   /** The popup width */
   width?: string;
-  /** The translation prop */
   t: TFunction<'translation', undefined>;
 };
 
 /** Selfcare's popup */
-export default function SessionModal({
+function SessionModal({
   t,
   open,
   title,
@@ -109,3 +108,4 @@ export default function SessionModal({
     </Dialog>
   );
 }
+export default withTranslation()(SessionModal);

@@ -1,11 +1,9 @@
 import { Button } from '@mui/material';
 import { Fragment, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { SessionModal } from '../lib';
 
 export default () => {
   const [open, setOpen] = useState(false);
-  const { t } = useTranslation();
   return (
     <Fragment>
       <Button onClick={() => setOpen(true)} variant="contained">
@@ -20,7 +18,6 @@ export default () => {
           setOpen(false);
           setTimeout(() => setOpen(true), 1000);
         }}
-        t={t}
       />
     </Fragment>
   );

@@ -34,7 +34,6 @@ export default function UnloadEventHandler() {
       onConfirm={onConfirm}
       onConfirmLabel={t('common.unloadEventHandler.confirmLabel')}
       handleClose={onClose}
-      t={t}
     />
   );
 }
