@@ -20,3 +20,4 @@ export const configureI18n = (
       throw new Error(err);
     });
 };
+export default i18n;

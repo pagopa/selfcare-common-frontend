@@ -2,7 +2,7 @@ const labelTitle = 'nome Titolo';
 const descriptionIt = 'descrizione in grassetto';
 
 export default {
-  'session modal button': 'Apri Session Modal',
+  'session modal button': 'Esempio Traduzione SessionModal',
   labelTitle: `${labelTitle}`,
   boldDescriptionText: ' testo in grassetto',
   boldDescriptionTwo: `visualizza la ${descriptionIt}`,

@@ -6,6 +6,7 @@ import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import useErrorDispatcher from '../useErrorDispatcher';
 import { AppError } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
+import './../../../examples/locale';
 
 jest.mock('../../services/errorService');
 

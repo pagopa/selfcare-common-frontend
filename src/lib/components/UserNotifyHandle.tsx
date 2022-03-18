@@ -38,7 +38,6 @@ function UserNotifyHandle() {
 
   const notifyModal = lastNotifyModal.current;
   const notifiesToast = lastNotifiesToast.current;
-
   return (
     <>
       <ToastWrapper>

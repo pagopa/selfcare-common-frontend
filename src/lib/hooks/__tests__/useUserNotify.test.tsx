@@ -4,6 +4,7 @@ import { createStore } from '../../../examples/redux/store';
 import UserNotifyHandle from '../../components/UserNotifyHandle';
 import useUserNotify from '../useUserNotify';
 import { UserNotify } from '../../model/UserNotify';
+import './../../../examples/locale';
 
 const renderApp = (userNotify: UserNotify) => {
   const store = createStore();

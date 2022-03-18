@@ -1,10 +1,41 @@
 export default {
   common: {
-    key1: 'TRAD1',
-    key2: 'TRAD2',
-    errorPage: {
-      title: 'TITOLO',
-      description: 'DESCRIZIONE',
+    errorBoundary: {
+      sessionModalTitle: 'Errore',
+      sessionModalMessage: 'Spiacenti, qualcosa è andato storto.',
+      toastError: 'ERRORE',
+      toastMessage: 'Spiacenti, qualcosa è andato storto.',
+    },
+    blockingErrorPage: {
+      title: 'Spiacenti, qualcosa è andato storto.',
+      description: 'A causa di un errore del sistema non è possibile completare la procedura.',
+      buttonLabel: "Contatta l'assistenza",
+    },
+    footer: {
+      legalInfoText: `PagoPA S.p.A. - società per azioni con socio unico - capitale sociale di euro 1,000,000
+      interamente versato - sede legale in Roma, Piazza Colonna 370, CAP 00187 -
+      <1/>
+      n. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009`,
+      privacyPolicyLink: 'Privacy Policy ',
+      termsAndConditionLink: 'Termini e condizioni d’uso del sito ',
+      informationSecurityLink: 'Sicurezza delle informazioni ',
+      assistanceLink: 'Assistenza ',
+    },
+    header: {
+      exitButton: 'Esci',
+    },
+    filterModal: {
+      title: 'Filtra per ',
+      button: 'Filtra',
+    },
+    sessionModal: {
+      closeButton: 'Annulla',
+      confirmButton: 'Riprova',
+    },
+    unloadEventHandler: {
+      title: 'Vuoi davvero uscire?',
+      message: 'Se esci, le modifiche apportate andranno perse.',
+      confirmLabel: 'Esci',
     },
   },
 };

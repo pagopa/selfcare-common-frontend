@@ -3,6 +3,7 @@ import { uniqueId } from 'lodash';
 import { Component, ErrorInfo, Fragment, ReactElement, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { TFunction, withTranslation } from 'react-i18next';
 import { AppError, appStateActions, appStateSelectors } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
 import SessionModal from '../SessionModal';
@@ -13,6 +14,7 @@ import BlockingErrorPage from './components/BlockingErrorPage';
 interface Props {
   children: ReactNode;
   assistanceEmail?: string;
+  t: TFunction<'translation', undefined>;
 }
 
 interface ConnectedProps {
@@ -94,8 +96,8 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
     return (
       <Toast
         open={true}
-        title={error.displayableTitle ?? 'ERRORE'}
-        message={error.displayableDescription ?? 'Spiacenti, qualcosa è andato storto.'}
+        title={error.displayableTitle ?? this.props.t('common.errorBoundary.toastError')}
+        message={error.displayableDescription ?? this.props.t('common.errorBoundary.toastMessage')}
         logo={FaultIcon}
         leftBorderColor="#C02927"
         onCloseToast={() => this.handleClose(error)}
@@ -108,8 +110,10 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
     return (
       <SessionModal
         open={true}
-        title={error.displayableTitle ?? 'Errore'}
-        message={error.displayableDescription ?? 'Spiacenti, qualcosa è andato storto.'}
+        title={error.displayableTitle ?? this.props.t('common.errorBoundary.sessionModalTitle')}
+        message={
+          error.displayableDescription ?? this.props.t('common.errorBoundary.sessionModalMessage')
+        }
         onConfirm={error.onRetry ? () => this.retryError(error) : undefined}
         handleClose={() => this.handleClose(error)}
         width={error.width}
@@ -150,4 +154,4 @@ const ErrorBoundaryConnected: (props: Props) => ReactElement | null = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ErrorBoundary);
-export default ErrorBoundaryConnected;
+export default withTranslation()(ErrorBoundaryConnected);

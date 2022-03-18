@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { useUnloadEventInterceptor } from '../hooks/useUnloadEventInterceptor';
 import { appStateSelectors, appStateActions } from '../redux/slices/appStateSlice';
@@ -24,15 +25,14 @@ export default function UnloadEventHandler() {
       unloadEventconfiguration.exitAction();
     }
   };
+  const { t } = useTranslation();
   return (
     <SessionModal
       open={unloadEventconfiguration.enabled && unloadEventconfiguration.open}
-      title={unloadEventconfiguration.title ?? 'Vuoi davvero uscire?'}
-      message={
-        unloadEventconfiguration.description ?? 'Se esci, le modifiche apportate andranno perse.'
-      }
+      title={unloadEventconfiguration.title ?? t('common.unloadEventHandler.title')}
+      message={unloadEventconfiguration.description ?? t('common.unloadEventHandler.message')}
       onConfirm={onConfirm}
-      onConfirmLabel={'Esci'}
+      onConfirmLabel={t('common.unloadEventHandler.confirmLabel')}
       handleClose={onClose}
     />
   );

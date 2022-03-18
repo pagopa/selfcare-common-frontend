@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { buildAssistanceURI } from '../../../services/assistanceService';
 import Footer from './../Footer';
+import './../../../../examples/locale';
 
 const oldWindowLocation = global.window.location;
 

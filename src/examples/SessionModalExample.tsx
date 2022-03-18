@@ -4,7 +4,6 @@ import { SessionModal } from '../lib';
 
 export default () => {
   const [open, setOpen] = useState(false);
-
   return (
     <Fragment>
       <Button onClick={() => setOpen(true)} variant="contained">
