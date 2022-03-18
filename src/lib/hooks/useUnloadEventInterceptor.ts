@@ -18,14 +18,18 @@ export const useUnloadEventInterceptor = () => {
 
   const registerUnloadEvent = (title?: string, description?: string) => {
     dispatch(appStateActions.enableUnloadEventInterceptor({ title, description }));
-    // eslint-disable-next-line functional/immutable-data
-    unblockHistory.current = history.block((tx) => {
-      onExit(() => {
-        unblockHistory.current();
-        history.push(tx);
+
+    if (history) {
+      // if not using ReactRouter, it will be undefined
+      // eslint-disable-next-line functional/immutable-data
+      unblockHistory.current = history.block((tx) => {
+        onExit(() => {
+          unblockHistory.current();
+          history.push(tx);
+        });
+        return false;
       });
-      return false;
-    });
+    }
   };
 
   const unregisterUnloadEvent = () => {
