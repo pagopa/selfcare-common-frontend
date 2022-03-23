@@ -147,6 +147,19 @@ Selfcare's ending page
 | buttonLabel | string | N | The ending page button label if any |
 | onButtonClick | () => void | N | if defined it will show a button that will performe this action on click |
 
+## NavigationBar
+Selfcare's navigation bar
+
+| Prop | Type | Mandatory | Description |
+|------|------|-----------|-------------|
+| paths | Array`<NavigationPath>` | Y | The array which describe the navigation structure to display |
+
+NavigationPath's fields:
+| field | Type | Mandatory | Description |
+|------|------|-----------|-------------|
+| description | string | Y | The text displayed |
+| onClick | () => void | N | If defined, it will represent the function executed when clicking on the element. Moreover it will be displayed in bold |
+
 # Utilities
 ## api-utils
 ### onRedirectToLogin: (store: EnhancedStore) => void
