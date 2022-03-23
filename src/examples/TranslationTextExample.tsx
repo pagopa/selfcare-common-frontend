@@ -41,7 +41,7 @@ function TranslationTextExample({ t }: Props) {
       >
         <DialogTitle id="alert-dialog-title">{t('labelTitle')}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText id="alert-dialog-description" component="div">
             <Box>
               Test Descrizione con <strong>{t('boldDescriptionText')}</strong>
             </Box>

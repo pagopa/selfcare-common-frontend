@@ -101,7 +101,7 @@ export default function FilterModal({
                   <FormControlLabel
                     value={filterModalConfig?.getValue(value)}
                     control={<Radio />}
-                    label={filterModalConfig?.getLabel(value)}
+                    label={filterModalConfig?.getLabel(value) ?? ''}
                     key={index}
                   />
                 ))}
