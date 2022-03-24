@@ -160,6 +160,19 @@ NavigationPath's fields:
 | description | string | Y | The text displayed |
 | onClick | () => void | N | If defined, it will represent the function executed when clicking on the element. Moreover it will be displayed in bold |
 
+## LoadingOverlayComponent
+A component which render an overlay loading
+
+| Prop | Type | Mandatory | Description |
+|------|------|-----------|-------------|
+| open | boolean | Y | if show the loading overlay or not |
+
+NavigationPath's fields:
+| field | Type | Mandatory | Description |
+|------|------|-----------|-------------|
+| description | string | Y | The text displayed |
+| onClick | () => void | N | If defined, it will represent the function executed when clicking on the element. Moreover it will be displayed in bold |
+
 # Utilities
 ## api-utils
 ### onRedirectToLogin: (store: EnhancedStore) => void
