@@ -36,7 +36,7 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
               component="div"
               sx={{
                 fontWeight: 'normal',
-                fontSize: '18px',
+                fontSize: '15px',
                 lineHeight: '22,82px',
                 textAlign: 'left',
                 color: '#17324D',
@@ -63,7 +63,7 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
           <Typography
             sx={{
               fontWeight: 'normal',
-              fontSize: '18px',
+              fontSize: '15px',
               lineHeight: '15px',
               textAlign: 'left',
               padding: '0px',
