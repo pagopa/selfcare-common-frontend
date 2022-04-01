@@ -24,15 +24,11 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
         alignItems: 'center',
         boxSizing: 'unset',
         position: 'relative',
+        borderTop: '1px solid #F2F2F2',
       }}
     >
-      <Grid
-        container
-        justifyContent={'center'}
-        alignItems={'center'}
-        sx={{ borderTop: '1px solid #F2F2F2' }}
-      >
-        <Box sx={{ width: '90%', display: 'flex' }} pt={2}>
+      <Grid container justifyContent={'center'} alignItems={'center'}>
+        <Box sx={{ width: '90%', display: 'flex' }}>
           <PagoPaIconColored viewBox="0 0 140 33" sx={{ width: '119px' }} />
           {/* <PagopaLogo /> */}
           <Box sx={{ textAlign: 'right', flexGrow: 1 }} pl={8}>
@@ -40,7 +36,7 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
               component="div"
               sx={{
                 fontWeight: 'normal',
-                fontSize: '15px',
+                fontSize: '18px',
                 lineHeight: '22,82px',
                 textAlign: 'left',
                 color: '#17324D',
@@ -67,7 +63,7 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
           <Typography
             sx={{
               fontWeight: 'normal',
-              fontSize: '15px',
+              fontSize: '18px',
               lineHeight: '15px',
               textAlign: 'left',
               padding: '0px',
