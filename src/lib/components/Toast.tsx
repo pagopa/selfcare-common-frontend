@@ -73,7 +73,7 @@ export default function Toast({
               />
             </Grid>
             <Grid item xs={8}>
-              <Typography pt={1} pb={1} sx={{ fontSize: '15px', fontWeight: '600' }}>
+              <Typography pt={1} pb={1} sx={{ fontSize: '15px !important', fontWeight: '600' }}>
                 {title}
               </Typography>
               <Typography component="div">{message}</Typography>

@@ -35,7 +35,9 @@ const Header = ({
       >
         <Toolbar sx={{ width: { xs: '100%', lg: '90%', minHeight: '48px !important' } }}>
           {/* <PagoPaMiniIcon viewBox="0 0 80 22" sx={{ width: '80px' }} /> */}
-          <Typography sx={{ fontSize: '14px', fontWeight: '700' }}>PagoPA S.p.A</Typography>
+          <Typography sx={{ fontSize: '14px !important', fontWeight: '700' }}>
+            PagoPA S.p.A
+          </Typography>
           {onExitAction !== null ? (
             <Box sx={{ flexGrow: 1, textAlign: 'right' }}>
               <Button

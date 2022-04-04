@@ -26,7 +26,7 @@ export default function SubHeader({ children }: Props) {
                 component="div"
                 sx={{
                   fontWeight: 'bold',
-                  fontSize: '24px',
+                  fontSize: '24px !important',
                   lineHeight: '36px',
                   textAlign: 'left',
                   color: '#17324D',
@@ -40,7 +40,7 @@ export default function SubHeader({ children }: Props) {
                 component="div"
                 sx={{
                   fontWeight: 'normal',
-                  fontSize: '14px',
+                  fontSize: '14px !important',
                   lineHeight: '24px',
                   textAlign: 'left',
                   color: '#17324D',
