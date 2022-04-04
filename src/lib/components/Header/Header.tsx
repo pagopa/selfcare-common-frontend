@@ -1,9 +1,9 @@
-import { AppBar, Button, Toolbar } from '@mui/material';
+import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CONFIG } from '../../config/env';
-import PagoPaMiniIcon from '../icons/PagoPaMiniIcon';
+// import PagoPaMiniIcon from '../icons/PagoPaMiniIcon';
 import SubHeader from './subHeader/SubHeader';
 
 type HeaderProps = {
@@ -29,17 +29,20 @@ const Header = ({
         sx={{
           alignItems: 'center',
           height: '48px',
-          backgroundColor: 'primary.dark',
+          backgroundColor: 'white',
           boxShadow: 'none',
         }}
       >
         <Toolbar sx={{ width: { xs: '100%', lg: '90%', minHeight: '48px !important' } }}>
-          <PagoPaMiniIcon viewBox="0 0 80 22" sx={{ width: '80px' }} />
+          {/* <PagoPaMiniIcon viewBox="0 0 80 22" sx={{ width: '80px' }} /> */}
+          <Typography sx={{ fontSize: '14px !important', fontWeight: '700' }}>
+            PagoPA S.p.A
+          </Typography>
           {onExitAction !== null ? (
             <Box sx={{ flexGrow: 1, textAlign: 'right' }}>
               <Button
                 variant="contained"
-                sx={{ width: '88px', backgroundColor: '#004C99', height: '32px' }}
+                sx={{ width: '88px', backgroundColor: '#0073E6', height: '32px' }}
                 onClick={onExitAction}
               >
                 {t('common.header.exitButton')}

@@ -1,7 +1,7 @@
 import { Box, Grid, Link, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { buildAssistanceURI } from '../../services/assistanceService';
-import PagoPaIcon from '../icons/PagoPaIcon';
+import PagoPaIconColored from '../icons/PagoPaIconColored';
 
 type Props = {
   /** The email to which the assistance button will ask to send an email */
@@ -20,24 +20,26 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
         pt: '32px',
         height: '156px',
         mt: 'auto',
-        bgcolor: '#01254C',
+        bgcolor: 'white',
         alignItems: 'center',
         boxSizing: 'unset',
         position: 'relative',
+        borderTop: '1px solid #F2F2F2',
       }}
     >
       <Grid container justifyContent={'center'} alignItems={'center'}>
         <Box sx={{ width: '90%', display: 'flex' }}>
-          <PagoPaIcon viewBox="0 0 140 33" sx={{ width: '119px' }} />
+          <PagoPaIconColored viewBox="0 0 140 33" sx={{ width: '119px' }} />
+          {/* <PagopaLogo /> */}
           <Box sx={{ textAlign: 'right', flexGrow: 1 }} pl={8}>
             <Typography
               component="div"
               sx={{
                 fontWeight: 'normal',
-                fontSize: '15px',
+                fontSize: '15px !important',
                 lineHeight: '22,82px',
                 textAlign: 'left',
-                color: 'background.default',
+                color: '#17324D',
                 paddingLeft: '0px',
               }}
             >
@@ -61,7 +63,7 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
           <Typography
             sx={{
               fontWeight: 'normal',
-              fontSize: '15px',
+              fontSize: '15px !important',
               lineHeight: '15px',
               textAlign: 'left',
               padding: '0px',
@@ -75,9 +77,10 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
               underline="none"
               sx={{
                 marginRight: '10px',
-                color: '#9BB7CB !important',
+                color: '#17324D !important',
                 textDecoration: 'none !important',
                 cursor: 'pointer',
+                fontWeight: '600',
               }}
             >
               {t('common.footer.privacyPolicyLink')}
@@ -93,9 +96,10 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
               underline="none"
               sx={{
                 margin: '10px',
-                color: '#9BB7CB !important',
+                color: '#17324D !important',
                 textDecoration: 'none !important',
                 cursor: 'pointer',
+                fontWeight: '600',
               }}
             >
               {t('common.footer.termsAndConditionLink')}
@@ -111,9 +115,10 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
               underline="none"
               sx={{
                 marginRight: '10px',
-                color: '#9BB7CB !important',
+                color: '#17324D !important',
                 textDecoration: 'none !important',
                 cursor: 'pointer',
+                fontWeight: '600',
               }}
             >
               {t('common.footer.informationSecurityLink')}
@@ -126,9 +131,10 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
                 underline="none"
                 sx={{
                   margin: '10px',
-                  color: '#9BB7CB !important',
+                  color: '#17324D!important',
                   textDecoration: 'none !important',
                   cursor: 'pointer',
+                  fontWeight: '600',
                 }}
               >
                 {t('common.footer.assistanceLink')}
