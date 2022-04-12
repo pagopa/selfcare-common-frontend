@@ -41,11 +41,20 @@ const Header = ({
           {onExitAction !== null ? (
             <Box sx={{ flexGrow: 1, textAlign: 'right' }}>
               <Button
-                variant="contained"
-                sx={{ width: '88px', backgroundColor: '#0073E6', height: '32px' }}
+                variant="outlined"
+                sx={{
+                  width: '88px',
+                  color: '#0073E6',
+                  height: '32px',
+                  border: 'none',
+                  boxShadow: 'none',
+                  '&:hover': { backgroundColor: 'transparent', border: 'none' },
+                }}
                 onClick={onExitAction}
               >
-                {t('common.header.exitButton')}
+                <Typography sx={{ fontSize: '14px', fontWeight: '700', color: '#0073E6' }}>
+                  {t('common.header.exitButton')}
+                </Typography>
               </Button>
             </Box>
           ) : (
