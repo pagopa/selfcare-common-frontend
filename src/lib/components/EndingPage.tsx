@@ -60,7 +60,7 @@ export default ({
 }: Props) => (
   <Box sx={{ minHeight: '100vh' }} display="flex" flexGrow={1}>
     <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
-      <Grid container item justifyContent="center" mb={5}>
+      <Grid container item justifyContent="center" mb={3}>
         <Grid item xs={6}>
           {icon}
         </Grid>
@@ -78,11 +78,7 @@ export default ({
       {onButtonClick && (
         <Grid container item justifyContent="center">
           <Grid item xs={4}>
-            <Button
-              variant="contained"
-              sx={{ width: '200px', alignSelf: 'center' }}
-              onClick={onButtonClick}
-            >
+            <Button variant="contained" sx={{ alignSelf: 'center' }} onClick={onButtonClick}>
               {buttonLabel}
             </Button>
           </Grid>
