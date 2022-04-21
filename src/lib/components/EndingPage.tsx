@@ -12,6 +12,40 @@ type Props = {
   buttonLabel?: string;
   /** if defined it will show a button that will performe this action on click */
   onButtonClick?: () => void;
+  /** Set the variant of the title */
+  variantTitle?:
+    | 'button'
+    | 'caption'
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'inherit'
+    | 'subtitle1'
+    | 'subtitle2'
+    | 'body1'
+    | 'body2'
+    | 'overline'
+    | undefined;
+  /** Set the variant of the description */
+  variantDescription?:
+    | 'button'
+    | 'caption'
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'inherit'
+    | 'subtitle1'
+    | 'subtitle2'
+    | 'body1'
+    | 'body2'
+    | 'overline'
+    | undefined;
 };
 
 /** Selfcare's Ending Page */
@@ -21,6 +55,8 @@ export default ({
   icon = <CheckIllustrationIcon />,
   title,
   buttonLabel,
+  variantTitle,
+  variantDescription,
 }: Props) => (
   <Box sx={{ minHeight: '100vh' }} display="flex" flexGrow={1}>
     <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
@@ -31,12 +67,12 @@ export default ({
       </Grid>
       <Grid container item justifyContent="center">
         <Grid item xs={6}>
-          <Typography variant="h2">{title}</Typography>
+          <Typography variant={variantTitle}>{title}</Typography>
         </Grid>
       </Grid>
       <Grid container item justifyContent="center" mb={7} mt={1}>
         <Grid item xs={6}>
-          <Typography component="div">{description}</Typography>
+          <Typography variant={variantDescription}>{description}</Typography>
         </Grid>
       </Grid>
       {onButtonClick && (
