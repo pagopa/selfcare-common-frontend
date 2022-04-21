@@ -70,7 +70,7 @@ export default ({
           <Typography variant={variantTitle}>{title}</Typography>
         </Grid>
       </Grid>
-      <Grid container item justifyContent="center" mb={7} mt={1}>
+      <Grid container item justifyContent="center" mb={3} mt={1}>
         <Grid item xs={6}>
           <Typography variant={variantDescription}>{description}</Typography>
         </Grid>
