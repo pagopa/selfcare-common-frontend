@@ -11,42 +11,26 @@ export default function SubHeader({ children }: Props) {
       position="relative"
       sx={{
         alignItems: 'center',
-        height: '107px',
         backgroundColor: 'white',
         boxShadow: 'none',
         borderTop: '1px solid #F2F2F2',
         borderBottom: '1px solid #F2F2F2',
       }}
     >
-      <Toolbar sx={{ width: { xs: '100%', lg: '90%' }, minHeight: '107px !important' }}>
+      <Toolbar sx={{ width: { xs: '100%', lg: '90%' }, minHeight: '80px !important' }}>
         <Grid container>
           <Grid container item direction="column" xs={6}>
             <Grid item>
               <Typography
                 component="div"
+                variant="h3"
                 sx={{
-                  fontWeight: 'bold',
-                  fontSize: '24px !important',
                   lineHeight: '36px',
                   textAlign: 'left',
                   color: '#17324D',
                 }}
               >
-                Self Care
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography
-                component="div"
-                sx={{
-                  fontWeight: 'normal',
-                  fontSize: '14px !important',
-                  lineHeight: '24px',
-                  textAlign: 'left',
-                  color: '#17324D',
-                }}
-              >
-                Gestisci i tuoi prodotti e servizi PagoPA
+                Area riservata
               </Typography>
             </Grid>
           </Grid>
