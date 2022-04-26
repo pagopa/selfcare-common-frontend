@@ -23,8 +23,9 @@ export default function SubHeader({ children }: Props) {
             <Grid item>
               <Typography
                 component="div"
-                variant="h3"
                 sx={{
+                  fontSize: '28px !important',
+                  fontWeight: '700 !important',
                   lineHeight: '36px',
                   textAlign: 'left',
                   color: '#17324D',
