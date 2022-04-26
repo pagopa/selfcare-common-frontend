@@ -45,7 +45,7 @@ export default function Toast({
   right = '64px',
 }: Props) {
   const positionStyle: CSSProperties = !wrapped
-    ? { position: 'fixed', bottom, right, zIndex: 100 }
+    ? { position: 'fixed', bottom, right, zIndex: 1000 }
     : { marginTop: 2 };
 
   return (
