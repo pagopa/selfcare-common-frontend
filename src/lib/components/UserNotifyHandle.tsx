@@ -16,8 +16,12 @@ function UserNotifyHandle() {
   const lastNotifiesToast = useRef<Array<UserNotify>>([]);
   const lastNotifyModal = useRef<UserNotify>();
 
+  const timers = useRef<any>({});
+
   const onClose = (notify: UserNotify) => {
     dispatch(appStateActions.removeNotify(notify as UserNotify));
+    // eslint-disable-next-line functional/immutable-data
+    delete timers.current[notify.id];
     if (notify?.onClose) {
       notify.onClose();
     }
@@ -33,7 +37,8 @@ function UserNotifyHandle() {
     lastNotifyModal,
     lastNotifiesToast,
     notifies,
-    onClose
+    onClose,
+    timers.current
   );
 
   const notifyModal = lastNotifyModal.current;
@@ -75,7 +80,8 @@ function updateCurrents(
   lastNotifyModalRef: MutableRefObject<UserNotify | undefined>,
   lastNotifiesToastRef: MutableRefObject<Array<UserNotify>>,
   notifies: Array<UserNotify>,
-  onClose: (notify: UserNotify) => void
+  onClose: (notify: UserNotify) => void,
+  timers: any
 ) {
   const lastNotifiesToast = notifies.filter((e) => e.component === 'Toast');
   const lastNotifySessionModal = notifies.find((e) => e.component === 'SessionModal');
@@ -92,8 +98,10 @@ function updateCurrents(
     lastNotifiesToastRef.current = lastNotifiesToast;
 
     lastNotifiesToast.forEach((n) => {
-      if (n.autoclosable === 'timer') {
+      if (n.autoclosable === 'timer' && !timers[n.id]) {
         setTimeout(() => onClose(n), n.autocloseMilliseconds);
+        // eslint-disable-next-line functional/immutable-data
+        timers[n.id] = true;
       }
     });
   }
