@@ -18,7 +18,7 @@ export default function ToastWrapper({ children, bottom = '64px', right = '64px'
           position: 'fixed',
           bottom: { bottom },
           right: { right },
-          zIndex: 100,
+          zIndex: 500,
         }}
       >
         {children.slice().reverse()}
