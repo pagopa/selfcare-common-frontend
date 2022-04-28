@@ -37,5 +37,17 @@ export default {
       message: 'Se esci, le modifiche apportate andranno perse.',
       confirmLabel: 'Esci',
     },
+    roles: {
+      admin: {
+        shortLabelKey: 'Ref. Amministrativo',
+        longLabelKey: 'Amministratore',
+        descriptionKey: 'Ha tutti i permessi e gestisce gli utenti',
+      },
+      limited: {
+        shortLabelKey: 'Ref. Operativo',
+        longLabelKey: 'Operatore',
+        descriptionKey: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
+      },
+    },
   },
 };
