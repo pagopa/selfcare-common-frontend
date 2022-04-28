@@ -5,16 +5,16 @@ export type UserRole = 'ADMIN' | 'LIMITED';
 
 /** The short and long labels used for the roles of selfcare's projects */
 export const roleLabels: {
-  [key in UserRole]: { shortLabel: string; longLabel: string; description: string };
+  [key in UserRole]: { shortLabelKey: string; longLabelKey: string; descriptionKey: string };
 } = {
   ADMIN: {
-    shortLabel: 'Ref. Amministrativo',
-    longLabel: 'Referente Amministrativo',
-    description: 'Gestisce i prodotti e gli utenti attivi',
+    shortLabelKey: 'common.roles.admin.shortLabel',
+    longLabelKey: 'common.roles.admin.longLabel',
+    descriptionKey: 'common.roles.admin.description',
   },
   LIMITED: {
-    shortLabel: 'Ref. Operativo',
-    longLabel: 'Referente Operativo',
-    description: 'Operatore prodotto',
+    shortLabelKey: 'common.roles.limited.shortLabel',
+    longLabelKey: 'common.roles.limited.longLabel',
+    descriptionKey: 'common.roles.limited.description',
   },
 };
