@@ -35,18 +35,22 @@ export default function TitleBox({
   variantTitle = 'h1',
   variantSubTitle = 'h5',
   titleFontSize,
-  subTitleFontSize = '18px'
+  subTitleFontSize = '18px',
 }: Props) {
   return (
     <Grid container mt={mtTitle}>
       <Grid item xs={12} mb={mbTitle}>
-        <Typography variant={variantTitle} sx={{fontSize: titleFontSize}}>{title}</Typography>
-      </Grid>
-      <Grid item xs={12} mb={mbSubTitle}>
-        <Typography variant={variantSubTitle} sx={{ fontSize: subTitleFontSize }}>
-          {subTitle}
+        <Typography variant={variantTitle} sx={{ fontSize: titleFontSize }}>
+          {title}
         </Typography>
       </Grid>
+      {subTitle && (
+        <Grid item xs={12} mb={mbSubTitle}>
+          <Typography variant={variantSubTitle} sx={{ fontSize: subTitleFontSize }}>
+            {subTitle}
+          </Typography>
+        </Grid>
+      )}
     </Grid>
   );
 }
