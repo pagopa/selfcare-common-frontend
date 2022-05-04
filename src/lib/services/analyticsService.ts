@@ -24,7 +24,7 @@ export const initAnalytics = (): void => {
 
 /** To notify an error through the analytics tool */
 export const trackAppError = (error: AppError): void => {
-  if (CONFIG.ANALYTCS.ENABLE && init) {
+  if (CONFIG.ANALYTCS.ENABLE && (window as any).initMixPanel) {
     trackEvent('GENERIC_ERROR', error);
   } else {
     console.error(error);
@@ -38,7 +38,7 @@ export const trackAppError = (error: AppError): void => {
  * @property callback: an action taken when the track has completed (If the action taken immediately after the track is an exit action from the application, it's better to use this callback to perform the exit, in order to give to mixPanel the time to send the event)
  */
 export const trackEvent = (event_name: string, properties?: any, callback?: () => void): void => {
-  if (CONFIG.ANALYTCS.ENABLE && init) {
+  if (CONFIG.ANALYTCS.ENABLE && (window as any).initMixPanel) {
     if (CONFIG.ANALYTCS.MOCK) {
       // eslint-disable-next-line no-console
       console.log(event_name, properties);
