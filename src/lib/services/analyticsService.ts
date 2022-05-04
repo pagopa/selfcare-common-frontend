@@ -2,13 +2,11 @@ import mixpanel from 'mixpanel-browser';
 import { CONFIG } from '../config/env';
 import { AppError } from '../redux/slices/appStateSlice';
 
-// eslint-disable-next-line functional/no-let
-let init = false;
-
 /** To call in order to start the analytics service, otherwise no event will be sent */
 export const initAnalytics = (): void => {
   if (CONFIG.ANALYTCS.ENABLE) {
-    init = true;
+    // eslint-disable-next-line functional/immutable-data
+    (window as any).initMixPanel = true;
     if (CONFIG.ANALYTCS.MOCK) {
       // eslint-disable-next-line no-console
       console.log('Mixpanel events mock on console log.');
