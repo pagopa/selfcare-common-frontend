@@ -11,19 +11,17 @@ import UseUnloadEventInterceptorExample from './examples/UseUnloadEventIntercept
 import { TitleBox } from './lib';
 import ErrorBoundary from './lib/components/ErrorBoundary/ErrorBoundary';
 import Footer from './lib/components/Footer/Footer';
-import Header from './lib/components/Header/Header';
 import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import UnloadEventHandler from './lib/components/UnloadEventHandler';
 import UserNotifyHandle from './lib/components/UserNotifyHandle';
 import withLogin from './lib/decorators/withLogin';
-import { useUnloadEventLogout, useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
+import { useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
 import AnalyticsExample from './examples/AnalyticsExample';
 import TranslationTextExample from './examples/TranslationTextExample';
 
 import './lib/consentManagementConfigure';
 
 const AppExample = () => {
-  const onLogout = useUnloadEventLogout();
   const onExit = useUnloadEventOnExit();
   return (
     <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
@@ -34,7 +32,6 @@ const AppExample = () => {
           minHeight: '100vh',
         }}
       >
-        <Header withSecondHeader={false} onExitAction={onLogout} />
         <UserNotifyHandle />
         <LoadingOverlay />
         <UnloadEventHandler />

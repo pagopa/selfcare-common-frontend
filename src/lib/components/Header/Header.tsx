@@ -1,10 +1,34 @@
+/* eslint-disable no-console */
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
 import { CONFIG } from '../../config/env';
-// import PagoPaMiniIcon from '../icons/PagoPaMiniIcon';
-import SubHeader from './subHeader/SubHeader';
+
+type LinkType = 'internal' | 'external';
+
+type PartySwitchItem = {
+  id: string;
+  name: string;
+};
+
+type PartyEntity = PartySwitchItem;
+
+type ProductSwitchItem = {
+  id: string;
+  title: string;
+  productUrl: string;
+  linkType: LinkType;
+};
+export type ProductEntity = ProductSwitchItem;
+
+const selfcareProduct: ProductEntity = {
+  id: 'prod-selfcare',
+  title: 'Area Riservata',
+  productUrl: '/dashboard',
+  linkType: 'internal',
+};
 
 type HeaderProps = {
   /** if true, it will render an other toolbar under the Header */
@@ -13,13 +37,23 @@ type HeaderProps = {
   onExitAction?: (() => void) | null;
   /** If withSecondHeader is true, this component will be rendered at the end of the secondary toolbar */
   subHeaderChild?: React.ReactNode;
+  productsList: Array<ProductEntity>;
+  selectedParty?: string;
+  partyList?: Array<PartyEntity>;
+  onSelectedProduct?: (product: ProductSwitchItem) => void;
+  onSelectedParty?: (party: PartySwitchItem) => void;
 };
 
 /** SelfCare Header component */
 const Header = ({
   withSecondHeader,
   onExitAction = () => window.location.assign(CONFIG.URL_FE.LOGOUT),
-  subHeaderChild,
+
+  productsList,
+  selectedParty,
+  partyList,
+  onSelectedProduct,
+  onSelectedParty,
 }: HeaderProps) => {
   const { t } = useTranslation();
   return (
@@ -62,7 +96,18 @@ const Header = ({
           )}
         </Toolbar>
       </AppBar>
-      {withSecondHeader === true ? <SubHeader>{subHeaderChild}</SubHeader> : ''}
+      {withSecondHeader === true ? (
+        <HeaderProduct
+          productId={selfcareProduct.id}
+          productsList={[selfcareProduct].concat(productsList)}
+          partyId={selectedParty}
+          partyList={partyList}
+          onSelectedProduct={onSelectedProduct}
+          onSelectedParty={onSelectedParty}
+        />
+      ) : (
+        ''
+      )}
     </Fragment>
   );
 };
