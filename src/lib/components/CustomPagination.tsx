@@ -43,7 +43,7 @@ export default function CustomPagination({ page, onPageRequest, sort }: Props) {
             <Pagination
               sx={{ display: 'flex' }}
               color="primary"
-              variant="outlined"
+              // variant="outlined"
               shape="rounded"
               page={page.number + 1}
               count={page.totalPages}

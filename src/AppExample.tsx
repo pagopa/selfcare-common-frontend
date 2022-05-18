@@ -10,7 +10,7 @@ import UseUserNotifyExample from './examples/UseUserNotifyExample';
 import UseUnloadEventInterceptorExample from './examples/UseUnloadEventInterceptorExample';
 import { TitleBox } from './lib';
 import ErrorBoundary from './lib/components/ErrorBoundary/ErrorBoundary';
-import Footer from './lib/components/Footer/Footer';
+import FooterOld from './lib/components/Footer/FooterOld';
 import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import UnloadEventHandler from './lib/components/UnloadEventHandler';
 import UserNotifyHandle from './lib/components/UserNotifyHandle';
@@ -82,7 +82,7 @@ const AppExample = () => {
             <TranslationTextExample />
           </Grid>
         </Grid>
-        <Footer assistanceEmail="assistenza@selfcare.it" onExit={onExit} />
+        <FooterOld assistanceEmail="assistenza@selfcare.it" onExit={onExit} />
       </Box>
     </ErrorBoundary>
   );

@@ -10,7 +10,7 @@ type Props = {
 };
 
 /** SelfCare Footer component */
-const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Props) => {
+const FooterOld = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Props) => {
   const { t } = useTranslation();
 
   return (
@@ -147,4 +147,4 @@ const Footer = ({ assistanceEmail, onExit = (exitAction) => exitAction() }: Prop
   );
 };
 
-export default Footer;
+export default FooterOld;

@@ -5,23 +5,7 @@ import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
 import { CONFIG } from '../../config/env';
-
-type LinkType = 'internal' | 'external';
-
-type PartySwitchItem = {
-  id: string;
-  name: string;
-};
-
-type PartyEntity = PartySwitchItem;
-
-type ProductSwitchItem = {
-  id: string;
-  title: string;
-  productUrl: string;
-  linkType: LinkType;
-};
-export type ProductEntity = ProductSwitchItem;
+import { PartySwitchItem, ProductEntity, ProductSwitchItem } from '../../model/Mui-italia-model';
 
 const selfcareProduct: ProductEntity = {
   id: 'prod-selfcare',
@@ -29,7 +13,7 @@ const selfcareProduct: ProductEntity = {
   productUrl: '/dashboard',
   linkType: 'internal',
 };
-
+type PartyEntity = PartySwitchItem;
 type HeaderProps = {
   /** if true, it will render an other toolbar under the Header */
   withSecondHeader: boolean;

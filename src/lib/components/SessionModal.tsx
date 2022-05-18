@@ -83,25 +83,26 @@ function SessionModal({
               </Typography>
             </Grid>
           </Grid>
-
-          {onConfirm && (
-            <Grid item xs={12} mb={2}>
-              <Button
-                sx={{ width: '100%' }}
-                color="primary"
-                variant="contained"
-                onClick={onConfirm}
-                disabled={!onConfirmEnabled}
-              >
-                {onConfirmLabel}
-              </Button>
-            </Grid>
-          )}
-
-          <Grid item xs={12} mb={3} mt={0}>
-            <Button onClick={handleClose} sx={{ width: '100%' }} color="primary" variant="outlined">
-              {onCloseLabel}
-            </Button>
+          <Grid item xs={12}>
+            <Box display="flex" justifyContent="flex-end">
+              <Box mb={3} mt={0}>
+                <Button onClick={handleClose} color="primary" variant="outlined">
+                  {onCloseLabel}
+                </Button>
+              </Box>
+              {onConfirm && (
+                <Box mb={2} ml={2}>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={onConfirm}
+                    disabled={!onConfirmEnabled}
+                  >
+                    {onConfirmLabel}
+                  </Button>
+                </Box>
+              )}
+            </Box>
           </Grid>
         </Box>
       </Grid>
