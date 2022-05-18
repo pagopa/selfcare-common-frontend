@@ -43,11 +43,12 @@ export default function CustomPagination({ page, onPageRequest, sort }: Props) {
             <Pagination
               sx={{ display: 'flex' }}
               color="primary"
-              // variant="outlined"
               shape="rounded"
               page={page.number + 1}
               count={page.totalPages}
-              renderItem={(props2) => <PaginationItem {...props2} sx={{ border: 'none' }} />}
+              renderItem={(props2) => (
+                <PaginationItem {...props2} sx={{ border: 'none' }} variant="outlined" />
+              )}
               onChange={(_event: React.ChangeEvent<unknown>, value: number) => (
                 onPageRequest({
                   page: value - 1,
