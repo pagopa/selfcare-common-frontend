@@ -257,6 +257,7 @@ export default function Footer({ loggedUser, onExit }: FooterProps) {
       onExit={onExit}
       languages={LANGUAGES}
       onLanguageChanged={(language: string) => i18n.changeLanguage(language)}
+      currentLangCode="it"
     />
   );
 }
