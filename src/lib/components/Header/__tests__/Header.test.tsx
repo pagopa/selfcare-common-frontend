@@ -1,3 +1,4 @@
+import { JwtUser } from '@pagopa/mui-italia';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ProductEntity } from '../../../model/Mui-italia-model';
 import { buildAssistanceURI } from '../../../services/assistanceService';
@@ -43,6 +44,13 @@ const initialLocation = {
 
 const mockedLocation = Object.assign({}, initialLocation);
 
+const user: JwtUser = {
+  id: '1',
+  name: 'Ermenegildo',
+  surname: 'Zegna',
+  email: 'mario.rossi@gmail.com',
+};
+
 beforeAll(() => {
   Object.defineProperty(window, 'location', { value: mockedLocation });
 });
@@ -58,14 +66,10 @@ jest.mock('../../../services/assistanceService', () => ({
 test('test using assistance', () => {
   render(
     <Header
+      enableLogin={true}
       withSecondHeader={false}
       productsList={productsList}
-      loggedUser={{
-        id: 'UID',
-        name: 'NAME',
-        surname: 'SURNAME',
-        email: 'a@a.aa',
-      }}
+      loggedUser={user}
       assistanceEmail="assistance@selfcare.it"
     />
   );
@@ -79,16 +83,10 @@ test('test not using assistance', () => {
     <Header
       withSecondHeader={false}
       productsList={productsList}
-      loggedUser={{
-        id: 'UID',
-        name: 'NAME',
-        surname: 'SURNAME',
-        email: 'a@a.aa',
-      }}
+      loggedUser={false}
+      enableLogin={false}
     />
   );
-  screen.debug(document, 11000);
-
   expect(screen.queryByText('Assistenza')).toBeNull();
 
   expect(buildAssistanceURI).toBeCalledTimes(0);

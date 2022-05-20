@@ -156,6 +156,8 @@ const AppExample = () => (
           surname: undefined,
           email: undefined,
         }}
+        assistanceEmail="assistance@selfcare.it"
+        enableLogin={true}
       />
       <UserNotifyHandle />
       <LoadingOverlay />

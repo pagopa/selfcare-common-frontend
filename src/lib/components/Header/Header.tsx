@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
 import { HeaderAccount } from '@pagopa/mui-italia/dist/components/HeaderAccount/HeaderAccount';
-import { RootLinkType, JwtUser } from '@pagopa/mui-italia';
+import { RootLinkType, JwtUser, UserAction } from '@pagopa/mui-italia';
 import { CONFIG } from '../../config/env';
 import { PartySwitchItem, ProductEntity, ProductSwitchItem } from '../../model/Mui-italia-model';
 import { buildAssistanceURI } from '../../services/assistanceService';
@@ -17,7 +17,7 @@ type HeaderProps = {
   /** the parties list */
   partyList?: Array<PartyEntity>;
   /** shows if there is a logged user */
-  loggedUser: JwtUser;
+  loggedUser: JwtUser | false;
   /** the email to which the assistance button will ask to send an email */
   assistanceEmail?: string;
   /** the function to be invoked when the product was selected  */
@@ -30,6 +30,9 @@ type HeaderProps = {
   onExitAction?: () => void;
   /** the function to be invoked when the user login  */
   onLogin?: () => void;
+  enableLogin?: boolean;
+  userActions?: Array<UserAction>;
+  enableDropdown?: boolean;
 };
 
 const selfcareProduct: ProductEntity = {
@@ -53,6 +56,9 @@ const Header = ({
   partyList,
   loggedUser,
   assistanceEmail,
+  enableLogin,
+  userActions,
+  enableDropdown,
   onExitAction = () => window.location.assign(CONFIG.URL_FE.LOGOUT),
   onLogin,
   onSelectedProduct,
@@ -68,6 +74,9 @@ const Header = ({
       }
       onLogin={onLogin}
       onLogout={onExitAction}
+      enableLogin={enableLogin}
+      userActions={userActions}
+      enableDropdown={enableDropdown}
     />
     {withSecondHeader === true ? (
       <HeaderProduct
