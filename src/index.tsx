@@ -10,7 +10,6 @@ import AppExample from './AppExample';
 import { createStore } from './examples/redux/store';
 import { CONFIG } from './lib/config/env';
 import './examples/locale';
-import HeaderExamples from './HeaderExamples';
 
 const store = createStore();
 
@@ -23,7 +22,6 @@ ReactDOM.render(
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <HeaderExamples />
           <AppExample />
         </ThemeProvider>
       </BrowserRouter>
