@@ -16,17 +16,21 @@ export const pagoPALink: CompanyLinkType = {
   ariaLabel: 'Link: vai al sito di PagoPA S.p.A.',
 };
 const termsAndConditionHref = 'https://www.pagopa.it/it/termini-e-condizioni-di-utilizzo-del-sito/';
+const protectionOfPersonalData =
+  'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8';
+const privacyPolicy = 'https://www.pagopa.it/it/privacy-policy/';
+// const accessibility = '';  TODO
 
 export const postLoginLinks: Array<FooterLinksType> = [
   {
     label: 'Privacy policy',
-    href: 'https://www.pagopa.it/it/privacy-policy/',
+    href: privacyPolicy,
     ariaLabel: 'Vai al link: Privacy policy',
     linkType: 'internal',
   },
   {
     label: 'Diritto alla protezione dei dati personali',
-    href: '#diritto-allaprotezionedipersonalidati', // TODO
+    href: protectionOfPersonalData,
     ariaLabel: 'Vai al link: Diritto alla protezione dei dati personali',
     linkType: 'internal',
   },
@@ -36,12 +40,13 @@ export const postLoginLinks: Array<FooterLinksType> = [
     ariaLabel: 'Vai al link: Termini e condizioni',
     linkType: 'internal',
   },
-  {
-    label: 'Accessibilità',
-    href: '#accessibility', // TODO
-    ariaLabel: 'Vai al link: Accessibilità',
-    linkType: 'internal',
-  },
+  // TODO
+  // {
+  //   label: 'Accessibilità',
+  //   href: accessibility,
+  //   ariaLabel: 'Vai al link: Accessibilità',
+  //   linkType: 'internal',
+  // },
 ];
 
 export const preLoginLinks: PreLoginFooterLinksType = {
@@ -49,27 +54,29 @@ export const preLoginLinks: PreLoginFooterLinksType = {
   aboutUs: {
     title: undefined,
     links: [
-      {
-        label: 'Chi siamo',
-        href: '#chi-siamo', // TODO
-        ariaLabel: 'Vai al link: Chi siamo',
-        linkType: 'internal',
-      },
-      {
-        label: 'PNRR',
-        href: '#pnrr', // TODO
-        ariaLabel: 'Vai al link: PNRR',
-        linkType: 'internal',
-      },
+      // TODO
+      // {
+      //   label: 'Chi siamo',
+      //   href: '#chi-siamo',
+      //   ariaLabel: 'Vai al link: Chi siamo',
+      //   linkType: 'internal',
+      // },
+      // TODO
+      // {
+      //   label: 'PNRR',
+      //   href: '#pnrr',
+      //   ariaLabel: 'Vai al link: PNRR',
+      //   linkType: 'internal',
+      // },
       {
         label: 'Media',
-        href: '#media', // TODO
+        href: 'https://www.pagopa.it/it/',
         ariaLabel: 'Vai al link: Media',
         linkType: 'internal',
       },
       {
         label: 'Lavora con noi',
-        href: '#lavora-con-noi', // TODO
+        href: 'https://www.pagopa.it/it/lavora-con-noi/',
         ariaLabel: 'Vai al link: Lavora con noi',
         linkType: 'internal',
       },
@@ -81,52 +88,55 @@ export const preLoginLinks: PreLoginFooterLinksType = {
     links: [
       {
         label: 'App IO',
-        href: '#app-io', // TODO
+        href: 'https://www.pagopa.it/it/prodotti-e-servizi/app-io',
         ariaLabel: 'Vai al link: App IO',
         linkType: 'internal',
       },
       {
         label: 'Piattaforma pagoPA',
-        href: '#piattaforma-pagoPA', // TODO
+        href: 'https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-pagopa',
         ariaLabel: 'Vai al link: Piattaforma pagoPA',
         linkType: 'internal',
       },
       {
         label: 'Centro stella',
-        href: '#centro-stella', // TODO
+        href: 'https://www.pagopa.it/it/prodotti-e-servizi/centro-stella-pagamenti-elettronici',
         ariaLabel: 'Vai al link: Centro stella',
         linkType: 'internal',
       },
       {
         label: 'Check IBAN',
-        href: '#check-iban', // TODO
+        href: 'https://www.pagopa.it/it/prodotti-e-servizi/check-iban',
         ariaLabel: 'Vai al link: Check IBAN',
         linkType: 'internal',
       },
       {
         label: 'Piattaforma Notifiche Digitali',
-        href: '#pn-digitali', // TODO
+        href: 'https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali',
         ariaLabel: 'Vai al link: Piattaforma Notifiche Digitali',
         linkType: 'internal',
       },
-      {
-        label: 'Piattaforma Digitale Nazionale Dati',
-        href: '#pdnd', // TODO
-        ariaLabel: 'Vai al link: Piattaforma Digitale Nazionale Dati',
-        linkType: 'internal',
-      },
-      {
-        label: 'Interoperabilità',
-        href: '#interoperabilita', // TODO
-        ariaLabel: 'Vai al link: Interoperabilità',
-        linkType: 'internal',
-      },
-      {
-        label: 'Self Care',
-        href: '#self-care', // TODO
-        ariaLabel: 'Vai al link: Self Care',
-        linkType: 'internal',
-      },
+      // TODO
+      // {
+      //   label: 'Piattaforma Digitale Nazionale Dati',
+      //   href: '#pdnd',
+      //   ariaLabel: 'Vai al link: Piattaforma Digitale Nazionale Dati',
+      //   linkType: 'internal',
+      // },
+      // TODO
+      // {
+      //   label: 'Interoperabilità',
+      //   href: '#interoperabilita',
+      //   ariaLabel: 'Vai al link: Interoperabilità',
+      //   linkType: 'internal',
+      // },
+      // TODO
+      // {
+      //   label: 'Area Riservata',
+      //   href: '#self-care',
+      //   ariaLabel: 'Vai al link: Self Care',
+      //   linkType: 'internal',
+      // },
     ],
   },
   // Third column
@@ -135,34 +145,35 @@ export const preLoginLinks: PreLoginFooterLinksType = {
     links: [
       {
         label: 'Privacy Policy',
-        href: '#privacy-policy', // TODO
+        href: privacyPolicy,
         ariaLabel: 'Vai al link: Privacy Policy',
         linkType: 'internal',
       },
       {
         label: 'Certificazioni',
-        href: '#certificazioni', // TODO
+        href: 'https://www.pagopa.it/static/10ffe3b3d90ecad83d1bbebea0512188/Certificato-SGSI-PagoPA-2020.pdf',
         ariaLabel: 'Vai al link: Certificazioni',
         linkType: 'internal',
       },
       {
         label: 'Sicurezza delle informazioni',
-        href: 'https://www.pagopa.it/static/781646994f1f8ddad2d95af3aaedac3d/Sicurezza-delle-informazioni_PagoPA-S.p.A..pdft',
+        href: 'https://www.pagopa.it/static/781646994f1f8ddad2d95af3aaedac3d/Sicurezza-delle-informazioni_PagoPA-S.p.A..pdf',
         ariaLabel: 'Vai al link: Sicurezza delle informazioni',
         linkType: 'internal',
       },
       {
         label: 'Diritto alla protezione dei dati personali',
-        href: '#diritto-alla-protezione-dei-dati-personali', // TODO
+        href: protectionOfPersonalData,
         ariaLabel: 'Vai al link: Diritto alla protezione dei dati personali',
         linkType: 'internal',
       },
-      {
-        label: 'Preferenze Cookie',
-        href: '#preferenze-cookie', // TODO
-        ariaLabel: 'Vai al link: Preferenze Cookie',
-        linkType: 'internal',
-      },
+      // TODO
+      // {
+      //   label: 'Preferenze Cookie',
+      //   href: '#preferenze-cookie',
+      //   ariaLabel: 'Vai al link: Preferenze Cookie',
+      //   linkType: 'internal',
+      // },
       {
         label: 'Termini e Condizioni',
         href: termsAndConditionHref,
@@ -171,19 +182,19 @@ export const preLoginLinks: PreLoginFooterLinksType = {
       },
       {
         label: 'Società trasparente',
-        href: '#societa-trasparente', // TODO
+        href: 'https://pagopa.portaleamministrazionetrasparente.it/',
         ariaLabel: 'Vai al link: Società trasparente',
         linkType: 'internal',
       },
       {
         label: 'Responsible Disclosure Policy',
-        href: '#responsible-disclosure-policy', // TODO
+        href: 'https://www.pagopa.it/it/responsible-disclosure-policy/',
         ariaLabel: 'Vai al link: Responsible Disclosure Policy',
         linkType: 'internal',
       },
       {
         label: 'Modello 321',
-        href: '#modello-321', // TODO
+        href: 'https://pagopa.portaleamministrazionetrasparente.it/pagina746_altri-contenuti.html',
         ariaLabel: 'Vai al link: Modello 321',
         linkType: 'internal',
       },
@@ -208,23 +219,24 @@ export const preLoginLinks: PreLoginFooterLinksType = {
       {
         icon: 'instagram',
         title: 'Instagram',
-        href: 'https://www.instagram.com/pagopa/',
+        href: 'https://www.instagram.com/pagopaspa/',
         ariaLabel: 'Link: vai al sito Instagram di PagoPA S.p.A.',
       },
       {
         icon: 'medium',
         title: 'Medium',
-        href: 'https://medium.com/pagopa',
+        href: 'https://medium.com/pagopa-spa',
         ariaLabel: 'Link: vai al sito Medium di PagoPA S.p.A.',
       },
     ],
     links: [
-      {
-        label: 'Accessibilità',
-        href: '#accessibilità', // TODO
-        ariaLabel: 'Vai al link: Accessibilità',
-        linkType: 'internal',
-      },
+      // TODO
+      // {
+      //   label: 'Accessibilità',
+      //   href: accessibility,
+      //   ariaLabel: 'Vai al link: Accessibilità',
+      //   linkType: 'internal',
+      // },
     ],
   },
 };
