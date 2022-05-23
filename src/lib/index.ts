@@ -1,6 +1,5 @@
 export { default as Header } from './components/Header/Header';
 export { default as Footer } from './components/Footer/Footer';
-export { default as FooterContainer } from './components/Footer/Footer';
 export { default as CustomAvatar } from './components/CustomAvatar';
 export { default as CustomPagination } from './components/CustomPagination';
 export { default as FilterModal } from './components/FilterModal';

@@ -8,7 +8,7 @@ import UseErrorDispatcherExample from './examples/UseErrorDispatcherExample';
 import UseLoadingExample from './examples/UseLoadingExample';
 import UseUserNotifyExample from './examples/UseUserNotifyExample';
 import UseUnloadEventInterceptorExample from './examples/UseUnloadEventInterceptorExample';
-import { Footer, TitleBox } from './lib';
+import { TitleBox } from './lib';
 import ErrorBoundary from './lib/components/ErrorBoundary/ErrorBoundary';
 import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import UnloadEventHandler from './lib/components/UnloadEventHandler';
@@ -18,6 +18,7 @@ import AnalyticsExample from './examples/AnalyticsExample';
 import TranslationTextExample from './examples/TranslationTextExample';
 import './lib/consentManagementConfigure';
 import HeaderExample from './HeaderExample';
+import FooterExample from './FooterExample';
 
 const AppExample = () => (
   <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
@@ -79,8 +80,7 @@ const AppExample = () => (
           <TranslationTextExample />
         </Grid>
       </Grid>
-      {/* if false, show more links */}
-      <Footer loggedUser={true} />
+      <FooterExample />
     </Box>
   </ErrorBoundary>
 );
