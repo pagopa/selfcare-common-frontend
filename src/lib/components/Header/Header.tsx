@@ -1,9 +1,15 @@
 import { Fragment } from 'react';
 import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
 import { HeaderAccount } from '@pagopa/mui-italia/dist/components/HeaderAccount/HeaderAccount';
-import { RootLinkType, JwtUser, UserAction } from '@pagopa/mui-italia';
+import {
+  RootLinkType,
+  JwtUser,
+  UserAction,
+  ProductSwitchItem,
+  ProductEntity,
+} from '@pagopa/mui-italia';
+import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
 import { CONFIG } from '../../config/env';
-import { PartySwitchItem, ProductEntity, ProductSwitchItem } from '../../model/Mui-italia-model';
 import { buildAssistanceURI } from '../../services/assistanceService';
 
 type PartyEntity = PartySwitchItem;
@@ -13,7 +19,7 @@ type HeaderProps = {
   /** If withSecondHeader is true, this component will be rendered at the end of the secondary toolbar */
   productsList: Array<ProductEntity>;
   /** the party selected */
-  selectedParty?: string;
+  selectedPartyId?: string;
   /** the parties list */
   partyList?: Array<PartyEntity>;
   /** shows if there is a logged user */
@@ -52,7 +58,7 @@ const rootLink: RootLinkType = {
 const Header = ({
   withSecondHeader,
   productsList,
-  selectedParty,
+  selectedPartyId,
   partyList,
   loggedUser,
   assistanceEmail,
@@ -82,7 +88,7 @@ const Header = ({
       <HeaderProduct
         productId={selfcareProduct.id}
         productsList={[selfcareProduct].concat(productsList)}
-        partyId={selectedParty}
+        partyId={selectedPartyId}
         partyList={partyList}
         onSelectedProduct={onSelectedProduct}
         onSelectedParty={onSelectedParty}
