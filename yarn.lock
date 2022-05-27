@@ -1731,13 +1731,15 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@pagopa/mui-italia@0.6.21":
-  version "0.6.21"
-  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.6.21.tgz#d8f2afa9de9764c3db64df6a15fa582460046eb7"
-  integrity sha512-JaakelUhUxHR0LutlUvtFBVq5fMBAS92V7206R9NRoIJR/wR08iHfH4wpNxh9DzkYtzqir7J+i9Yi5kjBJUa7g==
+"@pagopa/mui-italia@0.6.23":
+  version "0.6.23"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.6.23.tgz#f0b56f6a6c2ea5696359430300bf15fb7960261e"
+  integrity sha512-rVqn/tjNpzvX+fXe38DpApAfM7exn/eJ4dEE2ArHua4a/8cn2ITXsSwzi+2cMmK8T7sTZVUegZ3MNkacXd8ggw==
   dependencies:
     "@fontsource/titillium-web" "^4.5.8"
     clsx "^1.1.1"
+    fp-ts "^2.12.1"
+    io-ts "^2.2.16"
 
 "@pagopa/openapi-codegen-ts@^10.0.6":
   version "10.0.6"
@@ -5581,6 +5583,11 @@ fp-ts@^2.11.0, fp-ts@^2.11.5:
   version "2.11.9"
   resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.11.9.tgz#bbc204e0932954b59c98a282635754a4b624a05e"
   integrity sha512-GhYlNKkCOfdjp71ocdtyaQGoqCswEoWDJLRr+2jClnBBq2dnSOtd6QxmJdALq8UhfqCyZZ0f0lxadU4OhwY9nw==
+
+fp-ts@^2.12.1:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.12.1.tgz#e389488bfd1507af06bd5965e97367edcd4fabad"
+  integrity sha512-oxvgqUYR6O9VkKXrxkJ0NOyU0FrE705MeqgBUMEPWyTu6Pwn768cJbHChw2XOBlgFLKfIHxjr2OOBFpv2mUGZw==
 
 fraction.js@^4.2.0:
   version "4.2.0"

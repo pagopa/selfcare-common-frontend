@@ -1,6 +1,7 @@
 import { Footer as MuiItaliaFooter } from '@pagopa/mui-italia/dist/components/Footer/Footer';
 import { LinkType } from '@pagopa/mui-italia';
 import i18n from '../../locale/locale-utils';
+import { CONFIG } from '../../config/env';
 import {
   companyLegalInfo,
   LANGUAGES,
@@ -26,6 +27,7 @@ export default function Footer({ loggedUser, onExit }: FooterProps) {
       languages={LANGUAGES as any}
       onLanguageChanged={(language: string) => i18n.changeLanguage(language)}
       currentLangCode="it"
+      productsJsonUrl={CONFIG.JSON_URL.PRODUCTS}
     />
   );
 }

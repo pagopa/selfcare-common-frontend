@@ -10,6 +10,7 @@ export { default as ToastWrapper } from './components/ToastWrapper';
 export { default as EndingPage } from './components/EndingPage';
 export { default as LoadingOverlayComponent } from './components/LoadingOverlayComponent';
 export { default as NavigationBar } from './components/NavigationBar';
+export { default as BackComponent } from './components/BackComponent';
 
 export { default as CheckIllustrationIcon } from './components/icons/CheckIllustrationIcon';
 export { default as ConfirmIcon } from './components/icons/ConfirmIcon';

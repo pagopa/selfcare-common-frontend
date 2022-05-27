@@ -27,4 +27,8 @@ export const CONFIG = {
   CONSENT: {
     COOKIE_GROUP_ANALYTICS: 'C0004',
   },
+
+  JSON_URL: {
+    PRODUCTS: 'https://dev.selfcare.pagopa.it/assets/products.json',
+  },
 };
