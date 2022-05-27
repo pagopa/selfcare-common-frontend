@@ -10,6 +10,7 @@ type Props = {
   backLinkTextDecoration?: string;
   backLinkFontWeight?: string;
   backLinkFontSize?: string;
+  hideBackComponent?: boolean;
 };
 
 export type NavigationPath = {
@@ -24,18 +25,21 @@ export default function NavigationBar({
   backLinkTextDecoration,
   backLinkFontWeight,
   backLinkFontSize,
+  hideBackComponent,
 }: Props) {
   const onExit = useUnloadEventOnExit();
 
   return (
     <React.Fragment>
       <Breadcrumbs aria-label="breadcrumb">
-        <BackComponent
-          goBack={goBack}
-          backLinkTextDecoration={backLinkTextDecoration}
-          backLinkFontWeight={backLinkFontWeight}
-          backLinkFontSize={backLinkFontSize}
-        />
+        {!hideBackComponent && (
+          <BackComponent
+            goBack={goBack}
+            backLinkTextDecoration={backLinkTextDecoration}
+            backLinkFontWeight={backLinkFontWeight}
+            backLinkFontSize={backLinkFontSize}
+          />
+        )}
         {paths.map((p) =>
           p.onClick ? (
             <Box display="flex" key={p.description} alignItems="center">
