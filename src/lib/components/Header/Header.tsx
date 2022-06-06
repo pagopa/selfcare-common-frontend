@@ -32,12 +32,8 @@ type HeaderProps = {
   onSelectedProduct?: (product: ProductSwitchItem) => void;
   /** The function invoked when the user click on a party from the switch  */
   onSelectedParty?: (party: PartySwitchItem) => void;
-  /** The function invoked when clicking on the assistance button */
-  onAssistanceClick?: (exitAction: () => void) => void;
   /** The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file */
-  onLogout?: () => void;
-  /** The function to be invoked when the user click on the login button  */
-  onLogin?: () => void;
+  onExit: (exitAction: () => void) => void;
   /** If false hides login button  */
   enableLogin?: boolean;
   /** The users actions inside the user dropdown. It's visible only if enableLogin and enableDropdown are true */
@@ -71,24 +67,22 @@ const Header = ({
   loggedUser,
   assistanceEmail,
   enableLogin,
-  userActions,
-  enableDropdown,
+  userActions = [],
+  enableDropdown = false,
   addSelfcareProduct = true,
-  onLogout = () => window.location.assign(CONFIG.URL_FE.LOGOUT),
-  onLogin,
+  onExit,
   onSelectedProduct,
   onSelectedParty,
-  onAssistanceClick = (exitAction) => exitAction(),
 }: HeaderProps) => (
   <Fragment>
     <HeaderAccount
       rootLink={rootLink}
       loggedUser={loggedUser}
       onAssistanceClick={() =>
-        onAssistanceClick(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
+        onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
       }
-      onLogin={onLogin}
-      onLogout={onLogout}
+      onLogin={() => window.location.assign(CONFIG.URL_FE.LOGIN)}
+      onLogout={() => window.location.assign(CONFIG.URL_FE.LOGOUT)}
       enableLogin={enableLogin}
       userActions={userActions}
       enableDropdown={enableDropdown}

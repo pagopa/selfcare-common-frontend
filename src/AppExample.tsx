@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import { useState } from 'react';
 import CustomAvatarExample from './examples/CustomAvatarExample';
 import CustomPaginationExample from './examples/CustomPaginationExample';
@@ -20,10 +20,11 @@ import TranslationTextExample from './examples/TranslationTextExample';
 import './lib/consentManagementConfigure';
 import FooterExample from './examples/FooterExample';
 import HeaderExample from './examples/HeaderExample';
+import { useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
 
 const AppExample = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
-
+  const onExit = useUnloadEventOnExit();
   return (
     <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
       <Box
@@ -33,11 +34,7 @@ const AppExample = () => {
           minHeight: '100vh',
         }}
       >
-        <HeaderExample
-          onLogin={() => setIsLoggedIn(true)}
-          onLogout={() => setIsLoggedIn(false)}
-          isLoggedIn={isLoggedIn}
-        />
+        <HeaderExample isLoggedIn={isLoggedIn} onExit={onExit} />
         <UserNotifyHandle />
         <LoadingOverlay />
         <UnloadEventHandler />
@@ -53,6 +50,17 @@ const AppExample = () => {
         </Grid>
 
         <Grid container direction="row" flexGrow={1} spacing={1} mt={1}>
+          <Grid item xs={2}>
+            <Button
+              variant={!isLoggedIn ? 'contained' : 'outlined'}
+              size="small"
+              onClick={() => {
+                setIsLoggedIn(!isLoggedIn);
+              }}
+            >
+              {isLoggedIn ? 'Logout' : 'Login'}
+            </Button>
+          </Grid>
           <Grid item xs={1}>
             <UseLoadingExample />
           </Grid>

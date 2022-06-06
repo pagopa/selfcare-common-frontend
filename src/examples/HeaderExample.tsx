@@ -1,6 +1,4 @@
 import { PartyEntity, ProductSwitchItem } from '@pagopa/mui-italia';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import Header from '../lib/components/Header/Header';
 
 const cdnPath = 'https://assets.cdn.io.italia.it/logos/organizations/';
@@ -113,33 +111,12 @@ export const partyList: Array<PartyEntity> = [
   },
 ];
 
-type Props = { onLogout: () => void; onLogin: () => void; isLoggedIn: boolean };
+type Props = { onExit: (exitAction: () => void) => void; isLoggedIn: boolean };
 
-export default function HeaderExample({ onLogout, isLoggedIn, onLogin }: Props) {
-  const userActions = [
-    {
-      id: 'profile',
-      label: 'Profilo',
-      onClick: () => {
-        // eslint-disable-next-line no-console
-        console.log('Clicked/Tapped on Profile');
-      },
-      icon: <SettingsIcon fontSize="small" color="inherit" />,
-    },
-    {
-      id: 'logout',
-      label: 'Esci',
-      onClick: () => {
-        // eslint-disable-next-line no-console
-        console.log('User logged out');
-      },
-      icon: <LogoutRoundedIcon fontSize="small" color="inherit" />,
-    },
-  ];
+export default function HeaderExample({ onExit, isLoggedIn }: Props) {
   return (
     <Header
-      onLogin={onLogin}
-      onLogout={onLogout}
+      onExit={onExit}
       withSecondHeader={true}
       productsList={productsList}
       partyList={partyList}
@@ -155,8 +132,6 @@ export default function HeaderExample({ onLogout, isLoggedIn, onLogin }: Props) 
       }
       assistanceEmail="assistance@selfcare.it"
       enableLogin={true}
-      enableDropdown={true}
-      userActions={userActions}
     />
   );
 }
