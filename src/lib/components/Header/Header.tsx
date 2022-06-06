@@ -69,7 +69,7 @@ const Header = ({
   enableLogin,
   userActions,
   enableDropdown,
-  addSelfcareProduct,
+  addSelfcareProduct = true,
   onExitAction = () => window.location.assign(CONFIG.URL_FE.LOGOUT),
   onLogin,
   onSelectedProduct,

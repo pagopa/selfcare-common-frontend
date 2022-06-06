@@ -17,8 +17,8 @@ import withLogin from './lib/decorators/withLogin';
 import AnalyticsExample from './examples/AnalyticsExample';
 import TranslationTextExample from './examples/TranslationTextExample';
 import './lib/consentManagementConfigure';
-import HeaderExample from './HeaderExample';
-import FooterExample from './FooterExample';
+import FooterExample from './examples/FooterExample';
+import HeaderExample from './examples/HeaderExample';
 
 const AppExample = () => (
   <ErrorBoundary assistanceEmail="assistenza@selfcare.it">

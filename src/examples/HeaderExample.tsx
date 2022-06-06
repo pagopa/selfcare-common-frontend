@@ -1,5 +1,5 @@
 import { PartyEntity, ProductSwitchItem } from '@pagopa/mui-italia';
-import Header from './lib/components/Header/Header';
+import Header from '../lib/components/Header/Header';
 
 const cdnPath = 'https://assets.cdn.io.italia.it/logos/organizations/';
 type ProductEntity = ProductSwitchItem;
