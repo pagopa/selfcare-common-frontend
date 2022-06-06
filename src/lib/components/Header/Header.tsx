@@ -14,35 +14,35 @@ import { buildAssistanceURI } from '../../services/assistanceService';
 
 type PartyEntity = PartySwitchItem;
 type HeaderProps = {
-  /** if true, it will render an other toolbar under the Header */
+  /** If true, it will render an other toolbar under the Header */
   withSecondHeader: boolean;
-  /** If withSecondHeader is true, this component will be rendered at the end of the secondary toolbar */
+  /** The list of products in header */
   productsList: Array<ProductEntity>;
-  /** the party selected */
+  /** The party id selected */
   selectedPartyId?: string;
-  /** the product id selected */
+  /** The product id selected */
   selectedProductId?: string;
-  /** the parties list */
+  /** The parties list */
   partyList?: Array<PartyEntity>;
-  /** shows if there is a logged user */
+  /** The logged user or false if there is not a valid session */
   loggedUser: JwtUser | false;
-  /** the email to which the assistance button will ask to send an email */
+  /** The email to which the assistance button will ask to send an email, if the user is not logged in, otherwise it will be redirect to the assistance form */
   assistanceEmail?: string;
-  /** the function to be invoked when the product was selected  */
+  /** The function invoked when the user click on a product */
   onSelectedProduct?: (product: ProductSwitchItem) => void;
-  /** the function to be invoked when the party was selected  */
+  /** The function invoked when the user click on a party from the switch  */
   onSelectedParty?: (party: PartySwitchItem) => void;
-  /** the function to be invoked to redirect the user to the assistance page  */
+  /** The function invoked when clicking on the assistance button */
   onAssistanceClick?: (exitAction: () => void) => void;
   /** The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file */
-  onExitAction?: () => void;
-  /** the function to be invoked when the user login  */
+  onLogout?: () => void;
+  /** The function to be invoked when the user click on the login button  */
   onLogin?: () => void;
   /** If false hides login button  */
   enableLogin?: boolean;
   /** The users actions inside the user dropdown. It's visible only if enableLogin and enableDropdown are true */
   userActions?: Array<UserAction>;
-  /** If true the user dropdown in headerAccount component is visible. It's visible only if enableLogin is true. */
+  /** If true the user dropdown in headerAccount component is visible. It's visible only if enableLogin is true */
   enableDropdown?: boolean;
   /** If true it concatenates selfcareProduct with productsList */
   addSelfcareProduct?: boolean;
@@ -74,7 +74,7 @@ const Header = ({
   userActions,
   enableDropdown,
   addSelfcareProduct = true,
-  onExitAction = () => window.location.assign(CONFIG.URL_FE.LOGOUT),
+  onLogout = () => window.location.assign(CONFIG.URL_FE.LOGOUT),
   onLogin,
   onSelectedProduct,
   onSelectedParty,
@@ -88,7 +88,7 @@ const Header = ({
         onAssistanceClick(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
       }
       onLogin={onLogin}
-      onLogout={onExitAction}
+      onLogout={onLogout}
       enableLogin={enableLogin}
       userActions={userActions}
       enableDropdown={enableDropdown}

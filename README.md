@@ -29,19 +29,18 @@ SelfCare Header component
 
 | Prop | Type | Mandatory | Description |
 |------|------|-----------|-------------|
-| withSecondHeader | Y | boolean | if true, it will render an other toolbar under the Header |
-| productsList| Y |Array`ProductEntity`| If withSecondHeader is true, this component will be rendered at the end of the secondary toolbar |
-| selectedPartyId | N | the party selected |
-| selectedProductId | N | the product id selected. Default selfcareProduct.id |
-| partyList | N | Array`PartyEntity` | the parties list |
-| loggedUser | Y | `JwtUser | false` | shows if there is a logged user |
-| assistanceEmail | N | string | the email to which the assistance button will ask to send an email |
-| onSelectedProduct | N | (product: ProductSwitchItem) => void | the function to be invoked when the party was selected |
-| onSelectedParty | N | (exitAction: () => void) => void | the function to be invoked when the party was selected | 
-| onAssistanceClick | N | the function to be invoked to redirect the user to the assistance page. Default = (exitAction) => exitAction()| 
-| onExitAction | N | () => void | The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file. Default () => window.location.assign(CONFIG.URL_FE.LOGOUT) | 
-| onExitAction | N | (() => void) &#124; null | The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file |
-| onLogin | N | () => void | the function to be invoked when the user login |
+| withSecondHeader | Y | boolean | If true, it will render an other toolbar under the Header |
+| productsList| Y |Array`ProductEntity`| The list of products in header  |
+| selectedPartyId | N | The party id selected |
+| selectedProductId | N | The product id selected. Default selfcareProduct.id |
+| partyList | N | Array`PartyEntity` | The parties list |
+| loggedUser | Y | `JwtUser | false` | The logged user or false if there is not a valid session |
+| assistanceEmail | N | string | The email to which the assistance button will ask to send an email, if the user is not logged in, otherwise it will be redirect to the assistance form |
+| onSelectedProduct | N | (product: ProductSwitchItem) => void | The function invoked when the user click on a product |
+| onSelectedParty | N | (exitAction: () => void) => void | The function invoked when the user click on a party from the switch | 
+| onAssistanceClick | N | (exitAction: () => void) => void |  The function invoked when clicking on the assistance button. Default = (exitAction) => exitAction()| 
+| onLogout | N | () => void | The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file. Default () => window.location.assign(CONFIG.URL_FE.LOGOUT) | 
+| onLogin | N | () => void | The function to be invoked when the user click on the login button |
 | enableLogin | N | boolean | If false hides login button |
 | userActions | N | Array `<UserAction>` | The users actions inside the user dropdown. It's visible only if enableLogin and enableDropdown are true  |
 | enableDropdown | N | boolean | If true the user dropdown in headerAccount component is visible. It's visible only if enableLogin is true. | 
