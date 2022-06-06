@@ -32,6 +32,10 @@ export const CONFIG = {
     PRODUCTS: 'https://dev.selfcare.pagopa.it/assets/products.json',
   },
 
+  TEST: {
+    JWT: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imp3dF9kZjplNjoxOTplYToxZTpjZTplNjo3Yjo3MDo0MjoyYzphMjpjZDo4Yjo1MjowYiJ9.eyJlbWFpbCI6ImZ1cmlvdml0YWxlQG1hcnRpbm8uaXQiLCJmYW1pbHlfbmFtZSI6IlNhcnRvcmkiLCJmaXNjYWxfbnVtYmVyIjoiU1JUTkxNMDlUMDZHNjM1UyIsIm5hbWUiOiJBbnNlbG1vIiwiZnJvbV9hYSI6ZmFsc2UsInVpZCI6IjliMTdjZTcwLWY3OWYtNDJkOS04YjBlLTRlN2ViNGQ4ODA3NCIsImxldmVsIjoiTDIiLCJpYXQiOjE2NDkzMjQ5NjYsImF1ZCI6Imh0dHBzOi8vYXBpLmRldi5zZWxmY2FyZS5wYWdvcGEuaXQiLCJpc3MiOiJTUElEIiwianRpIjoiMDFHMDFQVkdNR1hDR1IyMTdZWTZFTUNYNk4ifQ.Deq53Tt1Lohp54H6e83-ZaUVMuRahGRDVW7awKl9czZ5UC8Nb6-PPP4hLz7Ut3lq_DjVy7sUpMVjHhGBi2g-Xya95apRlwOwl5Evu-MJzoLTjSKMRK7Nz5qEhJoA3tgOU3094VNuz_-AyIyOptD--wXZH15furowqGdvzH2lFWN2SK7mqwnuCw8zHsPiDtmUD2LxWIGP7TUo5wYHggwD332Gzi85fWJAFlwY0K0mtUE6JiAcZmtTNSnlksqPlrRa1AfwGrgs8Wi9kxS7eL1YhcBIi3b6Y3qPg5sLvM77L8RCdPRmGt1nViGDFSmcBldhtk82XW2IjJwyiJb5kgrMcQ',
+  },
+
   FOOTER: {
     LINK: {
       PAGOPALINK: 'https://www.pagopa.it/',
