@@ -20,6 +20,8 @@ type HeaderProps = {
   productsList: Array<ProductEntity>;
   /** the party selected */
   selectedPartyId?: string;
+  /** the product id selected */
+  selectedProductId?: string;
   /** the parties list */
   partyList?: Array<PartyEntity>;
   /** shows if there is a logged user */
@@ -39,12 +41,13 @@ type HeaderProps = {
   enableLogin?: boolean;
   userActions?: Array<UserAction>;
   enableDropdown?: boolean;
+  addSelfcareProduct?: boolean;
 };
 
 const selfcareProduct: ProductEntity = {
   id: 'prod-selfcare',
   title: 'Area Riservata',
-  productUrl: '/dashboard',
+  productUrl: CONFIG.HEADER.LINK.PRODUCTURL,
   linkType: 'internal',
 };
 const rootLink: RootLinkType = {
@@ -59,12 +62,14 @@ const Header = ({
   withSecondHeader,
   productsList,
   selectedPartyId,
+  selectedProductId = selfcareProduct.id,
   partyList,
   loggedUser,
   assistanceEmail,
   enableLogin,
   userActions,
   enableDropdown,
+  addSelfcareProduct,
   onExitAction = () => window.location.assign(CONFIG.URL_FE.LOGOUT),
   onLogin,
   onSelectedProduct,
@@ -86,8 +91,8 @@ const Header = ({
     />
     {withSecondHeader === true ? (
       <HeaderProduct
-        productId={selfcareProduct.id}
-        productsList={[selfcareProduct].concat(productsList)}
+        productId={selectedProductId}
+        productsList={addSelfcareProduct ? [selfcareProduct].concat(productsList) : productsList}
         partyId={selectedPartyId}
         partyList={partyList}
         onSelectedProduct={onSelectedProduct}

@@ -66,6 +66,7 @@ export const CONFIG = {
   HEADER: {
     LINK: {
       ROOTLINK: 'https://www.pagopa.it/',
+      PRODUCTURL: '/dashboard',
     },
   },
 };
