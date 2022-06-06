@@ -32,20 +32,20 @@ SelfCare Header component
 | withSecondHeader | Y | boolean | if true, it will render an other toolbar under the Header |
 | productsList| Y |Array`ProductEntity`| If withSecondHeader is true, this component will be rendered at the end of the secondary toolbar |
 | selectedPartyId | N | the party selected |
-| selectedProductId | N | the product id selected |
+| selectedProductId | N | the product id selected. Default selfcareProduct.id |
 | partyList | N | Array`PartyEntity` | the parties list |
 | loggedUser | Y | `JwtUser | false` | shows if there is a logged user |
 | assistanceEmail | N | string | the email to which the assistance button will ask to send an email |
 | onSelectedProduct | N | (product: ProductSwitchItem) => void | the function to be invoked when the party was selected |
 | onSelectedParty | N | (exitAction: () => void) => void | the function to be invoked when the party was selected | 
-| onAssistanceClick | N | the function to be invoked to redirect the user to the assistance page | 
-| onExitAction | N | () => void | The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file | 
+| onAssistanceClick | N | the function to be invoked to redirect the user to the assistance page. Default = (exitAction) => exitAction()| 
+| onExitAction | N | () => void | The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file. Default () => window.location.assign(CONFIG.URL_FE.LOGOUT) | 
 | onExitAction | N | (() => void) &#124; null | The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file |
 | onLogin | N | () => void | the function to be invoked when the user login |
 | enableLogin | N | boolean | If false hides login button |
 | userActions | N | Array `<UserAction>` | The users actions inside the user dropdown. It's visible only if enableLogin and enableDropdown are true  |
 | enableDropdown | N | boolean | If true the user dropdown in headerAccount component is visible. It's visible only if enableLogin is true. | 
-| addSelfcareProduct | N | boolean | If true it concatenates selfcareProduct with productsList | 
+| addSelfcareProduct | N | boolean | If true it concatenates selfcareProduct with productsList. Default true| 
 
 
 ## Footer
