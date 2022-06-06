@@ -35,7 +35,7 @@ const AppExample = () => {
       >
         <HeaderExample
           onLogin={() => setIsLoggedIn(true)}
-          onExitAction={() => setIsLoggedIn(false)}
+          onLogout={() => setIsLoggedIn(false)}
           isLoggedIn={isLoggedIn}
         />
         <UserNotifyHandle />

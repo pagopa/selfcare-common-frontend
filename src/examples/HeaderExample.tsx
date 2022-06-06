@@ -113,9 +113,9 @@ export const partyList: Array<PartyEntity> = [
   },
 ];
 
-type Props = { onExitAction: () => void; onLogin: () => void; isLoggedIn: boolean };
+type Props = { onLogout: () => void; onLogin: () => void; isLoggedIn: boolean };
 
-export default function HeaderExample({ onExitAction, isLoggedIn, onLogin }: Props) {
+export default function HeaderExample({ onLogout, isLoggedIn, onLogin }: Props) {
   const userActions = [
     {
       id: 'profile',
@@ -139,7 +139,7 @@ export default function HeaderExample({ onExitAction, isLoggedIn, onLogin }: Pro
   return (
     <Header
       onLogin={onLogin}
-      onExitAction={onExitAction}
+      onLogout={onLogout}
       withSecondHeader={true}
       productsList={productsList}
       partyList={partyList}
