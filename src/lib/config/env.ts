@@ -58,4 +58,10 @@ export const CONFIG = {
       // PNRR:'' TODO
     },
   },
+
+  HEADER: {
+    LINK: {
+      ROOTLINK: 'https://www.pagopa.it/',
+    },
+  },
 };
