@@ -1,5 +1,4 @@
 import { Footer as MuiItaliaFooter } from '@pagopa/mui-italia/dist/components/Footer/Footer';
-import { LinkType } from '@pagopa/mui-italia';
 import i18n from '../../locale/locale-utils';
 import { CONFIG } from '../../config/env';
 import {
@@ -12,7 +11,7 @@ import {
 
 type FooterProps = {
   loggedUser: boolean;
-  onExit?: (href: string, linkType: LinkType) => void;
+  onExit?: (exitAction: () => void) => void;
 };
 
 export default function Footer({ loggedUser, onExit }: FooterProps) {

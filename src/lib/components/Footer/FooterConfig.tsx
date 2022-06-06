@@ -20,6 +20,7 @@ const protectionOfPersonalData =
   'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8';
 const privacyPolicy = 'https://www.pagopa.it/it/privacy-policy/';
 // const accessibility = '';  TODO
+declare const window: any;
 
 export const postLoginLinks: Array<FooterLinksType> = [
   {
@@ -56,18 +57,17 @@ export const preLoginLinks: PreLoginFooterLinksType = {
     links: [
       // TODO
       // {
-      //   label: 'Chi siamo',
-      //   href: '#chi-siamo',
-      //   ariaLabel: 'Vai al link: Chi siamo',
-      //   linkType: 'internal',
-      // },
-      // TODO
-      // {
       //   label: 'PNRR',
       //   href: '#pnrr',
       //   ariaLabel: 'Vai al link: PNRR',
       //   linkType: 'internal',
       // },
+      {
+        label: 'PagoPA S.p.A.',
+        href: 'https://www.pagopa.it/it/societa/chi-siamo/',
+        ariaLabel: 'Vai al link: Chi siamo',
+        linkType: 'internal',
+      },
       {
         label: 'Media',
         href: 'https://www.pagopa.it/it/',
@@ -110,13 +110,12 @@ export const preLoginLinks: PreLoginFooterLinksType = {
         ariaLabel: 'Vai al link: Diritto alla protezione dei dati personali',
         linkType: 'internal',
       },
-      // TODO
-      // {
-      //   label: 'Preferenze Cookie',
-      //   href: '#preferenze-cookie',
-      //   ariaLabel: 'Vai al link: Preferenze Cookie',
-      //   linkType: 'internal',
-      // },
+      {
+        label: 'Preferenze Cookie',
+        onClick: () => window.OneTrust.ToggleInfoDisplay(),
+        ariaLabel: 'Vai al link: Preferenze Cookie',
+        linkType: 'internal',
+      },
       {
         label: 'Termini e Condizioni',
         href: termsAndConditionHref,

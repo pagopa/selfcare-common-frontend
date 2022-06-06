@@ -1731,10 +1731,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@pagopa/mui-italia@0.6.23":
-  version "0.6.23"
-  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.6.23.tgz#f0b56f6a6c2ea5696359430300bf15fb7960261e"
-  integrity sha512-rVqn/tjNpzvX+fXe38DpApAfM7exn/eJ4dEE2ArHua4a/8cn2ITXsSwzi+2cMmK8T7sTZVUegZ3MNkacXd8ggw==
+"@pagopa/mui-italia@0.6.24":
+  version "0.6.24"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.6.24.tgz#8f15d7f8559ae04ecddcf5c66e65f4a981a72bb7"
+  integrity sha512-S6o3/qzpQc0xdQpK1P03BVYBsr94uxxVrwa5pi/u7p8j4KaE5yN/W28hKwiu6AZb/0aHgph8opGsIlNVpA0nJQ==
   dependencies:
     "@fontsource/titillium-web" "^4.5.8"
     clsx "^1.1.1"
