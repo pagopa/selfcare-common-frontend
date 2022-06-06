@@ -38,9 +38,13 @@ type HeaderProps = {
   onExitAction?: () => void;
   /** the function to be invoked when the user login  */
   onLogin?: () => void;
+  /** If false hides login button  */
   enableLogin?: boolean;
+  /** The users actions inside the user dropdown. It's visible only if enableLogin and enableDropdown are true */
   userActions?: Array<UserAction>;
+  /** If true the user dropdown in headerAccount component is visible. It's visible only if enableLogin is true. */
   enableDropdown?: boolean;
+  /** If true it concatenates selfcareProduct with productsList */
   addSelfcareProduct?: boolean;
 };
 

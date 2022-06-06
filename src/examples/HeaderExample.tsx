@@ -1,4 +1,6 @@
 import { PartyEntity, ProductSwitchItem } from '@pagopa/mui-italia';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import Header from '../lib/components/Header/Header';
 
 const cdnPath = 'https://assets.cdn.io.italia.it/logos/organizations/';
@@ -114,6 +116,26 @@ export const partyList: Array<PartyEntity> = [
 type Props = { onExitAction: () => void; onLogin: () => void; isLoggedIn: boolean };
 
 export default function HeaderExample({ onExitAction, isLoggedIn, onLogin }: Props) {
+  const userActions = [
+    {
+      id: 'profile',
+      label: 'Profilo',
+      onClick: () => {
+        // eslint-disable-next-line no-console
+        console.log('Clicked/Tapped on Profile');
+      },
+      icon: <SettingsIcon fontSize="small" color="inherit" />,
+    },
+    {
+      id: 'logout',
+      label: 'Esci',
+      onClick: () => {
+        // eslint-disable-next-line no-console
+        console.log('User logged out');
+      },
+      icon: <LogoutRoundedIcon fontSize="small" color="inherit" />,
+    },
+  ];
   return (
     <Header
       onLogin={onLogin}
@@ -133,6 +155,8 @@ export default function HeaderExample({ onExitAction, isLoggedIn, onLogin }: Pro
       }
       assistanceEmail="assistance@selfcare.it"
       enableLogin={true}
+      enableDropdown={true}
+      userActions={userActions}
     />
   );
 }
