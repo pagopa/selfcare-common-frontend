@@ -111,18 +111,26 @@ export const partyList: Array<PartyEntity> = [
   },
 ];
 
-export default function HeaderExample() {
+type Props = { onExitAction: () => void; onLogin: () => void; isLoggedIn: boolean };
+
+export default function HeaderExample({ onExitAction, isLoggedIn, onLogin }: Props) {
   return (
     <Header
+      onLogin={onLogin}
+      onExitAction={onExitAction}
       withSecondHeader={true}
       productsList={productsList}
       partyList={partyList}
-      loggedUser={{
-        id: '',
-        name: undefined,
-        surname: undefined,
-        email: undefined,
-      }}
+      loggedUser={
+        isLoggedIn
+          ? {
+              id: '',
+              name: undefined,
+              surname: undefined,
+              email: undefined,
+            }
+          : false
+      }
       assistanceEmail="assistance@selfcare.it"
       enableLogin={true}
     />
