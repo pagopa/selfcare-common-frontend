@@ -81,8 +81,8 @@ const Header = ({
       onAssistanceClick={() =>
         onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
       }
-      onLogin={() => window.location.assign(CONFIG.URL_FE.LOGIN)}
-      onLogout={() => window.location.assign(CONFIG.URL_FE.LOGOUT)}
+      onLogin={() => onExit(()=>window.location.assign(CONFIG.URL_FE.LOGIN))}
+      onLogout={() => onExit(()=>window.location.assign(CONFIG.URL_FE.LOGOUT))}
       enableLogin={enableLogin}
       userActions={userActions}
       enableDropdown={enableDropdown}
