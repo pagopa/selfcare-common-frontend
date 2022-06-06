@@ -49,7 +49,7 @@ const selfcareProduct: ProductEntity = {
 };
 const rootLink: RootLinkType = {
   label: 'PagoPA S.p.A.',
-  href: 'https://www.pagopa.it/',
+  href: CONFIG.HEADER.LINK.ROOTLINK,
   ariaLabel: 'Link: vai al sito di PagoPA S.p.A.',
   title: 'Sito di PagoPA S.p.A.',
 };
