@@ -17,7 +17,7 @@ type HeaderProps = {
   /** If true, it will render an other toolbar under the Header */
   withSecondHeader: boolean;
   /** The list of products in header */
-  productsList: Array<ProductEntity>;
+  productsList?: Array<ProductEntity>;
   /** The party id selected */
   selectedPartyId?: string;
   /** The product id selected */
@@ -33,7 +33,7 @@ type HeaderProps = {
   /** The function invoked when the user click on a party from the switch  */
   onSelectedParty?: (party: PartySwitchItem) => void;
   /** The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file */
-  onExit: (exitAction: () => void) => void;
+  onExit?: (exitAction: () => void) => void;
   /** If false hides login button  */
   enableLogin?: boolean;
   /** The users actions inside the user dropdown. It's visible only if enableLogin and enableDropdown are true */
@@ -60,17 +60,17 @@ const rootLink: RootLinkType = {
 /** SelfCare Header component */
 const Header = ({
   withSecondHeader,
-  productsList,
+  productsList = [],
   selectedPartyId,
   selectedProductId = selfcareProduct.id,
-  partyList,
+  partyList = [],
   loggedUser,
   assistanceEmail,
-  enableLogin,
+  enableLogin = true,
   userActions = [],
   enableDropdown = false,
   addSelfcareProduct = true,
-  onExit,
+  onExit = (exitAction) => exitAction(),
   onSelectedProduct,
   onSelectedParty,
 }: HeaderProps) => (
@@ -81,8 +81,8 @@ const Header = ({
       onAssistanceClick={() =>
         onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
       }
-      onLogin={() => onExit(()=>window.location.assign(CONFIG.URL_FE.LOGIN))}
-      onLogout={() => onExit(()=>window.location.assign(CONFIG.URL_FE.LOGOUT))}
+      onLogin={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGIN))}
+      onLogout={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT))}
       enableLogin={enableLogin}
       userActions={userActions}
       enableDropdown={enableDropdown}

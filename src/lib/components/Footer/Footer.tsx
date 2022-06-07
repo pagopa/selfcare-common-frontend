@@ -14,7 +14,7 @@ type FooterProps = {
   onExit?: (exitAction: () => void) => void;
 };
 
-export default function Footer({ loggedUser, onExit }: FooterProps) {
+export default function Footer({ loggedUser, onExit = (exitAction) => exitAction() }: FooterProps) {
   return (
     <MuiItaliaFooter
       companyLink={pagoPALink}
