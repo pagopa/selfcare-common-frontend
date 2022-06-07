@@ -49,5 +49,8 @@ export default {
         description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
       },
     },
+    backComponent: {
+      label: 'Indietro',
+    },
   },
 };

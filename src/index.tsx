@@ -5,7 +5,7 @@ import './lib/index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import theme from '@pagopa/mui-italia/theme';
+import { theme } from '@pagopa/mui-italia';
 import AppExample from './AppExample';
 import { createStore } from './examples/redux/store';
 import { CONFIG } from './lib/config/env';

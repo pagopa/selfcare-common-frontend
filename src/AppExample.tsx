@@ -1,4 +1,5 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
+import { useState } from 'react';
 import CustomAvatarExample from './examples/CustomAvatarExample';
 import CustomPaginationExample from './examples/CustomPaginationExample';
 import FilterModalExample from './examples/FilterModalExample';
@@ -10,20 +11,19 @@ import UseUserNotifyExample from './examples/UseUserNotifyExample';
 import UseUnloadEventInterceptorExample from './examples/UseUnloadEventInterceptorExample';
 import { TitleBox } from './lib';
 import ErrorBoundary from './lib/components/ErrorBoundary/ErrorBoundary';
-import Footer from './lib/components/Footer/Footer';
-import Header from './lib/components/Header/Header';
 import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import UnloadEventHandler from './lib/components/UnloadEventHandler';
 import UserNotifyHandle from './lib/components/UserNotifyHandle';
 import withLogin from './lib/decorators/withLogin';
-import { useUnloadEventLogout, useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
 import AnalyticsExample from './examples/AnalyticsExample';
 import TranslationTextExample from './examples/TranslationTextExample';
-
 import './lib/consentManagementConfigure';
+import FooterExample from './examples/FooterExample';
+import HeaderExample from './examples/HeaderExample';
+import { useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
 
 const AppExample = () => {
-  const onLogout = useUnloadEventLogout();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const onExit = useUnloadEventOnExit();
   return (
     <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
@@ -34,7 +34,7 @@ const AppExample = () => {
           minHeight: '100vh',
         }}
       >
-        <Header withSecondHeader={false} onExitAction={onLogout} />
+        <HeaderExample isLoggedIn={isLoggedIn} onExit={onExit} />
         <UserNotifyHandle />
         <LoadingOverlay />
         <UnloadEventHandler />
@@ -50,6 +50,17 @@ const AppExample = () => {
         </Grid>
 
         <Grid container direction="row" flexGrow={1} spacing={1} mt={1}>
+          <Grid item xs={2}>
+            <Button
+              variant={!isLoggedIn ? 'contained' : 'outlined'}
+              size="small"
+              onClick={() => {
+                setIsLoggedIn(!isLoggedIn);
+              }}
+            >
+              {isLoggedIn ? 'Logout' : 'Login'}
+            </Button>
+          </Grid>
           <Grid item xs={1}>
             <UseLoadingExample />
           </Grid>
@@ -85,7 +96,7 @@ const AppExample = () => {
             <TranslationTextExample />
           </Grid>
         </Grid>
-        <Footer assistanceEmail="assistenza@selfcare.it" onExit={onExit} />
+        <FooterExample isLoggedIn={isLoggedIn} />
       </Box>
     </ErrorBoundary>
   );

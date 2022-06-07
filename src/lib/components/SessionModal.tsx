@@ -60,48 +60,44 @@ function SessionModal({
       onClose={handleClose}
       aria-labelledby="responsive-dialog-title"
     >
-      <Grid container direction="column" sx={{ height, minHeight, width }}>
-        <Box mx={3} sx={{ height: '100%' }}>
-          <Grid container item mt={4}>
-            <Grid item xs={10}>
-              <IconButton
-                onClick={handleExit}
-                style={{ position: 'absolute', top: '20px', right: '16px', zIndex: 100 }}
-              >
-                <ClearOutlinedIcon />
-              </IconButton>
-              <Typography variant="h5" sx={{ fontSize: '18px', fontWeight: '600' }}>
-                {title}
-              </Typography>
-            </Grid>
+      <Grid container sx={{ height, minHeight, width }} px={2}>
+        <Grid item xs={12} mt={4}>
+          <IconButton
+            onClick={handleExit}
+            style={{ position: 'absolute', top: '20px', right: '16px', zIndex: 100 }}
+          >
+            <ClearOutlinedIcon />
+          </IconButton>
+          <Typography variant="h5" sx={{ fontSize: '18px', fontWeight: '600' }}>
+            {title}
+          </Typography>
+        </Grid>
+        <Box width="100%">
+          <Grid item xs={12} my={3}>
+            <Typography component="div" variant="body2">
+              {message}
+            </Typography>
           </Grid>
-
-          <Grid container item>
-            <Grid item xs={12} my={3}>
-              <Typography component="div" variant="body2">
-                {message}
-              </Typography>
-            </Grid>
-          </Grid>
-
-          {onConfirm && (
-            <Grid item xs={12} mb={2}>
-              <Button
-                sx={{ width: '100%' }}
-                color="primary"
-                variant="contained"
-                onClick={onConfirm}
-                disabled={!onConfirmEnabled}
-              >
-                {onConfirmLabel}
-              </Button>
-            </Grid>
-          )}
-
-          <Grid item xs={12} mb={3} mt={0}>
-            <Button onClick={handleClose} sx={{ width: '100%' }} color="primary" variant="outlined">
-              {onCloseLabel}
-            </Button>
+          <Grid item xs={12}>
+            <Box display="flex" justifyContent="flex-end">
+              <Box mb={3} mt={0}>
+                <Button onClick={handleClose} color="primary" variant="outlined">
+                  {onCloseLabel}
+                </Button>
+              </Box>
+              {onConfirm && (
+                <Box mb={3} ml={2}>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={onConfirm}
+                    disabled={!onConfirmEnabled}
+                  >
+                    {onConfirmLabel}
+                  </Button>
+                </Box>
+              )}
+            </Box>
           </Grid>
         </Box>
       </Grid>

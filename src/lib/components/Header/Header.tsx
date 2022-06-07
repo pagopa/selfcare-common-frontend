@@ -1,70 +1,105 @@
-import { AppBar, Button, Toolbar, Typography } from '@mui/material';
-import { Box } from '@mui/system';
 import { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
+import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
+import { HeaderAccount } from '@pagopa/mui-italia/dist/components/HeaderAccount/HeaderAccount';
+import {
+  RootLinkType,
+  JwtUser,
+  UserAction,
+  ProductSwitchItem,
+  ProductEntity,
+} from '@pagopa/mui-italia';
+import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
 import { CONFIG } from '../../config/env';
-// import PagoPaMiniIcon from '../icons/PagoPaMiniIcon';
-import SubHeader from './subHeader/SubHeader';
+import { buildAssistanceURI } from '../../services/assistanceService';
 
+type PartyEntity = PartySwitchItem;
 type HeaderProps = {
-  /** if true, it will render an other toolbar under the Header */
+  /** If true, it will render an other toolbar under the Header */
   withSecondHeader: boolean;
+  /** The list of products in header */
+  productsList?: Array<ProductEntity>;
+  /** The party id selected */
+  selectedPartyId?: string;
+  /** The product id selected */
+  selectedProductId?: string;
+  /** The parties list */
+  partyList?: Array<PartyEntity>;
+  /** The logged user or false if there is not a valid session */
+  loggedUser: JwtUser | false;
+  /** The email to which the assistance button will ask to send an email, if the user is not logged in, otherwise it will be redirect to the assistance form */
+  assistanceEmail?: string;
+  /** The function invoked when the user click on a product */
+  onSelectedProduct?: (product: ProductSwitchItem) => void;
+  /** The function invoked when the user click on a party from the switch  */
+  onSelectedParty?: (party: PartySwitchItem) => void;
   /** The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file */
-  onExitAction?: (() => void) | null;
-  /** If withSecondHeader is true, this component will be rendered at the end of the secondary toolbar */
-  subHeaderChild?: React.ReactNode;
+  onExit?: (exitAction: () => void) => void;
+  /** If false hides login button  */
+  enableLogin?: boolean;
+  /** The users actions inside the user dropdown. It's visible only if enableLogin and enableDropdown are true */
+  userActions?: Array<UserAction>;
+  /** If true the user dropdown in headerAccount component is visible. It's visible only if enableLogin is true */
+  enableDropdown?: boolean;
+  /** If true it concatenates selfcareProduct with productsList */
+  addSelfcareProduct?: boolean;
+};
+
+const selfcareProduct: ProductEntity = {
+  id: 'prod-selfcare',
+  title: 'Area Riservata',
+  productUrl: CONFIG.HEADER.LINK.PRODUCTURL,
+  linkType: 'internal',
+};
+const rootLink: RootLinkType = {
+  label: 'PagoPA S.p.A.',
+  href: CONFIG.HEADER.LINK.ROOTLINK,
+  ariaLabel: 'Link: vai al sito di PagoPA S.p.A.',
+  title: 'Sito di PagoPA S.p.A.',
 };
 
 /** SelfCare Header component */
 const Header = ({
   withSecondHeader,
-  onExitAction = () => window.location.assign(CONFIG.URL_FE.LOGOUT),
-  subHeaderChild,
-}: HeaderProps) => {
-  const { t } = useTranslation();
-  return (
-    <Fragment>
-      <AppBar
-        position="relative"
-        sx={{
-          alignItems: 'center',
-          height: '48px',
-          backgroundColor: 'white',
-          boxShadow: 'none',
-        }}
-      >
-        <Toolbar sx={{ width: { xs: '100%', lg: '90%', minHeight: '48px !important' } }}>
-          {/* <PagoPaMiniIcon viewBox="0 0 80 22" sx={{ width: '80px' }} /> */}
-          <Typography sx={{ fontSize: '14px !important', fontWeight: '700' }}>
-            PagoPA S.p.A
-          </Typography>
-          {onExitAction !== null ? (
-            <Box sx={{ flexGrow: 1, textAlign: 'right' }}>
-              <Button
-                variant="outlined"
-                sx={{
-                  width: '88px',
-                  color: '#0073E6',
-                  height: '32px',
-                  border: 'none',
-                  boxShadow: 'none',
-                  '&:hover': { backgroundColor: 'transparent', border: 'none' },
-                }}
-                onClick={onExitAction}
-              >
-                <Typography sx={{ fontSize: '14px', fontWeight: '700', color: '#0073E6' }}>
-                  {t('common.header.exitButton')}
-                </Typography>
-              </Button>
-            </Box>
-          ) : (
-            ''
-          )}
-        </Toolbar>
-      </AppBar>
-      {withSecondHeader === true ? <SubHeader>{subHeaderChild}</SubHeader> : ''}
-    </Fragment>
-  );
-};
+  productsList = [],
+  selectedPartyId,
+  selectedProductId = selfcareProduct.id,
+  partyList = [],
+  loggedUser,
+  assistanceEmail,
+  enableLogin = true,
+  userActions = [],
+  enableDropdown = false,
+  addSelfcareProduct = true,
+  onExit = (exitAction) => exitAction(),
+  onSelectedProduct,
+  onSelectedParty,
+}: HeaderProps) => (
+  <Fragment>
+    <HeaderAccount
+      rootLink={rootLink}
+      loggedUser={loggedUser}
+      onAssistanceClick={() =>
+        onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
+      }
+      onLogin={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGIN))}
+      onLogout={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT))}
+      enableLogin={enableLogin}
+      userActions={userActions}
+      enableDropdown={enableDropdown}
+    />
+    {withSecondHeader === true ? (
+      <HeaderProduct
+        productId={selectedProductId}
+        productsList={addSelfcareProduct ? [selfcareProduct].concat(productsList) : productsList}
+        partyId={selectedPartyId}
+        partyList={partyList}
+        onSelectedProduct={onSelectedProduct}
+        onSelectedParty={onSelectedParty}
+      />
+    ) : (
+      ''
+    )}
+  </Fragment>
+);
 
 export default Header;

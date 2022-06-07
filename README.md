@@ -29,16 +29,29 @@ SelfCare Header component
 
 | Prop | Type | Mandatory | Description |
 |------|------|-----------|-------------|
-| withSecondHeader | Y | boolean | if true, it will render an other toolbar under the Header |
-| onExitAction | N | (() => void) &#124; null | The function to be invoked when pressing the rendered logout button, if not defined it will redirect to the logout page, if setted to null it will no render the logout button. It's possible to modify the logout path changing the value in CONFIG.logout inside the index.tsx file |
-| subHeaderChild | N | React.ReactNode | If withSecondHeader is true, this component will be rendered at the end of the secondary toolbar |
+| withSecondHeader | Y | boolean | If true, it will render an other toolbar under the Header |
+| productsList| N |Array`ProductEntity`| The list of products in header. Default []  |
+| selectedPartyId | N | The party id selected |
+| selectedProductId | N | The product id selected. Default selfcareProduct.id |
+| partyList | N | Array`PartyEntity` | The parties list. Default [] |
+| loggedUser | Y | `JwtUser | false` | The logged user or false if there is not a valid session |
+| assistanceEmail | N | string | The email to which the assistance button will ask to send an email, if the user is not logged in, otherwise it will be redirect to the assistance form |
+| onSelectedProduct | N | (product: ProductSwitchItem) => void | The function invoked when the user click on a product |
+| onSelectedParty | N | (exitAction: () => void) => void | The function invoked when the user click on a party from the switch |
+| onExit | N | (exitAction: () => void) => void | The function invoked when exiting from the application. As default it will just invoke the exitAction. Default exitAction => exitAction() | 
+| enableLogin | N | boolean | If false, it will hide login/logout buttons. Default true |
+| userActions | N | Array `<UserAction>` | The users actions inside the user dropdown. It's visible only if enableLogin and enableDropdown are true. Default [] |
+| enableDropdown | N | boolean | If true the user dropdown in headerAccount component is visible. It's visible only if enableLogin is true. Default false | 
+| addSelfcareProduct | N | boolean | If true it concatenates selfcareProduct with productsList. Default true| 
+
 
 ## Footer
 SelfCare Footer component
 
 | Prop | Type | Mandatory | Description |
 |------|------|-----------|-------------|
-| assistanceEmail | string | N | The email to which the assistance button will ask to send an email |
+| loggedUser | Y | boolean | The logged user or false if there is not a valid session |
+| onExit | N | (exitAction: () => void) => void | The function invoked when exiting from the application. As default it will just invoke the exitAction. Default exitAction => exitAction() | 
 
 ## CustomAvatar
 Avatar to use to load Organization logo
