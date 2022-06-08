@@ -23,12 +23,17 @@ export const onRedirectToLogin = (store: EnhancedStore) =>
   );
 
 /** Return the implementation of fetch configured with a timeout */
-export const buildFetchApi = (timeoutMs: number = 300000): typeof fetchWithTimeout => {
+export const buildFetchApi = (
+  timeoutMs: number = 300000
+): ((input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>) => {
   // Must be an https endpoint so we use an https agent
   const abortableFetch = AbortableFetch(agent.getHttpFetch(process.env));
   const fetchWithTimeout = toFetch(setFetchTimeout(timeoutMs as Millisecond, abortableFetch));
   // tslint:disable-next-line: no-any
-  return fetch as any as typeof fetchWithTimeout;
+  return fetchWithTimeout as (
+    input: RequestInfo | URL,
+    init?: RequestInit | undefined
+  ) => Promise<Response>;
 };
 
 /** Extract the response of a @pagopa/openapi-codegen-ts generated client rest invocation having status code successHttpStatus.
