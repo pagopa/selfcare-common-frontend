@@ -2,7 +2,7 @@ import { ArrowBack } from '@mui/icons-material';
 import { Box, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 type Props = {
-  goBack: () => void;
+  goBack?: () => void;
   backLinkTextDecoration?: string;
   backLinkFontWeight?: string;
   backLinkFontSize?: string;

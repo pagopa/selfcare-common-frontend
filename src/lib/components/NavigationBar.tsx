@@ -5,7 +5,7 @@ import BackComponent from './BackComponent';
 
 type Props = {
   paths: Array<NavigationPath>;
-  goBack: () => void;
+  goBack?: () => void;
   backLinkTextDecoration?: string;
   backLinkFontWeight?: string;
   backLinkFontSize?: string;
