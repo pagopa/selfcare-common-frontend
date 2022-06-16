@@ -56,7 +56,7 @@ stages:
               persistCredentials: true
           - template: templates/node-github-release/template.yaml@pagopaCommons
             parameters:
-              release_branch: '$(DEFAULT_BRANCH)'
+              release_branch: ${{replace(variables.DEFAULT_BRANCH, 'refs/tags/', '')}}
               semver: '${{ parameters.RELEASE_SEMVER }}'
               gitEmail: '$(GIT_EMAIL)'
               gitUsername: '$(GIT_USERNAME)'
