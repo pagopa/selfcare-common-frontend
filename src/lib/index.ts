@@ -16,6 +16,7 @@ export { default as CheckIllustrationIcon } from './components/icons/CheckIllust
 export { default as ConfirmIcon } from './components/icons/ConfirmIcon';
 export { default as ErrorIcon } from './components/icons/ErrorIcon';
 export { default as FaultIcon } from './components/icons/FaultIcon';
+export { default as ErrorIconExclamation } from './components/icons/ErrorIconExclamation';
 export { default as PagoPaIcon } from './components/icons/PagoPaIcon';
 export { default as PagoPaMiniIcon } from './components/icons/PagoPaMiniIcon';
 

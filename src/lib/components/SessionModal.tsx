@@ -48,7 +48,7 @@ function SessionModal({
   onCloseLabel = t('common.sessionModal.closeButton'),
   height,
   minHeight,
-  width = '21.9em',
+  width = '33.3em',
 }: Props) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
@@ -60,7 +60,7 @@ function SessionModal({
       onClose={handleClose}
       aria-labelledby="responsive-dialog-title"
     >
-      <Grid container sx={{ height, minHeight, width }} px={2}>
+      <Grid container sx={{ height, minHeight, width }} px={4}>
         <Grid item xs={12} mt={4}>
           <IconButton
             onClick={handleExit}
@@ -68,15 +68,11 @@ function SessionModal({
           >
             <ClearOutlinedIcon />
           </IconButton>
-          <Typography variant="h5" sx={{ fontSize: '18px', fontWeight: '600' }}>
-            {title}
-          </Typography>
+          <Typography sx={{ fontSize: '24px', fontWeight: '600' }}>{title}</Typography>
         </Grid>
         <Box width="100%">
           <Grid item xs={12} my={3}>
-            <Typography component="div" variant="body2">
-              {message}
-            </Typography>
+            <Typography sx={{ fontSize: '18px', fontWeight: '400' }}>{message}</Typography>
           </Grid>
           <Grid item xs={12}>
             <Box display="flex" justifyContent="flex-end">
