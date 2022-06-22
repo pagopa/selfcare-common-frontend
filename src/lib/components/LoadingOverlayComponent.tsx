@@ -11,7 +11,7 @@ export default function LoadingOverlayComponent({ open }: Props) {
   const theme = useTheme();
 
   return (
-    <Modal open={open} sx={{ outline: 0 }}>
+    <Modal open={open} sx={{ outline: 0, zIndex: 1500 }}>
       <Box
         sx={{
           position: 'absolute',

@@ -8,7 +8,7 @@ import { AppError, appStateActions, appStateSelectors } from '../../redux/slices
 import { handleErrors } from '../../services/errorService';
 import SessionModal from '../SessionModal';
 import Toast from '../Toast';
-import FaultIcon from '../icons/FaultIcon';
+import ErrorIconExclamation from '../icons/ErrorIconExclamation';
 import BlockingErrorPage from './components/BlockingErrorPage';
 
 interface Props {
@@ -98,8 +98,8 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         open={true}
         title={error.displayableTitle ?? this.props.t('common.errorBoundary.toastError')}
         message={error.displayableDescription ?? this.props.t('common.errorBoundary.toastMessage')}
-        logo={FaultIcon}
-        leftBorderColor="#C02927"
+        logo={ErrorIconExclamation}
+        leftBorderColor="#FE6666"
         onCloseToast={() => this.handleClose(error)}
         width={error.width}
       />

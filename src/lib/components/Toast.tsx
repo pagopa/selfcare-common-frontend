@@ -38,7 +38,7 @@ export default function Toast({
   message,
   onCloseToast,
   logo = ConfirmIcon,
-  leftBorderColor = '#00CF86',
+  leftBorderColor = '#6CC66A',
   width = '376px',
   wrapped = false,
   bottom = '64px',
