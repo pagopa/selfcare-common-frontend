@@ -1,5 +1,6 @@
 import { Box, Button, Grid } from '@mui/material';
 import { useState } from 'react';
+import { SupervisedUserCircle } from '@mui/icons-material';
 import CustomAvatarExample from './examples/CustomAvatarExample';
 import CustomPaginationExample from './examples/CustomPaginationExample';
 import FilterModalExample from './examples/FilterModalExample';
@@ -9,7 +10,7 @@ import UseErrorDispatcherExample from './examples/UseErrorDispatcherExample';
 import UseLoadingExample from './examples/UseLoadingExample';
 import UseUserNotifyExample from './examples/UseUserNotifyExample';
 import UseUnloadEventInterceptorExample from './examples/UseUnloadEventInterceptorExample';
-import { TitleBox } from './lib';
+import { NavigationBar, TitleBox } from './lib';
 import ErrorBoundary from './lib/components/ErrorBoundary/ErrorBoundary';
 import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import UnloadEventHandler from './lib/components/UnloadEventHandler';
@@ -38,7 +39,21 @@ const AppExample = () => {
         <UserNotifyHandle />
         <LoadingOverlay />
         <UnloadEventHandler />
-
+        <NavigationBar
+          showBackComponent={true}
+          // eslint-disable-next-line no-console
+          goBack={() => console.log('Go back')}
+          paths={[
+            {
+              icon: SupervisedUserCircle,
+              description: 'Link1',
+              onClick: () => {},
+            },
+            {
+              description: 'Link2',
+            },
+          ]}
+        />
         <TitleBox title="Title example" subTitle="Subtitle example" />
 
         <Grid container direction="row">

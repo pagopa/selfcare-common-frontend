@@ -4,17 +4,18 @@ import { Component, ErrorInfo, Fragment, ReactElement, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { TFunction, withTranslation } from 'react-i18next';
+import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import { AppError, appStateActions, appStateSelectors } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
 import SessionModal from '../SessionModal';
 import Toast from '../Toast';
-import ErrorIconExclamation from '../icons/ErrorIconExclamation';
 import BlockingErrorPage from './components/BlockingErrorPage';
 
 interface Props {
   children: ReactNode;
   assistanceEmail?: string;
   t: TFunction<'translation', undefined>;
+  showCloseIcon?: boolean;
 }
 
 interface ConnectedProps {
@@ -98,10 +99,12 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         open={true}
         title={error.displayableTitle ?? this.props.t('common.errorBoundary.toastError')}
         message={error.displayableDescription ?? this.props.t('common.errorBoundary.toastMessage')}
-        logo={ErrorIconExclamation}
+        logo={ErrorOutlineOutlinedIcon}
+        toastColorIcon="#FE6666"
         leftBorderColor="#FE6666"
         onCloseToast={() => this.handleClose(error)}
         width={error.width}
+        showToastCloseIcon={error.showToastCloseIcon}
       />
     );
   }
@@ -117,6 +120,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         onConfirm={error.onRetry ? () => this.retryError(error) : undefined}
         handleClose={() => this.handleClose(error)}
         width={error.width}
+        showModalCloseIcon={error.showModalCloseIcon}
       />
     );
   }

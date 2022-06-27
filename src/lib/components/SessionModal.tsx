@@ -32,6 +32,8 @@ type Props = {
   /** The popup width */
   width?: string;
   t: TFunction<'translation', undefined>;
+  /** If true show modal close icon */
+  showModalCloseIcon?: boolean;
 };
 
 /** Selfcare's popup */
@@ -49,6 +51,7 @@ function SessionModal({
   height,
   minHeight,
   width = '33.3em',
+  showModalCloseIcon = true,
 }: Props) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
@@ -62,14 +65,17 @@ function SessionModal({
     >
       <Grid container sx={{ height, minHeight, width }} px={4}>
         <Grid item xs={12} mt={4}>
-          <IconButton
-            onClick={handleExit}
-            style={{ position: 'absolute', top: '20px', right: '16px', zIndex: 100 }}
-          >
-            <ClearOutlinedIcon />
-          </IconButton>
+          {showModalCloseIcon && (
+            <IconButton
+              onClick={handleExit}
+              style={{ position: 'absolute', top: '20px', right: '16px', zIndex: 100 }}
+            >
+              <ClearOutlinedIcon />
+            </IconButton>
+          )}
           <Typography sx={{ fontSize: '24px', fontWeight: '600' }}>{title}</Typography>
         </Grid>
+
         <Box width="100%">
           <Grid item xs={12} my={3}>
             <Typography sx={{ fontSize: '18px', fontWeight: '400' }}>{message}</Typography>
