@@ -1,5 +1,6 @@
 import { SvgIconComponent } from '@mui/icons-material';
-import { Breadcrumbs, Link, Typography, Icon, Box } from '@mui/material';
+import { Breadcrumbs, Typography, Icon, Box } from '@mui/material';
+import { ButtonNaked } from '@pagopa/mui-italia';
 import { useUnloadEventOnExit } from '../hooks/useUnloadEventInterceptor';
 import BackComponent from './BackComponent';
 
@@ -32,33 +33,36 @@ export default function NavigationBar({ paths, goBack, showBackComponent }: Prop
         <Breadcrumbs aria-label="breadcrumb">
           {paths.map((p) =>
             p.onClick ? (
-              <Box key={p.description} display="flex" alignItems="center" justifyContent="center">
-                <Box ml={3} mr={1} display="flex" alignItems="center">
-                  {p.icon && <Icon component={p.icon} />}
-                </Box>
-                <Box>
-                  <Link
-                    variant="body2"
-                    onClick={() => onExit(p.onClick as () => void)}
-                    sx={{
-                      fontWeight: 'fontWeightRegular',
-                      fontSize: 'fontSize',
-                      color: '#17324D !important',
-                      textDecoration: 'none !important',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {p.description}
-                  </Link>
-                </Box>
+              <Box
+                key={p.description}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                ml={2}
+              >
+                <ButtonNaked
+                  component="button"
+                  onClick={() => onExit(p.onClick as () => void)}
+                  startIcon={p.icon && <Icon component={p.icon} />}
+                  sx={{ color: 'colorTextPrimary' }}
+                  weight="default"
+                >
+                  <Typography variant="body2">{p.description}</Typography>
+                </ButtonNaked>
               </Box>
             ) : (
               <Box display="flex" key={p.description} alignItems="center">
-                <Box mr={1} display="flex" alignItems="center">
-                  {p.icon && <Icon component={p.icon} />}
-                </Box>
+                {p.icon && (
+                  <Box mr={1} display="flex" alignItems="center">
+                    <Icon component={p.icon} />
+                  </Box>
+                )}
                 <Box>
-                  <Typography key={p.description} variant="body2" sx={{ color: 'text.secondary' }}>
+                  <Typography
+                    key={p.description}
+                    variant="body2"
+                    sx={{ color: 'text.secondary', fontSize: 'fontSize' }}
+                  >
                     {p.description}
                   </Typography>
                 </Box>
