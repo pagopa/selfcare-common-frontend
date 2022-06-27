@@ -51,7 +51,7 @@ function SessionModal({
   height,
   minHeight,
   width = '33.3em',
-  showModalCloseIcon = true,
+  showModalCloseIcon = false,
 }: Props) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
