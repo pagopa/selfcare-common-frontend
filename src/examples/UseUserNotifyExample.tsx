@@ -14,6 +14,7 @@ export default () => {
       id: 'NOTIFY_EXAMPLE',
       title: 'A USER NOTIFY',
       message: `NOTIFY THROUGH TOAST! (${counter.current})`,
+      showCloseIcon: true,
     });
   };
 
@@ -24,6 +25,7 @@ export default () => {
       title: 'A USER NOTIFY',
       message: 'NOTIFY THROUGH SESSION MODAL!',
       confirmLabel: 'Conferma',
+      showCloseIcon: true,
     });
   };
 

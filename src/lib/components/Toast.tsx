@@ -79,6 +79,7 @@ export default function Toast({
               />
             </Grid>
             <Grid
+              container
               item
               xs={showToastCloseIcon ? 9 : 10}
               display="flex"

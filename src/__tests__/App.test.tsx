@@ -6,6 +6,8 @@ import { verifyMockExecution as verifyLoginMockExecution } from '../lib/decorato
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import '../examples/locale';
+import { ThemeProvider } from '@mui/material';
+import { theme } from '@pagopa/mui-italia';
 
 jest.mock('../lib/decorators/withLogin');
 
@@ -18,7 +20,9 @@ const renderApp = (
   render(
     <Router history={history}>
       <Provider store={store}>
-        <AppExample />
+        <ThemeProvider theme={theme}>
+          <AppExample />
+        </ThemeProvider>
       </Provider>
     </Router>
   );

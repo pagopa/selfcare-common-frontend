@@ -30,6 +30,7 @@ test('test default component rendered', () => {
     id: 'EXAMPLE',
     title: 'TITLE',
     message: 'MESSAGE',
+    showCloseIcon: true,
   });
 
   expect(screen.queryByText('EXAMPLE')).toBeNull();
@@ -50,6 +51,7 @@ test('test Notify Through Toast', () => {
     message: 'MESSAGE',
     component: 'Toast',
     onClose: onCloseMock,
+    showCloseIcon: true,
   });
 
   expect(screen.queryByText('TITLE')).toBeNull();
@@ -73,6 +75,7 @@ test('test Notify Closing Through Popup', () => {
     message: 'MESSAGE',
     component: 'SessionModal',
     onClose: onCloseMock,
+    showCloseIcon: true,
   });
 
   expect(screen.queryByText('EXAMPLE')).toBeNull();
@@ -97,6 +100,7 @@ test('test Notify Confirm Through Popup', () => {
     component: 'SessionModal',
     confirmLabel: 'Conferma',
     onConfirm: onConfirmMock,
+    showCloseIcon: true,
   });
 
   expect(screen.queryByText('EXAMPLE')).toBeNull();
@@ -120,6 +124,7 @@ test('test Notify Cancel Through Popup', () => {
     message: 'MESSAGE',
     component: 'SessionModal',
     onClose: onCloseMock,
+    showCloseIcon: true,
   });
 
   expect(screen.queryByText('EXAMPLE')).toBeNull();

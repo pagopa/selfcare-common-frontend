@@ -104,7 +104,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         leftBorderColor="#FE6666"
         onCloseToast={() => this.handleClose(error)}
         width={error.width}
-        showToastCloseIcon={error.showToastCloseIcon}
+        showToastCloseIcon={error.showCloseIcon}
       />
     );
   }
@@ -120,7 +120,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         onConfirm={error.onRetry ? () => this.retryError(error) : undefined}
         handleClose={() => this.handleClose(error)}
         width={error.width}
-        showModalCloseIcon={error.showModalCloseIcon}
+        showCloseIcon={error.showCloseIcon}
       />
     );
   }

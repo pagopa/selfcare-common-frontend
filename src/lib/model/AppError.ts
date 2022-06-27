@@ -31,8 +31,6 @@ export type AppError = {
   autocloseMilliseconds?: number;
   /** The SessionModal or Toast width */
   width?: string | undefined;
-  /** if true show modal close icon */
-  showModalCloseIcon?: boolean;
-  /** if true show toast close icon */
-  showToastCloseIcon?: boolean;
+  /** if true show modal/toast close icon */
+  showCloseIcon?: boolean;
 };

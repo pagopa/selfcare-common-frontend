@@ -57,6 +57,7 @@ function UserNotifyHandle() {
             leftBorderColor={n.leftBorderColor}
             onCloseToast={() => onClose(n)}
             width={n.width}
+            showToastCloseIcon={n.showCloseIcon || n.autoclosable !== 'timer'}
           />
         ))}
       </ToastWrapper>
@@ -69,6 +70,7 @@ function UserNotifyHandle() {
         handleClose={() => onClose(notifyModal as UserNotify)}
         onCloseLabel={notifyModal?.closeLabel}
         width={notifyModal?.width}
+        showCloseIcon={notifyModal?.showCloseIcon}
       />
     </>
   );
