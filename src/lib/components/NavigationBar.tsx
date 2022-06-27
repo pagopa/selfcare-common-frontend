@@ -18,45 +18,32 @@ export type NavigationPath = {
   icon?: SvgIconComponent;
 };
 
-export default function NavigationBar({
-  paths,
-  goBack,
-  backLinkTextDecoration,
-  backLinkFontWeight,
-  backLinkFontSize,
-  showBackComponent,
-}: Props) {
+export default function NavigationBar({ paths, goBack, showBackComponent }: Props) {
   const onExit = useUnloadEventOnExit();
 
   return (
     <Box display="flex">
       {showBackComponent && (
         <Box>
-          <BackComponent
-            goBack={goBack}
-            backLinkTextDecoration={backLinkTextDecoration}
-            backLinkFontWeight={backLinkFontWeight}
-            backLinkFontSize={backLinkFontSize}
-          />
+          <BackComponent goBack={goBack} />
         </Box>
       )}
-      <Box>
+      <Box display="flex" alignItems={'center'}>
         <Breadcrumbs aria-label="breadcrumb">
           {paths.map((p) =>
             p.onClick ? (
-              <Box display="flex" key={p.description} alignItems="center">
-                <Box>
-                  {p.icon && (
-                    <Icon sx={{ mx: 1, fontSize: '24px', display: 'flex' }} component={p.icon} />
-                  )}
+              <Box key={p.description} display="flex" alignItems="center" justifyContent="center">
+                <Box ml={3} mr={1} display="flex" alignItems="center">
+                  {p.icon && <Icon component={p.icon} />}
                 </Box>
                 <Box>
                   <Link
                     variant="body2"
                     onClick={() => onExit(p.onClick as () => void)}
                     sx={{
-                      fontWeight: '700',
-                      color: '#5C6F82 !important',
+                      fontWeight: 'fontWeightRegular',
+                      fontSize: 'fontSize',
+                      color: '#17324D !important',
                       textDecoration: 'none !important',
                       cursor: 'pointer',
                     }}
@@ -67,10 +54,8 @@ export default function NavigationBar({
               </Box>
             ) : (
               <Box display="flex" key={p.description} alignItems="center">
-                <Box>
-                  {p.icon && (
-                    <Icon sx={{ mx: 1, fontSize: '24px', display: 'flex' }} component={p.icon} />
-                  )}
+                <Box mr={1} display="flex" alignItems="center">
+                  {p.icon && <Icon component={p.icon} />}
                 </Box>
                 <Box>
                   <Typography key={p.description} variant="body2" sx={{ color: 'text.secondary' }}>

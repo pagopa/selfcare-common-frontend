@@ -2,7 +2,7 @@ import React, { CSSProperties, Fragment } from 'react';
 import { Alert, Grid, SvgIcon, Typography, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
-import ConfirmIcon from './icons/ConfirmIcon';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 type Props = {
   /** If this component should be displayed or not */
@@ -14,7 +14,7 @@ type Props = {
   /** The toast title */
   title: string;
   /** The toast body */
-  message: React.ReactNode;
+  message?: React.ReactNode;
   /** The function to be invoked when closing the toast */
   onCloseToast: () => void;
   /** The toast width */
@@ -25,6 +25,10 @@ type Props = {
   bottom?: string;
   /** If not wrapped, the pixel from the right side of the viewport where to place the toast. Default "64px" */
   right?: string;
+  /** If true show toast close icon */
+  showToastCloseIcon?: boolean;
+  /** set the color of icon */
+  toastColorIcon?: string;
 };
 
 const CustomAlert = styled(Alert)({
@@ -37,12 +41,14 @@ export default function Toast({
   title,
   message,
   onCloseToast,
-  logo = ConfirmIcon,
+  logo = CheckCircleOutlineIcon,
   leftBorderColor = '#6CC66A',
   width = '376px',
   wrapped = false,
   bottom = '64px',
   right = '64px',
+  showToastCloseIcon = false,
+  toastColorIcon = '#6CC66A',
 }: Props) {
   const positionStyle: CSSProperties = !wrapped
     ? { position: 'fixed', bottom, right, zIndex: 500 }
@@ -65,24 +71,33 @@ export default function Toast({
           }}
         >
           <Grid container>
-            <Grid item xs={2}>
+            <Grid item xs={1} display="flex" alignItems="center" justifyContent="center" mr={2}>
               <SvgIcon
+                fontSize="small"
                 component={logo}
-                viewBox="0 0 80 24"
-                sx={{ width: '80px', height: '37px', marginLeft: '13px' }}
+                sx={{ color: toastColorIcon, width: '140px' }}
               />
             </Grid>
-            <Grid item xs={8}>
-              <Typography pt={1} pb={1} sx={{ fontSize: '15px !important', fontWeight: '600' }}>
+            <Grid
+              container
+              item
+              xs={showToastCloseIcon ? 9 : 10}
+              display="flex"
+              justifyContent="center"
+              direction="column"
+            >
+              <Typography sx={{ fontSize: 'fontSize', fontWeight: 'fontWeightMedium' }}>
                 {title}
               </Typography>
-              <Typography component="div">{message}</Typography>
+              {message && <Typography sx={{ fontSize: 'fontSize' }}>{message}</Typography>}
             </Grid>
-            <Grid item xs={2}>
-              <IconButton onClick={onCloseToast}>
-                <CloseIcon />
-              </IconButton>
-            </Grid>
+            {showToastCloseIcon && (
+              <Grid item xs={1}>
+                <IconButton onClick={onCloseToast}>
+                  <CloseIcon sx={{ fontSize: 'big' }} />
+                </IconButton>
+              </Grid>
+            )}
           </Grid>
         </CustomAlert>
       )}

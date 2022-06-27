@@ -46,7 +46,8 @@ test('Test blocking error', async () => {
   const childText = 'NOT DISPLAYED';
   const Child: FunctionComponent = buildChildComponent(childText, {
     id: 'id',
-    error: null,
+    error: new Error(),
+    showCloseIcon: true,
     blocking: true,
     displayableDescription: errorDisplayed,
     techDescription: 'DUMMY',
@@ -65,7 +66,8 @@ test('Test not blocking error not retriable', async () => {
   const childText = 'DISPLAYED TEXT';
   const Child: FunctionComponent = buildChildComponent(childText, {
     id: 'id',
-    error: null,
+    error: new Error(),
+    showCloseIcon: true,
     blocking: false,
     displayableDescription: errorDisplayed,
     techDescription: 'DUMMY',
@@ -85,7 +87,8 @@ test('Test not blocking error retriable', async () => {
   const retryMock = jest.fn();
   const Child: FunctionComponent = buildChildComponent(childText, {
     id: 'id',
-    error: null,
+    error: new Error(),
+    showCloseIcon: true,
     blocking: false,
     techDescription: 'DUMMY',
     onRetry: retryMock,
@@ -111,7 +114,8 @@ test('Test not blocking error toast', async () => {
   const childText = 'DISPLAYED TEXT';
   const Child: FunctionComponent = buildChildComponent(childText, {
     id: 'id',
-    error: null,
+    error: new Error(),
+    showCloseIcon: true,
     blocking: false,
     displayableTitle: 'Errore',
     displayableDescription: errorDisplayed,

@@ -28,4 +28,6 @@ export type UserNotify = {
   component?: 'SessionModal' | 'Toast';
   /** The SessionModal or Toast width */
   width?: string | undefined;
+  /** if true show modal/toast close icon */
+  showCloseIcon?: boolean;
 };
