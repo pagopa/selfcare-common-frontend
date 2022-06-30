@@ -50,7 +50,8 @@ const AppExample = () => {
               onClick: () => {},
             },
             {
-              description: 'Link2',
+              description:
+                'Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2',
             },
           ]}
         />
