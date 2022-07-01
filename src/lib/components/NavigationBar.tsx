@@ -55,17 +55,19 @@ export default function NavigationBar({ paths, goBack, showBackComponent }: Prop
                   sx={{ color: 'colorTextPrimary' }}
                   weight="default"
                 >
-                  <Typography variant="body2">{p.description}</Typography>
+                  <Typography variant="body2" sx={truncatedText}>
+                    {p.description}
+                  </Typography>
                 </ButtonNaked>
               </Box>
             ) : (
-              <Box display="flex" key={p.description} alignItems="center">
+              <Box display="flex" key={p.description}>
                 {p.icon && (
                   <Box mr={1} display="flex" alignItems="center">
                     <Icon component={p.icon} />
                   </Box>
                 )}
-                <Box>
+                <Box display="flex" alignItems="center">
                   <Typography
                     key={p.description}
                     variant="body2"
