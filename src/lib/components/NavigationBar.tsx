@@ -22,6 +22,14 @@ export type NavigationPath = {
 export default function NavigationBar({ paths, goBack, showBackComponent }: Props) {
   const onExit = useUnloadEventOnExit();
 
+  const truncatedText = {
+    display: 'inline-block',
+    width: '50ch',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  };
+
   return (
     <Box display="flex">
       {showBackComponent && (
@@ -61,7 +69,7 @@ export default function NavigationBar({ paths, goBack, showBackComponent }: Prop
                   <Typography
                     key={p.description}
                     variant="body2"
-                    sx={{ color: 'text.secondary', fontSize: 'fontSize' }}
+                    sx={{ ...truncatedText, color: 'text.secondary', fontSize: 'fontSize' }}
                   >
                     {p.description}
                   </Typography>
