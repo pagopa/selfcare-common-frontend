@@ -46,7 +46,8 @@ const AppExample = () => {
           paths={[
             {
               icon: SupervisedUserCircle,
-              description: 'Link1',
+              description:
+                'Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1',
               onClick: () => {},
             },
             {

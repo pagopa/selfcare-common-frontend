@@ -109,6 +109,12 @@ export const partyList: Array<PartyEntity> = [
     name: 'Ente senza stemma',
     productRole: 'Referente amministrativo',
   },
+  {
+    id: '14',
+    logoUrl: undefined,
+    name: 'Scuola Media Oswald Von Wolkenstein di Bressanone',
+    productRole: 'Referente amministrativo',
+  },
 ];
 
 type Props = { onExit: (exitAction: () => void) => void; isLoggedIn: boolean };
