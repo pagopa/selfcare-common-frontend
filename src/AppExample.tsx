@@ -46,13 +46,11 @@ const AppExample = () => {
           paths={[
             {
               icon: SupervisedUserCircle,
-              description:
-                'Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1Link1',
+              description: 'Link1',
               onClick: () => {},
             },
             {
-              description:
-                'Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2Link2',
+              description: 'Link managed with the introduction of dots at the end of text ______',
             },
           ]}
         />

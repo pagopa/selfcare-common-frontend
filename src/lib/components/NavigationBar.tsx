@@ -24,7 +24,7 @@ export default function NavigationBar({ paths, goBack, showBackComponent }: Prop
 
   const truncatedText = {
     display: 'inline-block',
-    width: '50ch',
+    maxWidth: '50ch',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
