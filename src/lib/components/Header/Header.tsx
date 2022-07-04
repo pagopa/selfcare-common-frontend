@@ -42,6 +42,10 @@ type HeaderProps = {
   enableDropdown?: boolean;
   /** If true it concatenates selfcareProduct with productsList */
   addSelfcareProduct?: boolean;
+  /* The number of characters beyond which the multiLine is applied in component PartyAccountItemButton */
+  maxCharactersNumberMultiLineButton?: number;
+  /* The number of characters beyond which the multiLine is applied in component PartyAccountItem */
+  maxCharactersNumberMultiLineItem?: number;
 };
 
 const selfcareProduct: ProductEntity = {
@@ -73,6 +77,8 @@ const Header = ({
   onExit = (exitAction) => exitAction(),
   onSelectedProduct,
   onSelectedParty,
+  maxCharactersNumberMultiLineButton,
+  maxCharactersNumberMultiLineItem,
 }: HeaderProps) => (
   <Fragment>
     <HeaderAccount
@@ -95,6 +101,8 @@ const Header = ({
         partyList={partyList}
         onSelectedProduct={onSelectedProduct}
         onSelectedParty={onSelectedParty}
+        maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}
+        maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
       />
     ) : (
       ''
