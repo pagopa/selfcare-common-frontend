@@ -33,7 +33,7 @@ export default function NavigationBar({ paths, goBack, showBackComponent }: Prop
   return (
     <Box display="flex">
       {showBackComponent && (
-        <Box>
+        <Box mr={2} display="flex" alignItems={'center'}>
           <BackComponent goBack={goBack} />
         </Box>
       )}
@@ -41,13 +41,7 @@ export default function NavigationBar({ paths, goBack, showBackComponent }: Prop
         <Breadcrumbs aria-label="breadcrumb">
           {paths.map((p) =>
             p.onClick ? (
-              <Box
-                key={p.description}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                ml={2}
-              >
+              <Box key={p.description} display="flex" alignItems="center" justifyContent="center">
                 <ButtonNaked
                   component="button"
                   onClick={() => onExit(p.onClick as () => void)}
