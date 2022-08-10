@@ -15,7 +15,7 @@
     "@mui/lab": "^5.0.0-alpha.80",
     "@mui/material": "^5.8.2",
     "@mui/system": "^5.8.1",
-    "@pagopa/mui-italia": "^0.6.31",
+    "@pagopa/mui-italia": "^0.6.39",
     "@pagopa/ts-commons": "^10.2.1",
     "@reduxjs/toolkit": "^1.6.2",
     "@types/lodash": "^4.14.172",
