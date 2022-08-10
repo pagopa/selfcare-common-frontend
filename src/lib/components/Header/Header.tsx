@@ -46,6 +46,8 @@ type HeaderProps = {
   maxCharactersNumberMultiLineButton?: number;
   /* The number of characters beyond which the multiLine is applied in component PartyAccountItem */
   maxCharactersNumberMultiLineItem?: number;
+  /** If false hides assistance button */
+  enableAssistanceButton?: boolean;
 };
 
 const selfcareProduct: ProductEntity = {
@@ -79,6 +81,7 @@ const Header = ({
   onSelectedParty,
   maxCharactersNumberMultiLineButton,
   maxCharactersNumberMultiLineItem,
+  enableAssistanceButton = true,
 }: HeaderProps) => (
   <Fragment>
     <HeaderAccount
@@ -92,6 +95,7 @@ const Header = ({
       enableLogin={enableLogin}
       userActions={userActions}
       enableDropdown={enableDropdown}
+      enableAssistanceButton={enableAssistanceButton}
     />
     {withSecondHeader === true ? (
       <HeaderProduct
