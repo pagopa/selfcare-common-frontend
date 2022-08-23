@@ -29,19 +29,19 @@ export default function Footer({ loggedUser, onExit = (exitAction) => exitAction
         //   linkType: 'internal',
         // },
         {
-          label: 'PagoPA S.p.A.',
+          label: t('common.footer.preLoginLinks.aboutUs.links.aboutUs'),
           href: CONFIG.FOOTER.LINK.ABOUTUS,
           ariaLabel: 'Vai al link: Chi siamo',
           linkType: 'internal',
         },
         {
-          label: 'Media',
+          label: t('common.footer.preLoginLinks.aboutUs.links.media'),
           href: CONFIG.FOOTER.LINK.MEDIA,
           ariaLabel: 'Vai al link: Media',
           linkType: 'internal',
         },
         {
-          label: 'Lavora con noi',
+          label: t('common.footer.preLoginLinks.aboutUs.links.workwithud'),
           href: CONFIG.FOOTER.LINK.WORKWITHUS,
           ariaLabel: 'Vai al link: Lavora con noi',
           linkType: 'internal',

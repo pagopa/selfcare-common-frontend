@@ -18,6 +18,13 @@ export default {
       informationSecurityLink: 'Sicurezza delle informazioni ',
       assistanceLink: 'Assistenza ',
       preLoginLinks: {
+        aboutUs: {
+          links: {
+            aboutUs: 'PagoPA S.p.A.',
+            media: 'Media',
+            workwithud: 'Lavora con noi',
+          },
+        },
         resources: {
           title: 'Risorse',
           links: {
