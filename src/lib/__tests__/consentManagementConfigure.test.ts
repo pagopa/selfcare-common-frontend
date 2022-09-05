@@ -26,7 +26,7 @@ describe('test clean session', () => {
   });
 
   test('Rejected consent', () => {
-    window.OnetrustActiveGroups = 'C0001,C0002,C0003';
+    window.OnetrustActiveGroups = 'C0001,C0003,C0004';
     onConsentChanged();
     expect(initAnalytics).toBeCalledTimes(0);
   });
@@ -45,7 +45,7 @@ describe('test cookies setted', () => {
   });
 
   test('Rejected consent', () => {
-    document.cookie = 'OptanonConsent=groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A0';
+    document.cookie = 'OptanonConsent=groups=C0001%3A1%2CC0002%3A0%2CC0003%3A1%2CC0004%3A1';
     configureConsentManagement();
     expect(require('../services/analyticsService').initAnalytics).toBeCalledTimes(0);
   });
