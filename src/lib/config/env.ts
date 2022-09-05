@@ -25,7 +25,7 @@ export const CONFIG = {
   },
 
   CONSENT: {
-    COOKIE_GROUP_ANALYTICS: 'C0004',
+    COOKIE_GROUP_ANALYTICS: 'C0002',
   },
 
   JSON_URL: {
