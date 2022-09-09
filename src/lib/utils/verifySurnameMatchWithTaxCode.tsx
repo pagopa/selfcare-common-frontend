@@ -8,7 +8,7 @@
 export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: string) => {
   const fiscalCodeSurname = fiscalCode?.substring(0, 3).toLocaleUpperCase();
   const consonantsSurname = surname
-    .match(/[^aeiou]/gi)
+    ?.match(/[^aeiou]/gi)
     ?.join('')
     .replace(/\s/g, '')
     .toLocaleUpperCase();
@@ -17,7 +17,7 @@ export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: stri
     return fiscalCodeSurname !== threeSurnameLetters;
   } else if (consonantsSurname && consonantsSurname?.length === 2) {
     const firstVocalFound = surname
-      .match(/[aeiou]/gi)
+      ?.match(/[aeiou]/gi)
       ?.join('')
       .substring(0, 1)
       .toLocaleUpperCase();
@@ -29,7 +29,7 @@ export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: stri
     }
   } else if (consonantsSurname && consonantsSurname?.length === 1) {
     const firstTwoVocalFound = surname
-      .match(/[aeiou]/gi)
+      ?.match(/[aeiou]/gi)
       ?.join('')
       .substring(0, 2)
       .toLocaleUpperCase();
@@ -41,7 +41,7 @@ export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: stri
     }
   } else {
     const firstThreeVocalFound = surname
-      .match(/[aeiou]/gi)
+      ?.match(/[aeiou]/gi)
       ?.join('')
       .substring(0, 3)
       .toLocaleUpperCase();

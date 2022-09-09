@@ -8,7 +8,7 @@
 export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) => {
   const fiscalCodeName = fiscalCode?.substring(3, 6).toLocaleUpperCase();
   const consonantsName = name
-    .match(/[^aeiou]/gi)
+    ?.match(/[^aeiou]/gi)
     ?.join('')
     .replace(/\s/g, '')
     .toLocaleUpperCase();
@@ -21,7 +21,7 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
     }
   } else if (consonantsName && consonantsName?.length === 2) {
     const firstVocalFound = name
-      .match(/[aeiou]/gi)
+      ?.match(/[aeiou]/gi)
       ?.join('')
       .substring(0, 1)
       .toLocaleUpperCase();
@@ -33,7 +33,7 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
     }
   } else if (consonantsName && consonantsName?.length === 1) {
     const firstTwoVocalFound = name
-      .match(/[aeiou]/gi)
+      ?.match(/[aeiou]/gi)
       ?.join('')
       .substring(0, 2)
       .toLocaleUpperCase();
@@ -45,7 +45,7 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
     }
   } else {
     const firstThreeVocalFound = name
-      .match(/[aeiou]/gi)
+      ?.match(/[aeiou]/gi)
       ?.join('')
       .substring(0, 3)
       .toLocaleUpperCase();
