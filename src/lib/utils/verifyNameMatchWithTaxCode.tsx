@@ -44,7 +44,14 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
       }
     }
   } else {
-    return true;
+    const firstThreeVocalFound = name
+      .match(/[aeiou]/gi)
+      ?.join('')
+      .substring(0, 3)
+      .toLocaleUpperCase();
+    if (fiscalCodeName === firstThreeVocalFound) {
+      return false;
+    }
   }
   return fiscalCode;
 };

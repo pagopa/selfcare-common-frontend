@@ -4,6 +4,7 @@
  * with the surname entered by the user, otherwise FALSE when they match.
  * */
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: string) => {
   const fiscalCodeSurname = fiscalCode?.substring(0, 3).toLocaleUpperCase();
   const consonantsSurname = surname
@@ -14,7 +15,7 @@ export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: stri
   if (consonantsSurname && consonantsSurname?.length >= 3) {
     const threeSurnameLetters = consonantsSurname?.substring(0, 3);
     return fiscalCodeSurname !== threeSurnameLetters;
-  } else {
+  } else if (consonantsSurname && consonantsSurname?.length === 2) {
     const firstVocalFound = surname
       .match(/[aeiou]/gi)
       ?.join('')
@@ -22,7 +23,30 @@ export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: stri
       .toLocaleUpperCase();
     if (firstVocalFound) {
       const threeSurnameLetters = consonantsSurname?.concat(firstVocalFound);
-      return fiscalCodeSurname !== threeSurnameLetters;
+      if (fiscalCodeSurname === threeSurnameLetters) {
+        return false;
+      }
+    }
+  } else if (consonantsSurname && consonantsSurname?.length === 1) {
+    const firstTwoVocalFound = surname
+      .match(/[aeiou]/gi)
+      ?.join('')
+      .substring(0, 2)
+      .toLocaleUpperCase();
+    if (firstTwoVocalFound) {
+      const threeNameLetters = consonantsSurname?.concat(firstTwoVocalFound);
+      if (fiscalCodeSurname === threeNameLetters) {
+        return false;
+      }
+    }
+  } else {
+    const firstThreeVocalFound = surname
+      .match(/[aeiou]/gi)
+      ?.join('')
+      .substring(0, 3)
+      .toLocaleUpperCase();
+    if (fiscalCodeSurname === firstThreeVocalFound) {
+      return false;
     }
   }
   return fiscalCode;

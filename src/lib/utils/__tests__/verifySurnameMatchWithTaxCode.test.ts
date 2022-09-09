@@ -27,6 +27,18 @@ test('test: surname have more than three consonants (4), first 3 will be taken a
   expect(result).toBeFalsy();
 });
 
+test('test: surname have one consonant, first 2 vowels will be taken and match with taxCode', () => {
+  const result = verifySurnameMatchWithTaxCode('UGO', 'GUOMRA99D23B442K');
+
+  expect(result).toBeFalsy();
+});
+
+test("test: surname haven't consonants, first 3 vowels will be taken and match with taxCode", () => {
+  const result = verifySurnameMatchWithTaxCode('IAIA', 'IAIMRA99D23B442K');
+
+  expect(result).toBeFalsy();
+});
+
 test('test: surname NOT match with taxCode', () => {
   const result = verifySurnameMatchWithTaxCode('BIANCHI', user.taxCode);
 
