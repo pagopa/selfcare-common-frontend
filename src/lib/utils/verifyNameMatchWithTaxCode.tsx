@@ -4,6 +4,7 @@
  * with the name entered by the user, otherwise FALSE when they match.
  * */
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) => {
   const fiscalCodeName = fiscalCode?.substring(3, 6).toLocaleUpperCase();
   const consonantsName = name
@@ -18,7 +19,7 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
     if (fiscalCodeName === threeNameLetters) {
       return false;
     }
-  } else if (consonantsName && consonantsName?.length < 3) {
+  } else if (consonantsName && consonantsName?.length === 2) {
     const firstVocalFound = name
       .match(/[aeiou]/gi)
       ?.join('')
@@ -26,6 +27,18 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
       .toLocaleUpperCase();
     if (firstVocalFound) {
       const threeNameLetters = consonantsName?.concat(firstVocalFound);
+      if (fiscalCodeName === threeNameLetters) {
+        return false;
+      }
+    }
+  } else if (consonantsName && consonantsName?.length === 1) {
+    const firstTwoVocalFound = name
+      .match(/[aeiou]/gi)
+      ?.join('')
+      .substring(0, 2)
+      .toLocaleUpperCase();
+    if (firstTwoVocalFound) {
+      const threeNameLetters = consonantsName?.concat(firstTwoVocalFound);
       if (fiscalCodeName === threeNameLetters) {
         return false;
       }
