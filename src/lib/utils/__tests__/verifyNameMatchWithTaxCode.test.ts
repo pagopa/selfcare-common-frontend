@@ -15,6 +15,12 @@ test('test: name have only two consonant, so the first vowel will be taken and m
   expect(result).toBeFalsy();
 });
 
+test('test: name have only one consonant, so the first two vowel will be taken and match with taxCode', () => {
+  const result = verifyNameMatchWithTaxCode('UGO', 'RSSGUO88C24A294U');
+
+  expect(result).toBeFalsy();
+});
+
 test('test: name have three consonant, all will be taken and match with taxCode', () => {
   const result = verifyNameMatchWithTaxCode('ANTONIO', 'RSSNTN72D11B321K');
 
