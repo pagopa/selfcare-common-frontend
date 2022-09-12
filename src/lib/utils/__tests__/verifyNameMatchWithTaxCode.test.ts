@@ -9,6 +9,12 @@ const user: User = {
   email: 'mario.rossi@comunedi.it',
 };
 
+test('test: typing a name leaving the taxCode empty, then no errors will be displayed', () => {
+  const result = verifyNameMatchWithTaxCode('LUDOVICO', '');
+
+  expect(result).toBeFalsy();
+});
+
 test('test: name have only two consonant, so the first vowel will be taken and match with taxCode', () => {
   const result = verifyNameMatchWithTaxCode(user.name, user.taxCode);
 

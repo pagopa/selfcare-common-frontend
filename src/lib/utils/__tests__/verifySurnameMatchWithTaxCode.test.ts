@@ -9,7 +9,13 @@ const user: User = {
   email: 'mario.rossi@comunedi.it',
 };
 
-test('test: surname have only two consonants, first vocal it will be taken and match with taxCode', () => {
+test('test: typing a surname leaving the taxCode empty, then no errors will be displayed', () => {
+  const result = verifySurnameMatchWithTaxCode('BIANCHINI', '');
+
+  expect(result).toBeFalsy();
+});
+
+test('test: surname have only two consonants, first vocal it will be taken and NOT match with taxCode', () => {
   const result = verifySurnameMatchWithTaxCode('ROSI', 'RSIMRA88C24A294U');
 
   expect(result).toBeTruthy();
