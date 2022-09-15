@@ -29,7 +29,7 @@ export const CONFIG = {
   },
 
   JSON_URL: {
-    PRODUCTS: 'https://dev.selfcare.pagopa.it/assets/products.json',
+    PRODUCTS: 'https://selfcare.pagopa.it/assets/products.json',
   },
 
   TEST: {
