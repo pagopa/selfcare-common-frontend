@@ -10,10 +10,15 @@ import { LANGUAGES, pagoPALink } from './FooterConfig';
 
 type FooterProps = {
   loggedUser: boolean;
+  productsJsonUrl: string;
   onExit?: (exitAction: () => void) => void;
 };
 declare const window: any;
-export default function Footer({ loggedUser, onExit = (exitAction) => exitAction() }: FooterProps) {
+export default function Footer({
+  loggedUser,
+  productsJsonUrl,
+  onExit = (exitAction) => exitAction(),
+}: FooterProps) {
   const { t } = useTranslation();
 
   const preLoginLinks: PreLoginFooterLinksType = {
@@ -194,7 +199,7 @@ export default function Footer({ loggedUser, onExit = (exitAction) => exitAction
       languages={LANGUAGES as any}
       onLanguageChanged={(language: string) => i18n.changeLanguage(language)}
       currentLangCode="it"
-      productsJsonUrl={CONFIG.JSON_URL.PRODUCTS}
+      productsJsonUrl={productsJsonUrl}
     />
   );
 }
