@@ -10,7 +10,7 @@ import { LANGUAGES, pagoPALink } from './FooterConfig';
 
 type FooterProps = {
   loggedUser: boolean;
-  productsJsonUrl: string;
+  productsJsonUrl?: string;
   onExit?: (exitAction: () => void) => void;
 };
 declare const window: any;
