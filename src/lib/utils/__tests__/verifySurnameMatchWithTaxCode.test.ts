@@ -34,7 +34,7 @@ test('test: surname have more than three consonants (4), first 3 will be taken a
 });
 
 test('test: surname having apostrophe, the apostrophe is not considered a consonant and match with taxCode', () => {
-  const result = verifySurnameMatchWithTaxCode("D'ALESSANDRO", 'DLSMRA72D11B321K');
+  const result = verifySurnameMatchWithTaxCode("D'ALE'SSA'ND'RO", 'DLSMRA72D11B321K');
 
   expect(result).toBeFalsy();
 });
