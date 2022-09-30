@@ -11,6 +11,7 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
     ?.match(/[^aeiou]/gi)
     ?.join('')
     .replace(/\s/g, '')
+    .replace("'", '')
     .toLocaleUpperCase();
   if (consonantsName?.length === 3 && fiscalCodeName === consonantsName) {
     return false;

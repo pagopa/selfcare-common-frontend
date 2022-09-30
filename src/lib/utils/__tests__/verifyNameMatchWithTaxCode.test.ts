@@ -39,6 +39,12 @@ test("test: name haven't consonants, all will be taken and match with taxCode", 
   expect(result).toBeFalsy();
 });
 
+test('test: name having apostrophe, the apostrophe is not considered a consonant and match with taxCode', () => {
+  const result = verifyNameMatchWithTaxCode("D'ANTONIO", 'RSSDTN72D11B321K');
+
+  expect(result).toBeFalsy();
+});
+
 test('test: name has more than three consonant (4), so will be taken first, third and fourth consonants and match with taxCode', () => {
   const result = verifyNameMatchWithTaxCode('FILIPPO', 'RSSFPP72D11B321K');
 
