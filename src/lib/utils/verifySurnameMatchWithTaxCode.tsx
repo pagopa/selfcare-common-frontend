@@ -11,6 +11,7 @@ export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: stri
     ?.match(/[^aeiou]/gi)
     ?.join('')
     .replace(/\s/g, '')
+    .replace("'", '')
     .toLocaleUpperCase();
   if (consonantsSurname && consonantsSurname?.length >= 3) {
     const threeSurnameLetters = consonantsSurname?.substring(0, 3);
