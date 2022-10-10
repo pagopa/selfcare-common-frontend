@@ -19,6 +19,11 @@ type Props = {
   onConfirmEnabled?: boolean;
   /** The confirm label text */
   onConfirmLabel?: string;
+  /** Introduced to manage the presence of test environments in the products, if defined, it will render as many buttons as there are test environments for the product */
+  productEnvironments?: Array<{
+    environment: string;
+    url: string;
+  }>;
   /** The function invoked when clicking on close button or in the showed X icon */
   handleClose: React.MouseEventHandler<HTMLButtonElement> | undefined;
   /** If defined, it allow to set a different behavior when clicking on X icon */
@@ -45,6 +50,7 @@ function SessionModal({
   onConfirm,
   onConfirmEnabled = true,
   onConfirmLabel = t('common.sessionModal.confirmButton'),
+  productEnvironments,
   handleClose,
   handleExit = handleClose,
   onCloseLabel = t('common.sessionModal.closeButton'),
@@ -81,15 +87,16 @@ function SessionModal({
             <Typography sx={{ fontSize: '18px', fontWeight: '400' }}>{message}</Typography>
           </Grid>
           <Grid item xs={12}>
-            <Box display="flex" justifyContent="flex-end">
+            <Box display="flex" justifyContent={productEnvironments ? 'space-between' : 'flex-end'}>
               <Box mb={3} mt={0}>
                 <Button onClick={handleClose} color="primary" variant="outlined">
                   {onCloseLabel}
                 </Button>
               </Box>
               {onConfirm && (
-                <Box mb={3} ml={2}>
+                <Box mb={3} display="flex" flexDirection="row-reverse">
                   <Button
+                    sx={{ marginLeft: 2 }}
                     color="primary"
                     variant="contained"
                     onClick={onConfirm}
@@ -97,6 +104,21 @@ function SessionModal({
                   >
                     {onConfirmLabel}
                   </Button>
+                  {productEnvironments &&
+                    productEnvironments.map((p) => (
+                      <Box ml={2} key={p.environment}>
+                        <Button
+                          value={p.environment}
+                          color="primary"
+                          variant="contained"
+                          onClick={onConfirm}
+                        >
+                          {p.environment
+                            .toLowerCase()
+                            .replace(/\b[a-z]/g, p.environment.charAt(0).toUpperCase())}
+                        </Button>
+                      </Box>
+                    ))}
                 </Box>
               )}
             </Box>
