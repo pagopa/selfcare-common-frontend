@@ -3,21 +3,58 @@ import { Fragment, useState } from 'react';
 import { SessionModal } from '../lib';
 
 export default () => {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [openModalWithEnvironments, setOpenModalWithEnvironments] = useState(false);
+
+  const backOfficeEnvironmentConfigurationsExample: Array<{
+    environment: string;
+    url: string;
+  }> = [
+    {
+      environment: 'test1',
+      url: 'www.test1.com',
+    },
+    {
+      environment: 'test2',
+      url: 'www.test2.com',
+    },
+  ];
+
   return (
     <Fragment>
-      <Button onClick={() => setOpen(true)} variant="contained">
+      <Button sx={{ height: 'auto' }} onClick={() => setOpenModal(true)} variant="contained">
         Open session modal
       </Button>
       <SessionModal
-        open={open}
+        open={openModal}
         title="Session Modal Example"
         message="Body example"
-        handleClose={() => setOpen(false)}
+        handleClose={() => setOpenModal(false)}
         onConfirm={() => {
-          setOpen(false);
-          setTimeout(() => setOpen(true), 1000);
+          setOpenModal(false);
+          setTimeout(() => setOpenModal(true), 1000);
         }}
+      />
+
+      <Button
+        onClick={() => setOpenModalWithEnvironments(true)}
+        variant="contained"
+        sx={{ marginTop: 1, height: 'auto' }}
+      >
+        Open session modal with environment buttons
+      </Button>
+      <SessionModal
+        open={openModalWithEnvironments}
+        title="Session Modal Example"
+        message="Body example"
+        handleClose={() => {
+          setOpenModalWithEnvironments(false);
+        }}
+        onConfirm={() => {
+          setOpenModalWithEnvironments(false);
+          setTimeout(() => setOpenModalWithEnvironments(true), 1000);
+        }}
+        productEnvironments={backOfficeEnvironmentConfigurationsExample}
       />
     </Fragment>
   );
