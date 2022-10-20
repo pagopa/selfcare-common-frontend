@@ -84,30 +84,34 @@ const Header = ({
   enableAssistanceButton = true,
 }: HeaderProps) => (
   <Fragment>
-    <HeaderAccount
-      rootLink={rootLink}
-      loggedUser={loggedUser}
-      onAssistanceClick={() =>
-        onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
-      }
-      onLogin={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGIN))}
-      onLogout={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT))}
-      enableLogin={enableLogin}
-      userActions={userActions}
-      enableDropdown={enableDropdown}
-      enableAssistanceButton={enableAssistanceButton}
-    />
-    {withSecondHeader === true ? (
-      <HeaderProduct
-        productId={selectedProductId}
-        productsList={addSelfcareProduct ? [selfcareProduct].concat(productsList) : productsList}
-        partyId={selectedPartyId}
-        partyList={partyList}
-        onSelectedProduct={onSelectedProduct}
-        onSelectedParty={onSelectedParty}
-        maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}
-        maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
+    <header>
+      <HeaderAccount
+        rootLink={rootLink}
+        loggedUser={loggedUser}
+        onAssistanceClick={() =>
+          onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
+        }
+        onLogin={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGIN))}
+        onLogout={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT))}
+        enableLogin={enableLogin}
+        userActions={userActions}
+        enableDropdown={enableDropdown}
+        enableAssistanceButton={enableAssistanceButton}
       />
+    </header>
+    {withSecondHeader === true ? (
+      <nav>
+        <HeaderProduct
+          productId={selectedProductId}
+          productsList={addSelfcareProduct ? [selfcareProduct].concat(productsList) : productsList}
+          partyId={selectedPartyId}
+          partyList={partyList}
+          onSelectedProduct={onSelectedProduct}
+          onSelectedParty={onSelectedParty}
+          maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}
+          maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
+        />
+      </nav>
     ) : (
       ''
     )}
