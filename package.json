@@ -26,7 +26,7 @@
     "@types/react-router-dom": "^5.1.8",
     "@types/redux-logger": "^3.0.9",
     "@types/validator": "13.7.0",
-    "async": "2.6.4",
+    "async": "3.2.4",
     "core-js": "^3.20.2",
     "env-var": "^7.1.1",
     "fp-ts": "^2.11.5",
