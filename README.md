@@ -16,6 +16,7 @@ In order to use these components it's necessary to set the following keys of the
 
 | Key | Type | Description | DefaultValue |
 |-----|------|-------------|--------------|
+| URL_FE.LOGIN_GOOGLE | string | The url of the google login page | /auth/google |
 | URL_FE.LOGIN | string | The url of the login page | /auth/login |
 | URL_FE.LOGOUT | string | The url of the logout page | /auth/logout |
 | URL_FE.ASSISTANCE | string | The url of the assistance page | /assistenza |

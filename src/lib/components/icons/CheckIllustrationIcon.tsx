@@ -3,7 +3,7 @@ import { DefaultComponentProps } from '@mui/material/OverridableComponent';
 
 export default (props: DefaultComponentProps<SvgIconTypeMap>) => (
   <SvgIcon
-    width="120" 
+    width="120"
     height="120"
     viewBox="0 0 120 120"
     sx={{ width: '120px', height: '120px' }}

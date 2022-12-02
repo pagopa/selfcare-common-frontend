@@ -1,15 +1,15 @@
 import { Button, Grid, Typography, Box, SvgIconProps } from '@mui/material';
-import CheckIllustrationIcon from './icons/CheckIllustrationIcon';
+import { FunctionComponent, SVGProps } from 'react';
 
 type Props = {
   /** The ending page icon */
-  icon?: React.ReactElement<SvgIconProps>;
+  icon?: React.ReactElement<SvgIconProps> | FunctionComponent<SVGProps<SVGSVGElement>>;
   /** The ending page title */
-  title: string;
+  title: React.ReactNode;
   /** The ending page description */
   description: React.ReactNode;
   /** The ending page button label if any */
-  buttonLabel?: string;
+  buttonLabel?: React.ReactNode;
   /** if defined it will show a button that will performe this action on click */
   onButtonClick?: () => void;
   /** Set the variant of the title */
@@ -52,14 +52,20 @@ type Props = {
 export default ({
   description,
   onButtonClick,
-  icon = <CheckIllustrationIcon />,
+  icon,
   title,
   buttonLabel,
   variantTitle,
   variantDescription,
 }: Props) => (
-  <Box sx={{ minHeight: '100vh' }} display="flex" flexGrow={1}>
-    <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
+  <Box sx={{ minHeight: '50vh', position: 'relative' }} display="flex" flexGrow={1}>
+    <Grid
+      container
+      direction="column"
+      key="0"
+      style={{ textAlign: 'center', position: 'absolute', top: '50%' }}
+      margin={'auto'}
+    >
       <Grid container item justifyContent="center" mb={3}>
         <Grid item xs={6}>
           {icon}
