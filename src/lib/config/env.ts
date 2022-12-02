@@ -2,6 +2,7 @@ import * as env from 'env-var';
 
 export const CONFIG = {
   URL_FE: {
+    LOGIN_GOOGLE: '/auth/google',
     LOGIN: '/auth/login',
     LOGOUT: '/auth/logout',
     ASSISTANCE: '/assistenza',

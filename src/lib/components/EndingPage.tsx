@@ -1,15 +1,14 @@
 import { Button, Grid, Typography, Box, SvgIconProps } from '@mui/material';
-import CheckIllustrationIcon from './icons/CheckIllustrationIcon';
 
 type Props = {
   /** The ending page icon */
   icon?: React.ReactElement<SvgIconProps>;
   /** The ending page title */
-  title: string;
+  title: React.ReactNode;
   /** The ending page description */
   description: React.ReactNode;
   /** The ending page button label if any */
-  buttonLabel?: string;
+  buttonLabel?: React.ReactNode;
   /** if defined it will show a button that will performe this action on click */
   onButtonClick?: () => void;
   /** Set the variant of the title */
@@ -52,7 +51,7 @@ type Props = {
 export default ({
   description,
   onButtonClick,
-  icon = <CheckIllustrationIcon />,
+  icon,
   title,
   buttonLabel,
   variantTitle,
