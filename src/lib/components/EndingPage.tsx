@@ -2,6 +2,8 @@ import { Button, Grid, Typography, Box, SvgIconProps } from '@mui/material';
 import { FunctionComponent, SVGProps } from 'react';
 
 type Props = {
+  /** The minHeight of the component, can be 52vh for the pages and 100vh for the blocking page */
+  minHeight?: '52vh' | '100vh';
   /** The ending page icon */
   icon?: React.ReactElement<SvgIconProps> | FunctionComponent<SVGProps<SVGSVGElement>> | string;
   /** The ending page title */
@@ -50,6 +52,7 @@ type Props = {
 
 /** Selfcare's Ending Page */
 export default ({
+  minHeight,
   description,
   onButtonClick,
   icon,
@@ -58,7 +61,7 @@ export default ({
   variantTitle,
   variantDescription,
 }: Props) => (
-  <Box sx={{ minHeight: '100vh', position: 'static' }} display="flex" flexGrow={1}>
+  <Box sx={{ minHeight, position: 'static' }} display="flex" flexGrow={1}>
     <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
       <Grid container item justifyContent="center" mb={3}>
         <Grid item xs={6}>
