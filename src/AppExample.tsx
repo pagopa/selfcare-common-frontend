@@ -27,7 +27,7 @@ const AppExample = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const onExit = useUnloadEventOnExit();
   return (
-    <ErrorBoundary assistanceEmail="assistenza@selfcare.it">
+    <ErrorBoundary minHeight="100vh" assistanceEmail="assistenza@selfcare.it">
       <Box
         sx={{
           display: 'flex',

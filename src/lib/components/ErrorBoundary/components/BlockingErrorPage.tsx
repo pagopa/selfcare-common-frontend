@@ -6,11 +6,13 @@ import ErrorIcon from '../../icons/ErrorIcon';
 type Props = {
   description?: React.ReactNode;
   assistanceEmail?: string;
+  minHeight?: '52vh' | '100vh';
 };
-export default ({ description, assistanceEmail }: Props) => {
+export default ({ description, assistanceEmail, minHeight = '100vh' }: Props) => {
   const { t } = useTranslation();
   return (
     <EndingPage
+      minHeight={minHeight}
       icon={<ErrorIcon />}
       title={t('common.blockingErrorPage.title')}
       description={description ?? t('common.blockingErrorPage.description')}

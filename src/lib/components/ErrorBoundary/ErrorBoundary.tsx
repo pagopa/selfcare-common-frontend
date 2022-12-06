@@ -14,6 +14,7 @@ import BlockingErrorPage from './components/BlockingErrorPage';
 interface Props {
   children: ReactNode;
   assistanceEmail?: string;
+  minHeight?: '52vh' | '100vh';
   t: TFunction<'translation', undefined>;
   showCloseIcon?: boolean;
 }
@@ -73,6 +74,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         <BlockingErrorPage
           description={blockingErrors[0].displayableDescription}
           assistanceEmail={this.props.assistanceEmail}
+          minHeight={this.props.minHeight}
         />
       );
     }
