@@ -39,6 +39,8 @@ type Props = {
   t: TFunction<'translation', undefined>;
   /** If true show modal close icon */
   showCloseIcon?: boolean;
+  /** If false not show the close button, default true */
+  showCloseButton?: boolean;
 };
 
 /** Selfcare's popup */
@@ -58,6 +60,7 @@ function SessionModal({
   minHeight,
   width = '33.3em',
   showCloseIcon = false,
+  showCloseButton = true,
 }: Props) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
@@ -88,11 +91,13 @@ function SessionModal({
           </Grid>
           <Grid item xs={12}>
             <Box display="flex" justifyContent={productEnvironments ? 'space-between' : 'flex-end'}>
-              <Box mb={3} mt={0}>
-                <Button onClick={handleClose} color="primary" variant="outlined">
-                  {onCloseLabel}
-                </Button>
-              </Box>
+              {showCloseButton && (
+                <Box mb={3} mt={0}>
+                  <Button onClick={handleClose} color="primary" variant="outlined">
+                    {onCloseLabel}
+                  </Button>
+                </Box>
+              )}
               {onConfirm && (
                 <Box mb={3} display="flex" flexDirection="row-reverse">
                   <Button
