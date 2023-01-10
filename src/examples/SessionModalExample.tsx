@@ -5,6 +5,7 @@ import { SessionModal } from '../lib';
 export default () => {
   const [openModal, setOpenModal] = useState(false);
   const [openModalWithEnvironments, setOpenModalWithEnvironments] = useState(false);
+  const [openModalWithNoCloseButton, setOpenModalWithNoCloseButton] = useState(false);
 
   const backOfficeEnvironmentConfigurationsExample: Array<{
     environment: string;
@@ -55,6 +56,24 @@ export default () => {
           setTimeout(() => setOpenModalWithEnvironments(true), 1000);
         }}
         productEnvironments={backOfficeEnvironmentConfigurationsExample}
+      />
+
+      <Button
+        onClick={() => setOpenModalWithNoCloseButton(true)}
+        variant="contained"
+        sx={{ marginTop: 1, height: 'auto' }}
+      >
+        Open blocking session modal with no close button
+      </Button>
+      <SessionModal
+        open={openModalWithNoCloseButton}
+        title="Session Modal Example"
+        message="Body example"
+        handleClose={() => {}}
+        onConfirm={() => {
+          setOpenModalWithNoCloseButton(false);
+        }}
+        showCloseButton={false}
       />
     </Fragment>
   );
