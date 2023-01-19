@@ -5,7 +5,7 @@ export const verifyChecksumMatchWithTaxCode = (fiscalCode: string) => {
   const onlyOddFiscalCodeElements = charactersArray.filter((_c, i) => i % 2 === 0);
 
   // eslint-disable-next-line functional/immutable-data
-  const insertedCheckSum = onlyEvenFiscalCodeElements.pop();
+  const insertedCheckSum = onlyEvenFiscalCodeElements.pop()?.toLocaleUpperCase();
 
   const sumOfEvenCharactersConverted = evenCharactersConverter2Numbers(onlyEvenFiscalCodeElements);
   const sumOfOddCharactersConverted = oddCharactersConverter2Numbers(onlyOddFiscalCodeElements);
