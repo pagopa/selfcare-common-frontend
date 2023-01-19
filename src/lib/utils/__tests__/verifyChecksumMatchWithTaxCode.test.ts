@@ -21,6 +21,12 @@ test('test: taxcode checksum is correct but typed checksum is lowercase, so the 
   expect(result).toBeFalsy();
 });
 
+test('test: taxcode checksum is correct and upperCase but the rest of taxCode is lowercase, so the function also return false (not error)', () => {
+  const result = verifyChecksumMatchWithTaxCode('mrarss80a01a794I');
+
+  expect(result).toBeFalsy();
+});
+
 test('test: taxcode checksum is incorrect, so the function return true (error)', () => {
   const result = verifyChecksumMatchWithTaxCode('MRARSS80A01A794V');
 
