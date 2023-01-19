@@ -1,11 +1,11 @@
 export const verifyChecksumMatchWithTaxCode = (fiscalCode: string) => {
-  const charactersArray = [...fiscalCode];
+  const charactersArray = [...fiscalCode.toLocaleUpperCase()];
 
   const onlyEvenFiscalCodeElements = charactersArray.filter((_c, i) => i % 2 !== 0);
   const onlyOddFiscalCodeElements = charactersArray.filter((_c, i) => i % 2 === 0);
 
   // eslint-disable-next-line functional/immutable-data
-  const insertedCheckSum = onlyEvenFiscalCodeElements.pop()?.toLocaleUpperCase();
+  const insertedCheckSum = onlyEvenFiscalCodeElements.pop();
 
   const sumOfEvenCharactersConverted = evenCharactersConverter2Numbers(onlyEvenFiscalCodeElements);
   const sumOfOddCharactersConverted = oddCharactersConverter2Numbers(onlyOddFiscalCodeElements);
