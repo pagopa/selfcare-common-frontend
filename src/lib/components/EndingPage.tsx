@@ -48,6 +48,8 @@ type Props = {
     | 'body2'
     | 'overline'
     | undefined;
+  paragraph?: React.ReactNode;
+  isParagraphPresent?: boolean;
 };
 
 /** Selfcare's Ending Page */
@@ -60,6 +62,8 @@ export default ({
   buttonLabel,
   variantTitle,
   variantDescription,
+  paragraph,
+  isParagraphPresent,
 }: Props) => (
   <Box sx={{ minHeight, position: 'static' }} display="flex" flexGrow={1}>
     <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
@@ -84,6 +88,14 @@ export default ({
             <Button variant="contained" sx={{ alignSelf: 'center' }} onClick={onButtonClick}>
               {buttonLabel}
             </Button>
+          </Grid>
+        </Grid>
+      )}
+
+      {isParagraphPresent && (
+        <Grid container item justifyContent="center" mb={4} mt={6}>
+          <Grid item xs={6}>
+            <Typography variant={variantDescription}>{paragraph}</Typography>
           </Grid>
         </Grid>
       )}
