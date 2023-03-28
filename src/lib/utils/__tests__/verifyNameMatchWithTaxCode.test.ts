@@ -62,3 +62,9 @@ test('test: name NOT match with taxCode', () => {
 
   expect(result).toBeTruthy();
 });
+
+test('test: tax code check with name with two letters', () => {
+  const result = verifyNameMatchWithTaxCode('YU', 'MRTYUX80A01H501W');
+
+  expect(result).toBeFalsy();
+});

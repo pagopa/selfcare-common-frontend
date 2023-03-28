@@ -7,6 +7,7 @@
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) => {
   const fiscalCodeName = fiscalCode?.substring(3, 6).toLocaleUpperCase();
+  const surnameLengthLessThanThree = name.toLocaleUpperCase().concat('X');
   const consonantsName = name
     ?.match(/[^aeiou]/gi)
     ?.join('')
@@ -31,6 +32,10 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
       if (fiscalCodeName === threeNameLetters) {
         return false;
       }
+    } else {
+      if (fiscalCodeName === surnameLengthLessThanThree) {
+        return false;
+      }
     }
   } else if (consonantsName && consonantsName?.length === 1) {
     const firstTwoVocalFound = name
@@ -42,6 +47,10 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
       const threeNameLetters = consonantsName?.concat(firstTwoVocalFound);
       if (fiscalCodeName === threeNameLetters) {
         return false;
+      } else {
+        if (fiscalCodeName === surnameLengthLessThanThree) {
+          return false;
+        }
       }
     }
   } else {
@@ -52,6 +61,10 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
       .toLocaleUpperCase();
     if (fiscalCodeName === firstThreeVocalFound) {
       return false;
+    } else {
+      if (fiscalCodeName === surnameLengthLessThanThree) {
+        return false;
+      }
     }
   }
   return fiscalCode;

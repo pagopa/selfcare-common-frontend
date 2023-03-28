@@ -8,12 +8,6 @@
 export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: string) => {
   const fiscalCodeSurname = fiscalCode?.substring(0, 3).toLocaleUpperCase();
   const surnameLengthLessThanThree = surname.toLocaleUpperCase().concat('X');
-  const surnamesWithAccentedLetters = surname
-    ?.match(/[^àèìòùé]/gi)
-    ?.join('')
-    .replace(/\s/g, '')
-    .replace(/'/g, 'X')
-    .toLocaleUpperCase();
 
   const consonantsSurname = surname
     ?.match(/[^aeiou]/gi)
@@ -26,14 +20,6 @@ export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: stri
     const threeSurnameLetters = consonantsSurname?.substring(0, 3);
     if (fiscalCodeSurname === threeSurnameLetters) {
       return false;
-    } else {
-      const surnamesWithWccentedLettersX = surnamesWithAccentedLetters
-        ?.toLocaleUpperCase()
-        .concat('X');
-
-      if (fiscalCodeSurname === surnamesWithWccentedLettersX) {
-        return false;
-      }
     }
   } else if (consonantsSurname && consonantsSurname?.length === 2) {
     const firstVocalFound = surname
@@ -46,11 +32,8 @@ export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: stri
       if (fiscalCodeSurname === threeSurnameLetters) {
         return false;
       }
-    } else if (surnamesWithAccentedLetters) {
-      const surnamesWithWccentedLettersX = surnamesWithAccentedLetters
-        ?.toLocaleUpperCase()
-        .concat('XX');
-      if (fiscalCodeSurname === surnamesWithWccentedLettersX) {
+    } else {
+      if (fiscalCodeSurname === surnameLengthLessThanThree) {
         return false;
       }
     }
