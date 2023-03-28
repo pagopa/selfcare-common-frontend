@@ -62,3 +62,15 @@ test('test: surname have only two consonants, first vocal it will be taken and N
 
   expect(result).toBeTruthy();
 });
+
+test('test: tax code check with surname with two letters', () => {
+  const result = verifySurnameMatchWithTaxCode('LY', 'LYXRSS80A01H501K');
+
+  expect(result).toBeFalsy();
+});
+
+test('test: tax code check with surname with one letter', () => {
+  const result = verifySurnameMatchWithTaxCode('L', 'LXXTRS80A41H501L');
+
+  expect(result).toBeFalsy();
+});
