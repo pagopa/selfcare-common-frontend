@@ -4,69 +4,26 @@
  * with the surname entered by the user, otherwise FALSE when they match.
  * */
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: string) => {
-  const fiscalCodeSurname = fiscalCode?.substring(0, 3).toLocaleUpperCase();
-  const surnameLengthLessThanThree = surname.toLocaleUpperCase().concat('X');
+  const fiscalCodeSurname = fiscalCode?.substring(0, 3).toUpperCase();
 
-  const consonantsSurname = surname
-    ?.match(/[^aeiou]/gi)
-    ?.join('')
-    .replace(/\s/g, '')
-    .replace(/'/g, '')
-    .toLocaleUpperCase();
+  const consonantsSurname = surname?.match(/[^aeiou]/gi)
+    ? surname
+        ?.match(/[^aeiou]/gi)
+        ?.join('')
+        .replace(/\s/g, '')
+        .replace(/'/g, '')
+        .toUpperCase()
+    : '';
 
-  if (consonantsSurname && consonantsSurname?.length >= 3) {
-    const threeSurnameLetters = consonantsSurname?.substring(0, 3);
-    if (fiscalCodeSurname === threeSurnameLetters) {
-      return false;
-    }
-  } else if (consonantsSurname && consonantsSurname?.length === 2) {
-    const firstVocalFound = surname
-      ?.match(/[aeiou]/gi)
-      ?.join('')
-      .substring(0, 1)
-      .toLocaleUpperCase();
-    if (firstVocalFound) {
-      const threeSurnameLetters = consonantsSurname?.concat(firstVocalFound);
-      if (fiscalCodeSurname === threeSurnameLetters) {
-        return false;
-      }
-    } else {
-      if (fiscalCodeSurname === surnameLengthLessThanThree) {
-        return false;
-      }
-    }
-  } else if (consonantsSurname && consonantsSurname?.length === 1) {
-    const firstTwoVocalFound = surname
-      ?.match(/[aeiou]/gi)
-      ?.join('')
-      .substring(0, 2)
-      .toLocaleUpperCase();
-    if (firstTwoVocalFound) {
-      const threeNameLetters = consonantsSurname?.concat(firstTwoVocalFound);
-      if (fiscalCodeSurname === threeNameLetters) {
-        return false;
-      } else {
-        if (fiscalCodeSurname === surnameLengthLessThanThree) {
-          return false;
-        }
-      }
-    }
-  } else {
-    const firstThreeVocalFound = surname
-      ?.match(/[aeiou]/gi)
-      ?.join('')
-      .substring(0, 3)
-      .toLocaleUpperCase();
-    if (fiscalCodeSurname === firstThreeVocalFound) {
-      return false;
-      // eslint-disable-next-line sonarjs/no-duplicated-branches
-    } else {
-      if (fiscalCodeSurname === surnameLengthLessThanThree) {
-        return false;
-      }
-    }
-  }
-  return fiscalCode;
+  const vowelsSurname = surname?.match(/[aeiou]/gi)
+    ? surname
+        ?.match(/[aeiou]/gi)
+        ?.join('')
+        .toUpperCase()
+    : '';
+
+  const calculatedSurname = `${consonantsSurname}${vowelsSurname}XX`.substring(0, 3);
+
+  return calculatedSurname === fiscalCodeSurname ? false : fiscalCode;
 };

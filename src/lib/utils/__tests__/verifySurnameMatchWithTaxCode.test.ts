@@ -68,3 +68,9 @@ test('test: tax code check with surname with two letters', () => {
 
   expect(result).toBeFalsy();
 });
+
+test('test: tax code check with surname with one letter', () => {
+  const result = verifySurnameMatchWithTaxCode('L', 'LXXTRS80A41H501L');
+
+  expect(result).toBeFalsy();
+});
