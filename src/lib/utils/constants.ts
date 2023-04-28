@@ -18,3 +18,19 @@ export const roleLabels: {
     descriptionKey: 'common.roles.limited.description',
   },
 };
+
+/** The short and long labels used for the roles of PNPG */
+export const pnpgRoleLabels: {
+  [key in UserRole]: { shortLabelKey: string; longLabelKey: string; descriptionKey: string };
+} = {
+  ADMIN: {
+    shortLabelKey: 'common.pnpgRoles.admin.shortLabel',
+    longLabelKey: 'common.pnpgRoles.admin.longLabel',
+    descriptionKey: 'common.pnpgRoles.admin.description',
+  },
+  LIMITED: {
+    shortLabelKey: 'common.pnpgRoles.limited.shortLabel',
+    longLabelKey: 'common.pnpgRoles.limited.longLabel',
+    descriptionKey: 'common.pnpgRoles.limited.description',
+  },
+};

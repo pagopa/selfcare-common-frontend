@@ -77,6 +77,18 @@ export default {
         description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
       },
     },
+    pnpgRoles: {
+      admin: {
+        shortLabel: 'Ref. Amministrativo',
+        longLabel: 'Amministratore',
+        description: 'Ha tutti i permessi e gestisce gli utenti',
+      },
+      limited: {
+        shortLabel: 'Ref. Tecnico',
+        longLabel: 'Tecnico',
+        description: "Legge le notifiche dell'ente",
+      },
+    },
     backComponent: {
       label: 'Indietro',
     },
