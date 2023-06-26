@@ -15,6 +15,7 @@ export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: stri
         ?.join('')
         .replace(/\s/g, '')
         .replace(/'/g, '')
+        .replace(/-/g, '')
         .toUpperCase()
     : '';
 

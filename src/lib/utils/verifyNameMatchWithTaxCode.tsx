@@ -10,7 +10,13 @@ export const verifyNameMatchWithTaxCode = (name: string, fiscalCode?: string) =>
   const fiscalCodeName = fiscalCode?.substring(3, 6).toUpperCase();
 
   const consonantsName = name?.match(acceptedConsonants)
-    ? name?.match(acceptedConsonants)?.join('').replace(/\s/g, '').replace(/'/g, '').toUpperCase()
+    ? name
+        ?.match(acceptedConsonants)
+        ?.join('')
+        .replace(/\s/g, '')
+        .replace(/'/g, '')
+        .toUpperCase()
+        .replace(/-/g, '')
     : '';
 
   const consonantsNameFiltered =
