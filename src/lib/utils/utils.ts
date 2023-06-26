@@ -6,5 +6,5 @@ export const formatDateAsLongString = (date: Date): string => {
   return `${da} ${mo} ${ye}`;
 };
 
-export const acceptedConsonants = /[^aeiouüöäẅæâçêîôœûščžẞ]/gi;
+export const acceptedConsonants = /[^aeiouüöäẅæâçêîôœûščžẞ-]/gi;
 export const acceptedVowels = /[aeiou]/gi;
