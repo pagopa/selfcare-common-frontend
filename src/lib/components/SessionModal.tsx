@@ -58,7 +58,7 @@ function SessionModal({
   onCloseLabel = t('common.sessionModal.closeButton'),
   height,
   minHeight,
-  width = '33.3em',
+  width = '100%',
   showCloseIcon = false,
   showCloseButton = true,
 }: Props) {
@@ -72,7 +72,7 @@ function SessionModal({
       onClose={handleClose}
       aria-labelledby="responsive-dialog-title"
     >
-      <Grid container sx={{ height, minHeight, width }} px={4}>
+      <Grid container sx={{ height, minHeight, width, maxWidth: '100%' }} px={4}>
         <Grid item xs={12} mt={4}>
           {showCloseIcon && (
             <IconButton
@@ -82,51 +82,56 @@ function SessionModal({
               <ClearOutlinedIcon />
             </IconButton>
           )}
-          <Typography sx={{ fontSize: '24px', fontWeight: '600' }}>{title}</Typography>
+          <Typography sx={{ fontSize: '24px', fontWeight: '600', wordBreak: 'break-word' }}>
+            {title}
+          </Typography>
         </Grid>
 
         <Box width="100%">
           <Grid item xs={12} my={3}>
-            <Typography sx={{ fontSize: '18px', fontWeight: '400' }}>{message}</Typography>
+            <Typography variant="body1">{message}</Typography>
           </Grid>
-          <Grid item xs={12}>
-            <Box display="flex" justifyContent={productEnvironments ? 'space-between' : 'flex-end'}>
-              {showCloseButton && (
-                <Box mb={3} mt={0}>
-                  <Button onClick={handleClose} color="primary" variant="outlined">
-                    {onCloseLabel}
-                  </Button>
-                </Box>
-              )}
-              {onConfirm && (
-                <Box mb={3} display="flex" flexDirection="row-reverse">
-                  <Button
-                    sx={{ marginLeft: 2 }}
-                    color="primary"
-                    variant="contained"
-                    onClick={onConfirm}
-                    disabled={!onConfirmEnabled}
-                  >
-                    {onConfirmLabel}
-                  </Button>
-                  {productEnvironments &&
-                    productEnvironments.map((p) => (
-                      <Box ml={2} key={p.environment}>
-                        <Button
-                          value={p.environment}
-                          color="primary"
-                          variant="contained"
-                          onClick={onConfirm}
-                        >
-                          {p.environment
-                            .toLowerCase()
-                            .replace(/\b[a-z]/g, p.environment.charAt(0).toUpperCase())}
-                        </Button>
-                      </Box>
-                    ))}
-                </Box>
-              )}
-            </Box>
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            justifyContent={productEnvironments ? 'space-between' : 'flex-end'}
+          >
+            {showCloseButton && (
+              <Box mb={3} mt={0}>
+                <Button onClick={handleClose} color="primary" variant="outlined">
+                  {onCloseLabel}
+                </Button>
+              </Box>
+            )}
+            {onConfirm && (
+              <Box mb={3} display="flex" flexDirection="row-reverse">
+                <Button
+                  sx={{ marginLeft: 2 }}
+                  color="primary"
+                  variant="contained"
+                  onClick={onConfirm}
+                  disabled={!onConfirmEnabled}
+                >
+                  {onConfirmLabel}
+                </Button>
+                {productEnvironments &&
+                  productEnvironments.map((p) => (
+                    <Box ml={2} key={p.environment}>
+                      <Button
+                        value={p.environment}
+                        color="primary"
+                        variant="contained"
+                        onClick={onConfirm}
+                      >
+                        {p.environment
+                          .toLowerCase()
+                          .replace(/\b[a-z]/g, p.environment.charAt(0).toUpperCase())}
+                      </Button>
+                    </Box>
+                  ))}
+              </Box>
+            )}
           </Grid>
         </Box>
       </Grid>
