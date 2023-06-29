@@ -96,6 +96,7 @@ function SessionModal({
             xs={12}
             display="flex"
             justifyContent={productEnvironments ? 'space-between' : 'flex-end'}
+            flexWrap={'wrap-reverse'}
           >
             {showCloseButton && (
               <Box mb={3} mt={0}>
