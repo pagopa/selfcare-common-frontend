@@ -43,10 +43,9 @@ export const CONFIG = {
       ABOUTUS: 'https://www.pagopa.it/it/societa/chi-siamo/',
       MEDIA: 'https://www.pagopa.it/it/',
       WORKWITHUS: 'https://www.pagopa.it/it/lavora-con-noi/',
-      CERTIFICATIONS:
-        'https://www.pagopa.it/static/10ffe3b3d90ecad83d1bbebea0512188/Certificato-SGSI-PagoPA-2020.pdf',
+      CERTIFICATIONS: 'https://www.pagopa.it/it/certificazioni/',
       INFORMATIONSECURITY:
-        'https://www.pagopa.it/static/781646994f1f8ddad2d95af3aaedac3d/Sicurezza-delle-informazioni_PagoPA-S.p.A..pdf',
+        'https://www.pagopa.it/it/politiche-per-la-sicurezza-delle-informazioni/',
       TRANSPARENTCOMPANY: 'https://pagopa.portaleamministrazionetrasparente.it/',
       DISCLOSUREPOLICY: 'https://www.pagopa.it/it/responsible-disclosure-policy/',
       MODEL321:
