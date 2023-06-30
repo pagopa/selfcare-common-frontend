@@ -12,12 +12,16 @@ type FooterProps = {
   loggedUser: boolean;
   productsJsonUrl?: string;
   onExit?: (exitAction: () => void) => void;
+  privacyPolicy?: string;
+  termsAndConditions?: string;
 };
 declare const window: any;
 export default function Footer({
   loggedUser,
   productsJsonUrl,
   onExit = (exitAction) => exitAction(),
+  privacyPolicy,
+  termsAndConditions,
 }: FooterProps) {
   const { t } = useTranslation();
 
@@ -59,7 +63,7 @@ export default function Footer({
       links: [
         {
           label: t('common.footer.preLoginLinks.resources.links.privacyPolicy'),
-          href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
+          href: privacyPolicy ? privacyPolicy : CONFIG.FOOTER.LINK.PRIVACYPOLICY,
           ariaLabel: 'Vai al link: Privacy Policy',
           linkType: 'internal',
         },
@@ -89,7 +93,7 @@ export default function Footer({
         },
         {
           label: t('common.footer.preLoginLinks.resources.links.termsandconditions'),
-          href: CONFIG.FOOTER.LINK.TERMSANDCONDITIONS,
+          href: termsAndConditions ? termsAndConditions : CONFIG.FOOTER.LINK.TERMSANDCONDITIONS,
           ariaLabel: 'Vai al link: Termini e Condizioni',
           linkType: 'internal',
         },
