@@ -1,7 +1,7 @@
 {
   "name": "@pagopa/selfcare-common-frontend",
   "description": "Shared React components for the pagopa selfcare project",
-  "version": "1.31.0",
+  "version": "1.32.0",
   "license": "MIT",
   "repository": "https://github.com/pagopa/selfcare-common-frontend",
   "author": "https://www.pagopa.gov.it",
