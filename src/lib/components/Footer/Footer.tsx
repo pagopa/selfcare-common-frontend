@@ -14,6 +14,7 @@ type FooterProps = {
   onExit?: (exitAction: () => void) => void;
 };
 declare const window: any;
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export default function Footer({
   loggedUser,
   productsJsonUrl,
@@ -179,7 +180,13 @@ export default function Footer({
   const postLoginLinks: Array<FooterLinksType> = [
     {
       label: t('common.footer.postLoginLinks.privacyPolicy'),
-      href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
+      href: isPnpgDev
+        ? 'https://imprese.dev.notifichedigitali.it/informativa-privacy'
+        : isPnpgUat
+        ? 'https://imprese.uat.notifichedigitali.it/informativa-privacy'
+        : isPnpg
+        ? 'https://imprese.notifichedigitali.it/informativa-privacy'
+        : CONFIG.FOOTER.LINK.PRIVACYPOLICY,
       ariaLabel: 'Vai al link: Privacy policy',
       linkType: 'internal',
     },
@@ -191,7 +198,13 @@ export default function Footer({
     },
     {
       label: t('common.footer.postLoginLinks.termsandconditions'),
-      href: CONFIG.FOOTER.LINK.TERMSANDCONDITIONS,
+      href: isPnpgDev
+        ? 'https://imprese.dev.notifichedigitali.it/termini-di-servizio'
+        : isPnpgUat
+        ? 'https://imprese.uat.notifichedigitali.it/termini-di-servizio'
+        : isPnpg
+        ? 'https://imprese.notifichedigitali.it/termini-di-servizio'
+        : CONFIG.FOOTER.LINK.TERMSANDCONDITIONS,
       ariaLabel: 'Vai al link: Termini e condizioni',
       linkType: 'internal',
     },
