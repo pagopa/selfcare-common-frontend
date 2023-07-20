@@ -12,4 +12,8 @@ declare const window: any;
 
 export const LANGUAGES = {
   it: { it: 'Italiano' },
+  en: { en: 'Inglese' },
+  de: { de: 'Tedesco' },
+  fr: { fr: 'Francese' },
+  sl: { sl: 'Sloveno' },
 };
