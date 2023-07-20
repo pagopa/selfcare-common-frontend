@@ -32,7 +32,7 @@ export default {
             certifications: 'Certificazioni',
             informationsecurity: 'Sicurezza delle informazioni',
             protectionofpersonaldata: 'Diritto alla protezione dei dati personali',
-            cookie: 'Preferenze Cookie',
+            cookies: 'Preferenze Cookie',
             termsandconditions: 'Termini e Condizioni',
             transparentcompany: 'Società trasparente',
             disclosurePolicy: 'Responsible Disclosure Policy',

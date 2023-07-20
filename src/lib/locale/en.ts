@@ -21,7 +21,7 @@ export default {
         aboutUs: {
           links: {
             aboutUs: 'PagoPA S.p.A.',
-            average: 'Average',
+            media: 'Average',
             workwithud: 'Work with us',
           },
         },
