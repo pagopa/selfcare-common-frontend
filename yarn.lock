@@ -1763,10 +1763,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@pagopa/mui-italia@^0.8.8":
-  version "0.8.8"
-  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.8.8.tgz#1c65d4d5cc6c4c22c70eb1665874e91d23e218fe"
-  integrity sha512-XnGQhgY9vJO4fPWkikFg56TONO5Vh1DRWqr7b9pSHUuQ8y+5MoEwkDAplGBL43n7aiYenML+zOO3dMzyE0T/eg==
+"@pagopa/mui-italia@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.10.0.tgz#8851c4ffe0c6a12f58bc07145685067a5194ea0a"
+  integrity sha512-jC90D4vCI9/xU7Ru/vACenMEn2hyHGhu4Tdp7CDPPq1eZ0o/VWUrqaNb6WzLQQkfZ43UEH2wKakQzVuMyaGDVQ==
   dependencies:
     "@fontsource/dm-mono" "^4.5.10"
     "@fontsource/titillium-web" "^4.5.9"
@@ -9517,7 +9517,7 @@ regenerator-runtime@^0.13.11:
   version "0.13.11"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
-  
+
 regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.9:
   version "0.13.9"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"

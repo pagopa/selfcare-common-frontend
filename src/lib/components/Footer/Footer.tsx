@@ -4,6 +4,8 @@ import {
   PreLoginFooterLinksType,
 } from '@pagopa/mui-italia/dist/components/Footer/Footer';
 import { Trans, useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { LangCode } from '@pagopa/mui-italia';
 import i18n from '../../locale/locale-utils';
 import { CONFIG } from '../../config/env';
 import { LANGUAGES, pagoPALink } from './FooterConfig';
@@ -21,6 +23,7 @@ export default function Footer({
   onExit = (exitAction) => exitAction(),
 }: FooterProps) {
   const { t } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState<LangCode>();
 
   // TODO Temporary solution, will be changed as soon as possible
   const isPnpgDev =
@@ -233,8 +236,11 @@ export default function Footer({
       loggedUser={loggedUser}
       onExit={onExit}
       languages={LANGUAGES as any}
-      onLanguageChanged={(language: string) => i18n.changeLanguage(language)}
-      currentLangCode="it"
+      onLanguageChanged={async (language: LangCode) => {
+        await i18n.changeLanguage(language);
+        setSelectedLanguage(language);
+      }}
+      currentLangCode={selectedLanguage}
       productsJsonUrl={productsJsonUrl}
     />
   );
