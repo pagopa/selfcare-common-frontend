@@ -25,17 +25,6 @@ export default function Footer({
   const { t } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState<LangCode>();
 
-  // TODO Temporary solution, will be changed as soon as possible
-  const isPnpgDev =
-    window.location.hostname?.startsWith('pnpg.dev') ||
-    window.location.hostname?.startsWith('imprese.dev');
-  const isPnpgUat =
-    window.location.hostname?.startsWith('pnpg.uat') ||
-    window.location.hostname?.startsWith('imprese.uat');
-  const isPnpg =
-    window.location.hostname?.startsWith('pnpg.selfcare') ||
-    window.location.hostname?.startsWith('imprese.notifichedigitali');
-
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {
@@ -74,13 +63,7 @@ export default function Footer({
       links: [
         {
           label: t('common.footer.preLoginLinks.resources.links.privacyPolicy'),
-          href: isPnpgDev
-            ? 'https://imprese.dev.notifichedigitali.it/informativa-privacy'
-            : isPnpgUat
-            ? 'https://imprese.uat.notifichedigitali.it/informativa-privacy'
-            : isPnpg
-            ? 'https://imprese.notifichedigitali.it/informativa-privacy'
-            : CONFIG.FOOTER.LINK.PRIVACYPOLICY,
+          href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
           ariaLabel: 'Vai al link: Privacy Policy',
           linkType: 'internal',
         },
@@ -110,13 +93,7 @@ export default function Footer({
         },
         {
           label: t('common.footer.preLoginLinks.resources.links.termsandconditions'),
-          href: isPnpgDev
-            ? 'https://imprese.dev.notifichedigitali.it/termini-di-servizio'
-            : isPnpgUat
-            ? 'https://imprese.uat.notifichedigitali.it/termini-di-servizio'
-            : isPnpg
-            ? 'https://imprese.notifichedigitali.it/termini-di-servizio'
-            : CONFIG.FOOTER.LINK.TERMSANDCONDITIONS,
+          href: CONFIG.FOOTER.LINK.TERMSANDCONDITIONS,
           ariaLabel: 'Vai al link: Termini e Condizioni',
           linkType: 'internal',
         },
@@ -183,13 +160,7 @@ export default function Footer({
   const postLoginLinks: Array<FooterLinksType> = [
     {
       label: t('common.footer.postLoginLinks.privacyPolicy'),
-      href: isPnpgDev
-        ? 'https://imprese.dev.notifichedigitali.it/informativa-privacy'
-        : isPnpgUat
-        ? 'https://imprese.uat.notifichedigitali.it/informativa-privacy'
-        : isPnpg
-        ? 'https://imprese.notifichedigitali.it/informativa-privacy'
-        : CONFIG.FOOTER.LINK.PRIVACYPOLICY,
+      href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
       ariaLabel: 'Vai al link: Privacy policy',
       linkType: 'internal',
     },
@@ -201,13 +172,7 @@ export default function Footer({
     },
     {
       label: t('common.footer.postLoginLinks.termsandconditions'),
-      href: isPnpgDev
-        ? 'https://imprese.dev.notifichedigitali.it/termini-di-servizio'
-        : isPnpgUat
-        ? 'https://imprese.uat.notifichedigitali.it/termini-di-servizio'
-        : isPnpg
-        ? 'https://imprese.notifichedigitali.it/termini-di-servizio'
-        : CONFIG.FOOTER.LINK.TERMSANDCONDITIONS,
+      href: CONFIG.FOOTER.LINK.TERMSANDCONDITIONS,
       ariaLabel: 'Vai al link: Termini e condizioni',
       linkType: 'internal',
     },
