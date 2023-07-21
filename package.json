@@ -1,7 +1,7 @@
 {
   "name": "@pagopa/selfcare-common-frontend",
   "description": "Shared React components for the pagopa selfcare project",
-  "version": "1.35.0",
+  "version": "1.34.0",
   "license": "MIT",
   "repository": "https://github.com/pagopa/selfcare-common-frontend",
   "author": "https://www.pagopa.gov.it",
@@ -15,7 +15,7 @@
     "@mui/lab": "^5.0.0-alpha.80",
     "@mui/material": "^5.8.2",
     "@mui/system": "^5.8.1",
-    "@pagopa/mui-italia": "^0.10.0",
+    "@pagopa/mui-italia": "^0.9.11",
     "@pagopa/ts-commons": "^10.2.1",
     "@reduxjs/toolkit": "^1.6.2",
     "@types/lodash": "^4.14.172",
