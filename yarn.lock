@@ -1763,6 +1763,17 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@pagopa/mui-italia@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.11.0.tgz#5a40ea3c15d80ad0704354f8789b3ef020f06feb"
+  integrity sha512-2Me71btcIOVuy64OhWQxBKrGz0hW42kCrBaCjCXQ9UOYCD/I3BRUHpdwoL84P1jbbglc1FVvD5vr/Y2Wh1aUxg==
+  dependencies:
+    "@fontsource/dm-mono" "^4.5.10"
+    "@fontsource/titillium-web" "^4.5.9"
+    clsx "^1.2.1"
+    fp-ts "^2.12.3"
+    io-ts "^2.2.18"
+
 "@pagopa/mui-italia@^0.9.11":
   version "0.9.11"
   resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.9.11.tgz#ff12d71de84e20f25b30577eda98eea76fc2ce1d"
