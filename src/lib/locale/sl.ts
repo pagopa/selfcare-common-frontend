@@ -32,7 +32,7 @@ export default {
             certifications: 'Certifikati',
             informationsecurity: 'Varnost informacij',
             protectionofpersonaldata: 'Pravica do varstva osebnih podatkov',
-            cookie: 'Nastavitve piškotkov',
+            cookies: 'Nastavitve piškotkov',
             termsandconditions: 'Splošni pogoji',
             transparentcompany: 'Transparentno podjetje',
             disclosurePolicy: 'Politika odgovornega razkritja',

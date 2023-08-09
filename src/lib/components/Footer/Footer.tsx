@@ -86,7 +86,7 @@ export default function Footer({
           linkType: 'internal',
         },
         {
-          label: t('common.footer.preLoginLinks.resources.links.cookie'),
+          label: t('common.footer.preLoginLinks.resources.links.cookies'),
           onClick: () => window.OneTrust.ToggleInfoDisplay(),
           ariaLabel: 'Vai al link: Preferenze Cookie',
           linkType: 'internal',
