@@ -48,7 +48,7 @@ export const CONFIG = {
         'https://www.pagopa.it/it/politiche-per-la-sicurezza-delle-informazioni/',
       TRANSPARENTCOMPANY: 'https://pagopa.portaleamministrazionetrasparente.it/',
       DISCLOSUREPOLICY: 'https://www.pagopa.it/it/responsible-disclosure-policy/',
-      MODEL321:
+      MODEL231:
         'https://pagopa.portaleamministrazionetrasparente.it/pagina746_altri-contenuti.html',
       LINKEDIN: 'https://www.linkedin.com/company/pagopa/',
       TWITTER: 'https://twitter.com/pagopa',
