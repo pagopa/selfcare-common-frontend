@@ -110,9 +110,9 @@ export default function Footer({
           linkType: 'internal',
         },
         {
-          label: t('common.footer.preLoginLinks.resources.links.Model321'),
-          href: CONFIG.FOOTER.LINK.MODEL321,
-          ariaLabel: 'Vai al link: Modello 321',
+          label: t('common.footer.preLoginLinks.resources.links.Model231'),
+          href: CONFIG.FOOTER.LINK.MODEL231,
+          ariaLabel: 'Vai al link: Modello 231',
           linkType: 'internal',
         },
       ],

@@ -36,7 +36,7 @@ export default {
             termsandconditions: 'Termini e Condizioni',
             transparentcompany: 'Società trasparente',
             disclosurePolicy: 'Responsible Disclosure Policy',
-            Model321: 'Modello 321',
+            Model231: 'Modello 231',
           },
         },
         followUs: {
