@@ -147,13 +147,12 @@ export default function Footer({
         },
       ],
       links: [
-        // TODO
-        // {
-        //   label: 'Accessibilità',
-        //   href: CONFIG.FOOTER.LINK.ACCESSIBILITY,
-        //   ariaLabel: 'Vai al link: Accessibilità',
-        //   linkType: 'internal',
-        // },
+        {
+          label: t('common.footer.preLoginLinks.accessibility'),
+          href: CONFIG.FOOTER.LINK.ACCESSIBILITY,
+          ariaLabel: 'Vai al link: Accessibilità',
+          linkType: 'internal',
+        },
       ],
     },
   };
@@ -176,13 +175,12 @@ export default function Footer({
       ariaLabel: 'Vai al link: Termini e condizioni',
       linkType: 'internal',
     },
-    // TODO
-    // {
-    //   label: 'Accessibilità',
-    //   href: CONFIG.FOOTER.LINK.ACCESSIBILITY,
-    //   ariaLabel: 'Vai al link: Accessibilità',
-    //   linkType: 'internal',
-    // },
+    {
+      label: t('common.footer.postLoginLinks.accessibility'),
+      href: CONFIG.FOOTER.LINK.ACCESSIBILITY,
+      ariaLabel: 'Vai al link: Accessibilità',
+      linkType: 'internal',
+    },
   ];
   const companyLegalInfo = (
     <Trans i18nKey="common.footer.legalInfoText">
