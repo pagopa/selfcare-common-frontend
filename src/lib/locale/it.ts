@@ -42,11 +42,13 @@ export default {
         followUs: {
           title: 'Seguici su',
         },
+        accessibility: 'Accessibilità',
       },
       postLoginLinks: {
         privacyPolicy: 'Privacy policy',
         protectionofpersonaldata: 'Diritto alla protezione dei dati personali',
         termsandconditions: 'Termini e Condizioni',
+        accessibility: 'Accessibilità',
       },
     },
     header: {
