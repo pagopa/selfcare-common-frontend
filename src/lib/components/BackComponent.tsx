@@ -3,9 +3,10 @@ import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslation } from 'react-i18next';
 type Props = {
   goBack?: () => void;
+  backLabel?: string;
 };
 
-export default function BackComponent({ goBack }: Props) {
+export default function BackComponent({ goBack, backLabel }: Props) {
   const { t } = useTranslation();
   return (
     <ButtonNaked
@@ -16,7 +17,7 @@ export default function BackComponent({ goBack }: Props) {
       sx={{ color: 'primary.main' }}
       weight="default"
     >
-      {t('common.backComponent.label')}
+      {backLabel ? backLabel : t('common.backComponent.label')}
     </ButtonNaked>
   );
 }

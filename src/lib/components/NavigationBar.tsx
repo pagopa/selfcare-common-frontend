@@ -7,6 +7,7 @@ import BackComponent from './BackComponent';
 type Props = {
   paths: Array<NavigationPath>;
   goBack?: () => void;
+  backLabel?: string;
   backLinkTextDecoration?: string;
   backLinkFontWeight?: string;
   backLinkFontSize?: string;
@@ -19,7 +20,7 @@ export type NavigationPath = {
   icon?: SvgIconComponent;
 };
 
-export default function NavigationBar({ paths, goBack, showBackComponent }: Props) {
+export default function NavigationBar({ paths, goBack, showBackComponent, backLabel}: Props) {
   const onExit = useUnloadEventOnExit();
 
   const truncatedText = {
@@ -34,7 +35,7 @@ export default function NavigationBar({ paths, goBack, showBackComponent }: Prop
     <Box display="flex">
       {showBackComponent && (
         <Box mr={2} display="flex" alignItems={'center'}>
-          <BackComponent goBack={goBack} />
+          <BackComponent goBack={goBack} backLabel={backLabel} />
         </Box>
       )}
       <Box display="flex" alignItems={'center'}>
