@@ -17,7 +17,7 @@ export default function BackComponent({ goBack, backLabel }: Props) {
       sx={{ color: 'primary.main' }}
       weight="default"
     >
-      {backLabel ? backLabel : t('common.backComponent.label')}
+      {backLabel ?? t('common.backComponent.label')}
     </ButtonNaked>
   );
 }
