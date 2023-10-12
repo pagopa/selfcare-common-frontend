@@ -48,6 +48,8 @@ type HeaderProps = {
   maxCharactersNumberMultiLineItem?: number;
   /** If false hides assistance button */
   enableAssistanceButton?: boolean;
+  /** A callback function that controls the visibility of the documentation button and handles user clicks on the documentation button. */
+  onDocumentationClick?: () => void;
 };
 
 const selfcareProduct: ProductEntity = {
@@ -82,6 +84,7 @@ const Header = ({
   maxCharactersNumberMultiLineButton,
   maxCharactersNumberMultiLineItem,
   enableAssistanceButton = true,
+  onDocumentationClick,
 }: HeaderProps) => (
   <Fragment>
     <header>
@@ -97,6 +100,7 @@ const Header = ({
         userActions={userActions}
         enableDropdown={enableDropdown}
         enableAssistanceButton={enableAssistanceButton}
+        onDocumentationClick={onDocumentationClick}
       />
     </header>
     {withSecondHeader === true ? (
