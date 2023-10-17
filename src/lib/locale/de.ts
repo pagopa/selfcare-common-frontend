@@ -2,31 +2,32 @@ export default {
   common: {
     errorBoundary: {
       sessionModalTitle: 'Fehler',
-      sessionModalMessage: 'Es tut uns leid, etwas ist schief gelaufen.',
+      sessionModalMessage: 'Es ist leider ein Fehler aufgetreten. ',
       toastError: 'FEHLER',
-      toastMessage: 'Es tut uns leid, etwas ist schief gelaufen.',
+      toastMessage: 'Es ist leider ein Fehler aufgetreten. ',
     },
     blockingErrorPage: {
-      title: 'Es tut uns leid, etwas ist schief gelaufen.',
+      title: 'Es ist leider ein Fehler aufgetreten. ',
       description: 'Aufgrund eines Systemfehlers kann der Vorgang nicht abgeschlossen werden.',
-      buttonLabel: 'Kundensupport kontaktieren',
+      buttonLabel: 'Kontaktiere den Support',
     },
     footer: {
-      legalInfoText: `<0>PagoPA S.p.A.</0> - Aktiengesellschaft mit einem einzigen Gesellschafter - Gezeichnetes Kapital von 1.000.000 Euro - Firmensitz in Rom, Piazza Colonna 370, <2/> CAP 00187 - Eintragung im Handelsregister von Rom, Steuernummer und Umsatzsteuer-ID 15376371009`,
+      legalInfoText:
+        '<0>PagoPA S.p.A.</0> - Aktiengesellschaft mit Alleingesellschafter - Gesellschaftskapital von 1.000.000 Euro voll eingezahlt - Sitz in Rom, Piazza Colonna 370, <2/> PLZ 00187 - Eintrag im Handelsregister von Rom Nr., Steuernummer und USt-IdNr. 15376371009',
       privacyPolicyLink: 'Datenschutzerklärung ',
-      termsAndConditionLink: 'Nutzungsbedingungen der Website ',
+      termsAndConditionLink: 'Allgemeine Geschäftsbedingungen zur Benutzung der Site ',
       informationSecurityLink: 'Informationssicherheit ',
-      assistanceLink: 'Kundensupport ',
+      assistanceLink: 'Betreuung ',
       preLoginLinks: {
         aboutUs: {
           links: {
             aboutUs: 'PagoPA S.p.A.',
             media: 'Medien',
-            workwithud: 'Arbeiten Sie mit uns',
+            workwithud: 'Karriere',
           },
         },
         resources: {
-          title: 'Ressourcen',
+          title: 'Quellen',
           links: {
             privacyPolicy: 'Datenschutzerklärung',
             certifications: 'Zertifizierungen',
@@ -34,23 +35,25 @@ export default {
             protectionofpersonaldata: 'Recht auf Schutz personenbezogener Daten',
             cookies: 'Cookie-Einstellungen',
             termsandconditions: 'Allgemeine Geschäftsbedingungen',
-            transparentcompany: 'Transparentes Unternehmen',
-            disclosurePolicy: 'Verantwortungsbewusste Offenlegungspolitik',
-            Model321: 'Modell 321',
+            transparentcompany: 'Transparente Gesellschaft',
+            disclosurePolicy: 'Responsible Disclosure Policy',
+            model231: 'Modell 231',
           },
         },
         followUs: {
-          title: 'Folgen Sie uns auf',
+          title: 'Folg uns auf',
         },
+        accessibility: 'Zugänglichkeit',
       },
       postLoginLinks: {
         privacyPolicy: 'Datenschutzerklärung',
         protectionofpersonaldata: 'Recht auf Schutz personenbezogener Daten',
         termsandconditions: 'Allgemeine Geschäftsbedingungen',
+        accessibility: 'Zugänglichkeit',
       },
     },
     header: {
-      exitButton: 'Beenden',
+      exitButton: 'Abmelden',
     },
     filterModal: {
       title: 'Filtern nach ',
@@ -58,35 +61,35 @@ export default {
     },
     sessionModal: {
       closeButton: 'Abbrechen',
-      confirmButton: 'Erneut versuchen',
+      confirmButton: 'Versuche es erneut',
     },
     unloadEventHandler: {
-      title: 'Wollen Sie wirklich gehen?',
-      message: 'Wenn Sie gehen, gehen alle Änderungen verloren.',
-      confirmLabel: 'Verlassen',
+      title: 'Möchtest du wirklich beenden?',
+      message: 'Wenn du dich abmeldest, gehen die vorgenommenen Änderungen verloren.',
+      confirmLabel: 'Abmelden',
     },
     roles: {
       admin: {
-        shortLabel: 'Admin',
+        shortLabel: 'Bez. Administrativ',
         longLabel: 'Administrator',
-        description: 'Verfügt über alle Rechte und verwaltet Benutzer',
+        description: 'Hat alle Berechtigungen und verwaltet Benutzer',
       },
       limited: {
-        shortLabel: 'Operator',
-        longLabel: 'Operator',
+        shortLabel: 'Bez. Operativ',
+        longLabel: 'Bearbeiter',
         description: 'Verwaltet die technologische Integration und/oder den Betrieb der Dienste',
       },
     },
     pnpgRoles: {
       admin: {
-        shortLabel: 'Admin',
+        shortLabel: 'Bez. Administrativ',
         longLabel: 'Administrator',
-        description: 'Verfügt über alle Rechte und verwaltet Benutzer',
+        description: 'Hat alle Berechtigungen und verwaltet Benutzer',
       },
       limited: {
-        shortLabel: 'Techniker',
+        shortLabel: 'Bez. Techniker',
         longLabel: 'Techniker',
-        description: 'Liest die Benachrichtigungen der Behörde',
+        description: 'Liest die Bescheide der Behörde',
       },
     },
     backComponent: {

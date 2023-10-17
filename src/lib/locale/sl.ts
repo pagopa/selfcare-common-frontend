@@ -2,51 +2,54 @@ export default {
   common: {
     errorBoundary: {
       sessionModalTitle: 'Napaka',
-      sessionModalMessage: 'Oprostite, nekaj je šlo narobe.',
+      sessionModalMessage: 'Žal, nekaj je šlo narobe.',
       toastError: 'NAPAKA',
-      toastMessage: 'Oprostite, nekaj je šlo narobe.',
+      toastMessage: 'Žal, nekaj je šlo narobe.',
     },
     blockingErrorPage: {
-      title: 'Oprostite, nekaj je šlo narobe.',
-      description: 'Zaradi napake v sistemu postopka ni mogoče dokončati.',
+      title: 'Žal, nekaj je šlo narobe.',
+      description: 'Zaradi sistemske napake postopka ni mogoče dokončati.',
       buttonLabel: 'Stopite v stik s podporo',
     },
     footer: {
-      legalInfoText: `<0>PagoPA S.p.A.</0> - Družba z omejeno odgovornostjo s posameznim družbenikom - Osnovni kapital 1.000.000 evrov - Sedež družbe: Rim, Piazza Colonna 370, <2/> Poštna številka 00187 - Matična številka v register družb v Rimu: 15376371009`,
+      legalInfoText:
+        '<0>PagoPA S.p.A.</0> - Delniška družba z enim družbenikom - Osnovni kapital v višini 1.000.000 EUR v celoti vplačan - Sedež v Rimu, Piazza Colonna 370, <2/> Poštna številka 00187 - Št. vpisa v poslovni register v Rimu, davčna številka in identifikacijska številka za DDV 15376371009',
       privacyPolicyLink: 'Politika zasebnosti ',
       termsAndConditionLink: 'Pogoji uporabe spletnega mesta ',
-      informationSecurityLink: 'Varnost informacij ',
-      assistanceLink: 'Podpora ',
+      informationSecurityLink: 'Varnost podatkov ',
+      assistanceLink: 'Podpora strankam ',
       preLoginLinks: {
         aboutUs: {
           links: {
             aboutUs: 'PagoPA S.p.A.',
             media: 'Mediji',
-            workwithud: 'Zaposlitev',
+            workwithud: 'Sodeluj z nami',
           },
         },
         resources: {
-          title: 'Vir',
+          title: 'Viri',
           links: {
             privacyPolicy: 'Politika zasebnosti',
             certifications: 'Certifikati',
-            informationsecurity: 'Varnost informacij',
+            informationsecurity: 'Varnost podatkov',
             protectionofpersonaldata: 'Pravica do varstva osebnih podatkov',
             cookies: 'Nastavitve piškotkov',
-            termsandconditions: 'Splošni pogoji',
-            transparentcompany: 'Transparentno podjetje',
+            termsandconditions: 'Pogoji in določila',
+            transparentcompany: 'Pregledna družba',
             disclosurePolicy: 'Politika odgovornega razkritja',
-            Model321: 'Model 321',
+            model231: 'Model 231',
           },
         },
         followUs: {
           title: 'Spremljajte nas na',
         },
+        accessibility: 'Dostopnost',
       },
       postLoginLinks: {
-        privacyPolicy: 'Politika zasebnosti',
+        privacyPolicy: 'Pravilnik o zasebnosti',
         protectionofpersonaldata: 'Pravica do varstva osebnih podatkov',
-        termsandconditions: 'Splošni pogoji',
+        termsandconditions: 'Pogoji in določila',
+        accessibility: 'Dostopnost',
       },
     },
     header: {
@@ -61,32 +64,32 @@ export default {
       confirmButton: 'Poskusi znova',
     },
     unloadEventHandler: {
-      title: 'Res želite zapustiti stran?',
-      message: 'Če zapustite, bodo vse spremembe izgubljene.',
-      confirmLabel: 'Zapusti',
+      title: 'Ali ste prepričani, da želite oditi?',
+      message: 'Če zaprete, bodo spremembe, ki si jih naredil, izgubljene.',
+      confirmLabel: 'Izhod',
     },
     roles: {
       admin: {
-        shortLabel: 'Admin',
-        longLabel: 'Skrbnik',
+        shortLabel: 'Ref. Upravno',
+        longLabel: 'Upravitelj',
         description: 'Ima vsa dovoljenja in upravlja uporabnike',
       },
       limited: {
-        shortLabel: 'Operater',
-        longLabel: 'Operater',
+        shortLabel: 'Ref. Delujoče',
+        longLabel: 'Upravljavec',
         description: 'Upravlja tehnološko integracijo in/ali delovanje storitev',
       },
     },
     pnpgRoles: {
       admin: {
-        shortLabel: 'Admin',
-        longLabel: 'Skrbnik',
+        shortLabel: 'Ref. Upravno',
+        longLabel: 'Upravitelj',
         description: 'Ima vsa dovoljenja in upravlja uporabnike',
       },
       limited: {
-        shortLabel: 'Tehnik',
+        shortLabel: 'Ref. Tehnično',
         longLabel: 'Tehnik',
-        description: 'Bere obvestila organa',
+        description: 'Bere obvestila organizacije',
       },
     },
     backComponent: {
