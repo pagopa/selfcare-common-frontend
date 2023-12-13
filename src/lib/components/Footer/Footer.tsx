@@ -64,7 +64,7 @@ export default function Footer({
         {
           label: t('common.footer.preLoginLinks.resources.links.privacyPolicy'),
           href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
-          ariaLabel: 'Vai al link: Privacy Policy',
+          ariaLabel: 'Vai al link: Informativa Privacy',
           linkType: 'internal',
         },
         {
@@ -160,7 +160,7 @@ export default function Footer({
     {
       label: t('common.footer.postLoginLinks.privacyPolicy'),
       href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
-      ariaLabel: 'Vai al link: Privacy policy',
+      ariaLabel: 'Vai al link: Informativa Privacy',
       linkType: 'internal',
     },
     {

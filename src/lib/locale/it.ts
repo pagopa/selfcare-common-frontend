@@ -13,7 +13,7 @@ export default {
     },
     footer: {
       legalInfoText: `<0>PagoPA S.p.A.</0> - Società per azioni con socio unico - Capitale sociale di euro 1,000,000 interamente versato - Sede legale in Roma, Piazza Colonna 370, <2/> CAP 00187 - N. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009`,
-      privacyPolicyLink: 'Privacy Policy ',
+      privacyPolicyLink: 'Informativa Privacy',
       termsAndConditionLink: 'Termini e condizioni d’uso del sito ',
       informationSecurityLink: 'Sicurezza delle informazioni ',
       assistanceLink: 'Assistenza ',
@@ -28,7 +28,7 @@ export default {
         resources: {
           title: 'Risorse',
           links: {
-            privacyPolicy: 'Privacy Policy',
+            privacyPolicy: 'Informativa Privacy',
             certifications: 'Certificazioni',
             informationsecurity: 'Sicurezza delle informazioni',
             protectionofpersonaldata: 'Diritto alla protezione dei dati personali',
@@ -45,7 +45,7 @@ export default {
         accessibility: 'Accessibilità',
       },
       postLoginLinks: {
-        privacyPolicy: 'Privacy policy',
+        privacyPolicy: 'Informativa Privacy',
         protectionofpersonaldata: 'Diritto alla protezione dei dati personali',
         termsandconditions: 'Termini e Condizioni',
         accessibility: 'Accessibilità',
