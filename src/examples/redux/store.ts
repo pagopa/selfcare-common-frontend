@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
+import { configureStore } from '@reduxjs/toolkit';
 import { appStateReducer } from '../../lib/redux/slices/appStateSlice';
 import { userReducer } from '../../lib/redux/slices/userSlice';
 import { testReducer } from './slices/testSlice';

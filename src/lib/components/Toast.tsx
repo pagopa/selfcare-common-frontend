@@ -1,5 +1,5 @@
 import React, { CSSProperties, Fragment } from 'react';
-import { Alert, Grid, SvgIcon, Typography, IconButton } from '@mui/material';
+import { Alert, Grid, Typography, IconButton, SvgIcon } from '@mui/material';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';

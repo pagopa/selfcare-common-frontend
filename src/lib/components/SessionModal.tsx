@@ -4,7 +4,8 @@ import Dialog from '@mui/material/Dialog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import { TFunction, withTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 
 type Props = {
   /** If this component should be displayed or not */
@@ -89,7 +90,7 @@ function SessionModal({
 
         <Box width="100%">
           <Grid item xs={12} my={3}>
-            <Typography variant="body1">{message}</Typography>
+            <Typography variant="body1">{message as string}</Typography>
           </Grid>
           <Grid
             item

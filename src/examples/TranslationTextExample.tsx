@@ -8,7 +8,8 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { useState } from 'react';
-import { TFunction, Trans, withTranslation } from 'react-i18next';
+import { Trans, withTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 import i18n from '../lib/locale/locale-utils';
 
 type Props = {
@@ -27,7 +28,7 @@ function TranslationTextExample({ t }: Props) {
   };
   // in case of Functional Component is recommended the use of Hook useTranslation();
   // const { t, i18n } = useTranslation();
-  const obj = { name: 'Jon', surname: 'Smith' };
+  // const obj = { name: 'Jon', surname: 'Smith' };
   return (
     <>
       <Button onClick={handleClickOpen} variant="contained">
@@ -71,7 +72,7 @@ function TranslationTextExample({ t }: Props) {
             <Box>
               <Trans i18nKey="key2">
                 {/* xx: is the default text */}
-                xx <strong>{{ author: `${obj.name} ${obj.surname}` }}</strong>
+                xx
               </Trans>
             </Box>
             <Box>{t('nesting1')}</Box>
