@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../examples/redux/store';
 import { appStateActions } from '../../redux/slices/appStateSlice';
@@ -31,9 +31,9 @@ const dispatchLoadingTask = (dispatch, task, loading) => {
   dispatch(appStateActions.setLoading({ task, loading }));
 };
 
-const checkLoading = (expectedLoading: boolean) => {
+const checkLoading = async (expectedLoading: boolean) => {
   if (expectedLoading) {
-    screen.getByRole('loadingSpinner');
+    await waitFor(() => screen.getByRole('loadingSpinner'));
   } else {
     expect(screen.queryByRole('loadingSpinner')).toBeNull();
   }
