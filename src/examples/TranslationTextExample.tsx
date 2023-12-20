@@ -28,7 +28,7 @@ function TranslationTextExample({ t }: Props) {
   };
   // in case of Functional Component is recommended the use of Hook useTranslation();
   // const { t, i18n } = useTranslation();
-  // const obj = { name: 'Jon', surname: 'Smith' };
+  const obj = { name: 'Jon', surname: 'Smith' };
   return (
     <>
       <Button onClick={handleClickOpen} variant="contained">
@@ -72,7 +72,7 @@ function TranslationTextExample({ t }: Props) {
             <Box>
               <Trans i18nKey="key2">
                 {/* xx: is the default text */}
-                xx
+                xx <strong>{'author: '.concat(obj.name) + ' ' + obj.surname}</strong>
               </Trans>
             </Box>
             <Box>{t('nesting1')}</Box>
