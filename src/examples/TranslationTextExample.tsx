@@ -70,9 +70,13 @@ function TranslationTextExample({ t }: Props) {
               </strong>
             </Box>
             <Box>
-              <Trans i18nKey="key2">
+              <Trans
+                i18nKey="key2"
+                components={{ 1: <strong /> }}
+                values={{ author: `${obj.name} ${obj.surname}` }}
+              >
                 {/* xx: is the default text */}
-                xx <strong>{'author: '.concat(obj.name) + ' ' + obj.surname}</strong>
+                {`xx <1>{{ author }}</1>`}
               </Trans>
             </Box>
             <Box>{t('nesting1')}</Box>
