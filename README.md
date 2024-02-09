@@ -1,4 +1,4 @@
-# SelfCare's common components & features
+# SelfCare's common components & features 
 This library contains [utilities](#utilities), [components](#components), [decorators](#decorators), [custom hooks](#custom-hooks) and [features](#features) built for the selfcare project.
 
 # Localization
