@@ -243,6 +243,12 @@ An object containing a complete set of operation on the storage regarding the ke
 ### storageUserOps
 An object containing a complete set of operation on the storage regarding the key used to store in the storage the loggedUser in selfcare projects.
 
+## parseJwt
+Decode and then convert the jwt into a JWTUser object
+
+## isExpiredToken
+Determines whether the token has expired
+
 # Decorators
 ## withLogin
 This feature is based on react-redux library and require to register the reducer build in userSlice into the application's redux store.
