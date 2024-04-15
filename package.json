@@ -108,7 +108,7 @@
     "prettier": "^2.4.1",
     "regex-replace": "^2.3.1",
     "renamer": "^4.0.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^5.0.5"
   },
   "jest": {
     "restoreMocks": true,
