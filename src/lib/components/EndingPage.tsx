@@ -12,6 +12,8 @@ type Props = {
   description: React.ReactNode;
   /** The ending page button label if any */
   buttonLabel?: React.ReactNode;
+  /** The ending page second button label if any */
+  secondButtonLabel?: React.ReactNode;
   /** if defined it will show a button that will performe this action on click */
   onButtonClick?: () => void;
   /** Set the variant of the title */
@@ -48,8 +50,16 @@ type Props = {
     | 'body2'
     | 'overline'
     | undefined;
+  /** Set the variant of the first button */
+  variantFirstButton?: 'contained' | 'outlined' | 'text';
+  /** Set the variant of the second button */
+  variantSecondButton?: 'contained' | 'outlined' | 'text';
+  /** Set the text of paragraph */
   paragraph?: React.ReactNode;
+  /** Show the paragraph */
   isParagraphPresent?: boolean;
+  /** Show the second button and the "secondButtonLabel" as text of this one */
+  haveTwoButtons?: boolean;
 };
 
 /** Selfcare's Ending Page */
@@ -64,6 +74,10 @@ export default ({
   variantDescription,
   paragraph,
   isParagraphPresent,
+  haveTwoButtons = false,
+  secondButtonLabel,
+  variantFirstButton = 'contained',
+  variantSecondButton = 'contained',
 }: Props) => (
   <Box sx={{ minHeight, position: 'static' }} display="flex" flexGrow={1}>
     <Grid container direction="column" key="0" style={{ textAlign: 'center' }} margin={'auto'}>
@@ -84,10 +98,23 @@ export default ({
       </Grid>
       {onButtonClick && (
         <Grid container item justifyContent="center">
-          <Grid item xs={4}>
-            <Button variant="contained" sx={{ alignSelf: 'center' }} onClick={onButtonClick}>
+          <Grid item xs={haveTwoButtons ? 12 : 4}>
+            <Button
+              variant={variantFirstButton}
+              sx={{ alignSelf: 'center', marginRight: haveTwoButtons ? 3 : 0 }}
+              onClick={onButtonClick}
+            >
               {buttonLabel}
             </Button>
+            {haveTwoButtons && (
+              <Button
+                variant={variantSecondButton}
+                sx={{ alignSelf: 'center' }}
+                onClick={onButtonClick}
+              >
+                {secondButtonLabel}
+              </Button>
+            )}
           </Grid>
         </Grid>
       )}
