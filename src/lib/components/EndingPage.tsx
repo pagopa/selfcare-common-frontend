@@ -14,8 +14,10 @@ type Props = {
   buttonLabel?: React.ReactNode;
   /** The ending page second button label if any */
   secondButtonLabel?: React.ReactNode;
-  /** if defined it will show a button that will performe this action on click */
+  /** if defined performe this action on click of the first button */
   onButtonClick?: () => void;
+  /** if defined performe this action on click of the second button */
+  onSecondButtonClick?: () => void;
   /** Set the variant of the title */
   variantTitle?:
     | 'button'
@@ -67,6 +69,7 @@ export default ({
   minHeight,
   description,
   onButtonClick,
+  onSecondButtonClick,
   icon,
   title,
   buttonLabel,
@@ -96,7 +99,7 @@ export default ({
           <Typography variant={variantDescription}>{description}</Typography>
         </Grid>
       </Grid>
-      {onButtonClick && (
+      {buttonLabel && (
         <Grid container item justifyContent="center">
           <Grid item xs={haveTwoButtons ? 12 : 4}>
             <Button
@@ -110,7 +113,7 @@ export default ({
               <Button
                 variant={variantSecondButton}
                 sx={{ alignSelf: 'center' }}
-                onClick={onButtonClick}
+                onClick={onSecondButtonClick}
               >
                 {secondButtonLabel}
               </Button>

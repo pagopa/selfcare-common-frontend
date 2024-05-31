@@ -162,7 +162,8 @@ Selfcare's ending page
 | description | React.ReactNode | Y | The ending page description | 
 | buttonLabel | React.ReactNode | N | The ending page button label if any |
 | secondButtonLabel | React.ReactNode | N | The ending page second button label if any |
-| onButtonClick | () => void | N | If defined it will show a button that will perform this action on click |
+| onButtonClick | () => void | N | if defined performe this action on click of the first button |
+| onSecondButtonClick | () => void | N | if defined performe this action on click of the second button |
 | variantTitle | 'button' \| 'caption' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'inherit' \| 'subtitle1' \| 'subtitle2' \| 'body1' \| 'body2' \| 'overline' \| undefined | N | Set the variant of the title |
 | variantDescription |  'button' \| 'caption' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'inherit' \| 'subtitle1' \| 'subtitle2' \| 'body1' \| 'body2' \| 'overline' \| undefined | N | Set the variant of the description |
 | variantFirstButton | 'contained' \| 'outlined' \| 'text' | N | Set the variant of the first button |
