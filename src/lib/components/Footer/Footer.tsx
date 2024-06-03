@@ -4,7 +4,7 @@ import {
   PreLoginFooterLinksType,
 } from '@pagopa/mui-italia/dist/components/Footer/Footer';
 import { Trans, useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LangCode } from '@pagopa/mui-italia';
 import i18n from '../../locale/locale-utils';
 import { CONFIG } from '../../config/env';
@@ -24,6 +24,15 @@ export default function Footer({
 }: FooterProps) {
   const { t } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState<LangCode>();
+
+  const currentLangByUrl = new URLSearchParams(window.location.search).get('lang') as LangCode;
+
+  useEffect(() => {
+    if (currentLangByUrl) {
+      void i18n.changeLanguage(currentLangByUrl);
+      setSelectedLanguage(currentLangByUrl);
+    }
+  }, [currentLangByUrl]);
 
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
