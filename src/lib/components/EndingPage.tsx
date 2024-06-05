@@ -123,7 +123,7 @@ export default ({
       )}
 
       {isParagraphPresent && (
-        <Grid container item justifyContent="center" mb={4} mt={6}>
+        <Grid container item justifyContent="center" my={4}>
           <Grid item xs={6}>
             <Typography variant={variantDescription}>{paragraph}</Typography>
           </Grid>
