@@ -26,7 +26,7 @@ describe('FilterModal Component', () => {
       />
     );
     data.forEach((item) => {
-      expect(screen.getByLabelText(item.label)).toBeInTheDocument();
+      expect(screen.getByLabelText(item.label)).not.toBeNull();
     });
   });
 
