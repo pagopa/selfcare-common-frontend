@@ -1,7 +1,7 @@
 export const LOADING_TASK_LOGIN_CHECK = 'LOGIN_CHECK';
 export const LOADING_TASK_RETRIEVE_CACHED_VALUES = 'RETRIEVE_CACHED_VALUES';
 
-export type UserRole = 'ADMIN' | 'LIMITED';
+export type UserRole = 'ADMIN' | 'LIMITED' | 'ADMIN_EA';
 
 export const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,5}$');
 
@@ -10,6 +10,11 @@ export const roleLabels: {
   [key in UserRole]: { shortLabelKey: string; longLabelKey: string; descriptionKey: string };
 } = {
   ADMIN: {
+    shortLabelKey: 'common.roles.admin.shortLabel',
+    longLabelKey: 'common.roles.admin.longLabel',
+    descriptionKey: 'common.roles.admin.description',
+  },
+  ADMIN_EA: {
     shortLabelKey: 'common.roles.admin.shortLabel',
     longLabelKey: 'common.roles.admin.longLabel',
     descriptionKey: 'common.roles.admin.description',
@@ -26,6 +31,11 @@ export const pnpgRoleLabels: {
   [key in UserRole]: { shortLabelKey: string; longLabelKey: string; descriptionKey: string };
 } = {
   ADMIN: {
+    shortLabelKey: 'common.pnpgRoles.admin.shortLabel',
+    longLabelKey: 'common.pnpgRoles.admin.longLabel',
+    descriptionKey: 'common.pnpgRoles.admin.description',
+  },
+  ADMIN_EA: {
     shortLabelKey: 'common.pnpgRoles.admin.shortLabel',
     longLabelKey: 'common.pnpgRoles.admin.longLabel',
     descriptionKey: 'common.pnpgRoles.admin.description',

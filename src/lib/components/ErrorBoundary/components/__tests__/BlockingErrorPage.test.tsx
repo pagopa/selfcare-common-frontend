@@ -1,7 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 import { buildAssistanceURI } from '../../../../services/assistanceService';
-import BlockingErrorPage from './../BlockingErrorPage';
 import './../../../../../examples/locale';
+import BlockingErrorPage from './../BlockingErrorPage';
 
 const oldWindowLocation = global.window.location;
 
@@ -50,7 +51,8 @@ test('test using assistance', () => {
 test('test not using assistance', () => {
   render(<BlockingErrorPage />);
   checkBase();
-  expect(screen.queryByText("Contatta l'assistenza")).toBeNull();
+  const btnLabel = screen.queryByText("Contatta l'assistenza");
+  expect(btnLabel).not.toBeNull();
 
   expect(buildAssistanceURI).toBeCalledTimes(0);
 });
