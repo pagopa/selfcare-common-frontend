@@ -434,4 +434,4 @@ The tool used is [OneTrust](#https://www.onetrust.it/), and in order to be able 
 
 | Key | Type | Description | DefaultValue |
 |-----|------|-------------|--------------|
-| COOKIE_GROUP_ANALYTICS | string | The cookie group configured for the analytics tool. MixPanel's cookies are configured as default by OneTrust with C0004 group, or as Targeting Cookies | C0004 | 
+| COOKIE_GROUP_ANALYTICS | string | The cookie group configured for the analytics tool. MixPanel's cookies are configured as default by OneTrust with C0004 group, or as Targeting Cookies | C0004 |
