@@ -13,6 +13,7 @@ type Props = {
   backLinkFontWeight?: string;
   backLinkFontSize?: string;
   showBackComponent?: boolean;
+  color?: string;
 };
 
 export type NavigationPath = {
@@ -21,7 +22,7 @@ export type NavigationPath = {
   icon?: SvgIconComponent;
 };
 
-export default function NavigationBar({ paths, goBack, showBackComponent, backLabel }: Props) {
+export default function NavigationBar({ paths, goBack, showBackComponent, backLabel, color }: Props) {
   const onExit = useUnloadEventOnExit();
 
   const truncatedText = {
@@ -36,7 +37,7 @@ export default function NavigationBar({ paths, goBack, showBackComponent, backLa
     <Box display="flex">
       {showBackComponent && (
         <Box mr={2} display="flex" alignItems={'center'}>
-          <BackComponent goBack={goBack} backLabel={backLabel} />
+          <BackComponent goBack={goBack} backLabel={backLabel} color={color} />
         </Box>
       )}
       {!showBackComponent && (
