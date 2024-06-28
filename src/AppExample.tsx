@@ -40,7 +40,7 @@ const AppExample = () => {
         <LoadingOverlay />
         <UnloadEventHandler />
         <NavigationBar
-          showBackComponent={true}
+          showBackComponent={false}
           // eslint-disable-next-line no-console
           goBack={() => console.log('Go back')}
           paths={[
