@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next';
 type Props = {
   goBack?: () => void;
   backLabel?: string;
+  color?: string;
 };
 
-export default function BackComponent({ goBack, backLabel }: Props) {
+export default function BackComponent({ goBack, backLabel, color }: Props) {
   const { t } = useTranslation();
   return (
     <ButtonNaked
@@ -14,7 +15,7 @@ export default function BackComponent({ goBack, backLabel }: Props) {
       component="button"
       onClick={goBack}
       startIcon={<ArrowBack />}
-      sx={{ color: 'primary.main' }}
+      sx={{ color: color ?? 'primary.main' }}
       weight="default"
     >
       {backLabel ?? t('common.backComponent.label')}
