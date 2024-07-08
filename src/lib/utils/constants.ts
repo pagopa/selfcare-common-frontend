@@ -3,7 +3,7 @@ export const LOADING_TASK_RETRIEVE_CACHED_VALUES = 'RETRIEVE_CACHED_VALUES';
 
 export type UserRole = 'ADMIN' | 'LIMITED' | 'ADMIN_EA';
 
-export const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,5}$');
+export const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,6}$');
 
 /** The short and long labels used for the roles of selfcare's projects */
 export const roleLabels: {
