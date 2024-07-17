@@ -46,3 +46,16 @@ export const pnpgRoleLabels: {
     descriptionKey: 'common.pnpgRoles.limited.description',
   },
 };
+
+export enum Actions {
+  ManageProductGroups = "Selc:ManageProductGroups",
+  ManageProductUsers = "Selc:ManageProductUsers",
+  ViewDelegations = "Selc:ViewDelegations",
+  ViewManagedInstitutions = "Selc:ViewManagedInstitutions",
+  AccessProductBackoffice = "Selc:AccessProductBackoffice",
+  ListActiveProducts = "Selc:ListActiveProducts",
+  ListAvailableProducts = "Selc:ListAvailableProducts",
+  RequestProductAccess = "Selc:RequestProductAccess",
+  ViewBilling = "Selc:ViewBilling",
+  UploadLogo = "Selc:UploadLogo",
+}
