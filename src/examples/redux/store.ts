@@ -2,6 +2,7 @@ import logger from 'redux-logger';
 import { configureStore } from '@reduxjs/toolkit';
 import { appStateReducer } from '../../lib/redux/slices/appStateSlice';
 import { userReducer } from '../../lib/redux/slices/userSlice';
+import { permissionsReducer } from '../../lib/redux/slices/permissionsSlice';
 import { testReducer } from './slices/testSlice';
 
 export const createStore = () =>
@@ -10,6 +11,7 @@ export const createStore = () =>
       user: userReducer,
       appState: appStateReducer,
       test: testReducer,
+      permissions: permissionsReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

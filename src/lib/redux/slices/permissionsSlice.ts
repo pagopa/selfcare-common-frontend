@@ -31,7 +31,7 @@ const permissionsSlice = createSlice({
 // Actions
 export const { setProductPermissions, resetPermissions } = permissionsSlice.actions;
 
-export default permissionsSlice.reducer;
+export const permissionsReducer = permissionsSlice.reducer;
 
 // Selectors
 export const selectProductPermissions = (state: { permissions: PermissionsState }) => 
