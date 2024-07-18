@@ -44,3 +44,5 @@ export { default as withRetrievedValue } from './decorators/withRetrievedValue';
 export { default as useReduxCachedValue } from './hooks/useReduxCachedValue';
 
 export { default as useFakePagination } from './hooks/useFakePagination';
+export { usePermissions } from './hooks/usePermissions';
+
