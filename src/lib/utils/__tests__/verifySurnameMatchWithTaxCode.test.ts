@@ -74,3 +74,26 @@ test('test: tax code check with surname with one letter', () => {
 
   expect(result).toBeFalsy();
 });
+
+test('test: tax code check with name with ONE letters', () => {
+  const result = verifySurnameMatchWithTaxCode('DÉMÉ', 'DMENCL80A01F205Q');
+
+  expect(result).toBeFalsy();
+});
+
+test('test: tax code check with some names with accented letters', () => {
+  const firstTest = verifySurnameMatchWithTaxCode('Ägid', 'GDAFRN80A01F205Q');
+  expect(firstTest).toBeFalsy();
+
+  const secondTest = verifySurnameMatchWithTaxCode('Žiga', 'ZGIFRN80A01F205Q');
+  expect(secondTest).toBeFalsy();
+
+  const thirdTest = verifySurnameMatchWithTaxCode('Žiganito', 'ZGNFRN80A01F205Q');
+  expect(thirdTest).toBeFalsy();
+
+  const fourthTest = verifySurnameMatchWithTaxCode('Deščak', 'DSCFRN80A01F205Q');
+  expect(fourthTest).toBeFalsy();
+
+  const fifthTest = verifySurnameMatchWithTaxCode('Kèrbašič', 'KRBMLN80A01F205N');
+  expect(fifthTest).toBeFalsy();
+});
