@@ -74,3 +74,26 @@ test('test: tax code check with name with ONE letters', () => {
 
   expect(result).toBeFalsy();
 });
+
+test('test: tax code check with name with accented letters', () => {
+  const result = verifyNameMatchWithTaxCode('DÉMÉ', 'NCLDME80A01F205Q');
+
+  expect(result).toBeFalsy();
+});
+
+test('test: tax code check with name with accented letters', () => {
+  const firstTest = verifyNameMatchWithTaxCode('Ägid', 'FRNGDA80A01F205Q');
+  expect(firstTest).toBeFalsy();
+
+  const secondTest = verifyNameMatchWithTaxCode('Žiga', 'FRNZGI80A01F205Q');
+  expect(secondTest).toBeFalsy();
+
+  const thirdTest = verifyNameMatchWithTaxCode('Žiganito', 'FRNZNT80A01F205Q');
+  expect(thirdTest).toBeFalsy();
+
+  const fourthTest = verifyNameMatchWithTaxCode('Loïç', 'VNILCO80A01F205L');
+  expect(fourthTest).toBeFalsy();
+
+  const fifthTest = verifyNameMatchWithTaxCode('Luçǩ', 'VTILCK80A01F205I');
+  expect(fifthTest).toBeFalsy();
+});
