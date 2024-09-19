@@ -435,3 +435,15 @@ The tool used is [OneTrust](#https://www.onetrust.it/), and in order to be able 
 | Key | Type | Description | DefaultValue |
 |-----|------|-------------|--------------|
 | COOKIE_GROUP_ANALYTICS | string | The cookie group configured for the analytics tool. MixPanel's cookies are configured as default by OneTrust with C0004 group, or as Targeting Cookies | C0004 |
+
+## CustomAlert
+Reusable component to display information messages using MUI's Alert.
+
+| Prop      | Type  | Mandatory | Description |
+|-----------|-------|-----------|-------------|
+| text      | string  | N         | The message text to display in the alert                    |
+| severity  | 'error' \| 'info' \| 'success' \| 'warning'| N  | The severity level of the alert |
+| variant   | 'filled' \| 'outlined' \| 'standard' | N   | The visual style of the alert        |
+| sx        | object | N         | Additional custom styles for the alert                       |
+| ...rest   | any   | N         | Any additional props passed to MUI's Alert component          |
+
