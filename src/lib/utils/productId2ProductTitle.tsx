@@ -1,6 +1,6 @@
 export const productId2ProductTitle = (productId: string) => {
   const productMap = {
-    'prod-io': 'App IO',
+    'prod-io': 'IO',
     'prod-pn': 'SEND - Servizio Notifiche Digitali',
     'prod-interop': 'Interoperabilità',
     'prod-pagopa': 'Piattaforma pagoPA',
