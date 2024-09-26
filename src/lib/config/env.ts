@@ -54,7 +54,7 @@ export const CONFIG = {
       TWITTER: 'https://twitter.com/pagopa',
       INSTAGRAM: 'https://www.instagram.com/pagopaspa/',
       MEDIUM: 'https://medium.com/pagopa-spa',
-      ACCESSIBILITY: 'https://form.agid.gov.it/view/7aa810f2-bc15-40d1-b996-6eaa658439c3/',
+      ACCESSIBILITY: 'https://form.agid.gov.it/view/54952540-7734-11ef-be01-57e2dd1750a5',
       // PNRR:'' TODO
     },
   },
