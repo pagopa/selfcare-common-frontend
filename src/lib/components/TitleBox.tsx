@@ -3,12 +3,13 @@
 import { Typography } from '@mui/material';
 import { Grid } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
+import { ReactNode } from 'react';
 
 type Props = {
-  /** The title to show */
-  title: string;
-  /** The subtitle to show */
-  subTitle?: string;
+  /** The title to show (can be a string or JSX) */
+  title: ReactNode;
+  /** The subtitle to show (can be a string or JSX) */
+  subTitle?: ReactNode;
   /** The margin top of the title */
   mtTitle?: number;
   /** The margin bottom of the title */
