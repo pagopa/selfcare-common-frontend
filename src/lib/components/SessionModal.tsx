@@ -83,13 +83,13 @@ function SessionModal({
               <ClearOutlinedIcon />
             </IconButton>
           )}
-          <Typography sx={{ fontSize: '24px', fontWeight: '600', wordBreak: 'break-word' }}>
+          <Typography sx={{ fontSize: '24px', fontWeight: '700', wordBreak: 'break-word' }}>
             {title}
           </Typography>
         </Grid>
 
         <Box width="100%">
-          <Grid item xs={12} my={3}>
+          <Grid item xs={12} mt={2} mb={3}>
             <Typography variant="body1">{message as string}</Typography>
           </Grid>
           <Grid
