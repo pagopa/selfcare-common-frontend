@@ -6,6 +6,8 @@ import useUserNotify from '../useUserNotify';
 import { UserNotify } from '../../model/UserNotify';
 import './../../../examples/locale';
 
+jest.mock('i18next-browser-languagedetector');
+
 const renderApp = (userNotify: UserNotify) => {
   const store = createStore();
   const Child = buildChildComponent(userNotify);
