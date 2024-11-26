@@ -20,11 +20,11 @@ export const configureI18n = (
     sl: { translation: { ...sl, ...resources.sl } },
   };
   i18n
-    .use(initReactI18next)
     .use(LanguageDetector)
+    .use(initReactI18next)
     .init({
       resources: completeResources,
-      lng: defaultLanguage,
+      fallbackLng: defaultLanguage,
       interpolation: {
         escapeValue: false,
       },
