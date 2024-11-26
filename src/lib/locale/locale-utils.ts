@@ -24,7 +24,7 @@ export const configureI18n = (
     .use(LanguageDetector)
     .init({
       resources: completeResources,
-      fallbackLng: defaultLanguage,
+      lng: defaultLanguage,
       interpolation: {
         escapeValue: false,
       },
