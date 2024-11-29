@@ -20,8 +20,8 @@ export const configureI18n = (
     sl: { translation: { ...sl, ...resources.sl } },
   };
   i18n
-    .use(LanguageDetector)
     .use(initReactI18next)
+    .use(LanguageDetector)
     .init({
       resources: completeResources,
       fallbackLng: defaultLanguage,
@@ -30,8 +30,17 @@ export const configureI18n = (
       },
       detection: {
         order: ['querystring', 'sessionStorage', 'navigator'],
-        lookupSessionStorage: 'i18nextLng',
+        caches: ['sessionStorage'],
+        lookupSessionStorage: 'lang',
       },
+    })
+    .then(() => {
+      i18n.on('languageChanged', (lng) => {
+        if (lng.includes('-')) {
+          const normalizedLng = lng.split('-')[0];
+          void i18n.changeLanguage(normalizedLng);
+        }
+      });
     })
     .catch((err) => {
       throw new Error(err);
