@@ -2,6 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import FilterModal, { FilterModalConfig } from '../FilterModal';
 import './../../../examples/locale';
 
+jest.mock('i18next-browser-languagedetector');
+
 const data = [
   { id: '1', label: 'Option 1' },
   { id: '2', label: 'Option 2' },
