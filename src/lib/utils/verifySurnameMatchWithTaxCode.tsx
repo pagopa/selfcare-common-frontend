@@ -4,26 +4,20 @@
  * with the surname entered by the user, otherwise FALSE when they match.
  * */
 
-import { acceptedConsonants, acceptedVowels } from './utils';
+import { acceptedConsonants, acceptedVowels, specialChar2NormalChar } from './utils';
 
 export const verifySurnameMatchWithTaxCode = (surname: string, fiscalCode?: string) => {
   const fiscalCodeSurname = fiscalCode?.substring(0, 3).toUpperCase();
 
-  const consonantsSurname = surname?.match(acceptedConsonants)
-    ? surname
-        ?.match(acceptedConsonants)
-        ?.join('')
-        .replace(/\s/g, '')
-        .replace(/'/g, '')
-        .replace(/-/g, '')
-        .toUpperCase()
+  const vowelsSurname = fiscalCodeSurname?.match(acceptedVowels)
+    ? surname?.toUpperCase().match(acceptedVowels)?.map(specialChar2NormalChar).join('')
     : '';
 
-  const vowelsSurname = surname?.match(acceptedVowels)
-    ? surname?.match(acceptedVowels)?.join('').toUpperCase()
+  const consonantsSurname = fiscalCodeSurname?.match(acceptedConsonants)
+    ? surname?.toUpperCase().match(acceptedConsonants)?.map(specialChar2NormalChar).join('')
     : '';
 
-  const calculatedSurname = `${consonantsSurname}${vowelsSurname}XX`.substring(0, 3);
+  const expectedFiscalCodeSurname = `${consonantsSurname}${vowelsSurname}XX`.substring(0, 3);
 
-  return calculatedSurname === fiscalCodeSurname ? false : fiscalCode;
+  return fiscalCodeSurname && fiscalCodeSurname !== expectedFiscalCodeSurname;
 };

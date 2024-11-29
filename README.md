@@ -156,13 +156,21 @@ Selfcare's ending page
 
 | Prop | Type | Mandatory | Description |
 |------|------|-----------|-------------|
-| icon | React.ReactElement | N | The ending page icon |
-| title | string | Y | The ending page title |
+| minHeight | '52vh' \| '100vh' | N | The minHeight of the component, can be 52vh for the pages and 100vh for the blocking page |
+| icon | React.ReactElement<SvgIconProps> \| FunctionComponent<SVGProps<SVGSVGElement>> \| string | N | The ending page icon |
+| title | React.ReactNode | Y | The ending page title |
 | description | React.ReactNode | Y | The ending page description | 
-| buttonLabel | string | N | The ending page button label if any |
-| onButtonClick | () => void | N | if defined it will show a button that will performe this action on click |
-| variantTitle | (| 'button'| 'caption'| 'h1'| 'h2'| 'h3'| 'h4'| 'h5'| 'h6'| 'inherit'| 'subtitle1'| 'subtitle2'| 'body1'| 'body2'| 'overline'| undefined;) | N | Set the variant of the title |
-| variantDescription | (| 'button'| 'caption'| 'h1'| 'h2'| 'h3'| 'h4'| 'h5'| 'h6'| 'inherit'| 'subtitle1'| 'subtitle2'| 'body1'| 'body2'| 'overline'| undefined;) | N | Set the variant of the description |
+| buttonLabel | React.ReactNode | N | The ending page button label if any |
+| secondButtonLabel | React.ReactNode | N | The ending page second button label if any |
+| onButtonClick | () => void | N | if defined performe this action on click of the first button |
+| onSecondButtonClick | () => void | N | if defined performe this action on click of the second button |
+| variantTitle | 'button' \| 'caption' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'inherit' \| 'subtitle1' \| 'subtitle2' \| 'body1' \| 'body2' \| 'overline' \| undefined | N | Set the variant of the title |
+| variantDescription |  'button' \| 'caption' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'inherit' \| 'subtitle1' \| 'subtitle2' \| 'body1' \| 'body2' \| 'overline' \| undefined | N | Set the variant of the description |
+| variantFirstButton | 'contained' \| 'outlined' \| 'text' | N | Set the variant of the first button |
+| variantSecondButton | 'contained' \| 'outlined' \| 'text' | N | Set the variant of the second button |
+| paragraph | React.ReactNode | N | Set the text of paragraph |
+| isParagraphPresent | boolean | N | Show the paragraph |
+| haveTwoButtons | boolean | N | Show the second button and the "secondButtonLabel" as text of this one |
 
 ## NavigationBar
 Selfcare's navigation bar
@@ -427,3 +435,15 @@ The tool used is [OneTrust](#https://www.onetrust.it/), and in order to be able 
 | Key | Type | Description | DefaultValue |
 |-----|------|-------------|--------------|
 | COOKIE_GROUP_ANALYTICS | string | The cookie group configured for the analytics tool. MixPanel's cookies are configured as default by OneTrust with C0004 group, or as Targeting Cookies | C0004 |
+
+## CustomAlert
+Reusable component to display information messages using MUI's Alert.
+
+| Prop      | Type  | Mandatory | Description |
+|-----------|-------|-----------|-------------|
+| text      | string  | N         | The message text to display in the alert                    |
+| severity  | 'error' \| 'info' \| 'success' \| 'warning'| N  | The severity level of the alert |
+| variant   | 'filled' \| 'outlined' \| 'standard' | N   | The visual style of the alert        |
+| sx        | object | N         | Additional custom styles for the alert                       |
+| ...rest   | any   | N         | Any additional props passed to MUI's Alert component          |
+

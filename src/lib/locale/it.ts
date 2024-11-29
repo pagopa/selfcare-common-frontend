@@ -94,5 +94,8 @@ export default {
     backComponent: {
       label: 'Indietro',
     },
+    customAlert: {
+      message: 'Per migliorare la tua esperienza e offrirti una gestione più mirata, vedrai solo le informazioni e i prodotti di cui sei amministratore.'
+    }
   },
 };

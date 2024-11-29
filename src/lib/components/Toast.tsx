@@ -68,6 +68,7 @@ export default function Toast({
             borderRadius: '5px',
             boxShadow: '0px 0px 45px rgba(0, 0, 0, 0.1) ',
             border: 'none',
+            padding: '16px',
           }}
         >
           <Grid container>

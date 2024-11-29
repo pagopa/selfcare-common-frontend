@@ -12,7 +12,7 @@ export const productsList: Array<ProductEntity> = [
   },
   {
     id: '1',
-    title: `App IO`,
+    title: `IO`,
     productUrl: '#app-io',
     linkType: 'internal',
   },

@@ -1,6 +1,8 @@
-import logger from 'redux-logger';
+import type { Middleware } from '@reduxjs/toolkit';
 import { configureStore } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
 import { appStateReducer } from '../../lib/redux/slices/appStateSlice';
+import { permissionsReducer } from '../../lib/redux/slices/permissionsSlice';
 import { userReducer } from '../../lib/redux/slices/userSlice';
 import { testReducer } from './slices/testSlice';
 
@@ -10,9 +12,17 @@ export const createStore = () =>
       user: userReducer,
       appState: appStateReducer,
       test: testReducer,
+      permissions: permissionsReducer,
     },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
+    middleware: (getDefaultMiddleware) => {
+      const middleware = getDefaultMiddleware({
         serializableCheck: false,
-      }).concat(process.env.NODE_ENV === 'development' ? [logger] : []),
+      });
+
+      if (process.env.NODE_ENV === 'development') {
+        middleware.push(logger as Middleware);
+      }
+
+      return middleware;
+    },
   });

@@ -7,7 +7,7 @@ test('test: given prod-pn as id, expected the correct product title', () => {
 
 test('test: given prod-io as id, expected the correct product title', () => {
   const result = productId2ProductTitle('prod-io');
-  expect(result).toBe('App IO');
+  expect(result).toBe('IO');
 });
 
 test('test: given prod-pagopa as id, expected the correct product title', () => {

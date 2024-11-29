@@ -1,4 +1,5 @@
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import i18n from 'i18next';
 import it from './it';
 import en from './en';
@@ -19,12 +20,17 @@ export const configureI18n = (
     sl: { translation: { ...sl, ...resources.sl } },
   };
   i18n
+    .use(LanguageDetector)
     .use(initReactI18next)
     .init({
       resources: completeResources,
-      lng: defaultLanguage,
+      fallbackLng: defaultLanguage,
       interpolation: {
         escapeValue: false,
+      },
+      detection: {
+        order: ['querystring', 'sessionStorage', 'navigator'],
+        lookupSessionStorage: 'i18nextLng',
       },
     })
     .catch((err) => {

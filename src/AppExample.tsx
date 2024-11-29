@@ -1,26 +1,27 @@
+import { SupervisedUserCircle } from '@mui/icons-material';
 import { Box, Button, Grid } from '@mui/material';
 import { useState } from 'react';
-import { SupervisedUserCircle } from '@mui/icons-material';
+import AnalyticsExample from './examples/AnalyticsExample';
+import CustomAlertExample from './examples/CustomAlertExample';
 import CustomAvatarExample from './examples/CustomAvatarExample';
 import CustomPaginationExample from './examples/CustomPaginationExample';
 import FilterModalExample from './examples/FilterModalExample';
+import FooterExample from './examples/FooterExample';
+import HeaderExample from './examples/HeaderExample';
 import SessionModalExample from './examples/SessionModalExample';
 import ToastExample from './examples/ToastExample';
+import TranslationTextExample from './examples/TranslationTextExample';
 import UseErrorDispatcherExample from './examples/UseErrorDispatcherExample';
 import UseLoadingExample from './examples/UseLoadingExample';
-import UseUserNotifyExample from './examples/UseUserNotifyExample';
 import UseUnloadEventInterceptorExample from './examples/UseUnloadEventInterceptorExample';
+import UseUserNotifyExample from './examples/UseUserNotifyExample';
 import { NavigationBar, TitleBox } from './lib';
 import ErrorBoundary from './lib/components/ErrorBoundary/ErrorBoundary';
 import LoadingOverlay from './lib/components/Loading/LoadingOverlay';
 import UnloadEventHandler from './lib/components/UnloadEventHandler';
 import UserNotifyHandle from './lib/components/UserNotifyHandle';
-import withLogin from './lib/decorators/withLogin';
-import AnalyticsExample from './examples/AnalyticsExample';
-import TranslationTextExample from './examples/TranslationTextExample';
 import './lib/consentManagementConfigure';
-import FooterExample from './examples/FooterExample';
-import HeaderExample from './examples/HeaderExample';
+import withLogin from './lib/decorators/withLogin';
 import { useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
 
 const AppExample = () => {
@@ -40,7 +41,7 @@ const AppExample = () => {
         <LoadingOverlay />
         <UnloadEventHandler />
         <NavigationBar
-          showBackComponent={true}
+          showBackComponent={false}
           // eslint-disable-next-line no-console
           goBack={() => console.log('Go back')}
           paths={[
@@ -110,6 +111,9 @@ const AppExample = () => {
           <Grid item xs={2}>
             <TranslationTextExample />
           </Grid>
+        </Grid>
+        <Grid>
+          <CustomAlertExample />
         </Grid>
         <FooterExample isLoggedIn={isLoggedIn} />
       </Box>
