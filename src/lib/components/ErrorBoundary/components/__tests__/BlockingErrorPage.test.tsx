@@ -4,6 +4,8 @@ import { buildAssistanceURI } from '../../../../services/assistanceService';
 import './../../../../../examples/locale';
 import BlockingErrorPage from './../BlockingErrorPage';
 
+jest.mock('i18next-browser-languagedetector');
+
 const oldWindowLocation = global.window.location;
 
 const initialLocation = {

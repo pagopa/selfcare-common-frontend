@@ -10,6 +10,7 @@ import { ThemeProvider } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
 
 jest.mock('../lib/decorators/withLogin');
+jest.mock('i18next-browser-languagedetector');
 
 const renderApp = (
   injectedStore?: ReturnType<typeof createStore>,

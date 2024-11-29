@@ -7,7 +7,7 @@
 #
 
 variables:
-  NODE_VERSION: '16.10.0'
+  NODE_VERSION: '20.18.1'
   YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
   # Execute agents (jobs) on latest Ubuntu version.
   vmImageNameDefault: 'ubuntu-latest'
