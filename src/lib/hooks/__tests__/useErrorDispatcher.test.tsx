@@ -9,6 +9,7 @@ import { handleErrors } from '../../services/errorService';
 import './../../../examples/locale';
 
 jest.mock('../../services/errorService');
+jest.mock('i18next-browser-languagedetector');
 
 const renderApp = (content: ReactNode) => {
   const store = createStore();

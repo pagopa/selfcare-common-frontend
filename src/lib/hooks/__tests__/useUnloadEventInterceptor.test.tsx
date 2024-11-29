@@ -12,6 +12,8 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import './../../../examples/locale';
 
+jest.mock('i18next-browser-languagedetector');
+
 const oldWindowLocation = global.window.location;
 
 const initialLocation = {
