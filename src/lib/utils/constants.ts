@@ -50,6 +50,7 @@ export enum Actions {
   ManageProductUsers = 'Selc:ManageProductUsers',
   ListProductUsers = 'Selc:ListProductUsers',
   ViewDelegations = 'Selc:ViewDelegations',
+  CreateDelegation = 'Selc:CreateDelegation',
   ViewManagedInstitutions = 'Selc:ViewManagedInstitutions',
   AccessProductBackoffice = 'Selc:AccessProductBackoffice',
   ListActiveProducts = 'Selc:ListActiveProducts',
