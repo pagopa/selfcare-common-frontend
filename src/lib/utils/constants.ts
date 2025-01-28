@@ -1,24 +1,23 @@
 export const LOADING_TASK_LOGIN_CHECK = 'LOGIN_CHECK';
 export const LOADING_TASK_RETRIEVE_CACHED_VALUES = 'RETRIEVE_CACHED_VALUES';
 
-export type UserRole = 'ADMIN' | 'LIMITED' | 'ADMIN_EA';
+export type UserRole = 'ADMIN' | 'LIMITED' | 'ADMIN_EA' | 'ADMIN_EA_IO';
 
 export const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,6}$');
+
+const commonRolesAdminLabels = {
+  shortLabelKey: 'common.roles.admin.shortLabel',
+  longLabelKey: 'common.roles.admin.longLabel',
+  descriptionKey: 'common.roles.admin.description',
+};
 
 /** The short and long labels used for the roles of selfcare's projects */
 export const roleLabels: {
   [key in UserRole]: { shortLabelKey: string; longLabelKey: string; descriptionKey: string };
 } = {
-  ADMIN: {
-    shortLabelKey: 'common.roles.admin.shortLabel',
-    longLabelKey: 'common.roles.admin.longLabel',
-    descriptionKey: 'common.roles.admin.description',
-  },
-  ADMIN_EA: {
-    shortLabelKey: 'common.roles.admin.shortLabel',
-    longLabelKey: 'common.roles.admin.longLabel',
-    descriptionKey: 'common.roles.admin.description',
-  },
+  ADMIN: commonRolesAdminLabels,
+  ADMIN_EA: commonRolesAdminLabels,
+  ADMIN_EA_IO: commonRolesAdminLabels,
   LIMITED: {
     shortLabelKey: 'common.roles.limited.shortLabel',
     longLabelKey: 'common.roles.limited.longLabel',
@@ -26,20 +25,19 @@ export const roleLabels: {
   },
 };
 
+const commonRolesPnpgAdminLabels = {
+  shortLabelKey: 'common.pnpgRoles.admin.shortLabel',
+  longLabelKey: 'common.pnpgRoles.admin.longLabel',
+  descriptionKey: 'common.pnpgRoles.admin.description',
+};
+
 /** The short and long labels used for the roles of PNPG */
 export const pnpgRoleLabels: {
   [key in UserRole]: { shortLabelKey: string; longLabelKey: string; descriptionKey: string };
 } = {
-  ADMIN: {
-    shortLabelKey: 'common.pnpgRoles.admin.shortLabel',
-    longLabelKey: 'common.pnpgRoles.admin.longLabel',
-    descriptionKey: 'common.pnpgRoles.admin.description',
-  },
-  ADMIN_EA: {
-    shortLabelKey: 'common.pnpgRoles.admin.shortLabel',
-    longLabelKey: 'common.pnpgRoles.admin.longLabel',
-    descriptionKey: 'common.pnpgRoles.admin.description',
-  },
+  ADMIN: commonRolesPnpgAdminLabels,
+  ADMIN_EA: commonRolesPnpgAdminLabels,
+  ADMIN_EA_IO: commonRolesPnpgAdminLabels,
   LIMITED: {
     shortLabelKey: 'common.pnpgRoles.limited.shortLabel',
     longLabelKey: 'common.pnpgRoles.limited.longLabel',
