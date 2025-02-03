@@ -64,7 +64,7 @@ export const extractResponse = async <R>(
     ) {
       throw new Error(`Operation not allowed!`);
     } else if (emptyResponseHttpStatus && response.right.status === emptyResponseHttpStatus) {
-      return new Promise((resolve) => resolve(null as unknown as R));
+      return Promise.resolve(response.right.status);
     } else {
       console.error(JSON.stringify(response.right));
       const error = new Error(
