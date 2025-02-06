@@ -1,7 +1,7 @@
 export const LOADING_TASK_LOGIN_CHECK = 'LOGIN_CHECK';
 export const LOADING_TASK_RETRIEVE_CACHED_VALUES = 'RETRIEVE_CACHED_VALUES';
 
-export type UserRole = 'ADMIN' | 'LIMITED' | 'ADMIN_EA' | 'ADMIN_EA_IO';
+export type UserRole = 'ADMIN' | 'LIMITED' | 'ADMIN_EA';
 
 export const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,6}$');
 
@@ -17,7 +17,6 @@ export const roleLabels: {
 } = {
   ADMIN: commonRolesAdminLabels,
   ADMIN_EA: commonRolesAdminLabels,
-  ADMIN_EA_IO: commonRolesAdminLabels,
   LIMITED: {
     shortLabelKey: 'common.roles.limited.shortLabel',
     longLabelKey: 'common.roles.limited.longLabel',
@@ -37,7 +36,6 @@ export const pnpgRoleLabels: {
 } = {
   ADMIN: commonRolesPnpgAdminLabels,
   ADMIN_EA: commonRolesPnpgAdminLabels,
-  ADMIN_EA_IO: commonRolesPnpgAdminLabels,
   LIMITED: {
     shortLabelKey: 'common.pnpgRoles.limited.shortLabel',
     longLabelKey: 'common.pnpgRoles.limited.longLabel',
