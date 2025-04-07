@@ -15,7 +15,7 @@
     "@mui/lab": "^5.0.0-alpha.137",
     "@mui/material": "^5.14.1",
     "@mui/system": "^5.14.1",
-    "@pagopa/mui-italia": "^1.5.0",
+    "@pagopa/mui-italia": "^1.5.3-rc.20250403154846",
     "@pagopa/ts-commons": "^13.1.2",
     "@reduxjs/toolkit": "^1.6.2",
     "async": "3.2.4",
