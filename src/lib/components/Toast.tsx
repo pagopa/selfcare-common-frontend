@@ -18,7 +18,7 @@ type Props = {
   /** The function to be invoked when closing the toast */
   onCloseToast: () => void;
   /** The toast width */
-  width?: string | undefined;
+  width?: string;
   /** If true, it will not position itself as fixed */
   wrapped?: boolean;
   /** If not wrapped, the pixel from the bottom of the viewport where to place the toast. Default "64px" */
@@ -49,7 +49,7 @@ export default function Toast({
   right = '64px',
   showToastCloseIcon = false,
   toastColorIcon = '#6CC66A',
-}: Props) {
+}: Readonly<Props>) {
   const positionStyle: CSSProperties = !wrapped
     ? { position: 'fixed', bottom, right, zIndex: 500 }
     : { marginTop: 2 };
