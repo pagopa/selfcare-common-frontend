@@ -57,4 +57,5 @@ export enum Actions {
   ViewBilling = 'Selc:ViewBilling',
   UploadLogo = 'Selc:UploadLogo',
   UpdateInstitution = 'Selc:UpdateInstitutionData',
+  ViewContract = 'Selc:ViewContract',
 }
