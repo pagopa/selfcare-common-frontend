@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Typography, Box, Button, Grid, IconButton } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import { withTranslation } from 'react-i18next';
+import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { TFunction } from 'i18next';
+import * as React from 'react';
+import { withTranslation } from 'react-i18next';
 
 type Props = {
   /** If this component should be displayed or not */
@@ -71,7 +71,8 @@ function SessionModal({
       fullScreen={fullScreen}
       open={open}
       onClose={handleClose}
-      aria-labelledby="responsive-dialog-title"
+      aria-labelledby="session-modal-title"
+      aria-describedby="session-modal-description"
     >
       <Grid container sx={{ height, minHeight, width, maxWidth: '100%' }} px={4}>
         <Grid item xs={12} mt={4}>
@@ -83,14 +84,20 @@ function SessionModal({
               <ClearOutlinedIcon />
             </IconButton>
           )}
-          <Typography sx={{ fontSize: '24px', fontWeight: '700', wordBreak: 'break-word' }}>
+          <Typography
+            id="session-modal-title"
+            variant="h6"
+            sx={{ fontSize: '24px', fontWeight: '700', wordBreak: 'break-word' }}
+          >
             {title}
           </Typography>
         </Grid>
 
         <Box width="100%">
           <Grid item xs={12} mt={2} mb={3}>
-            <Typography variant="body1">{message as string}</Typography>
+            <Typography id="session-modal-description" variant="body1">
+              {message as string}
+            </Typography>
           </Grid>
           <Grid
             item
@@ -117,21 +124,20 @@ function SessionModal({
                 >
                   {onConfirmLabel}
                 </Button>
-                {productEnvironments &&
-                  productEnvironments.map((p) => (
-                    <Box ml={2} key={p.environment}>
-                      <Button
-                        value={p.environment}
-                        color="primary"
-                        variant="contained"
-                        onClick={onConfirm}
-                      >
-                        {p.environment
-                          .toLowerCase()
-                          .replace(/\b[a-z]/g, p.environment.charAt(0).toUpperCase())}
-                      </Button>
-                    </Box>
-                  ))}
+                {productEnvironments?.map((p) => (
+                  <Box ml={2} key={p.environment}>
+                    <Button
+                      value={p.environment}
+                      color="primary"
+                      variant="contained"
+                      onClick={onConfirm}
+                    >
+                      {p.environment
+                        .toLowerCase()
+                        .replace(/\b[a-z]/g, p.environment.charAt(0).toUpperCase())}
+                    </Button>
+                  </Box>
+                ))}
               </Box>
             )}
           </Grid>
