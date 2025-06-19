@@ -45,14 +45,15 @@ export const extractResponse = async <R>(
   response: t.Validation<
     TypeofApiResponse<ApiRequestType<any, any, any, IResponseType<any, any, any>>>
   >,
-  successHttpStatus: number,
+  successHttpStatus: number | Array<number>,
   onRedirectToLogin: () => void,
   notValidTokenHttpStatus: number | null = 401,
   notAuthorizedTokenHttpStatus: number | null = 403,
   emptyResponseHttpStatus: number | null = 404
 ): Promise<R> => {
+  const successCodes = Array.isArray(successHttpStatus) ? successHttpStatus : [successHttpStatus];
   if (isRight(response)) {
-    if (response.right.status === successHttpStatus) {
+    if (successCodes.includes(response.right.status)) {
       return response.right.value;
     } else if (notValidTokenHttpStatus && response.right.status === notValidTokenHttpStatus) {
       onRedirectToLogin();
