@@ -63,7 +63,16 @@ export const extractResponse = async <R>(
       notAuthorizedTokenHttpStatus &&
       response.right.status === notAuthorizedTokenHttpStatus
     ) {
-      throw new Error(`Operation not allowed!`);
+      const error = new Error(`Operation not allowed!`);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // eslint-disable-next-line functional/immutable-data
+      error.httpStatus = response.right.status;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // eslint-disable-next-line functional/immutable-data
+      error.httpBody = response.right.value;
+      throw error;
     } else if (emptyResponseHttpStatus && response.right.status === emptyResponseHttpStatus) {
       return Promise.resolve(null as unknown as R);
     } else {
@@ -84,6 +93,7 @@ export const extractResponse = async <R>(
   } else {
     console.error('Something gone wrong while fetching data');
     console.error(JSON.stringify(response.left));
+
     throw toError(response.left);
   }
 };
