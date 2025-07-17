@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useUnloadEventInterceptor } from '../hooks/useUnloadEventInterceptor';
-import { appStateSelectors, appStateActions } from '../redux/slices/appStateSlice';
+import { appStateActions, appStateSelectors } from '../redux/slices/appStateSlice';
 import SessionModal from './SessionModal';
 
 /** This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.
@@ -17,6 +17,7 @@ export default function UnloadEventHandler() {
   const { unregisterUnloadEvent } = useUnloadEventInterceptor();
 
   const onClose = () => {
+    unregisterUnloadEvent();
     dispatch(appStateActions.closeUnloadEventNotify());
   };
   const onConfirm = () => {
