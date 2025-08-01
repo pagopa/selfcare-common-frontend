@@ -1,14 +1,28 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const useLiveAnnouncerWithRegion = () => {
   const [message, setMessage] = useState('');
+  const timeoutRef = useRef<number | null>(null);
 
   const announce = useCallback((msg: string) => {
     setMessage('');
-    setTimeout(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    // eslint-disable-next-line functional/immutable-data
+    timeoutRef.current = window.setTimeout(() => {
       setMessage(msg);
     }, 100);
   }, []);
+
+  useEffect(
+    () => () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    },
+    []
+  );
 
   const LiveRegion = (
     <div
