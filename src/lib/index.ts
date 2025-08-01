@@ -32,7 +32,9 @@ export { default as useUserNotify } from './hooks/useUserNotify';
 export { default as UnloadEventHandler } from './components/UnloadEventHandler';
 export {
   useUnloadEventInterceptor,
-  useUnloadEventInterceptorAndActivate, useUnloadEventLogout, useUnloadEventOnExit
+  useUnloadEventInterceptorAndActivate,
+  useUnloadEventLogout,
+  useUnloadEventOnExit
 } from './hooks/useUnloadEventInterceptor';
 
 export { default as withLogin } from './decorators/withLogin';
@@ -43,5 +45,6 @@ export { default as useReduxCachedValue } from './hooks/useReduxCachedValue';
 
 export { default as CustomAlert } from './components/CustomAlert';
 export { default as useFakePagination } from './hooks/useFakePagination';
+export { useLiveAnnouncerWithRegion } from './hooks/useLiveAnnouncerWithRegion';
 export { usePermissions } from './hooks/usePermissions';
 
