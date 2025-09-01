@@ -1,11 +1,11 @@
-import { Action, Dispatch } from 'redux';
-import { uniqueId } from 'lodash';
-import { Component, ErrorInfo, Fragment, ReactElement, ReactNode } from 'react';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { withTranslation } from 'react-i18next';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import { TFunction } from 'i18next';
+import { uniqueId } from 'lodash';
+import { Component, ErrorInfo, Fragment, ReactNode } from 'react';
+import { withTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { Action, Dispatch } from 'redux';
+import { createSelector } from 'reselect';
 import { AppError, appStateActions, appStateSelectors } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
 import SessionModal from '../SessionModal';
@@ -157,7 +157,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   removeError: (error: AppError) => dispatch(appStateActions.removeError(error)),
 });
 
-const ErrorBoundaryConnected: (props: Props) => ReactElement | null = connect(
+const ErrorBoundaryConnected: (props: Props) => ReactNode = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ErrorBoundary);
