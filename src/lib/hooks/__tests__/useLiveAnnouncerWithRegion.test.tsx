@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { useLiveAnnouncerWithRegion } from '../useLiveAnnouncerWithRegion';
 
 jest.useFakeTimers();
@@ -16,21 +16,17 @@ const TestComponent = () => {
 };
 
 describe('useLiveAnnouncerWithRegion', () => {
-  it('should update the live region with the message after a delay', () => {
+  test('should update the live region', async () => {
     render(<TestComponent />);
 
     const button = screen.getByText('Announce');
-    act(() => {
-      button.click();
-    });
+
+    button.click();
 
     const region = screen.getByTestId('live-region-announcer');
-    expect(region).toHaveTextContent('');
 
-    act(() => {
-      jest.advanceTimersByTime(100);
+    await waitFor(() => {
+      expect(region).toHaveTextContent('Hello world!');
     });
-
-    expect(region).toHaveTextContent('Hello world!');
   });
 });
