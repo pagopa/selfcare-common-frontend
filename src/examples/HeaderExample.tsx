@@ -119,7 +119,7 @@ export const partyList: Array<PartyEntity> = [
 
 type Props = { onExit: (exitAction: () => void) => void; isLoggedIn: boolean };
 
-export default function HeaderExample({ onExit, isLoggedIn }: Props) {
+export default function HeaderExample({ onExit, isLoggedIn }: Readonly<Props>) {
   return (
     <Header
       onExit={onExit}
@@ -138,6 +138,7 @@ export default function HeaderExample({ onExit, isLoggedIn }: Props) {
       }
       assistanceEmail="assistance@selfcare.it"
       enableLogin={true}
+      onLogoutClick={() => alert('Logout click')}
     />
   );
 }

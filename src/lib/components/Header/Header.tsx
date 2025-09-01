@@ -1,14 +1,14 @@
-import { Fragment } from 'react';
-import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
-import { HeaderAccount } from '@pagopa/mui-italia/dist/components/HeaderAccount/HeaderAccount';
 import {
-  RootLinkType,
   JwtUser,
-  UserAction,
-  ProductSwitchItem,
   ProductEntity,
+  ProductSwitchItem,
+  RootLinkType,
+  UserAction,
 } from '@pagopa/mui-italia';
+import { HeaderAccount } from '@pagopa/mui-italia/dist/components/HeaderAccount/HeaderAccount';
+import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
 import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
+import { Fragment } from 'react';
 import { CONFIG } from '../../config/env';
 import { buildAssistanceURI } from '../../services/assistanceService';
 
@@ -50,6 +50,8 @@ type HeaderProps = {
   enableAssistanceButton?: boolean;
   /** A callback function that controls the visibility of the documentation button and handles user clicks on the documentation button. */
   onDocumentationClick?: () => void;
+  /** A callback function that handles user clicks on the logout button. */
+  onLogoutClick?: () => void;
 };
 
 const selfcareProduct: ProductEntity = {
@@ -85,6 +87,7 @@ const Header = ({
   maxCharactersNumberMultiLineItem,
   enableAssistanceButton = true,
   onDocumentationClick,
+  onLogoutClick,
 }: HeaderProps) => (
   <Fragment>
     <header>
@@ -95,7 +98,7 @@ const Header = ({
           onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
         }
         onLogin={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGIN))}
-        onLogout={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT))}
+        onLogout={onLogoutClick ?? (() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT)))}
         enableLogin={enableLogin}
         userActions={userActions}
         enableDropdown={enableDropdown}

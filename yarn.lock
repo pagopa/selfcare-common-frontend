@@ -2052,10 +2052,10 @@
   resolved "https://registry.npmjs.org/@opentelemetry/semantic-conventions/-/semantic-conventions-1.28.0.tgz#337fb2bca0453d0726696e745f50064411f646d6"
   integrity sha512-lp4qAiMTD4sNWW4DbKLBkfiMZ4jbAboJIGOQr5DvciMRI494OapieI9qiODpOt0XBr1LjIDy1xAGAnVs5supTA==
 
-"@pagopa/mui-italia@^1.6.1":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-1.6.1.tgz#ffeb35bc58ee4702b4d9a7b5e7fe6b1634cd0902"
-  integrity sha512-v3O16kSn4JHDJiNVOHKYklIeVRACKpmxnqrj6o6Y8qtURycVJmiMHAGW7uoNbw2yK1+ymJ+C7MSoZphXijKPFA==
+"@pagopa/mui-italia@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-1.7.0.tgz#85d578f759ea86a5620585442484fd1d16f8830e"
+  integrity sha512-w0+qdNcVnKVyR+6511sa1+/xKBcHQcd+gXM/Kj7ZbcNJ96PsAnA7dWzrNDPZzczdkPlltobAKacnrJ/eK41FgQ==
   dependencies:
     "@fontsource/dm-mono" "^4.5.10"
     "@fontsource/titillium-web" "^4.5.9"
@@ -2063,10 +2063,10 @@
     fp-ts "^2.12.3"
     io-ts "^2.2.18"
 
-"@pagopa/openapi-codegen-ts@^14.0.0":
-  version "14.0.0"
-  resolved "https://registry.npmjs.org/@pagopa/openapi-codegen-ts/-/openapi-codegen-ts-14.0.0.tgz#06ed67ec4259323820005d8e05ceb4ad8b2acb53"
-  integrity sha512-xnyC3I5gBuR3zeaXVyYP3Tcl2CEpB8NP9vJmEqWUY4tdAfj4HeREQgZ+gKinevZ+4CIlQljPo60IclB8rXHiag==
+"@pagopa/openapi-codegen-ts@^14.0.1":
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/@pagopa/openapi-codegen-ts/-/openapi-codegen-ts-14.0.1.tgz#9b468483034bf9d291f65e5842fd77ebdd2d5750"
+  integrity sha512-Q/urpV5sI+E/7hP0gRU6NaqiHAe1SjKALcG0wGdviNjwPAp4Zfb1Ij+J2p86KW0nlwB0WBCURtyXs8RpJk7wbA==
   dependencies:
     "@pagopa/ts-commons" "^10.15.0"
     fs-extra "^6.0.0"
@@ -12300,10 +12300,10 @@ typedarray.prototype.slice@^1.0.3:
     typed-array-buffer "^1.0.2"
     typed-array-byte-offset "^1.0.2"
 
-typescript@^4.3.5:
-  version "4.9.5"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
-  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
+typescript@^5.9.2:
+  version "5.9.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.9.2.tgz#d93450cddec5154a2d5cabe3b8102b83316fb2a6"
+  integrity sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==
 
 typical@^4.0.0:
   version "4.0.0"

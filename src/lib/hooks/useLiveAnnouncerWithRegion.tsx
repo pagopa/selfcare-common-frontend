@@ -1,41 +1,28 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+
+const visuallyHiddenStyle: React.CSSProperties = {
+  border: 0,
+  clip: 'rect(0  0  0 0)',
+  height: '1px',
+  margin: '-1px',
+  overflow: 'hidden',
+  padding: 0,
+  position: 'absolute',
+  whiteSpace: 'nowrap',
+  width: '1px',
+};
 
 export const useLiveAnnouncerWithRegion = () => {
   const [message, setMessage] = useState('');
-  const timeoutRef = useRef<number | null>(null);
 
-  const announce = useCallback((msg: string) => {
-    setMessage('');
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    // eslint-disable-next-line functional/immutable-data
-    timeoutRef.current = window.setTimeout(() => {
-      setMessage(msg);
-    }, 100);
-  }, []);
-
-  useEffect(
-    () => () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    },
-    []
-  );
+  const announce = (msg: string) => setMessage(msg);
 
   const LiveRegion = (
     <div
       aria-live="polite"
       aria-atomic="true"
       data-testid="live-region-announcer"
-      style={{
-        position: 'absolute',
-        left: '-9999px',
-        height: '1px',
-        width: '1px',
-        overflow: 'hidden',
-      }}
+      style={visuallyHiddenStyle}
     >
       {message}
     </div>
