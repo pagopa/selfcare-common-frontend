@@ -37,6 +37,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.1",
     "redux-logger": "^3.0.6",
+    "typescript": "^5.9.2",
     "validator": "13.11.0",
     "web-vitals": "^1.1.2"
   },
@@ -109,8 +110,7 @@
     "prettier": "^2.4.1",
     "regex-replace": "^2.3.1",
     "renamer": "^4.0.0",
-    "rimraf": "^6.0.1",
-    "typescript": "^5.9.2"
+    "rimraf": "^6.0.1"
   },
   "resolutions": {
     "body-parser": "^1.20.3",
