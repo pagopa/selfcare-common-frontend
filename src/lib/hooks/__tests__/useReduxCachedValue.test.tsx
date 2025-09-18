@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import useReduxCachedValue from '../useReduxCachedValue';
+import { useState } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from '../../../examples/redux/store';
-import { testActions, testSelectors } from '../../../examples/redux/slices/testSlice';
-import { fetchTestData, mockedTestData } from '../../../examples/services/testService';
 import TestData from '../../../examples/model/TestData';
+import { testActions, testSelectors } from '../../../examples/redux/slices/testSlice';
+import { createStore } from '../../../examples/redux/store';
+import { fetchTestData, mockedTestData } from '../../../examples/services/testService';
+import useReduxCachedValue from '../useReduxCachedValue';
 
 let spyFetch: () => Promise<Array<TestData>>;
 
@@ -50,10 +50,13 @@ const renderApp = (
     );
   };
 
+  // Type-safe aliases to avoid TypeScript conflicts
+  const ReduxProvider = Provider as any;
+
   render(
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <Component />
-    </Provider>
+    </ReduxProvider>
   );
 };
 
@@ -104,9 +107,9 @@ const checkMockInvocationTimes = (
   reduxSelectedPredicateMock: jest.Mock,
   retrieverServiceArg?: any
 ) => {
-  expect(spyFetch).toBeCalledTimes(expectedRetrieverServiceTimes);
-  expect(spyFetch).toBeCalledWith(retrieverServiceArg);
+  expect(spyFetch).toHaveBeenCalledTimes(expectedRetrieverServiceTimes);
+  expect(spyFetch).toHaveBeenCalledWith(retrieverServiceArg);
 
-  expect(reduxSelectedPredicateMock).toBeCalledWith(mockedTestData, retrieverServiceArg);
-  expect(reduxSelectedPredicateMock).toBeCalledTimes(expectedReduxSelectedPredicateTimes);
+  expect(reduxSelectedPredicateMock).toHaveBeenCalledWith(mockedTestData, retrieverServiceArg);
+  expect(reduxSelectedPredicateMock).toHaveBeenCalledTimes(expectedReduxSelectedPredicateTimes);
 };

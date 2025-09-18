@@ -52,10 +52,13 @@ const renderApp = (cachedRetrieve: boolean) => {
     Component
   );
 
+  // Type-safe aliases to avoid TypeScript conflicts
+  const ReduxProvider = Provider as any;
+
   render(
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <WithRetrievedTestDataComponent prop2="PROVA" />
-    </Provider>
+    </ReduxProvider>
   );
 };
 
@@ -68,7 +71,7 @@ const baseBehavior = async (cachedRetrieve: boolean) => {
 
   screen.getByText('PROVA');
 
-  expect(spyFetch).toBeCalledTimes(1);
+  expect(spyFetch).toHaveBeenCalledTimes(1);
 
   spyFetch.mockImplementation(
     () => new Promise((resolve) => resolve([{ prop1: 'RELOAD_P1', prop2: -5 }]))
@@ -81,11 +84,11 @@ const baseBehavior = async (cachedRetrieve: boolean) => {
     await waitFor(() => screen.getByText('(1)z_5'));
     screen.getByText('(2)b_200');
     screen.getByText('(3)g_25');
-    expect(spyFetch).toBeCalledTimes(1);
+    expect(spyFetch).toHaveBeenCalledTimes(1);
   } else {
     await waitFor(() => screen.getByText('(1)RELOAD_P1_-5'));
 
-    expect(spyFetch).toBeCalledTimes(2);
+    expect(spyFetch).toHaveBeenCalledTimes(2);
   }
 };
 

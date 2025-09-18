@@ -124,5 +124,5 @@ test('test', async () => {
   await waitFor(() => screen.getByText('page:10,size:0,totalElements:3,totalPages:0'));
   screen.getByText('no data');
 
-  expect(spyFetch).toBeCalledTimes(1);
+  expect(spyFetch).toHaveBeenCalledTimes(1);
 });

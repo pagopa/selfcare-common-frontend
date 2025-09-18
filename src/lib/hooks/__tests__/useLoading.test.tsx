@@ -1,15 +1,18 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../examples/redux/store';
-import { appStateActions } from '../../redux/slices/appStateSlice';
 import LoadingOverlay from '../../components/Loading/LoadingOverlay';
+import { appStateActions } from '../../redux/slices/appStateSlice';
 
 const renderApp = (injectedStore?: any) => {
   const store = injectedStore ? injectedStore : createStore();
+  // Type-safe aliases to avoid TypeScript conflicts
+  const ReduxProvider = Provider as any;
+
   render(
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <LoadingOverlay />
-    </Provider>
+    </ReduxProvider>
   );
   return store;
 };
@@ -27,7 +30,14 @@ test('Test loading', () => {
   checkLoading(false);
 });
 
-const dispatchLoadingTask = (dispatch, task, loading) => {
+const dispatchLoadingTask = (
+  dispatch: (arg0: {
+    payload: { task: string; loading: boolean };
+    type: 'appState/setLoading';
+  }) => void,
+  task: string,
+  loading: boolean
+) => {
   dispatch(appStateActions.setLoading({ task, loading }));
 };
 

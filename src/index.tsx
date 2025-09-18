@@ -16,16 +16,20 @@ const store = createStore();
 // eslint-disable-next-line functional/immutable-data
 CONFIG.MOCKS.MOCK_USER = true;
 
+// Type-safe aliases to avoid TypeScript conflicts
+const ReduxProvider = Provider as any;
+const Router = BrowserRouter as any;
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+    <ReduxProvider store={store}>
+      <Router>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <AppExample />
         </ThemeProvider>
-      </BrowserRouter>
-    </Provider>
+      </Router>
+    </ReduxProvider>
   </React.StrictMode>
 );

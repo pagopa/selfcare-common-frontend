@@ -5,7 +5,6 @@ import { Component, ErrorInfo, Fragment, ReactNode } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Action, Dispatch } from 'redux';
-import { createSelector } from 'reselect';
 import { AppError, appStateActions, appStateSelectors } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
 import SessionModal from '../SessionModal';
@@ -146,10 +145,11 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
     }
   }
 }
-const errorsSelector = createSelector(appStateSelectors.selectErrors, (errors) => errors);
 
 function mapStateToProps(state: any) {
-  return { errors: errorsSelector(state) };
+  return { 
+    errors: appStateSelectors.selectErrors(state) 
+  };
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
@@ -157,8 +157,9 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   removeError: (error: AppError) => dispatch(appStateActions.removeError(error)),
 });
 
-const ErrorBoundaryConnected: (props: Props) => ReactNode = connect(
+const ErrorBoundaryConnected = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ErrorBoundary);
+)(ErrorBoundary) as React.ComponentType<Props>;
+
 export default withTranslation()(ErrorBoundaryConnected);

@@ -1,16 +1,20 @@
-import { render } from '@testing-library/react';
-import AppExample from '../AppExample';
-import { Provider } from 'react-redux';
-import { createStore } from '../examples/redux/store';
-import { verifyMockExecution as verifyLoginMockExecution } from '../lib/decorators/__mocks__/withLogin';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router';
-import '../examples/locale';
 import { ThemeProvider } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
+import { render } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router';
+import AppExample from '../AppExample';
+import '../examples/locale';
+import { createStore } from '../examples/redux/store';
+import { verifyMockExecution as verifyLoginMockExecution } from '../lib/decorators/__mocks__/withLogin';
 
 jest.mock('../lib/decorators/withLogin');
 jest.mock('i18next-browser-languagedetector');
+
+// Type-safe aliases to avoid TypeScript conflicts
+const ReduxProvider = Provider as any;
+const RouterProvider = Router as any;
 
 const renderApp = (
   injectedStore?: ReturnType<typeof createStore>,
@@ -19,13 +23,13 @@ const renderApp = (
   const store = injectedStore ? injectedStore : createStore();
   const history = injectedHistory ? injectedHistory : createMemoryHistory();
   render(
-    <Router history={history}>
-      <Provider store={store}>
+    <RouterProvider history={history}>
+      <ReduxProvider store={store}>
         <ThemeProvider theme={theme}>
           <AppExample />
         </ThemeProvider>
-      </Provider>
-    </Router>
+      </ReduxProvider>
+    </RouterProvider>
   );
   return { store, history };
 };
