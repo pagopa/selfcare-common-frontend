@@ -46,8 +46,8 @@ test('test using assistance', () => {
 
   fireEvent.click(button);
 
-  expect(buildAssistanceURI).toBeCalledWith('assistance@selfcare.it');
-  expect(mockedLocation.assign).toBeCalledWith('url');
+  expect(buildAssistanceURI).toHaveBeenCalledWith('assistance@selfcare.it');
+  expect(mockedLocation.assign).toHaveBeenCalledWith('url');
 });
 
 test('test not using assistance', () => {
@@ -56,5 +56,5 @@ test('test not using assistance', () => {
   const btnLabel = screen.queryByText("Contatta l'assistenza");
   expect(btnLabel).not.toBeNull();
 
-  expect(buildAssistanceURI).toBeCalledTimes(0);
+  expect(buildAssistanceURI).toHaveBeenCalledTimes(0);
 });

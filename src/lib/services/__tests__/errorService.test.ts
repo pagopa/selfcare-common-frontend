@@ -14,9 +14,9 @@ test('test', () => {
   }));
   handleErrors(appErrors);
 
-  expect(trackAppError).toBeCalledTimes(3);
+  expect(trackAppError).toHaveBeenCalledTimes(3);
 
-  expect(trackAppError).toBeCalledWith(appErrors[0]);
-  expect(trackAppError).toBeCalledWith(appErrors[2]);
-  expect(trackAppError).toBeCalledWith(appErrors[4]);
+  expect(trackAppError).toHaveBeenCalledWith(appErrors[0]);
+  expect(trackAppError).toHaveBeenCalledWith(appErrors[2]);
+  expect(trackAppError).toHaveBeenCalledWith(appErrors[4]);
 });

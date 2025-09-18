@@ -1,9 +1,8 @@
 import { render, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { storageDelete, storageWrite } from '../../utils/storage-utils';
-import { storageUserOps } from '../../utils/storage';
-import { User } from '../../model/User';
 import { createStore } from '../../../examples/redux/store';
+import { User } from '../../model/User';
+import { storageUserOps } from '../../utils/storage';
 import withLogin from '../withLogin';
 
 const oldWindowLocation = global.window.location;
@@ -32,10 +31,12 @@ const renderApp = () => {
   const store = createStore();
   const Component = () => <></>;
   const DecoratedComponent = withLogin(Component);
+  // Type-safe aliases to avoid TypeScript conflicts
+const ReduxProvider = Provider as any;
   render(
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <DecoratedComponent />
-    </Provider>
+    </ReduxProvider>
   );
   return store;
 };
@@ -56,14 +57,14 @@ const mockUser = (): User => {
 
 test('Test no auth session', async () => {
   renderApp();
-  await waitFor(() => expect(global.window.location.assign).toBeCalledWith('/auth/login'));
+  await waitFor(() => expect(global.window.location.assign).toHaveBeenCalledWith('/auth/login'));
 });
 
 test('Test auth session', async () => {
   const user = mockUser();
   const store = renderApp();
   await waitFor(() => {
-    expect(global.window.location.assign).not.toBeCalled();
+    expect(global.window.location.assign).not.toHaveBeenCalled();
     expect(store.getState().user.logged).toMatchObject(user);
   });
 });

@@ -45,7 +45,9 @@ export const pnpgRoleLabels: {
 
 export enum Actions {
   ManageProductGroups = 'Selc:ManageProductGroups',
-  ManageProductUsers = 'Selc:ManageProductUsers',
+  UpdateProductUsers = 'Selc:UpdateProductUsers',
+  DeleteProductUsers = 'Selc:DeleteProductUsers',
+  CreateProductUsers = 'Selc:CreateProductUsers',
   ListProductUsers = 'Selc:ListProductUsers',
   ListProductGroups = 'Selc:ListProductGroups',
   ViewDelegations = 'Selc:ViewDelegations',

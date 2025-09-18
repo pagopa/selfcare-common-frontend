@@ -4,6 +4,8 @@
     "module": "esnext",
     "lib": ["es6", "dom", "es2019"],
     "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["react", "react-dom", "node"],
     "noEmit": true,
     "strict": true,
     "noImplicitAny": true,

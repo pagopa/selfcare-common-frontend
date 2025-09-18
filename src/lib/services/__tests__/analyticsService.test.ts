@@ -53,7 +53,7 @@ describe('test if not init', () => {
     trackEventTest(callback);
 
     checkTrackEventResult();
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test('test error', () => {
@@ -91,7 +91,7 @@ describe('test if disabled', () => {
     trackEventTest(callback);
 
     checkTrackEventResult();
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test('test error', () => {
@@ -131,7 +131,7 @@ describe('test if mocked', () => {
     trackEventTest(callback);
 
     checkTrackEventResult();
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test('test error', () => {
@@ -177,7 +177,7 @@ describe('test regular send', () => {
     trackEventTest(callback);
 
     checkTrackEventResult();
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test('test callback in error', () => {
@@ -190,12 +190,12 @@ describe('test regular send', () => {
     trackEventTest(callback);
 
     checkNoEventInConsole();
-    expect(console.error).toBeCalledWith(
+    expect(console.error).toHaveBeenCalledWith(
       'Something gone wrong while calling trackEvent PROVA callback',
       error
     );
     checkEventSent();
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test('test error', () => {
@@ -228,7 +228,7 @@ describe('test regular send library in error', () => {
   const checkTrackEventResult = () => {
     checkEventSent();
     checkEventInConsole();
-    expect(console.error).toBeCalledWith(
+    expect(console.error).toHaveBeenCalledWith(
       'Something gone wrong while sending data to mixpanel:',
       new Error('DUMMY ERROR')
     );
@@ -241,7 +241,7 @@ describe('test regular send library in error', () => {
     trackEventTest(callback);
 
     checkTrackEventResult();
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test('test callback when analytics called it even if in error', () => {
@@ -259,7 +259,7 @@ describe('test regular send library in error', () => {
     trackEventTest(callback);
 
     checkTrackEventResult();
-    expect(callback).toBeCalledTimes(1);
+    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   test('test error', () => {
@@ -267,7 +267,7 @@ describe('test regular send library in error', () => {
 
     checkErrorEventSent();
     checkErrorEventInConsole();
-    expect(console.error).toBeCalledWith(
+    expect(console.error).toHaveBeenCalledWith(
       'Something gone wrong while sending data to mixpanel:',
       new Error('DUMMY ERROR')
     );
@@ -277,10 +277,10 @@ describe('test regular send library in error', () => {
 // common methods
 
 const checkNoEventSent = () => {
-  expect(mixpanel.track).toBeCalledTimes(0);
+  expect(mixpanel.track).toHaveBeenCalledTimes(0);
 };
 const checkEventSent = () => {
-  expect(mixpanel.track).toBeCalledWith(
+  expect(mixpanel.track).toHaveBeenCalledWith(
     eventName,
     eventBody,
     expectedTrackOptions,
@@ -289,22 +289,22 @@ const checkEventSent = () => {
 };
 
 const checkNoEventInConsole = () => {
-  expect(console.log).toBeCalledTimes(0);
+  expect(console.log).toHaveBeenCalledTimes(0);
 };
 const checkEventInConsole = () => {
-  expect(console.log).toBeCalledWith(eventName, eventBody);
+  expect(console.log).toHaveBeenCalledWith(eventName, eventBody);
 };
 
 const checkNoErrorInConsole = () => {
-  expect(console.error).toBeCalledTimes(0);
+  expect(console.error).toHaveBeenCalledTimes(0);
 };
 
 const checkErrorEventSent = () => {
-  expect(mixpanel.track).toBeCalledWith('GENERIC_ERROR', appError, undefined, undefined);
+  expect(mixpanel.track).toHaveBeenCalledWith('GENERIC_ERROR', appError, undefined, undefined);
 };
 const checkErrorEventInConsole = () => {
-  expect(console.log).toBeCalledWith('GENERIC_ERROR', appError);
+  expect(console.log).toHaveBeenCalledWith('GENERIC_ERROR', appError);
 };
 const checkErrorInConsole = () => {
-  expect(console.error).toBeCalledWith(appError);
+  expect(console.error).toHaveBeenCalledWith(appError);
 };

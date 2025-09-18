@@ -11,11 +11,13 @@ jest.mock('i18next-browser-languagedetector');
 const renderApp = (userNotify: UserNotify) => {
   const store = createStore();
   const Child = buildChildComponent(userNotify);
+  // Type-safe aliases to avoid TypeScript conflicts
+  const ReduxProvider = Provider as any;
   render(
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <UserNotifyHandle />
       <Child />
-    </Provider>
+    </ReduxProvider>
   );
   return store;
 };
@@ -66,7 +68,7 @@ test('test Notify Through Toast', () => {
   fireEvent.click(exitButton);
   expect(screen.queryByText('TITLE')).toBeNull();
 
-  expect(onCloseMock).toBeCalledTimes(1);
+  expect(onCloseMock).toHaveBeenCalledTimes(1);
 });
 
 test('test Notify Closing Through Popup', () => {
@@ -90,7 +92,7 @@ test('test Notify Closing Through Popup', () => {
   fireEvent.click(exitButton);
   expect(screen.queryByText('EXAMPLE')).toBeNull();
 
-  expect(onCloseMock).toBeCalledTimes(1);
+  expect(onCloseMock).toHaveBeenCalledTimes(1);
 });
 
 test('test Notify Confirm Through Popup', () => {
@@ -115,7 +117,7 @@ test('test Notify Confirm Through Popup', () => {
   fireEvent.click(confirmButton);
   expect(screen.queryByText('EXAMPLE')).toBeNull();
 
-  expect(onConfirmMock).toBeCalledTimes(1);
+  expect(onConfirmMock).toHaveBeenCalledTimes(1);
 });
 
 test('test Notify Cancel Through Popup', () => {
@@ -139,5 +141,5 @@ test('test Notify Cancel Through Popup', () => {
   fireEvent.click(cancelButton);
   expect(screen.queryByText('EXAMPLE')).toBeNull();
 
-  expect(onCloseMock).toBeCalledTimes(1);
+  expect(onCloseMock).toHaveBeenCalledTimes(1);
 });

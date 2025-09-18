@@ -1,22 +1,39 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { FunctionComponent, ReactNode, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../examples/redux/store';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
-import useErrorDispatcher from '../useErrorDispatcher';
 import { AppError } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
+import useErrorDispatcher from '../useErrorDispatcher';
 import './../../../examples/locale';
 
 jest.mock('../../services/errorService');
 jest.mock('i18next-browser-languagedetector');
+const originalError = console.error;
+beforeAll(() => {
+  console.error = (...args) => {
+    if (
+      args[0]?.includes?.('The above error occurred in the <Child> component') ||
+      args[0]?.includes?.('React will try to recreate this component tree')
+    ) {
+      return; // Suppress expected error boundary errors
+    }
+    originalError(...args);
+  };
+});
+afterAll(() => {
+  console.error = originalError;
+});
 
 const renderApp = (content: ReactNode) => {
   const store = createStore();
+  // Type-safe aliases to avoid TypeScript conflicts
+  const ReduxProvider = Provider as any;
   render(
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <ErrorBoundary>{content}</ErrorBoundary>
-    </Provider>
+    </ReduxProvider>
   );
   return store;
 };

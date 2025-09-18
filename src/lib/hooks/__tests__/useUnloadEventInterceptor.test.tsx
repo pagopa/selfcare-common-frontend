@@ -1,16 +1,16 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
 import { createStore } from '../../../examples/redux/store';
+import './../../../examples/locale';
+import UseUnloadEventInterceptorExample from './../../../examples/UseUnloadEventInterceptorExample';
 import UnloadEventHandler from './../../components/UnloadEventHandler';
 import {
-  useUnloadEventOnExit,
-  useUnloadEventLogout,
   useUnloadEventInterceptorAndActivate,
+  useUnloadEventLogout,
+  useUnloadEventOnExit,
 } from './../useUnloadEventInterceptor';
-import UseUnloadEventInterceptorExample from './../../../examples/UseUnloadEventInterceptorExample';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import './../../../examples/locale';
 
 jest.mock('i18next-browser-languagedetector');
 
@@ -39,14 +39,17 @@ const renderApp = (startEnabled: boolean) => {
   const store = createStore();
   const Child = buildChildComponent(startEnabled);
   const history = createMemoryHistory();
+  // Type-safe aliases to avoid TypeScript conflicts
+  const ReduxProvider = Provider as any;
+  const RouterProvider = Router as any;
   render(
-    <Router history={history}>
-      <Provider store={store}>
+    <RouterProvider history={history}>
+      <ReduxProvider store={store}>
         <UnloadEventHandler />
         <UseUnloadEventInterceptorExample />
         <Child />
-      </Provider>
-    </Router>
+      </ReduxProvider>
+    </RouterProvider>
   );
   return store;
 };
@@ -94,7 +97,7 @@ describe('not enabled', () => {
   const checkButtonClick = async (buttonLabel: string, invokedUrl: string) => {
     const button = screen.getByText(buttonLabel);
     fireEvent.click(button);
-    await waitFor(() => expect(mockedLocation.assign).toBeCalledWith(invokedUrl));
+    await waitFor(() => expect(mockedLocation.assign).toHaveBeenCalledWith(invokedUrl));
   };
 
   test('logout', async () => {
@@ -135,7 +138,7 @@ describe('enabled', () => {
     const button = screen.getByText(buttonLabel);
     fireEvent.click(button);
 
-    expect(mockedLocation.assign).toBeCalledTimes(0);
+    expect(mockedLocation.assign).toHaveBeenCalledTimes(0);
 
     screen.getByText('Vuoi davvero uscire?');
 
@@ -144,7 +147,7 @@ describe('enabled', () => {
 
     fireEvent.click(button);
     fireEvent.click(screen.getByText('Esci'));
-    expect(mockedLocation.assign).toBeCalledWith(invokedUrl);
+    expect(mockedLocation.assign).toHaveBeenCalledWith(invokedUrl);
   };
 
   test('logout', async () => {
