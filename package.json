@@ -14,7 +14,7 @@
     "@mui/icons-material": "^5.14.1",
     "@mui/lab": "^5.0.0-alpha.137",
     "@mui/material": "^5.14.1",
-    "@mui/system": "^5.14.1",
+    "@mui/system": "^7.3.2",
     "@pagopa/mui-italia": "^1.7.2",
     "@pagopa/ts-commons": "^13.1.2",
     "@reduxjs/toolkit": "^2.9.0",
