@@ -12,7 +12,11 @@ const visuallyHiddenStyle: React.CSSProperties = {
   width: '1px',
 };
 
-export const useLiveAnnouncerWithRegion = () => {
+type Props = {
+ role?: string;
+}
+
+export const useLiveAnnouncerWithRegion = ({role}: Readonly<Props>) => {
   const [message, setMessage] = useState('');
 
   const announce = (msg: string) => setMessage(msg);
@@ -23,6 +27,7 @@ export const useLiveAnnouncerWithRegion = () => {
       aria-atomic="true"
       data-testid="live-region-announcer"
       style={visuallyHiddenStyle}
+      role={role}
     >
       {message}
     </div>
