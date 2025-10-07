@@ -5,4 +5,5 @@ export type JwtUser = {
   family_name: string;
   email: string;
   exp: string;
+  iss: string;
 };
