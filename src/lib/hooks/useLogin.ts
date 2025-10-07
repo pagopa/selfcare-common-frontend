@@ -13,6 +13,7 @@ const mockedUser = {
   name: 'loggedName',
   surname: 'loggedSurname',
   email: 'loggedEmail@aa.aa',
+  iss: 'SPID'
 };
 
 export const useLogin = () => {

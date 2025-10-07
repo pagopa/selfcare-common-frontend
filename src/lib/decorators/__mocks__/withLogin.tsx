@@ -4,11 +4,7 @@ import { User } from '../../model/User';
 import { userActions, userSelectors } from '../../redux/slices/userSlice';
 
 export const mockedUser: User = {
-  name: 'NAME',
-  surname: 'SURNAME',
   uid: 'UID',
-  taxCode: 'AAAAAA00A00A000A',
-  email: 'a@a.aa',
 };
 
 export const verifyMockExecution = (state: any) => {
