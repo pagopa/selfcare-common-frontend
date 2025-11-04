@@ -22,7 +22,13 @@ export type NavigationPath = {
   icon?: SvgIconComponent;
 };
 
-export default function NavigationBar({ paths, goBack, showBackComponent, backLabel, color }: Props) {
+export default function NavigationBar({
+  paths,
+  goBack,
+  showBackComponent,
+  backLabel,
+  color,
+}: Props) {
   const onExit = useUnloadEventOnExit();
 
   const truncatedText = {
@@ -74,7 +80,7 @@ export default function NavigationBar({ paths, goBack, showBackComponent, backLa
                     <Typography
                       key={p.description}
                       variant="body2"
-                      sx={{ ...truncatedText, color: 'text.disabled', fontSize: 'fontSize' }}
+                      sx={{ ...truncatedText, fontSize: 'fontSize' }}
                     >
                       {p.description}
                     </Typography>
