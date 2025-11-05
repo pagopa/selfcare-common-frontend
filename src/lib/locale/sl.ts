@@ -54,6 +54,7 @@ export default {
     },
     header: {
       exitButton: 'Izhod',
+      chipLabel: 'Operater PagoPA',
     },
     filterModal: {
       title: 'Filtriraj po ',

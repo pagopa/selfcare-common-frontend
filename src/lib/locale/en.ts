@@ -54,6 +54,7 @@ export default {
     },
     header: {
       exitButton: 'Exit',
+      chipLabel: 'PagoPA Operator',
     },
     filterModal: {
       title: 'Filter by ',

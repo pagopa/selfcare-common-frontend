@@ -53,6 +53,7 @@ export default {
     },
     header: {
       exitButton: 'Esci',
+      chipLabel: 'Operatore PagoPA',
     },
     filterModal: {
       title: 'Filtra per ',
@@ -95,7 +96,8 @@ export default {
       label: 'Indietro',
     },
     customAlert: {
-      message: 'Per migliorare la tua esperienza e offrirti una gestione più mirata, vedrai solo le informazioni e i prodotti di cui sei amministratore.'
-    }
+      message:
+        'Per migliorare la tua esperienza e offrirti una gestione più mirata, vedrai solo le informazioni e i prodotti di cui sei amministratore.',
+    },
   },
 };
