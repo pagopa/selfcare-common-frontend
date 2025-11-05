@@ -54,6 +54,7 @@ export default {
     },
     header: {
       exitButton: 'Abmelden',
+      chipLabel: 'PagoPA-Betreiber',
     },
     filterModal: {
       title: 'Filtern nach ',

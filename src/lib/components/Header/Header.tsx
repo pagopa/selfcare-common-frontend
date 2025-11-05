@@ -9,8 +9,10 @@ import { HeaderAccount } from '@pagopa/mui-italia/dist/components/HeaderAccount/
 import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
 import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
 import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CONFIG } from '../../config/env';
 import { buildAssistanceURI } from '../../services/assistanceService';
+import { isPagoPaUser } from '../../utils/storage';
 
 type PartyEntity = PartySwitchItem;
 type HeaderProps = {
@@ -88,41 +90,54 @@ const Header = ({
   enableAssistanceButton = true,
   onDocumentationClick,
   onLogoutClick,
-}: HeaderProps) => (
-  <Fragment>
-    <header>
-      <HeaderAccount
-        rootLink={rootLink}
-        loggedUser={loggedUser}
-        onAssistanceClick={() =>
-          onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
-        }
-        onLogin={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGIN))}
-        onLogout={onLogoutClick ?? (() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT)))}
-        enableLogin={enableLogin}
-        userActions={userActions}
-        enableDropdown={enableDropdown}
-        enableAssistanceButton={enableAssistanceButton}
-        onDocumentationClick={onDocumentationClick}
-      />
-    </header>
-    {withSecondHeader === true ? (
-      <nav>
-        <HeaderProduct
-          productId={selectedProductId}
-          productsList={addSelfcareProduct ? [selfcareProduct].concat(productsList) : productsList}
-          partyId={selectedPartyId}
-          partyList={partyList}
-          onSelectedProduct={onSelectedProduct}
-          onSelectedParty={onSelectedParty}
-          maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}
-          maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
+}: HeaderProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Fragment>
+      <header>
+        <HeaderAccount
+          rootLink={rootLink}
+          loggedUser={loggedUser}
+          onAssistanceClick={() =>
+            onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
+          }
+          onLogin={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGIN))}
+          onLogout={
+            onLogoutClick ?? (() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT)))
+          }
+          enableLogin={enableLogin}
+          userActions={userActions}
+          enableDropdown={enableDropdown}
+          enableAssistanceButton={enableAssistanceButton}
+          onDocumentationClick={onDocumentationClick}
         />
-      </nav>
-    ) : (
-      ''
-    )}
-  </Fragment>
-);
+      </header>
+      {withSecondHeader === true ? (
+        <nav>
+          <HeaderProduct
+            productId={selectedProductId}
+            productsList={
+              addSelfcareProduct ? [selfcareProduct].concat(productsList) : productsList
+            }
+            partyId={selectedPartyId}
+            partyList={partyList}
+            onSelectedProduct={onSelectedProduct}
+            onSelectedParty={onSelectedParty}
+            maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}
+            maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
+            {...(isPagoPaUser && {
+              chipLabel: t('common.header.chipLabel'),
+              chipColor: 'primary' as const,
+              chipSize: 'medium' as const,
+            })}
+          />
+        </nav>
+      ) : (
+        ''
+      )}
+    </Fragment>
+  );
+};
 
 export default Header;

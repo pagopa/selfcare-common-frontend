@@ -55,6 +55,7 @@ export default {
     },
     header: {
       exitButton: 'Quitter',
+      chipLabel: 'Opérateur PagoPA',
     },
     filterModal: {
       title: 'Filtrer par ',
