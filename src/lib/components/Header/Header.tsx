@@ -54,6 +54,8 @@ type HeaderProps = {
   onDocumentationClick?: () => void;
   /** A callback function that handles user clicks on the logout button. */
   onLogoutClick?: () => void;
+  /** An optional fixed list of parties to be shown in the party switcher */
+  fixedParty?: PartyEntity;
 };
 
 const selfcareProduct: ProductEntity = {
@@ -62,6 +64,17 @@ const selfcareProduct: ProductEntity = {
   productUrl: CONFIG.HEADER.LINK.PRODUCTURL,
   linkType: 'internal',
 };
+
+const selfcareBackstageProduct: ProductEntity = {
+  id: 'prod-selfcare-backstage',
+  title: 'Area Riservata Backstage',
+  productUrl: CONFIG.HEADER.LINK.PRODUCTURL,
+  linkType: 'internal',
+};
+
+const productToRender =
+  isPagoPaUser && location.pathname.includes('/admin') ? selfcareBackstageProduct : selfcareProduct;
+
 const rootLink: RootLinkType = {
   label: 'PagoPA S.p.A.',
   href: CONFIG.HEADER.LINK.ROOTLINK,
@@ -74,7 +87,7 @@ const Header = ({
   withSecondHeader,
   productsList = [],
   selectedPartyId,
-  selectedProductId = selfcareProduct.id,
+  selectedProductId = productToRender.id,
   partyList = [],
   loggedUser,
   assistanceEmail,
@@ -90,8 +103,12 @@ const Header = ({
   enableAssistanceButton = true,
   onDocumentationClick,
   onLogoutClick,
+  fixedParty,
 }: HeaderProps) => {
   const { t } = useTranslation();
+
+  const effectivePartyList = fixedParty ? [fixedParty] : partyList;
+  const effectivePartyId = fixedParty ? fixedParty.id : selectedPartyId;
 
   return (
     <Fragment>
@@ -118,10 +135,10 @@ const Header = ({
           <HeaderProduct
             productId={selectedProductId}
             productsList={
-              addSelfcareProduct ? [selfcareProduct].concat(productsList) : productsList
+              addSelfcareProduct ? [productToRender].concat(productsList) : productsList
             }
-            partyId={selectedPartyId}
-            partyList={partyList}
+            partyId={effectivePartyId}
+            partyList={effectivePartyList}
             onSelectedProduct={onSelectedProduct}
             onSelectedParty={onSelectedParty}
             maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}

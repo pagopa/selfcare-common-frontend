@@ -63,3 +63,20 @@ export enum Actions {
   UpdateInstitution = 'Selc:UpdateInstitutionData',
   ViewContract = 'Selc:ViewContract',
 }
+
+export const PRODUCT_IDS = {
+  PAGOPA: 'prod-pagopa',
+  IO: 'prod-io',
+  SEND: 'prod-pn',
+  SEND_DEV: 'prod-pn-dev',
+  INTEROP: 'prod-interop',
+  IDPAY: 'prod-idpay',
+  IO_SIGN: 'prod-io-sign',
+  FD: 'prod-fd',
+  FD_GARANTITO: 'prod-fd-garantito',
+  DASHBOARD_PSP: 'prod-dashboard-psp',
+  IO_PREMIUM: 'prod-io-premium',
+  CIBAN: 'prod-ciban',
+  CGN: 'prod-cgn',
+  IDPAY_MERCHANT: 'prod-idpay-merchant',
+};
