@@ -139,6 +139,12 @@ export default function HeaderExample({ onExit, isLoggedIn }: Readonly<Props>) {
       assistanceEmail="assistance@selfcare.it"
       enableLogin={true}
       onLogoutClick={() => alert('Logout click')}
+      fixedParty={{
+        id: '1',
+        logoUrl: `${cdnPath}4a4149af-172e-4950-9cc8-63ccc9a6d865.png`,
+        name: 'Comune di Test',
+        productRole: 'Referente amministrativo',
+      }}
     />
   );
 }
