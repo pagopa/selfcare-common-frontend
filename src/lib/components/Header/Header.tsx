@@ -8,7 +8,7 @@ import {
 import { HeaderAccount } from '@pagopa/mui-italia/dist/components/HeaderAccount/HeaderAccount';
 import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
 import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CONFIG } from '../../config/env';
 import { buildAssistanceURI } from '../../services/assistanceService';
@@ -72,9 +72,6 @@ const selfcareBackstageProduct: ProductEntity = {
   linkType: 'internal',
 };
 
-const productToRender =
-  isPagoPaUser && location.pathname.includes('/admin') ? selfcareBackstageProduct : selfcareProduct;
-
 const rootLink: RootLinkType = {
   label: 'PagoPA S.p.A.',
   href: CONFIG.HEADER.LINK.ROOTLINK,
@@ -87,7 +84,7 @@ const Header = ({
   withSecondHeader,
   productsList = [],
   selectedPartyId,
-  selectedProductId = productToRender.id,
+  selectedProductId,
   partyList = [],
   loggedUser,
   assistanceEmail,
@@ -105,10 +102,19 @@ const Header = ({
   onLogoutClick,
   fixedParty,
 }: HeaderProps) => {
+  const [productToRender, setProductToRender] = useState<ProductEntity>(selfcareProduct);
   const { t } = useTranslation();
 
   const effectivePartyList = fixedParty ? [fixedParty] : partyList;
   const effectivePartyId = fixedParty ? fixedParty.id : selectedPartyId;
+
+  useEffect(() => {
+    setProductToRender(
+      isPagoPaUser && location.pathname.includes('/admin')
+        ? selfcareBackstageProduct
+        : selfcareProduct
+    );
+  }, [location.pathname]);
 
   return (
     <Fragment>
@@ -133,7 +139,7 @@ const Header = ({
       {withSecondHeader === true ? (
         <nav>
           <HeaderProduct
-            productId={selectedProductId}
+            productId={selectedProductId || productToRender.id}
             productsList={
               addSelfcareProduct ? [productToRender].concat(productsList) : productsList
             }
