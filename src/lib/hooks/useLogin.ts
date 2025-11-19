@@ -29,14 +29,14 @@ export const useLogin = () => {
     }
 
     const sessionStorageUser = storageUserOps.read();
-    const LOGOUT_URL = isPagoPaUser ? CONFIG.URL_FE.LOGIN_ADMIN_GOOGLE : CONFIG.URL_FE.LOGOUT;
+    const LOGIN_URL = isPagoPaUser ? CONFIG.URL_FE.LOGIN_ADMIN_GOOGLE : CONFIG.URL_FE.LOGIN;
 
     // If there are no credentials, it is impossible to get the user, so
     if (isEmpty(sessionStorageUser)) {
       // Remove any partial data that might have remained, just for safety
       storageUserOps.delete();
       // Go to the login view
-      window.location.assign(LOGOUT_URL);
+      window.location.assign(LOGIN_URL);
       // This return is necessary
       return;
     }

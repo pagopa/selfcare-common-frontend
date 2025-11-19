@@ -37,7 +37,7 @@ export const buildFetchApi = (
   ) => Promise<Response>;
 };
 
-const LOGOUT_URL = isPagoPaUser ? CONFIG.URL_FE.LOGIN_ADMIN_GOOGLE : CONFIG.URL_FE.LOGOUT;
+const LOGIN_URL = isPagoPaUser ? CONFIG.URL_FE.LOGIN_ADMIN_GOOGLE : CONFIG.URL_FE.LOGOUT;
 
 /** Extract the response of a @pagopa/openapi-codegen-ts generated client rest invocation having status code successHttpStatus.
 If notValidTokenHttpStatus is not null and the returned status is equal to notValidTokenHttpStatus, it will call the onRedirectToLogin function and will schedule the redirect towards logout path.
@@ -60,7 +60,7 @@ export const extractResponse = async <R>(
       return response.right.value;
     } else if (notValidTokenHttpStatus && response.right.status === notValidTokenHttpStatus) {
       onRedirectToLogin();
-      window.setTimeout(() => window.location.assign(LOGOUT_URL), 2000);
+      window.setTimeout(() => window.location.assign(LOGIN_URL), 2000);
       return new Promise(() => null);
     } else if (
       notAuthorizedTokenHttpStatus &&
