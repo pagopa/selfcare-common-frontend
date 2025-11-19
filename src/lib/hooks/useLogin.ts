@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { CONFIG } from '../config/env';
 import { User } from '../model/User';
 import { userActions } from '../redux/slices/userSlice';
-import { storageTokenOps, storageUserOps } from '../utils/storage';
+import { isPagoPaUser, storageTokenOps, storageUserOps } from '../utils/storage';
 
 const testToken = CONFIG.TEST.JWT;
 
@@ -13,7 +13,7 @@ const mockedUser = {
   name: 'loggedName',
   surname: 'loggedSurname',
   email: 'loggedEmail@aa.aa',
-  iss: 'SPID'
+  iss: 'SPID',
 };
 
 export const useLogin = () => {
@@ -29,13 +29,14 @@ export const useLogin = () => {
     }
 
     const sessionStorageUser = storageUserOps.read();
+    const LOGIN_URL = isPagoPaUser ? CONFIG.URL_FE.LOGIN_ADMIN_GOOGLE : CONFIG.URL_FE.LOGIN;
 
     // If there are no credentials, it is impossible to get the user, so
     if (isEmpty(sessionStorageUser)) {
       // Remove any partial data that might have remained, just for safety
       storageUserOps.delete();
       // Go to the login view
-      window.location.assign(CONFIG.URL_FE.LOGIN);
+      window.location.assign(LOGIN_URL);
       // This return is necessary
       return;
     }
