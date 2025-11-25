@@ -7,7 +7,6 @@ import { isRight, toError } from 'fp-ts/lib/Either';
 import * as t from 'io-ts';
 import { CONFIG } from '../config/env';
 import { appStateActions } from '../redux/slices/appStateSlice';
-import { isPagoPaUser } from './storage';
 
 /** To show an error popup to inform of the not valid session */
 export const onRedirectToLogin = (store: EnhancedStore) =>
