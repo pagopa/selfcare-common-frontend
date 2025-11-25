@@ -59,7 +59,7 @@ export const extractResponse = async <R>(
       return response.right.value;
     } else if (notValidTokenHttpStatus && response.right.status === notValidTokenHttpStatus) {
       onRedirectToLogin();
-      window.setTimeout(() => window.location.assign(CONFIG.URL_FE.LOGIN), 2000);
+      window.setTimeout(() => window.location.assign(CONFIG.URL_FE.LOGOUT), 2000);
       return new Promise(() => null);
     } else if (
       notAuthorizedTokenHttpStatus &&
