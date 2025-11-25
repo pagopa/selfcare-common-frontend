@@ -80,3 +80,5 @@ export const PRODUCT_IDS = {
   CGN: 'prod-cgn',
   IDPAY_MERCHANT: 'prod-idpay-merchant',
 };
+
+export const ALLOWED_PRODUCT_IDS = ['prod-interop'];
