@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { RootState } from '../../examples/redux/store';
 import { CONFIG } from '../config/env';
 import { appStateActions } from '../redux/slices/appStateSlice';
 import { appStateSelectors } from './../redux/slices/appStateSlice';
@@ -60,7 +59,7 @@ export const useUnloadEventInterceptorAndActivate = (title?: string, description
 /** In order to show a custom pop-up when the user trigger an exit action you have to use the custom hook useUnloadEventOnExit which will return an arrow function to invoke instead of the exit action passing to it the exitAction itself. */
 export const useUnloadEventOnExit = () => {
   const dispatch = useDispatch();
-  const store = useStore<RootState>();
+  const store = useStore<any>();
   return (exitAction: () => void) => {
     if (appStateSelectors.selectUnloadEventConfiguration(store.getState()).enabled) {
       dispatch(appStateActions.openUnloadEventNotify(exitAction));
