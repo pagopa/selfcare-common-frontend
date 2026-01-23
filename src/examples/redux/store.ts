@@ -26,3 +26,5 @@ export const createStore = () =>
       return middleware;
     },
   });
+
+  export type RootState = ReturnType<ReturnType<typeof createStore>['getState']>;

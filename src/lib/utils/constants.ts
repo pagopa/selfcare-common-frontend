@@ -62,23 +62,26 @@ export enum Actions {
   UploadLogo = 'Selc:UploadLogo',
   UpdateInstitution = 'Selc:UpdateInstitutionData',
   ViewContract = 'Selc:ViewContract',
+  UpdateGeoTaxonomy = 'Selc:UpdateGeoTaxonomy',
 }
 
 export const PRODUCT_IDS = {
   PAGOPA: 'prod-pagopa',
+  DASHBOARD_PSP: 'prod-dashboard-psp',
   IO: 'prod-io',
+  IO_PREMIUM: 'prod-io-premium',
   SEND: 'prod-pn',
   SEND_DEV: 'prod-pn-dev',
   INTEROP: 'prod-interop',
+  INTEROP_ATTESTAZIONE: 'prod-interop-atst',
+  INTEROP_COLLAUDO: 'prod-interop-collaudo',
   IDPAY: 'prod-idpay',
+  IDPAY_MERCHANT: 'prod-idpay-merchant',
   IO_SIGN: 'prod-io-sign',
   FD: 'prod-fd',
   FD_GARANTITO: 'prod-fd-garantito',
-  DASHBOARD_PSP: 'prod-dashboard-psp',
-  IO_PREMIUM: 'prod-io-premium',
   CIBAN: 'prod-ciban',
   CGN: 'prod-cgn',
-  IDPAY_MERCHANT: 'prod-idpay-merchant',
 };
 
 export const ALLOWED_PRODUCT_IDS = ['prod-interop'];
