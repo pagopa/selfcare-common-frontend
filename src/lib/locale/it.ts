@@ -53,7 +53,7 @@ export default {
     },
     header: {
       exitButton: 'Esci',
-      chipLabel: 'Operatore PagoPA',
+      chipLabel: 'Supporto',
     },
     filterModal: {
       title: 'Filtra per ',

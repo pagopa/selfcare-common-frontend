@@ -124,7 +124,8 @@
     "postcss": "^8.4.31",
     "got": "^11.8.5",
     "static-eval": "^2.0.2",
-    "mem": "^4.0.0"
+    "mem": "^4.0.0",
+    "immer": "^9.0.19"
   },
   "jest": {
     "restoreMocks": true,
