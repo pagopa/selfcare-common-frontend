@@ -105,15 +105,14 @@ const Header = ({
   const [productToRender, setProductToRender] = useState<ProductEntity>(selfcareProduct);
   const { t } = useTranslation();
 
-  const effectivePartyList = fixedParty ? [fixedParty] : partyList;
-  const effectivePartyId = fixedParty ? fixedParty.id : selectedPartyId;
+  // For backstage the party is always static pagopa with user role support
+  const renderedPartyList = fixedParty ? [fixedParty] : partyList;
+  const renderedPartyId = fixedParty ? fixedParty.id : selectedPartyId;
+
+  const isPagoPaUserOnAdminPage = isPagoPaUser && location.pathname.includes('/admin');
 
   useEffect(() => {
-    setProductToRender(
-      isPagoPaUser && location.pathname.includes('/admin')
-        ? selfcareBackstageProduct
-        : selfcareProduct
-    );
+    setProductToRender(isPagoPaUserOnAdminPage ? selfcareBackstageProduct : selfcareProduct);
   }, [location.pathname]);
 
   return (
@@ -143,13 +142,13 @@ const Header = ({
             productsList={
               addSelfcareProduct ? [productToRender].concat(productsList) : productsList
             }
-            partyId={effectivePartyId}
-            partyList={effectivePartyList}
+            partyId={renderedPartyId}
+            partyList={renderedPartyList}
             onSelectedProduct={onSelectedProduct}
             onSelectedParty={onSelectedParty}
             maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}
             maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
-            {...(isPagoPaUser && {
+            {...(isPagoPaUserOnAdminPage && {
               chipLabel: t('common.header.chipLabel'),
               chipColor: 'primary' as const,
               chipSize: 'medium' as const,
