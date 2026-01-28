@@ -29,7 +29,7 @@ export const useLogin = () => {
     }
 
     const sessionStorageUser = storageUserOps.read();
-    const LOGIN_URL = isPagoPaUser ? CONFIG.URL_FE.LOGIN_ADMIN_GOOGLE : CONFIG.URL_FE.LOGIN;
+    const LOGIN_URL = isPagoPaUser ? CONFIG.URL_FE.LOGOUT_GOOGLE : CONFIG.URL_FE.LOGIN;
 
     // If there are no credentials, it is impossible to get the user, so
     if (isEmpty(sessionStorageUser)) {

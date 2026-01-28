@@ -5,6 +5,7 @@ export const CONFIG = {
     LOGIN_GOOGLE: '/auth/google',
     LOGIN: '/auth/login',
     LOGOUT: '/auth/logout',
+    LOGOUT_GOOGLE: '/auth/logout/google',
     LOGIN_ADMIN_GOOGLE: env.get('REACT_APP_GOOGLE_LOGIN_URL').asString() || '',
     ASSISTANCE: '/assistenza',
   },
