@@ -73,7 +73,7 @@ const BACKSTAGE_PRODUCT: ProductEntity = {
   linkType: 'internal',
 };
 
-const rootLink: RootLinkType = {
+const ROOT_LINK: RootLinkType = {
   label: 'PagoPA S.p.A.',
   href: CONFIG.HEADER.LINK.ROOTLINK,
   ariaLabel: 'Link: vai al sito di PagoPA S.p.A.',
@@ -123,7 +123,7 @@ const Header = ({
     <Fragment>
       <header>
         <HeaderAccount
-          rootLink={rootLink}
+          rootLink={ROOT_LINK}
           loggedUser={loggedUser}
           onAssistanceClick={() =>
             onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
