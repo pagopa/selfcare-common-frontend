@@ -1,15 +1,16 @@
 import {
+  HeaderAccount,
+  HeaderProduct,
   JwtUser,
   ProductEntity,
   ProductSwitchItem,
   RootLinkType,
   UserAction,
 } from '@pagopa/mui-italia';
-import { HeaderAccount } from '@pagopa/mui-italia/dist/components/HeaderAccount/HeaderAccount';
-import { HeaderProduct } from '@pagopa/mui-italia/dist/components/HeaderProduct/HeaderProduct';
 import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import { CONFIG } from '../../config/env';
 import { buildAssistanceURI } from '../../services/assistanceService';
 import { isPagoPaUser } from '../../utils/storage';
@@ -58,21 +59,21 @@ type HeaderProps = {
   fixedParty?: PartyEntity;
 };
 
-const selfcareProduct: ProductEntity = {
+const SELFCARE_PRODUCT: ProductEntity = {
   id: 'prod-selfcare',
   title: 'Area Riservata',
   productUrl: CONFIG.HEADER.LINK.PRODUCTURL,
   linkType: 'internal',
 };
 
-const selfcareBackstageProduct: ProductEntity = {
+const BACKSTAGE_PRODUCT: ProductEntity = {
   id: 'prod-selfcare-backstage',
   title: 'Area Riservata Backstage',
   productUrl: CONFIG.HEADER.LINK.PRODUCTURL,
   linkType: 'internal',
 };
 
-const rootLink: RootLinkType = {
+const ROOT_LINK: RootLinkType = {
   label: 'PagoPA S.p.A.',
   href: CONFIG.HEADER.LINK.ROOTLINK,
   ariaLabel: 'Link: vai al sito di PagoPA S.p.A.',
@@ -102,24 +103,27 @@ const Header = ({
   onLogoutClick,
   fixedParty,
 }: HeaderProps) => {
-  const [productToRender, setProductToRender] = useState<ProductEntity>(selfcareProduct);
   const { t } = useTranslation();
+  const { pathname } = useLocation();
 
-  // For backstage the party is always static pagopa with user role support
+  // Logic Derivation
+  const isAdminPage = pathname.includes('/admin');
+  const productToRender = isAdminPage ? BACKSTAGE_PRODUCT : SELFCARE_PRODUCT;
+
   const renderedPartyList = fixedParty ? [fixedParty] : partyList;
   const renderedPartyId = fixedParty ? fixedParty.id : selectedPartyId;
 
-  const isPagoPaUserOnAdminPage = isPagoPaUser && location.pathname.includes('/admin');
-
-  useEffect(() => {
-    setProductToRender(isPagoPaUserOnAdminPage ? selfcareBackstageProduct : selfcareProduct);
-  }, [location.pathname]);
+  // Memoize the product list
+  const fullProductList = useMemo(
+    () => (addSelfcareProduct ? [productToRender, ...productsList] : productsList),
+    [addSelfcareProduct, productToRender, productsList]
+  );
 
   return (
     <Fragment>
       <header>
         <HeaderAccount
-          rootLink={rootLink}
+          rootLink={ROOT_LINK}
           loggedUser={loggedUser}
           onAssistanceClick={() =>
             onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
@@ -139,20 +143,19 @@ const Header = ({
         <nav>
           <HeaderProduct
             productId={selectedProductId || productToRender.id}
-            productsList={
-              addSelfcareProduct ? [productToRender].concat(productsList) : productsList
-            }
+            productsList={fullProductList}
             partyId={renderedPartyId}
             partyList={renderedPartyList}
             onSelectedProduct={onSelectedProduct}
             onSelectedParty={onSelectedParty}
             maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}
             maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
-            {...(isPagoPaUserOnAdminPage && {
-              chipLabel: t('common.header.chipLabel'),
-              chipColor: 'primary' as const,
-              chipSize: 'medium' as const,
-            })}
+            {...(isPagoPaUser &&
+              !isAdminPage && {
+                chipLabel: t('common.header.chipLabel'),
+                chipColor: 'primary' as const,
+                chipSize: 'medium' as const,
+              })}
           />
         </nav>
       ) : (
