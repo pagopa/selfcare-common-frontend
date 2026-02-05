@@ -56,5 +56,3 @@ yarn-error.log
 !.release-it.js
 .idea
 .vscode
-
-tsconfig.json
