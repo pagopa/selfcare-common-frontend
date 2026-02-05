@@ -10,18 +10,11 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: 'tsconfig.json',
+    project: './tsconfig.json',
+    ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint',
-    'react',
-    'react-hooks',
-    'import',
-    'functional',
-    'sonarjs',
-    'react-refresh',
-  ],
+  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'import', 'functional', 'sonarjs'],
   rules: {
     'no-case-declarations': 'off',
     'no-inner-declarations': 'off',
@@ -48,10 +41,8 @@ module.exports = {
     'arrow-body-style': 'error',
     'import/order': 'error',
     '@typescript-eslint/no-unused-vars': 'off',
-    // Enable if we want to enforce the return type for all the functions
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
-    // TODO: added for compatibility. Removing this line we have to remove all the any usage in the code
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/array-type': [
       'error',
@@ -89,7 +80,6 @@ module.exports = {
     'react/jsx-no-bind': ['error', { allowArrowFunctions: true }],
     'react-hooks/rules-of-hooks': 'warn',
     'react-hooks/exhaustive-deps': 'warn',
-    // 'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'functional/no-let': 'error',
     'functional/immutable-data': 'error',
     'sonarjs/no-small-switch': 'off',
@@ -100,11 +90,11 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
   },
   overrides: [
+    // Test files
     {
       files: ['**/*.test.*', '**/__tests__/**/*'],
       rules: {
         '@typescript-eslint/no-non-null-assertion': 'off',
-        'react-refresh/only-export-components': 'off',
       },
     },
   ],
@@ -113,5 +103,5 @@ module.exports = {
       version: 'detect',
     },
   },
-  ignorePatterns: ['dist', 'node_modules', 'build', '*.config.js', '*.config.ts'],
+  ignorePatterns: ['dist', 'node_modules', 'build', 'coverage'],
 };
