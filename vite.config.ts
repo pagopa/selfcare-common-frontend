@@ -16,7 +16,7 @@ export default defineConfig({
     }),
   ],
   server: {
-    host: true, 
+    host: true,
     port: 3001,
   },
   build: {
@@ -27,10 +27,7 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
-      external: [
-        ...Object.keys(pkg.peerDependencies),
-        'react/jsx-runtime',
-      ],
+      external: [...Object.keys(pkg.peerDependencies), 'react/jsx-runtime'],
       output: {
         manualChunks: undefined,
         globals: {

@@ -30,5 +30,5 @@
     "vite.config.ts",
     "vitest.config.ts"
   ],
-  "exclude": ["__mocks__", "node_modules", "**/__tests__/*", "Dangerfile.ts"]
+  "exclude": ["__mocks__", "dist", "node_modules", "**/__tests__/*", "Dangerfile.ts"]
 }

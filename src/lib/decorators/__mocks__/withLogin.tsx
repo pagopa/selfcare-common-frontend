@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { expect } from 'vitest';
 import { User } from '../../model/User';
 import { userActions, userSelectors } from '../../redux/slices/userSlice';
 

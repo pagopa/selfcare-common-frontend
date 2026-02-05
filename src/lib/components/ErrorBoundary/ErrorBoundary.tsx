@@ -1,6 +1,6 @@
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import { TFunction } from 'i18next';
-import { uniqueId } from 'lodash';
+import  uniqueId  from 'lodash/uniqueId';
 import { Component, ErrorInfo, Fragment, ReactNode } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
