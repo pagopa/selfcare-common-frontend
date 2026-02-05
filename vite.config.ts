@@ -11,9 +11,10 @@ export default defineConfig({
     }),
     dts({
       tsconfigPath: './tsconfig.json',
+      include: ['src/lib'],
       insertTypesEntry: true,
       rollupTypes: false,
-      exclude: ['**/__tests__/**', '**/examples/**', 'src/index.tsx', 'src/setupTests.ts'],
+      exclude: ['**/__tests__/**', 'src/examples', 'src/index.tsx', 'src/setupTests.ts'],
     }),
   ],
   server: {
