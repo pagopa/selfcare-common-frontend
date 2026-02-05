@@ -12,6 +12,7 @@
     "noUnusedLocals": true,
     "noImplicitReturns": true,
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -25,10 +26,6 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true
   },
-   "include": [
-    "src/**/*",
-    "vite.config.ts",
-    "vitest.config.ts"
-  ],
+  "include": ["src/**/*", "vite.config.ts", "vitest.config.ts"],
   "exclude": ["__mocks__", "dist", "node_modules", "**/__tests__/*", "Dangerfile.ts"]
 }
