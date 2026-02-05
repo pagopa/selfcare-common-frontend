@@ -5,6 +5,7 @@ import { Component, ErrorInfo, Fragment, ReactNode } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Action, Dispatch } from 'redux';
+import i18n from '../../locale/locale-utils';
 import { AppError, appStateActions, appStateSelectors } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
 import SessionModal from '../SessionModal';
@@ -123,6 +124,7 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
         handleClose={() => this.handleClose(error)}
         width={error.width}
         showCloseIcon={error.showCloseIcon}
+        t={i18n.t}
       />
     );
   }
@@ -147,8 +149,8 @@ class ErrorBoundary extends Component<Props & ConnectedProps> {
 }
 
 function mapStateToProps(state: any) {
-  return { 
-    errors: appStateSelectors.selectErrors(state) 
+  return {
+    errors: appStateSelectors.selectErrors(state),
   };
 }
 
@@ -162,4 +164,4 @@ const ErrorBoundaryConnected = connect(
   mapDispatchToProps
 )(ErrorBoundary) as React.ComponentType<Props>;
 
-export default withTranslation()(ErrorBoundaryConnected);
+export default withTranslation()(ErrorBoundaryConnected) as React.ComponentType<Props>;

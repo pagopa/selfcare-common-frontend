@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import { Fragment, useState } from 'react';
 import { SessionModal } from '../lib';
+import i18n from '../lib/locale/locale-utils';
 
 export default () => {
   const [openModal, setOpenModal] = useState(false);
@@ -35,6 +36,7 @@ export default () => {
           setOpenModal(false);
           setTimeout(() => setOpenModal(true), 1000);
         }}
+        t={i18n.t}
       />
 
       <Button
@@ -56,6 +58,7 @@ export default () => {
           setTimeout(() => setOpenModalWithEnvironments(true), 1000);
         }}
         productEnvironments={backOfficeEnvironmentConfigurationsExample}
+        t={i18n.t}
       />
 
       <Button
@@ -74,6 +77,7 @@ export default () => {
           setOpenModalWithNoCloseButton(false);
         }}
         showCloseButton={false}
+        t={i18n.t}
       />
     </Fragment>
   );

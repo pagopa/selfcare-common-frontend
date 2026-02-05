@@ -33,7 +33,7 @@ export const useUnloadEventInterceptor = () => {
   };
 
   const unregisterUnloadEvent = () => {
-    dispatch(appStateActions.disableUnloadEventInterceptor());
+    dispatch(appStateActions.disableUnloadEventInterceptor(undefined));
     unblockHistory.current();
   };
 
