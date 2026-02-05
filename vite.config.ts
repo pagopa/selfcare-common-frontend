@@ -10,6 +10,7 @@ export default defineConfig({
       jsxRuntime: 'automatic',
     }),
     dts({
+      tsconfigPath: './tsconfig.lib.json',
       insertTypesEntry: true,
       rollupTypes: false,
       exclude: ['**/__tests__/**', '**/examples/**', 'src/index.tsx', 'src/setupTests.ts'],
@@ -28,6 +29,7 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [...Object.keys(pkg.peerDependencies), 'react/jsx-runtime'],
+      input: resolve(__dirname, 'src/lib/index.ts'),  
       output: {
         globals: {
           react: 'React',
