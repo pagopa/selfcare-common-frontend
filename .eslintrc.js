@@ -13,7 +13,15 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'import', 'functional', 'sonarjs'],
+  plugins: [
+    '@typescript-eslint',
+    'react',
+    'react-hooks',
+    'import',
+    'functional',
+    'sonarjs',
+    'react-refresh',
+  ],
   rules: {
     'no-case-declarations': 'off',
     'no-inner-declarations': 'off',
@@ -80,6 +88,8 @@ module.exports = {
     'react/jsx-key': 'error',
     'react/jsx-no-bind': ['error', { allowArrowFunctions: true }],
     'react-hooks/rules-of-hooks': 'warn',
+    'react-hooks/exhaustive-deps': 'warn',
+    // 'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'functional/no-let': 'error',
     'functional/immutable-data': 'error',
     'sonarjs/no-small-switch': 'off',
@@ -91,9 +101,10 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.test.*'],
+      files: ['**/*.test.*', '**/__tests__/**/*'],
       rules: {
         '@typescript-eslint/no-non-null-assertion': 'off',
+        'react-refresh/only-export-components': 'off',
       },
     },
   ],
@@ -102,4 +113,5 @@ module.exports = {
       version: 'detect',
     },
   },
+  ignorePatterns: ['dist', 'node_modules', 'build', '*.config.js', '*.config.ts'],
 };

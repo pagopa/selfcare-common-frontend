@@ -1,5 +1,4 @@
 import { renderHook } from '@testing-library/react';
-import { useRef } from 'react';
 import { useFocus } from '../useFocus';
 
 describe('useFocus', () => {
@@ -8,12 +7,12 @@ describe('useFocus', () => {
 
   beforeEach(() => {
     mockElement = document.createElement('input');
-    mockElement.focus = jest.fn();
+    mockElement.focus = vi.fn();
     mockRef = { current: mockElement };
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should focus element on mount when ref is provided', () => {
@@ -24,7 +23,7 @@ describe('useFocus', () => {
 
   it('should not focus when ref.current is null', () => {
     const nullRef = { current: null };
-    const focusSpy = jest.fn();
+    const focusSpy = vi.fn();
 
     renderHook(() => useFocus(nullRef));
 

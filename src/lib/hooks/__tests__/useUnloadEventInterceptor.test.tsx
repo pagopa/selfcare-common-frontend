@@ -12,12 +12,12 @@ import {
   useUnloadEventOnExit,
 } from './../useUnloadEventInterceptor';
 
-jest.mock('i18next-browser-languagedetector');
+vi.mock('i18next-browser-languagedetector');
 
 const oldWindowLocation = global.window.location;
 
 const initialLocation = {
-  assign: jest.fn(),
+  assign: vi.fn(),
   pathname: '',
   origin: 'MOCKED_ORIGIN',
   search: '',

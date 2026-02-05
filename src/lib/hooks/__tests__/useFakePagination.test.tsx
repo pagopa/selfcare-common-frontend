@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { PageRequest } from '../../model/PageRequest';
 import { PageResource } from '../../model/PageResource';
 import useFakePagination from '../useFakePagination';
 import { fetchTestData } from '../../../examples/services/testService';
+import { fireEvent, waitFor, render, screen } from '@testing-library/react';
 
 type CustomType = {
   prop1: string;
@@ -13,7 +13,7 @@ type CustomType = {
 let spyFetch: () => Promise<Array<CustomType>>;
 
 beforeEach(() => {
-  spyFetch = jest.fn(fetchTestData);
+  spyFetch = vi.fn(fetchTestData);
 });
 
 const renderApp = () => {

@@ -7,11 +7,12 @@ import { createStore } from '../../../examples/redux/store';
 import { testActions, testSelectors } from '../../../examples/redux/slices/testSlice';
 import { fetchTestData } from '../../../examples/services/testService';
 import TestData from '../../../examples/model/TestData';
+import { vi, type Mock } from 'vitest';
 
-let spyFetch: jest.Mock<Promise<Array<TestData>>>;
+let spyFetch: Mock<Promise<Array<TestData>>>;
 
 beforeEach(() => {
-  spyFetch = jest.fn(fetchTestData);
+  spyFetch = vi.fn(fetchTestData);
 });
 
 const renderApp = (cachedRetrieve: boolean) => {

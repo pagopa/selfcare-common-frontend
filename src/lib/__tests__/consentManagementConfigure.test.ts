@@ -1,6 +1,9 @@
+import { vi, beforeEach, describe, test, expect } from 'vitest';
 import { initAnalytics } from '../services/analyticsService';
 
-jest.mock('../services/analyticsService', () => ({ initAnalytics: jest.fn() }));
+vi.mock('../services/analyticsService', () => ({ 
+  initAnalytics: vi.fn() 
+}));
 
 declare const window: any;
 
@@ -11,13 +14,16 @@ window.OneTrust = {
 
 window.OnetrustActiveGroups = '';
 
-const configureConsentManagement = () => {
-  require('../consentManagementConfigure');
+const configureConsentManagement = async () => {
+  await import('../consentManagementConfigure');
   window.OptanonWrapper();
 };
 
 describe('test clean session', () => {
-  beforeEach(configureConsentManagement);
+  beforeEach(async () => {
+    vi.clearAllMocks(); // Clear mock call history
+    await configureConsentManagement();
+  });
 
   test('Approved consent', () => {
     window.OnetrustActiveGroups = 'C0001,C0002,C0003,C0004';
@@ -33,20 +39,31 @@ describe('test clean session', () => {
 });
 
 describe('test cookies setted', () => {
-  beforeEach(() => {
-    jest.resetModules();
-    jest.mock('../services/analyticsService', () => ({ initAnalytics: jest.fn() }));
+  beforeEach(async () => {
+    vi.resetModules();
+    vi.clearAllMocks();
+    // Re-mock after reset
+    vi.doMock('../services/analyticsService', () => ({ 
+      initAnalytics: vi.fn() 
+    }));
   });
 
-  test('Approved consent', () => {
+  test('Approved consent', async () => {
     document.cookie = 'OptanonConsent=groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A1';
-    configureConsentManagement();
-    expect(require('../services/analyticsService').initAnalytics).toHaveBeenCalledTimes(1);
+    
+    // Import AFTER mocking
+    const { initAnalytics } = await import('../services/analyticsService');
+    await configureConsentManagement();
+    
+    expect(initAnalytics).toHaveBeenCalledTimes(1);
   });
 
-  test('Rejected consent', () => {
+  test('Rejected consent', async () => {
     document.cookie = 'OptanonConsent=groups=C0001%3A1%2CC0002%3A0%2CC0003%3A1%2CC0004%3A1';
-    configureConsentManagement();
-    expect(require('../services/analyticsService').initAnalytics).toHaveBeenCalledTimes(0);
+    
+    const { initAnalytics } = await import('../services/analyticsService');
+    await configureConsentManagement();
+    
+    expect(initAnalytics).toHaveBeenCalledTimes(0);
   });
 });

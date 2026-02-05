@@ -1,15 +1,15 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
 import { buildAssistanceURI } from '../../../../services/assistanceService';
 import './../../../../../examples/locale';
 import BlockingErrorPage from './../BlockingErrorPage';
+import { vi, type Mock } from 'vitest';
 
-jest.mock('i18next-browser-languagedetector');
+vi.mock('i18next-browser-languagedetector');
 
 const oldWindowLocation = global.window.location;
 
 const initialLocation = {
-  assign: jest.fn(),
+  assign: vi.fn(),
   pathname: '',
   origin: 'MOCKED_ORIGIN',
   search: '',
@@ -27,12 +27,12 @@ afterAll(() => {
   Object.defineProperty(window, 'location', { value: oldWindowLocation });
 });
 
-jest.mock('../../../../services/assistanceService', () => ({
-  buildAssistanceURI: jest.fn(),
+vi.mock('../../../../services/assistanceService', () => ({
+  buildAssistanceURI: vi.fn(),
 }));
 
 beforeEach(() => {
-  (buildAssistanceURI as jest.Mock).mockReturnValue('url');
+  (buildAssistanceURI as Mock).mockReturnValue('url');
 });
 
 const checkBase = () => {

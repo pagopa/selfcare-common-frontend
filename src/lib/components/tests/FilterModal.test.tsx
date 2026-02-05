@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import FilterModal, { FilterModalConfig } from '../FilterModal';
 import './../../../examples/locale';
 
-jest.mock('i18next-browser-languagedetector');
+vi.mock('i18next-browser-languagedetector');
 
 const data = [
   { id: '1', label: 'Option 1' },
@@ -14,7 +14,7 @@ const filterModalConfig: FilterModalConfig<{ id: string; label: string }, string
   data,
   getLabel: (e) => e.label,
   getValue: (e) => e.id,
-  onFilterChange: jest.fn(),
+  onFilterChange: vi.fn(),
 };
 
 describe('FilterModal Component', () => {
@@ -47,7 +47,7 @@ describe('FilterModal Component', () => {
   });
 
   test('should call handleClose when the apply filter button is clicked', () => {
-    const handleClose = jest.fn();
+    const handleClose = vi.fn();
     render(
       <FilterModal
         open={true}

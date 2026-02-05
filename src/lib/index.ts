@@ -1,3 +1,7 @@
+// Global styles for all components
+import './index.css';
+
+// Export components and hooks
 export { default as BackComponent } from './components/BackComponent';
 export { default as CustomAvatar } from './components/CustomAvatar';
 export { default as CustomPagination } from './components/CustomPagination';

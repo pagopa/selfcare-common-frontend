@@ -10,7 +10,7 @@ import useReduxCachedValue from '../useReduxCachedValue';
 let spyFetch: () => Promise<Array<TestData>>;
 
 beforeEach(() => {
-  spyFetch = jest.fn(fetchTestData);
+  spyFetch = vi.fn(fetchTestData);
 });
 
 const renderApp = (
@@ -62,7 +62,7 @@ const renderApp = (
 
 test('test', async () => {
   const retrieverServiceArg = 'PROVA';
-  const reduxSelectedPredicateMock = jest.fn(() => false);
+  const reduxSelectedPredicateMock = vi.fn(() => false);
   renderApp(retrieverServiceArg, reduxSelectedPredicateMock);
 
   await waitFor(() => screen.getByText('no data'));
@@ -104,7 +104,7 @@ const clear = async (clearButton: HTMLElement) => {
 const checkMockInvocationTimes = (
   expectedRetrieverServiceTimes: number,
   expectedReduxSelectedPredicateTimes: number,
-  reduxSelectedPredicateMock: jest.Mock,
+  reduxSelectedPredicateMock: vi.Mock,
   retrieverServiceArg?: any
 ) => {
   expect(spyFetch).toHaveBeenCalledTimes(expectedRetrieverServiceTimes);

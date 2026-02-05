@@ -9,8 +9,8 @@ import '../examples/locale';
 import { createStore } from '../examples/redux/store';
 import { verifyMockExecution as verifyLoginMockExecution } from '../lib/decorators/__mocks__/withLogin';
 
-jest.mock('../lib/decorators/withLogin');
-jest.mock('i18next-browser-languagedetector');
+vi.mock('../lib/decorators/withLogin');
+vi.mock('i18next-browser-languagedetector');
 
 // Type-safe aliases to avoid TypeScript conflicts
 const ReduxProvider = Provider as any;

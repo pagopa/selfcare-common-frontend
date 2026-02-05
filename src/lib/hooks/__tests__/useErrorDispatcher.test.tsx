@@ -8,8 +8,8 @@ import { handleErrors } from '../../services/errorService';
 import useErrorDispatcher from '../useErrorDispatcher';
 import './../../../examples/locale';
 
-jest.mock('../../services/errorService');
-jest.mock('i18next-browser-languagedetector');
+vi.mock('../../services/errorService');
+vi.mock('i18next-browser-languagedetector');
 const originalError = console.error;
 beforeAll(() => {
   console.error = (...args) => {
@@ -102,7 +102,7 @@ test('Test not blocking error not retriable', async () => {
 
 test('Test not blocking error retriable', async () => {
   const childText = 'DISPLAYED TEXT';
-  const retryMock = jest.fn();
+  const retryMock = vi.fn();
   const Child: FunctionComponent = buildChildComponent(childText, {
     id: 'id',
     error: new Error(),
