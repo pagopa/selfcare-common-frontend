@@ -10,7 +10,7 @@ export default defineConfig({
       jsxRuntime: 'automatic',
     }),
     dts({
-      tsconfigPath: './tsconfig.lib.json',
+      tsconfigPath: './tsconfig.json',
       insertTypesEntry: true,
       rollupTypes: false,
       exclude: ['**/__tests__/**', '**/examples/**', 'src/index.tsx', 'src/setupTests.ts'],
