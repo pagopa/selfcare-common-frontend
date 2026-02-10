@@ -1,5 +1,5 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { describe, expect, test, vi } from 'vitest';
+import { render, waitFor, screen } from '@testing-library/react';
+import { describe, test, expect } from 'vitest';
 import { useLiveAnnouncerWithRegion } from '../useLiveAnnouncerWithRegion';
 
 // Remove vi.useFakeTimers() or use real timers for this test

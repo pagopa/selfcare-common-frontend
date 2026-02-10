@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { CONFIG } from '../../config/env';
 import { User } from '../../model/User';
 import { storageUserOps } from '../../utils/storage';

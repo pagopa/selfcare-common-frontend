@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { FunctionComponent, ReactNode, useEffect } from 'react';
 import { Provider } from 'react-redux';
+import { afterAll, beforeAll, expect, test, vi } from 'vitest';
 import { createStore } from '../../../examples/redux/store';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import { AppError } from '../../redux/slices/appStateSlice';
@@ -32,7 +33,7 @@ const renderApp = (content: ReactNode) => {
   const ReduxProvider = Provider as any;
   render(
     <ReduxProvider store={store}>
-      <ErrorBoundary>{content}</ErrorBoundary>
+      <ErrorBoundary t={() => {}}>{content}</ErrorBoundary>
     </ReduxProvider>
   );
   return store;
