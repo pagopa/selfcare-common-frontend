@@ -2,10 +2,9 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": ["es6", "dom", "es2019"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "types": ["react", "react-dom", "node"],
     "noEmit": true,
     "strict": true,
     "noImplicitAny": true,

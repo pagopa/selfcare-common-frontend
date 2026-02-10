@@ -5,6 +5,8 @@ import { User } from '../model/User';
 import { userActions } from '../redux/slices/userSlice';
 import { isPagoPaUser, storageTokenOps, storageUserOps } from '../utils/storage';
 
+declare const window: any;
+
 const testToken = CONFIG.TEST.JWT;
 
 const mockedUser = {
