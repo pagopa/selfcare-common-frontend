@@ -3,7 +3,11 @@
     "outDir": "dist",
     "target": "es2019",
     "module": "commonjs",
-    "lib": ["es6", "dom", "es2019"],
+    "lib": [
+      "es6",
+      "dom",
+      "es2019"
+    ],
     "jsx": "react-jsx",
     "declaration": true,
     "moduleResolution": "node",
@@ -25,7 +29,9 @@
     "resolveJsonModule": true,
     "sourceMap": true
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "__mocks__",
     "node_modules",
