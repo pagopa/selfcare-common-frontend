@@ -1,7 +1,7 @@
 locales/locales.ts
 **/__tests__/**
 **/__mocks__/**
-.eslintrc.js
+.eslintrc.cjs
 definitions/*
 src/vite-env.d.ts
 Dangerfile.ts
