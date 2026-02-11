@@ -9,3 +9,4 @@ Dangerfile.ts
 dist/**
 build/**
 src/lib/utils/fixSwagger20ArraySchemaDef.js
+vite.config.ts
