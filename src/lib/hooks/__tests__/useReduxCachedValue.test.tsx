@@ -6,7 +6,7 @@ import { testActions, testSelectors } from '../../../examples/redux/slices/testS
 import { createStore } from '../../../examples/redux/store';
 import { fetchTestData, mockedTestData } from '../../../examples/services/testService';
 import useReduxCachedValue from '../useReduxCachedValue';
-import { beforeEach, expect, test, vi } from 'vitest';
+import { beforeEach, expect, Mock, test, vi } from 'vitest';
 
 let spyFetch: () => Promise<Array<TestData>>;
 
@@ -105,7 +105,7 @@ const clear = async (clearButton: HTMLElement) => {
 const checkMockInvocationTimes = (
   expectedRetrieverServiceTimes: number,
   expectedReduxSelectedPredicateTimes: number,
-  reduxSelectedPredicateMock: vi.Mock,
+  reduxSelectedPredicateMock: Mock,
   retrieverServiceArg?: any
 ) => {
   expect(spyFetch).toHaveBeenCalledTimes(expectedRetrieverServiceTimes);

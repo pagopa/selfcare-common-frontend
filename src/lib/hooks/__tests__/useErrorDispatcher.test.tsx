@@ -8,6 +8,7 @@ import { AppError } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
 import useErrorDispatcher from '../useErrorDispatcher';
 import './../../../examples/locale';
+import i18n from '../../locale/locale-utils';
 
 vi.mock('../../services/errorService');
 vi.mock('i18next-browser-languagedetector');
@@ -33,7 +34,7 @@ const renderApp = (content: ReactNode) => {
   const ReduxProvider = Provider as any;
   render(
     <ReduxProvider store={store}>
-      <ErrorBoundary t={() => {}}>{content}</ErrorBoundary>
+      <ErrorBoundary t={i18n.t}>{content}</ErrorBoundary>
     </ReduxProvider>
   );
   return store;
