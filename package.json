@@ -14,7 +14,48 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./index.css": "./dist/index.css"
+    "./components/*": {
+      "import": "./dist/components/*.js",
+      "types": "./dist/components/*.d.ts"
+    },
+    "./hooks/*": {
+      "import": "./dist/hooks/*.js",
+      "types": "./dist/hooks/*.d.ts"
+    },
+    "./utils/*": {
+      "import": "./dist/utils/*.js",
+      "types": "./dist/utils/*.d.ts"
+    },
+    "./decorators/*": {
+      "import": "./dist/decorators/*.js",
+      "types": "./dist/decorators/*.d.ts"
+    },
+    "./lib/*": {
+      "import": "./dist/lib/*.js",
+      "types": "./dist/lib/*.d.ts"
+    },
+    "./services/*": {
+      "import": "./dist/services/*.js",
+      "types": "./dist/services/*.d.ts"
+    },
+    "./model/*": {
+      "import": "./dist/model/*.js",
+      "types": "./dist/model/*.d.ts"
+    },
+    "./locale/*": {
+      "import": "./dist/locale/*.js",
+      "types": "./dist/locale/*.d.ts"
+    },
+    "./config/*": {
+      "import": "./dist/config/*.js",
+      "types": "./dist/config/*.d.ts"
+    },
+    "./*": {
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    },
+    "./index.css": "./dist/index.css",
+    "./package.json": "./package.json"
   },
   "sideEffects": [
     "**/*.css"
