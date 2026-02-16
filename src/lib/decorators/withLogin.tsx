@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { CONFIG } from '../config/env';
 import useLoading from '../hooks/useLoading';
 import { useLogin } from '../hooks/useLogin';
 import { userSelectors } from '../redux/slices/userSlice';
 import { LOADING_TASK_LOGIN_CHECK } from '../utils/constants';
+import { storageUserOps } from '../utils/storage';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type LoginProps = {};
@@ -22,7 +24,29 @@ export default function withLogin<T extends LoginProps>(
     const { attemptSilentLogin } = useLogin();
     const setLoading = useLoading(LOADING_TASK_LOGIN_CHECK);
 
+    const currentPath = window.location.pathname;
+    const currentHash = window.location.hash;
+    const isPagoPaUser = storageUserOps.read()?.iss === 'PAGOPA';
+
     useEffect(() => {
+      // eslint-disable-next-line no-console
+      console.log('Checking user login status...', { currentPath, currentHash });
+
+      // Check if coming from Google login (path contains /auth/login/success with token fragment)
+      if (
+        currentPath.includes('/auth/login/success') &&
+        currentHash.includes('token=') &&
+        !isPagoPaUser
+      ) {
+        window.location.assign(CONFIG.URL_FE.LOGOUT_GOOGLE);
+        return;
+      }
+
+      if (currentPath.includes('/auth/login') && !currentHash.includes('token=') && isPagoPaUser) {
+        window.location.assign(CONFIG.URL_FE.LOGOUT);
+        return;
+      }
+
       async function asyncAttemptSilentLogin() {
         await attemptSilentLogin();
       }
