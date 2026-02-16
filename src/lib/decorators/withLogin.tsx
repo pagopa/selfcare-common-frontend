@@ -32,21 +32,23 @@ export default function withLogin<T extends LoginProps>(
       // eslint-disable-next-line no-console
       console.log('Checking user login status...', { currentPath, currentHash });
 
-      // Check if coming from Google login (path contains /auth/login/success with token fragment)
       if (
         currentPath.includes('/auth/login/success') &&
         currentHash.includes('token=') &&
         !isPagoPaUser
       ) {
-        window.location.assign(CONFIG.URL_FE.LOGOUT_GOOGLE);
+        storageUserOps.delete();
+        globalThis.location.assign(CONFIG.URL_FE.LOGOUT_GOOGLE);
         return;
       }
 
       if (currentPath.includes('/auth/login') && !currentHash.includes('token=') && isPagoPaUser) {
-        window.location.assign(CONFIG.URL_FE.LOGOUT);
-        return;
+        storageUserOps.delete();
+        globalThis.location.assign(CONFIG.URL_FE.LOGOUT);
       }
+    }, [currentPath, currentHash, isPagoPaUser]);
 
+    useEffect(() => {
       async function asyncAttemptSilentLogin() {
         await attemptSilentLogin();
       }
