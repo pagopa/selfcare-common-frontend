@@ -24,6 +24,72 @@ In order to use these components it's necessary to set the following keys of the
 | ANALYTICS.* |  | See [analitics feature](#analytics) | |
 | CONSENT.* |  | See [consent management feature](#consent-management) | |
 
+# Migration Guide (v1.34.90+)
+
+## Breaking Change: Root-only API exports
+
+Starting from **v1.34.90**, this package has been migrated from Create React App (CRA) to Vite and now exports a **root-only public API**. This simplifies the package structure and improves compatibility with modern bundlers.
+
+### Required import path changes
+
+All imports must now go through the **root package entry point**, not internal module paths.
+
+#### ❌ **Old patterns (no longer supported):**
+```typescript
+// These deep import paths will NO LONGER WORK
+import Toast from '@pagopa/selfcare-common-frontend/components/Toast';
+import useLoading from '@pagopa/selfcare-common-frontend/hooks/useLoading';
+import { Header } from '@pagopa/selfcare-common-frontend/components/Header/Header';
+```
+
+#### ✅ **New pattern (required):**
+```typescript
+// All imports must use the root entry point
+import { Toast, useLoading, Header } from '@pagopa/selfcare-common-frontend';
+```
+
+### Migration steps
+
+1. **Replace all deep imports** with imports from the root package:
+   ```typescript
+   // Before
+   import CustomAlert from '@pagopa/selfcare-common-frontend/components/CustomAlert';
+   
+   // After
+   import { CustomAlert } from '@pagopa/selfcare-common-frontend';
+   ```
+
+2. **Update tsconfig paths** if you have path aliases targeting internal modules:
+   ```json
+   // Remove or update these tsconfig paths:
+   {
+     "compilerOptions": {
+       "paths": {
+         // ❌ Remove patterns like:
+         "@pagopa/selfcare-common-frontend/*": ["node_modules/@pagopa/selfcare-common-frontend/*"],
+         // These will no longer resolve correctly
+       }
+     }
+   }
+   ```
+
+3. **Verify bundler resolution** - Most bundlers (Webpack, Vite, esbuild) will automatically resolve the root entry point, but ensure your build settings are not forcing deep module resolution.
+
+### Package format changes
+
+- **Module formats**: ESM-only (removed CommonJS/CJS)
+- **Build output**: Single bundled index.js + index.d.ts (no per-file modules)
+- **Entry points**: Only `@pagopa/selfcare-common-frontend` (no subpath exports)
+- **TypeScript support**: Single bundled index.d.ts with full type information
+
+### Why this change?
+
+This change aligns with modern web development best practices:
+- **Cleaner public API**: Single, well-defined entry point reduces confusion
+- **Better tree-shaking**: Bundlers can more efficiently analyze and remove unused code
+- **Improved maintainability**: Easier to manage breaking changes and versioning
+- **Modern standards**: ESM-only reduces bundle size and simplifies consumption
+
 # Components
 ## Header
 SelfCare Header component

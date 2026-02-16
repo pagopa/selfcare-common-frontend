@@ -1,15 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { FunctionComponent, ReactNode, useEffect } from 'react';
 import { Provider } from 'react-redux';
+import { afterAll, beforeAll, expect, test, vi } from 'vitest';
 import { createStore } from '../../../examples/redux/store';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import { AppError } from '../../redux/slices/appStateSlice';
 import { handleErrors } from '../../services/errorService';
 import useErrorDispatcher from '../useErrorDispatcher';
 import './../../../examples/locale';
+import i18n from '../../locale/locale-utils';
 
-jest.mock('../../services/errorService');
-jest.mock('i18next-browser-languagedetector');
+vi.mock('../../services/errorService');
+vi.mock('i18next-browser-languagedetector');
 const originalError = console.error;
 beforeAll(() => {
   console.error = (...args) => {
@@ -32,7 +34,7 @@ const renderApp = (content: ReactNode) => {
   const ReduxProvider = Provider as any;
   render(
     <ReduxProvider store={store}>
-      <ErrorBoundary>{content}</ErrorBoundary>
+      <ErrorBoundary t={i18n.t}>{content}</ErrorBoundary>
     </ReduxProvider>
   );
   return store;
@@ -102,7 +104,7 @@ test('Test not blocking error not retriable', async () => {
 
 test('Test not blocking error retriable', async () => {
   const childText = 'DISPLAYED TEXT';
-  const retryMock = jest.fn();
+  const retryMock = vi.fn();
   const Child: FunctionComponent = buildChildComponent(childText, {
     id: 'id',
     error: new Error(),

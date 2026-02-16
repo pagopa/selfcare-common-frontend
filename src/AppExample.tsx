@@ -23,12 +23,13 @@ import UserNotifyHandle from './lib/components/UserNotifyHandle';
 import './lib/consentManagementConfigure';
 import withLogin from './lib/decorators/withLogin';
 import { useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
+import i18n from './lib/locale/locale-utils';
 
 const AppExample = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const onExit = useUnloadEventOnExit();
   return (
-    <ErrorBoundary minHeight="100vh" assistanceEmail="assistenza@selfcare.it">
+    <ErrorBoundary minHeight="100vh" assistanceEmail="assistenza@selfcare.it" t={i18n.t}>
       <Box
         sx={{
           display: 'flex',
@@ -109,7 +110,7 @@ const AppExample = () => {
             <AnalyticsExample />
           </Grid>
           <Grid item xs={2}>
-            <TranslationTextExample />
+            <TranslationTextExample t={i18n.t} />
           </Grid>
         </Grid>
         <Grid>

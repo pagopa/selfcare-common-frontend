@@ -1,7 +1,7 @@
+import { expect, test } from 'vitest';
 import { CONFIG } from '../../config/env';
 import { User } from '../../model/User';
 import { storageUserOps } from '../../utils/storage';
-import { storageDelete, storageWrite } from '../../utils/storage-utils';
 import { buildAssistanceURI } from './../assistanceService';
 
 test('test logged', () => {

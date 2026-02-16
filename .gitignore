@@ -52,9 +52,7 @@ yarn-error.log
 
 *.zip
 
-!jest.config.js
+!vitest.config.js
 !.release-it.js
 .idea
 .vscode
-
-tsconfig.json

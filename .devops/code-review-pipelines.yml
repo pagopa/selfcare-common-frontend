@@ -7,7 +7,7 @@
 #
 
 variables:
-  NODE_VERSION: '20.18.1'
+  NODE_VERSION: '24.13.0'
   YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
   # Execute agents (jobs) on latest Ubuntu version.
   vmImageNameDefault: 'ubuntu-latest'
@@ -92,5 +92,5 @@ stages:
               nodeVersion: $(NODE_VERSION)
 
           - script: |
-              yarn test:coverage --watchAll=false
+              yarn test:coverage
             displayName: 'Unit tests exec'

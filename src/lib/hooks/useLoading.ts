@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash';
+import uniqueId from 'lodash/uniqueId';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { appStateActions } from '../redux/slices/appStateSlice';

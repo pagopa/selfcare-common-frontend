@@ -1,6 +1,7 @@
 import { MutableRefObject, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SessionModal, Toast } from '..';
+import i18n from '../locale/locale-utils';
 import { UserNotify } from '../model/UserNotify';
 import { appStateActions, appStateSelectors } from '../redux/slices/appStateSlice';
 import ToastWrapper from './ToastWrapper';
@@ -71,6 +72,7 @@ function UserNotifyHandle() {
         onCloseLabel={notifyModal?.closeLabel}
         width={notifyModal?.width}
         showCloseIcon={notifyModal?.showCloseIcon}
+        t={i18n.t}
       />
     </>
   );

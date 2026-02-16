@@ -1,8 +1,8 @@
-import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, waitFor, screen } from '@testing-library/react';
+import { describe, test, expect } from 'vitest';
 import { useLiveAnnouncerWithRegion } from '../useLiveAnnouncerWithRegion';
 
-jest.useFakeTimers();
+// Remove vi.useFakeTimers() or use real timers for this test
 
 const TestComponent = () => {
   const { announce, LiveRegion } = useLiveAnnouncerWithRegion();
@@ -20,7 +20,6 @@ describe('useLiveAnnouncerWithRegion', () => {
     render(<TestComponent />);
 
     const button = screen.getByText('Announce');
-
     button.click();
 
     const region = screen.getByTestId('live-region-announcer');

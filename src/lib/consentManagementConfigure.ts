@@ -20,7 +20,7 @@ window.OptanonWrapper = function () {
 };
 // check mixpanel cookie consent in cookie
 const OTCookieValue: string =
-  document.cookie.split('; ').find((row) => row.startsWith('OptanonConsent=')) || '';
+  document.cookie.split('; ').find((row: string) => row.startsWith('OptanonConsent=')) || '';
 const checkValue = `${targCookiesGroup}%3A1`;
 if (OTCookieValue.indexOf(checkValue) > -1) {
   initAnalytics();

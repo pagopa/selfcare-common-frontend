@@ -2,18 +2,20 @@ import { initAnalytics, trackAppError, trackEvent } from '../analyticsService';
 import { CONFIG } from '../../config/env';
 import mixpanel from 'mixpanel-browser';
 import { AppError } from '../../redux/slices/appStateSlice';
+import { vi, Mock } from 'vitest';
+
 
 const oldConsoleLog = console.log;
 const oldConsoleError = console.error;
 
-jest.mock('mixpanel-browser');
+vi.mock('mixpanel-browser');
 
 beforeAll(() => {
-  console.log = jest.fn();
-  console.error = jest.fn();
+  console.log = vi.fn();
+  console.error = vi.fn();
 
-  mixpanel.init = jest.fn();
-  mixpanel.track = jest.fn();
+  mixpanel.init = vi.fn();
+  mixpanel.track = vi.fn();
 });
 
 afterAll(() => {
@@ -49,7 +51,7 @@ describe('test if not init', () => {
   };
 
   test('test callback', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     trackEventTest(callback);
 
     checkTrackEventResult();
@@ -87,7 +89,7 @@ describe('test if disabled', () => {
   };
 
   test('test callback', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     trackEventTest(callback);
 
     checkTrackEventResult();
@@ -127,7 +129,7 @@ describe('test if mocked', () => {
   };
 
   test('test callback', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     trackEventTest(callback);
 
     checkTrackEventResult();
@@ -152,7 +154,7 @@ describe('test regular send', () => {
     expectedCallback = undefined;
     expectedTrackOptions = undefined;
 
-    mixpanel.track = jest
+    mixpanel.track = vi
       .fn()
       .mockImplementation(
         (_eventName: string, _property: any, _options: any, callback) => callback && callback()
@@ -171,7 +173,7 @@ describe('test regular send', () => {
   };
 
   test('test callback', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     expectedCallback = expect.any(Function);
     expectedTrackOptions = { send_immediately: true };
     trackEventTest(callback);
@@ -182,7 +184,7 @@ describe('test regular send', () => {
 
   test('test callback in error', () => {
     const error = new Error();
-    const callback = jest.fn().mockImplementation(() => {
+    const callback = vi.fn().mockImplementation(() => {
       throw error;
     });
     expectedCallback = expect.any(Function);
@@ -213,7 +215,7 @@ describe('test regular send library in error', () => {
     CONFIG.ANALYTCS.ENABLE = true;
     CONFIG.ANALYTCS.MOCK = false;
     initAnalytics();
-    (mixpanel.track as jest.Mock).mockImplementation(() => {
+    (mixpanel.track as Mock).mockImplementation(() => {
       throw new Error('DUMMY ERROR');
     });
 
@@ -235,7 +237,7 @@ describe('test regular send library in error', () => {
   };
 
   test('test callback', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     expectedCallback = expect.any(Function);
     expectedTrackOptions = { send_immediately: true };
     trackEventTest(callback);
@@ -245,7 +247,7 @@ describe('test regular send library in error', () => {
   });
 
   test('test callback when analytics called it even if in error', () => {
-    (mixpanel.track as jest.Mock).mockImplementation(
+    (mixpanel.track as Mock).mockImplementation(
       (_eventName: string, _property: any, _options: any, callback) => {
         if (callback) {
           callback();
@@ -253,7 +255,7 @@ describe('test regular send library in error', () => {
         throw new Error('DUMMY ERROR');
       }
     );
-    const callback = jest.fn();
+    const callback = vi.fn();
     expectedCallback = expect.any(Function);
     expectedTrackOptions = { send_immediately: true };
     trackEventTest(callback);

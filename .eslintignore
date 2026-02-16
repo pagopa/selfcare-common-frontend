@@ -1,12 +1,12 @@
 locales/locales.ts
 **/__tests__/**
 **/__mocks__/**
-.eslintrc.js
+.eslintrc.cjs
 definitions/*
-src/react-app-env.d.ts
+src/vite-env.d.ts
 Dangerfile.ts
-src/reportWebVitals.ts
 **/generated/**
 dist/**
 build/**
 src/lib/utils/fixSwagger20ArraySchemaDef.js
+vite.config.ts

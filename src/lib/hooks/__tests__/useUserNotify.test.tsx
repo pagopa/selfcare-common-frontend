@@ -6,7 +6,7 @@ import useUserNotify from '../useUserNotify';
 import { UserNotify } from '../../model/UserNotify';
 import './../../../examples/locale';
 
-jest.mock('i18next-browser-languagedetector');
+vi.mock('i18next-browser-languagedetector');
 
 const renderApp = (userNotify: UserNotify) => {
   const store = createStore();
@@ -48,7 +48,7 @@ test('test default component rendered', () => {
 });
 
 test('test Notify Through Toast', () => {
-  const onCloseMock = jest.fn();
+  const onCloseMock = vi.fn();
   renderApp({
     id: 'EXAMPLE',
     title: 'TITLE',
@@ -72,7 +72,7 @@ test('test Notify Through Toast', () => {
 });
 
 test('test Notify Closing Through Popup', () => {
-  const onCloseMock = jest.fn();
+  const onCloseMock = vi.fn();
   renderApp({
     id: 'EXAMPLE',
     title: 'TITLE',
@@ -96,7 +96,7 @@ test('test Notify Closing Through Popup', () => {
 });
 
 test('test Notify Confirm Through Popup', () => {
-  const onConfirmMock = jest.fn();
+  const onConfirmMock = vi.fn();
   renderApp({
     id: 'EXAMPLE',
     title: 'TITLE',
@@ -121,7 +121,7 @@ test('test Notify Confirm Through Popup', () => {
 });
 
 test('test Notify Cancel Through Popup', () => {
-  const onCloseMock = jest.fn();
+  const onCloseMock = vi.fn();
   renderApp({
     id: 'EXAMPLE',
     title: 'TITLE',

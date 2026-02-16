@@ -6,19 +6,19 @@ export const CONFIG = {
     LOGIN: '/auth/login',
     LOGOUT: '/auth/logout',
     LOGOUT_GOOGLE: '/auth/logout/google',
-    LOGIN_ADMIN_GOOGLE: env.get('REACT_APP_GOOGLE_LOGIN_URL').asString() || '',
+    LOGIN_ADMIN_GOOGLE: env.get('VITE_GOOGLE_LOGIN_URL').asString() || '',
     ASSISTANCE: '/assistenza',
   },
 
   MOCKS: {
-    MOCK_USER: env.get('REACT_APP_MOCK_USER').default('false').asBool(),
+    MOCK_USER: env.get('VITE_MOCK_USER').default('false').asBool(),
   },
 
   ANALYTCS: {
-    ENABLE: env.get('REACT_APP_ANALYTICS_ENABLE').default('false').asBool(),
-    MOCK: env.get('REACT_APP_ANALYTICS_MOCK').default('false').asBool(),
-    DEBUG: env.get('REACT_APP_ANALYTICS_DEBUG').default('false').asBool(),
-    TOKEN: env.get('REACT_APP_MIXPANEL_TOKEN').default('').asString(),
+    ENABLE: env.get('VITE_ANALYTICS_ENABLE').default('false').asBool(),
+    MOCK: env.get('VITE_ANALYTICS_MOCK').default('false').asBool(),
+    DEBUG: env.get('VITE_ANALYTICS_DEBUG').default('false').asBool(),
+    TOKEN: env.get('VITE_MIXPANEL_TOKEN').default('').asString(),
     API_HOST: 'https://api-eu.mixpanel.com',
     PERSISTENCE: 'localStorage',
     LOG_IP: false,
@@ -38,8 +38,8 @@ export const CONFIG = {
   FOOTER: {
     LINK: {
       PAGOPALINK: 'https://www.pagopa.it/',
-      PRIVACYPOLICY: env.get('REACT_APP_URL_PRIVACY_DISCLAIMER').asString(),
-      TERMSANDCONDITIONS: env.get('REACT_APP_URL_TERMS_AND_CONDITIONS').asString(),
+      PRIVACYPOLICY: env.get('VITE_URL_PRIVACY_DISCLAIMER').asString(),
+      TERMSANDCONDITIONS: env.get('VITE_URL_TERMS_AND_CONDITIONS').asString(),
       PROTECTIONOFPERSONALDATA:
         'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
       ABOUTUS: 'https://www.pagopa.it/it/societa/chi-siamo/',

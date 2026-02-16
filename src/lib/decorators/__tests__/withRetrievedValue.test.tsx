@@ -1,17 +1,17 @@
-import { useState } from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { vi, type Mock } from 'vitest';
+import TestData from '../../../examples/model/TestData';
+import { testActions, testSelectors } from '../../../examples/redux/slices/testSlice';
+import { createStore } from '../../../examples/redux/store';
+import { fetchTestData } from '../../../examples/services/testService';
 import useReduxCachedValue from '../../hooks/useReduxCachedValue';
 import withRetrievedValue from '../withRetrievedValue';
-import { Provider } from 'react-redux';
-import { createStore } from '../../../examples/redux/store';
-import { testActions, testSelectors } from '../../../examples/redux/slices/testSlice';
-import { fetchTestData } from '../../../examples/services/testService';
-import TestData from '../../../examples/model/TestData';
 
-let spyFetch: jest.Mock<Promise<Array<TestData>>>;
+let spyFetch: Mock<Promise<Array<TestData>>>;
 
 beforeEach(() => {
-  spyFetch = jest.fn(fetchTestData);
+  spyFetch = vi.fn(fetchTestData);
 });
 
 const renderApp = (cachedRetrieve: boolean) => {

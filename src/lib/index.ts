@@ -1,3 +1,7 @@
+// Global styles for all components
+import './index.css';
+
+// Export components and hooks
 export { default as BackComponent } from './components/BackComponent';
 export { default as CustomAvatar } from './components/CustomAvatar';
 export { default as CustomPagination } from './components/CustomPagination';
@@ -47,4 +51,10 @@ export { default as CustomAlert } from './components/CustomAlert';
 export { default as useFakePagination } from './hooks/useFakePagination';
 export { useLiveAnnouncerWithRegion } from './hooks/useLiveAnnouncerWithRegion';
 export { usePermissions } from './hooks/usePermissions';
+export * from './utils/routes-utils';
+export * from './utils/productId2ProductTitle';
+export * from './utils/utils';
+export * from './utils/verifyChecksumMatchWithTaxCode';
+export * from './utils/verifyNameMatchWithTaxCode';
+export * from './utils/verifySurnameMatchWithTaxCode';
 

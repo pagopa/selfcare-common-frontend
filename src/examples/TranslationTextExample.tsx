@@ -101,4 +101,4 @@ function TranslationTextExample({ t }: Props) {
   );
 }
 
-export default withTranslation()(TranslationTextExample);
+export default withTranslation()(TranslationTextExample) as React.ComponentType<Props>;

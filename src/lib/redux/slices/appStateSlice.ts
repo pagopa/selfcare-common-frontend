@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { AppError } from '../../model/AppError';
 import { UserNotify } from '../../model/UserNotify';
 
@@ -46,7 +46,7 @@ const keepOnPage = (e: BeforeUnloadEvent) => {
 };
 
 /* eslint-disable functional/immutable-data */
-export const appStateSlice = createSlice({
+export const appStateSlice: Slice<AppStateState> = createSlice({
   name: 'appState',
   initialState,
   reducers: {
@@ -141,7 +141,8 @@ export const appStateSlice = createSlice({
   },
 });
 
-export const appStateActions = appStateSlice.actions;
+// explicit type annotation
+export const appStateActions: typeof appStateSlice.actions = appStateSlice.actions;
 export const appStateReducer = appStateSlice.reducer;
 
 export const appStateSelectors = {
