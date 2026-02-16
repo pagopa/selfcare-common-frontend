@@ -37,11 +37,13 @@ export default function withLogin<T extends LoginProps>(
         currentHash.includes('token=') &&
         !isPagoPaUser
       ) {
+        storageUserOps.delete();
         globalThis.location.assign(CONFIG.URL_FE.LOGOUT_GOOGLE);
         return;
       }
 
       if (currentPath.includes('/auth/login') && !currentHash.includes('token=') && isPagoPaUser) {
+        storageUserOps.delete();
         globalThis.location.assign(CONFIG.URL_FE.LOGOUT);
       }
     }, [currentPath, currentHash, isPagoPaUser]);
