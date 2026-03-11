@@ -46,7 +46,7 @@ const keepOnPage = (e: BeforeUnloadEvent) => {
 };
 
 /* eslint-disable functional/immutable-data */
-export const appStateSlice = createSlice({
+const appStateSlice = createSlice({
   name: 'appState',
   initialState,
   reducers: {
@@ -141,7 +141,17 @@ export const appStateSlice = createSlice({
   },
 });
 
-export const appStateActions = appStateSlice.actions;
+export const appStateActions = {
+  setLoading: appStateSlice.actions.setLoading,
+  addError: appStateSlice.actions.addError,
+  removeError: appStateSlice.actions.removeError,
+  addNotify: appStateSlice.actions.addNotify,
+  removeNotify: appStateSlice.actions.removeNotify,
+  enableUnloadEventInterceptor: appStateSlice.actions.enableUnloadEventInterceptor,
+  disableUnloadEventInterceptor: appStateSlice.actions.disableUnloadEventInterceptor,
+  openUnloadEventNotify: appStateSlice.actions.openUnloadEventNotify,
+  closeUnloadEventNotify: appStateSlice.actions.closeUnloadEventNotify,
+};
 export const appStateReducer = appStateSlice.reducer;
 
 export const appStateSelectors = {

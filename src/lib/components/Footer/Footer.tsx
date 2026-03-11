@@ -1,13 +1,13 @@
 import {
-  Footer as MuiItaliaFooter,
   FooterLinksType,
+  LangCode,
+  Footer as MuiItaliaFooter,
   PreLoginFooterLinksType,
-} from '@pagopa/mui-italia/dist/components/Footer/Footer';
-import { Trans, useTranslation } from 'react-i18next';
+} from '@pagopa/mui-italia';
 import { useEffect } from 'react';
-import { LangCode } from '@pagopa/mui-italia';
-import i18n from '../../locale/locale-utils';
+import { Trans, useTranslation } from 'react-i18next';
 import { CONFIG } from '../../config/env';
+import i18n from '../../locale/locale-utils';
 import { LANGUAGES, pagoPALink } from './FooterConfig';
 
 type FooterProps = {

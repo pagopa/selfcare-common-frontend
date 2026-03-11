@@ -2,10 +2,13 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": ["es6", "dom", "es2019"],
+    "lib": [
+      "es6",
+      "dom",
+      "es2019"
+    ],
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "types": ["react", "react-dom", "node"],
     "noEmit": true,
     "strict": true,
     "noImplicitAny": true,
@@ -23,8 +26,18 @@
     "strictFunctionTypes": true,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": [
+      "vitest/globals",
+      "vite/client"
+    ]
   },
-  "include": ["src/**/*"],
-  "exclude": ["__mocks__", "node_modules", "**/__tests__/*", "Dangerfile.ts"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "__mocks__",
+    "node_modules",
+    "Dangerfile.ts"
+  ]
 }

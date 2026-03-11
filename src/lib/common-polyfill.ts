@@ -1,4 +1,3 @@
-import 'react-app-polyfill/ie11';
 import 'core-js/es/object/entries';
 import 'core-js/es/object/from-entries';
 import 'core-js/es/object/values';

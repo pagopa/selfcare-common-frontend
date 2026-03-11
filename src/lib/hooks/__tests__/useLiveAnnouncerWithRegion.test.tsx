@@ -1,8 +1,6 @@
-import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import { useLiveAnnouncerWithRegion } from '../useLiveAnnouncerWithRegion';
 
-jest.useFakeTimers();
 
 const TestComponent = () => {
   const { announce, LiveRegion } = useLiveAnnouncerWithRegion();

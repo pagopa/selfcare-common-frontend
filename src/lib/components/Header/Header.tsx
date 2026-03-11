@@ -7,7 +7,7 @@ import {
   RootLinkType,
   UserAction,
 } from '@pagopa/mui-italia';
-import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
+import { PartySwitchItem } from '@pagopa/mui-italia/components/PartySwitch';
 import { Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
@@ -152,10 +152,10 @@ const Header = ({
             maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
             {...(isPagoPaUser &&
               !isAdminPage && {
-                chipLabel: t('common.header.chipLabel'),
-                chipColor: 'primary' as const,
-                chipSize: 'medium' as const,
-              })}
+              chipLabel: t('common.header.chipLabel'),
+              chipColor: 'primary' as const,
+              chipSize: 'medium' as const,
+            })}
           />
         </nav>
       ) : (

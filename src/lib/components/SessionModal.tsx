@@ -146,4 +146,5 @@ function SessionModal({
     </Dialog>
   );
 }
-export default withTranslation()(SessionModal);
+const SessionModalWithTranslation = withTranslation()(SessionModal);
+export default SessionModalWithTranslation as React.ComponentType<Omit<Props, 't'>>;

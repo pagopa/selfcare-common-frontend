@@ -8,10 +8,10 @@ import { testActions, testSelectors } from '../../../examples/redux/slices/testS
 import { fetchTestData } from '../../../examples/services/testService';
 import TestData from '../../../examples/model/TestData';
 
-let spyFetch: jest.Mock<Promise<Array<TestData>>>;
+let spyFetch: vi.Mock<Promise<Array<TestData>>>;
 
 beforeEach(() => {
-  spyFetch = jest.fn(fetchTestData);
+  spyFetch = vi.fn(fetchTestData);
 });
 
 const renderApp = (cachedRetrieve: boolean) => {

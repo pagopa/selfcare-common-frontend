@@ -25,6 +25,7 @@ local.settings.json
 node_modules
 generated
 build
+dist
 local
 dist
 
