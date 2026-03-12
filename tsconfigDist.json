@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "target": "es2019",
-    "module": "commonjs",
-    "lib": ["es6", "dom", "es2019"],
+    "target": "esnext",
+    "module": "esnext",
+    "lib": [
+      "es6",
+      "dom",
+      "es2019"
+    ],
     "jsx": "react-jsx",
     "declaration": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "esModuleInterop": true,
@@ -23,9 +27,15 @@
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": [
+      "vite/client",
+      "vitest/globals"
+    ]
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "__mocks__",
     "node_modules",

@@ -1,6 +1,6 @@
 import { initAnalytics } from '../services/analyticsService';
 
-jest.mock('../services/analyticsService', () => ({ initAnalytics: jest.fn() }));
+vi.mock('../services/analyticsService', () => ({ initAnalytics: vi.fn() }));
 
 declare const window: any;
 
@@ -11,8 +11,8 @@ window.OneTrust = {
 
 window.OnetrustActiveGroups = '';
 
-const configureConsentManagement = () => {
-  require('../consentManagementConfigure');
+const configureConsentManagement = async () => {
+  await import('../consentManagementConfigure');
   window.OptanonWrapper();
 };
 
@@ -34,19 +34,21 @@ describe('test clean session', () => {
 
 describe('test cookies setted', () => {
   beforeEach(() => {
-    jest.resetModules();
-    jest.mock('../services/analyticsService', () => ({ initAnalytics: jest.fn() }));
+    vi.resetModules();
+    vi.mock('../services/analyticsService', () => ({ initAnalytics: vi.fn() }));
   });
 
-  test('Approved consent', () => {
+  test('Approved consent', async () => {
     document.cookie = 'OptanonConsent=groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A1';
-    configureConsentManagement();
-    expect(require('../services/analyticsService').initAnalytics).toHaveBeenCalledTimes(1);
+    await configureConsentManagement();
+    const mod = await import('../services/analyticsService');
+    expect(mod.initAnalytics).toHaveBeenCalledTimes(1);
   });
 
-  test('Rejected consent', () => {
+  test('Rejected consent', async () => {
     document.cookie = 'OptanonConsent=groups=C0001%3A1%2CC0002%3A0%2CC0003%3A1%2CC0004%3A1';
-    configureConsentManagement();
-    expect(require('../services/analyticsService').initAnalytics).toHaveBeenCalledTimes(0);
+    await configureConsentManagement();
+    const mod = await import('../services/analyticsService');
+    expect(mod.initAnalytics).toHaveBeenCalledTimes(0);
   });
 });

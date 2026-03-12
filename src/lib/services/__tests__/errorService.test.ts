@@ -2,7 +2,7 @@ import { AppError } from '../../redux/slices/appStateSlice';
 import { trackAppError } from '../analyticsService';
 import { handleErrors } from '../errorService';
 
-jest.mock('../analyticsService', () => ({ trackAppError: jest.fn() }));
+vi.mock('../analyticsService', () => ({ trackAppError: vi.fn() }));
 
 test('test', () => {
   const appErrors: Array<AppError> = [...Array(5).keys()].map((i) => ({

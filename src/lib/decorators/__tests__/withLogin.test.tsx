@@ -7,7 +7,7 @@ import withLogin from '../withLogin';
 
 const oldWindowLocation = global.window.location;
 const mockedLocation = {
-  assign: jest.fn(),
+  assign: vi.fn(),
   pathname: '',
   origin: 'MOCKED_ORIGIN',
   search: '',

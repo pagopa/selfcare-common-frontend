@@ -13,7 +13,7 @@ type CustomType = {
 let spyFetch: () => Promise<Array<CustomType>>;
 
 beforeEach(() => {
-  spyFetch = jest.fn(fetchTestData);
+  spyFetch = vi.fn(fetchTestData);
 });
 
 const renderApp = () => {

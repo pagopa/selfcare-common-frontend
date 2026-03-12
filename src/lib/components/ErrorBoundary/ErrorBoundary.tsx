@@ -1,7 +1,7 @@
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import { TFunction } from 'i18next';
 import { uniqueId } from 'lodash';
-import { Component, ErrorInfo, Fragment, ReactNode } from 'react';
+import { Component, ComponentType, ErrorInfo, Fragment, ReactNode } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Action, Dispatch } from 'redux';
@@ -162,4 +162,5 @@ const ErrorBoundaryConnected = connect(
   mapDispatchToProps
 )(ErrorBoundary) as React.ComponentType<Props>;
 
-export default withTranslation()(ErrorBoundaryConnected);
+const ErrorBoundaryWithTranslation = withTranslation()(ErrorBoundaryConnected);
+export default ErrorBoundaryWithTranslation as ComponentType<Omit<Props, 't'>>;
