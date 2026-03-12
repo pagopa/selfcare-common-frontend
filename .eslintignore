@@ -10,3 +10,6 @@ src/reportWebVitals.ts
 dist/**
 build/**
 src/lib/utils/fixSwagger20ArraySchemaDef.js
+vitest.config.ts
+vite.config.ts
+setupTests.ts
