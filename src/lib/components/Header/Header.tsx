@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { CONFIG } from '../../config/env';
 import { buildAssistanceURI } from '../../services/assistanceService';
-import { isPagoPaUser } from '../../utils/storage';
+import { isBackStageUser } from '../../utils/storage';
 
 type PartyEntity = PartySwitchItem;
 type HeaderProps = {
@@ -150,7 +150,7 @@ const Header = ({
             onSelectedParty={onSelectedParty}
             maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}
             maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
-            {...(isPagoPaUser &&
+            {...(isBackStageUser() &&
               !isAdminPage && {
               chipLabel: t('common.header.chipLabel'),
               chipColor: 'primary' as const,
