@@ -85,4 +85,11 @@ export const PRODUCT_IDS = {
   CGN: 'prod-cgn',
 };
 
-export const ALLOWED_PRODUCT_IDS = ['prod-interop'];
+export const ALLOWED_PREFIXES = ['prod-interop', 'prod-pn'];
+
+/**
+ * Validates if a product ID matches our allowed prefixes.
+ * @param productId - The ID from the FE or API
+ */
+export const isProductAllowed = (productId: string): boolean =>
+  ALLOWED_PREFIXES.some((prefix) => productId.startsWith(prefix));
