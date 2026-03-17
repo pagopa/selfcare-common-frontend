@@ -150,7 +150,7 @@ const Header = ({
             onSelectedParty={onSelectedParty}
             maxCharactersNumberMultiLineButton={maxCharactersNumberMultiLineButton}
             maxCharactersNumberMultiLineItem={maxCharactersNumberMultiLineItem}
-            {...(isPagoPaUser &&
+            {...(isPagoPaUser() &&
               !isAdminPage && {
               chipLabel: t('common.header.chipLabel'),
               chipColor: 'primary' as const,
