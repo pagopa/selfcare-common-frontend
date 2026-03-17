@@ -35,4 +35,4 @@ export const isExpiredToken = (token: string) => {
   return new Date() >= tokenExpDate;
 };
 
-export const isPagoPaUser = storageUserOps.read()?.iss === 'PAGOPA';
+export const isPagoPaUser = () => storageUserOps.read()?.iss === 'PAGOPA';
