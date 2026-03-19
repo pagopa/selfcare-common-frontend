@@ -1,74 +1,67 @@
-import fs from 'node:fs/promises';
+const fs = require('fs');
+const regexReplace = require('regex-replace');
+
+console.log(`Fixing Swagger 2.0 schema array definition in ${process.argv[2]}`);
 
 const filePath = process.argv[2];
 
-if (!filePath) {
-  throw new Error('Missing file path argument');
+const patternRef =
+  /"schema"\s*:\s*\{[^{]+\{\s*"\$ref"\s*:\s*"#\/definitions\/([^"]+)"[^,]+,\s+"type"\s*:\s*"array"[^}]+}((?:\n|.)*"definitions"\s*:\s*\{)/gm;
+const patternRef2 =
+  /"schema"\s*:\s*\{\s*"type"\s*:\s*"array"[^{]+\{\s*"\$ref"\s*:\s*"#\/definitions\/([^"]+)"[^}]*}[^}]*}((?:\n|.)*"definitions"\s*:\s*\{)/gm;
+const replaceRef =
+  '"schema":{"$ref":"#/definitions/$1Array"}$2"$1Array":{"type": "array", "items": {"$ref": "#/definitions/$1"}},';
+
+async function fixArrayDef(patternRef, replaceRef) {
+  regexReplace(patternRef, replaceRef, filePath).then((r) => {
+    fs.readFile(filePath, 'utf8', function (err, doc) {
+      if (doc.match(patternRef)) {
+        fixArrayDef(patternRef, replaceRef);
+      }
+    });
+  });
 }
 
-const doc = JSON.parse(await fs.readFile(filePath, 'utf8'));
+const patternNativeArrayType = (nativeType) =>
+  new RegExp(
+    `"schema"\\s*:\\s*\\{[^{]+\\{\\s*"type"\\s*:\\s*"${nativeType}"[^,]+,\\s+"type"\\s*:\\s*"array"[^}]+}`,
+    'gm'
+  );
+const replaceNativeArrayType = (nativeType) =>
+  `"schema":{"$ref":"#/definitions/${nativeType.toUpperCase()}Array"}`;
 
-const definitions = doc.definitions || {};
-doc.definitions = definitions;
+const patternNativeTypeRef = /"definitions"\s*:\s*\{/gm;
+const replaceNativeArrayTypeRef = (nativeType) =>
+  `"definitions" : {"${nativeType.toUpperCase()}Array":{"type": "array", "items": {"type": "${nativeType}"}},`;
 
-// Utility
-const ensureDefinition = (name, value) => {
-  if (!definitions[name]) {
-    definitions[name] = value;
-  }
-};
+async function fixArrayNativeDef(nativeType) {
+  await regexReplace(
+    patternNativeArrayType(nativeType),
+    replaceNativeArrayType(nativeType),
+    filePath
+  );
 
-// Recursive traversal
-function traverse(obj) {
-  if (!obj || typeof obj !== 'object') return;
-
-  if (obj.schema) {
-    const schema = obj.schema;
-
-    // CASE 1: array + $ref (invalid swagger)
-    if (schema.type === 'array' && schema.$ref) {
-      const refName = schema.$ref.split('/').pop();
-      const arrayName = `${refName}Array`;
-
-      ensureDefinition(arrayName, {
-        type: 'array',
-        items: { $ref: `#/definitions/${refName}` },
-      });
-
-      obj.schema = { $ref: `#/definitions/${arrayName}` };
-    }
-
-    // CASE 2: native array
-    if (schema.type === 'array' && schema.items?.type) {
-      const native = schema.items.type.toUpperCase();
-      const arrayName = `${native}Array`;
-
-      ensureDefinition(arrayName, {
-        type: 'array',
-        items: { type: schema.items.type },
-      });
-
-      obj.schema = { $ref: `#/definitions/${arrayName}` };
-    }
-
-    // CASE 3: native type
-    if (schema.type && typeof schema.type === 'string' && !schema.$ref) {
-      const native = schema.type.toUpperCase();
-      const wrapperName = `${native}Wrapper`;
-
-      ensureDefinition(wrapperName, {
-        type: schema.type,
-      });
-
-      obj.schema = { $ref: `#/definitions/${wrapperName}` };
-    }
-  }
-
-  // recurse
-  Object.values(obj).forEach(traverse);
+  await regexReplace(patternNativeTypeRef, replaceNativeArrayTypeRef(nativeType), filePath);
 }
 
-traverse(doc);
+const patternNativeType = (nativeType) =>
+  new RegExp(`"schema"\\s*:\\s*\\{\\s*"type"\\s*:\\s*"${nativeType}"\\s*}`, 'gm');
+const replaceNativeType = (nativeType) =>
+  `"schema":{"$ref":"#/definitions/${nativeType.toUpperCase()}Wrapper"}`;
+const replaceNativeTypeRef = (nativeType) =>
+  `"definitions" : {"${nativeType.toUpperCase()}Wrapper":{"type": "${nativeType}"},`;
 
-// Write back
-await fs.writeFile(filePath, JSON.stringify(doc, null, 2));
+async function fixNativeDef(nativeType) {
+  await regexReplace(patternNativeType(nativeType), replaceNativeType(nativeType), filePath);
+
+  await regexReplace(patternNativeTypeRef, replaceNativeTypeRef(nativeType), filePath);
+}
+
+async function exec() {
+  await fixArrayDef(patternRef, replaceRef);
+  await fixArrayDef(patternRef2, replaceRef);
+  await fixArrayNativeDef('string');
+  await fixNativeDef('string');
+}
+
+exec();
