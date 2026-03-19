@@ -27,7 +27,7 @@
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "types": [
       "vite/client",
       "vitest/globals"

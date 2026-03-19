@@ -8,6 +8,8 @@
   "private": false,
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "type": "module",
+  "sideEffects": false,
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
