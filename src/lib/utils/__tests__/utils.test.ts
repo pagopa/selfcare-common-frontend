@@ -1,4 +1,3 @@
-// isPecEmail.test.ts
 import { expect } from 'vitest';
 import { isPecEmail } from '../utils';
 
