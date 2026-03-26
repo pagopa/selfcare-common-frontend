@@ -132,3 +132,8 @@ export const specialChar2NormalChar = (char: string) => specialCharacters[char] 
 
 export const acceptedVowels = /[aeiouàèìòùáéíóúäëïöüâêîôûæœǝɐɑɒ]/gi;
 export const acceptedConsonants = /[bcdfghjklmnpqrstvwxyzñçčšžǩßḃḍḫķḻḳṅṯẓẟẝƁƇƔƝƤƧƬƲƳƵʍʜʎɹɾʃʒʔɲ]/gi;
+
+const PEC_PATTERNS = [/@pec\./i, /@postecert\./i, /@legalmail\./i];
+
+export const isPecEmail = (email: string): boolean =>
+  PEC_PATTERNS.some((pattern) => pattern.test(email));
