@@ -3,7 +3,7 @@ import { CONFIG } from '../../config/env';
 
 export const pagoPALink: CompanyLinkType = {
   href: CONFIG.FOOTER.LINK.PAGOPALINK,
-  ariaLabel: 'Link: vai al sito di PagoPA S.p.A.',
+  ariaLabel: 'PagoPA S.p.A.: vai al sito',
 };
 
 declare const window: any;
