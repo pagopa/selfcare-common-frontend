@@ -24,43 +24,51 @@ type Props = {
   sort?: string;
   /** The function to be invoked if the user change page */
   onPageRequest: (r: PageRequest) => void;
+  /** The variant of the pagination component */
+  variant?: 'outlined' | 'text';
+  /** The component to control the page size */
+  pageSizeControl?: React.ReactNode;
 };
 
 /** Selfcare custom table available pages component */
-export default function CustomPagination({ page, onPageRequest, sort }: Props) {
+export default function CustomPagination({
+  page,
+  onPageRequest,
+  sort,
+  variant,
+  pageSizeControl,
+}: Readonly<Props>) {
   const count = page.totalElements;
   const from = count === 0 ? 0 : page.number * page.size + 1;
   const to = getLabelDisplayedRowsTo(count, page.number, page.size);
 
   return (
-    <React.Fragment>
-      <Grid container sx={{ padding: '0 10px' }}>
-        <Grid item xs={6} display="flex" justifyContent="start" alignItems={'center'}>
-          {defaultLabelDisplayedRows(from, to, count)}
-        </Grid>
-        <Grid item xs={6} display="flex" justifyContent="end" alignItems={'center'}>
-          {page.totalElements > page.size && (
-            <Pagination
-              sx={{ display: 'flex' }}
-              color="primary"
-              shape="rounded"
-              page={page.number + 1}
-              count={page.totalPages}
-              renderItem={(props2) => (
-                <PaginationItem {...props2} sx={{ border: 'none' }} variant="outlined" />
-              )}
-              onChange={(_event: React.ChangeEvent<unknown>, value: number) => (
-                onPageRequest({
-                  page: value - 1,
-                  size: page.size,
-                  sort,
-                }),
-                window.scrollTo(0, 0)
-              )}
-            />
-          )}
-        </Grid>
+    <Grid container sx={{ padding: '0 10px' }}>
+      <Grid item xs={6} display="flex" justifyContent="start" alignItems={'center'}>
+        {pageSizeControl ?? defaultLabelDisplayedRows(from, to, count)}
       </Grid>
-    </React.Fragment>
+      <Grid item xs={6} display="flex" justifyContent="end" alignItems={'center'}>
+        {page.totalElements > page.size && (
+          <Pagination
+            sx={{ display: 'flex' }}
+            color="primary"
+            shape="rounded"
+            page={page.number + 1}
+            count={page.totalPages}
+            renderItem={(props2) => (
+              <PaginationItem {...props2} sx={{ border: 'none' }} variant={variant ?? 'outlined'} />
+            )}
+            onChange={(_event: React.ChangeEvent<unknown>, value: number) => (
+              onPageRequest({
+                page: value - 1,
+                size: page.size,
+                sort,
+              }),
+              window.scrollTo(0, 0)
+            )}
+          />
+        )}
+      </Grid>
+    </Grid>
   );
 }
