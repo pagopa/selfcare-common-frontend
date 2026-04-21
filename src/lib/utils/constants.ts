@@ -85,7 +85,7 @@ export const PRODUCT_IDS = {
   CIBAN: 'prod-ciban',
   CGN: 'prod-cgn',
 };
-
+// TODO remove this. Moved this logic into env files
 export const ALLOWED_PREFIXES = ['prod-interop', 'prod-pn'];
 
 /**
