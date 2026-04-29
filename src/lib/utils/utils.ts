@@ -1,3 +1,5 @@
+import { isPagoPaUser } from './storage';
+
 export const formatDateAsLongString = (date: Date): string => {
   const ye = new Intl.DateTimeFormat('it', { year: 'numeric' }).format(date);
   const mo = new Intl.DateTimeFormat('it', { month: 'long' }).format(date);
@@ -137,3 +139,25 @@ const PEC_PATTERNS = [/@pec\./i, /@postecert\./i, /@legalmail\./i];
 
 export const isPecEmail = (email: string): boolean =>
   PEC_PATTERNS.some((pattern) => pattern.test(email));
+
+type AppArea = 'imprese' | 'ar_backstage' | 'area_riservata';
+
+const IMPRESE_URL_PREFIXES = [
+  'https://imprese.notifichedigitali.it',
+  'https://imprese.uat.notifichedigitali.it',
+  'https://pnpg.dev.selfcare.pagopa.it',
+] as const;
+
+export const getAppArea = (): AppArea => {
+  const currentUrl = window.location.origin + window.location.pathname;
+
+  if (IMPRESE_URL_PREFIXES.some((prefix) => currentUrl.startsWith(prefix))) {
+    return 'imprese';
+  }
+
+  if (isPagoPaUser()) {
+    return 'ar_backstage';
+  }
+
+  return 'area_riservata';
+};
