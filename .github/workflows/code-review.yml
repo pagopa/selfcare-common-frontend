@@ -1,0 +1,83 @@
+# GitHub Actions workflow to build, check source codes and run tests.
+#
+# To make Danger JS run on a pull request you need to add the following secret
+# in the repository settings and set it with a GitHub access token (scope public_repo);
+# otherwise set the repository variable DANGER_GITHUB_API_TOKEN to 'skip':
+# - DANGER_GITHUB_API_TOKEN (secret)
+
+name: Code Review
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: pagopa/dx/.github/actions/node-setup@main
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build
+        run: yarn dist
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: pagopa/dx/.github/actions/node-setup@main
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint
+        run: yarn lint
+
+  danger:
+    name: Danger CI
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: pagopa/dx/.github/actions/node-setup@main
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Danger CI
+        if: ${{ env.DANGER_GITHUB_API_TOKEN != '' && env.DANGER_GITHUB_API_TOKEN != 'skip' }}
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+        run: yarn danger ci
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: pagopa/dx/.github/actions/node-setup@main
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Unit tests
+        run: yarn test:coverage
