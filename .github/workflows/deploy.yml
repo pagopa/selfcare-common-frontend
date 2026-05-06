@@ -1,0 +1,112 @@
+# GitHub Actions workflow to release a new version and publish to npm.
+#
+# Uses npm Trusted Publishing (OIDC) — no long-lived npm token required.
+# The package must be configured on npmjs.com to allow trusted publishing
+# from this workflow (Settings > Publishing > Trusted Publishers).
+#
+# Required permissions for the workflow's GITHUB_TOKEN:
+# - contents: write (to push version bump and tags)
+# - id-token: write (for OIDC npm trusted publishing)
+
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      semver:
+        description: 'Version bump to apply'
+        required: true
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+        default: minor
+
+concurrency:
+  group: ${{ github.workflow }}-cd
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: pagopa/dx/.github/actions/node-setup@main
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Bump version
+        run: npm version ${{ inputs.semver }} -m "Bump version to %s [skip ci]"
+
+      - name: Push version commit and tag
+        run: git push --follow-tags
+
+  build:
+    name: Build
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Setup Node.js
+        uses: pagopa/dx/.github/actions/node-setup@main
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build
+        run: yarn dist
+
+      - name: Upload artifact
+        uses: pagopa/dx/.github/actions/upload-artifact@main
+        with:
+          bundle_name: Bundle
+          file_path: ./dist
+
+  publish:
+    name: Publish to npm
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Download artifact
+        uses: pagopa/dx/.github/actions/download-artifact@main
+        with:
+          bundle_name: Bundle
+          file_path: ./dist
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Install npm 11
+        run: npm install -g npm@11
+
+      - name: Publish
+        run: npm publish --access public
+        working-directory: ./dist
+        env:
+          NPM_CONFIG_PROVENANCE: true
