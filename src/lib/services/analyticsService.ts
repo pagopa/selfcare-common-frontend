@@ -96,3 +96,14 @@ const trackEventThroughAnalyticTool = (
     }
   }
 };
+
+export const registerSuperProperty = (properties: Record<string, any>): void => {
+  if (CONFIG.ANALYTCS.ENABLE && (window as any).initMixPanel) {
+    if (CONFIG.ANALYTCS.MOCK) {
+      // eslint-disable-next-line no-console
+      console.log('registerSuperProperty', properties);
+    } else {
+      mixpanel.register(properties);
+    }
+  }
+};
