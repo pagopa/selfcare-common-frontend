@@ -22,7 +22,7 @@
     "@mui/material": "^5.14.1",
     "@mui/system": "^5.14.1",
     "@mui/utils": "^7.3.9",
-    "@pagopa/mui-italia": "^2.3.0",
+    "@pagopa/mui-italia": "^2.4.1",
     "@pagopa/ts-commons": "^13.1.2",
     "@reduxjs/toolkit": "^2.9.0",
     "async": "3.2.4",
