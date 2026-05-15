@@ -61,15 +61,23 @@ jobs:
         env:
           INPUT_SEMVER: ${{ inputs.semver }}
         run: |
-          package_name=$(node -p "require('./package.json').name")
-          package_version=$(node -p "require('./package.json').version")
-          published_version=$(npm view "$package_name" version 2>/dev/null || echo "$package_version")
-          tag_versions=$(git ls-remote --tags origin 'v*' | awk -F/ '{print $3}' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sed 's/^v//')
+          node <<'NODE' >> "$GITHUB_OUTPUT"
+          const { execSync } = require('node:child_process');
+          const packageJson = require('./package.json');
 
-          release_version=$(TAG_VERSIONS="$tag_versions" node - "$package_version" "$published_version" "$INPUT_SEMVER" <<'NODE'
-          const [packageVersion, publishedVersion, bump] = process.argv.slice(2);
-          const tagVersions = (process.env.TAG_VERSIONS || '').split(/\s+/).filter(Boolean);
+          const bump = process.env.INPUT_SEMVER;
+          const semverPattern = /^\d+\.\d+\.\d+$/;
           const parse = (value) => value.split('.').map((part) => Number(part));
+          const compare = (left, right) => {
+            const [leftMajor, leftMinor, leftPatch] = parse(left);
+            const [rightMajor, rightMinor, rightPatch] = parse(right);
+
+            return (
+              leftMajor - rightMajor ||
+              leftMinor - rightMinor ||
+              leftPatch - rightPatch
+            );
+          };
           const increment = (value, type) => {
             const [major, minor, patch] = parse(value);
 
@@ -83,20 +91,65 @@ jobs:
 
             return `${major}.${minor}.${patch + 1}`;
           };
+          const readPublishedVersions = () => {
+            try {
+              const output = execSync(
+                `npm view ${JSON.stringify(packageJson.name)} versions --json`,
+                {
+                  encoding: 'utf8',
+                  stdio: ['ignore', 'pipe', 'ignore'],
+                }
+              ).trim();
 
-          const usedVersions = new Set([publishedVersion, ...tagVersions].filter(Boolean));
-          let candidateVersion = increment(packageVersion, bump);
+              if (!output) {
+                return [];
+              }
 
-          while (usedVersions.has(candidateVersion)) {
-            candidateVersion = increment(candidateVersion, bump);
+              const versions = JSON.parse(output);
+
+              return (Array.isArray(versions) ? versions : [versions]).filter((value) =>
+                semverPattern.test(value)
+              );
+            } catch {
+              return [];
+            }
+          };
+          const readTagVersions = () => {
+            try {
+              const output = execSync("git ls-remote --tags origin 'v*'", {
+                encoding: 'utf8',
+                stdio: ['ignore', 'pipe', 'ignore'],
+              }).trim();
+
+              if (!output) {
+                return [];
+              }
+
+              return output
+                .split('\n')
+                .map((line) => line.trim().split(/\s+/).pop()?.replace('refs/tags/v', ''))
+                .filter((value) => semverPattern.test(value));
+            } catch {
+              return [];
+            }
+          };
+
+          const knownVersions = new Set([
+            packageJson.version,
+            ...readPublishedVersions(),
+            ...readTagVersions(),
+          ]);
+          const baseVersion = [...knownVersions].sort(compare).at(-1) ?? packageJson.version;
+
+          let releaseVersion = increment(baseVersion, bump);
+
+          while (knownVersions.has(releaseVersion)) {
+            releaseVersion = increment(releaseVersion, bump);
           }
 
-          process.stdout.write(candidateVersion);
+          console.log(`release_version=${releaseVersion}`);
+          console.log(`release_branch=release/v${releaseVersion}`);
           NODE
-          )
-
-          echo "release_version=$release_version" >> "$GITHUB_OUTPUT"
-          echo "release_branch=release/v$release_version" >> "$GITHUB_OUTPUT"
 
       - name: Bump version
         run: npm version ${{ steps.release_metadata.outputs.release_version }} -m "Bump version to %s [skip ci]"
