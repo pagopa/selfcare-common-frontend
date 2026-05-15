@@ -5,7 +5,8 @@
 # from this workflow (Settings > Publishing > Trusted Publishers).
 #
 # Required permissions for the workflow's GITHUB_TOKEN:
-# - contents: write (to push version bump and tags)
+# - contents: write (to push the release branch and tags)
+# - pull-requests: write (to open the release PR)
 # - id-token: write (for OIDC npm trusted publishing)
 
 name: Deploy
@@ -31,8 +32,12 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    outputs:
+      release_branch: ${{ steps.release_metadata.outputs.release_branch }}
+      release_version: ${{ steps.release_metadata.outputs.release_version }}
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,11 +56,65 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
 
-      - name: Bump version
-        run: npm version ${{ inputs.semver }} -m "Bump version to %s [skip ci]"
+      - name: Calculate release metadata
+        id: release_metadata
+        env:
+          INPUT_SEMVER: ${{ inputs.semver }}
+        run: |
+          package_name=$(node -p "require('./package.json').name")
+          package_version=$(node -p "require('./package.json').version")
+          published_version=$(npm view "$package_name" version 2>/dev/null || echo "$package_version")
+          tag_versions=$(git ls-remote --tags origin 'v*' | awk -F/ '{print $3}' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sed 's/^v//')
 
-      - name: Push version commit and tag
-        run: git push --follow-tags
+          release_version=$(TAG_VERSIONS="$tag_versions" node - "$package_version" "$published_version" "$INPUT_SEMVER" <<'NODE'
+          const [packageVersion, publishedVersion, bump] = process.argv.slice(2);
+          const tagVersions = (process.env.TAG_VERSIONS || '').split(/\s+/).filter(Boolean);
+          const parse = (value) => value.split('.').map((part) => Number(part));
+          const increment = (value, type) => {
+            const [major, minor, patch] = parse(value);
+
+            if (type === 'major') {
+              return `${major + 1}.0.0`;
+            }
+
+            if (type === 'minor') {
+              return `${major}.${minor + 1}.0`;
+            }
+
+            return `${major}.${minor}.${patch + 1}`;
+          };
+
+          const usedVersions = new Set([publishedVersion, ...tagVersions].filter(Boolean));
+          let candidateVersion = increment(packageVersion, bump);
+
+          while (usedVersions.has(candidateVersion)) {
+            candidateVersion = increment(candidateVersion, bump);
+          }
+
+          process.stdout.write(candidateVersion);
+          NODE
+          )
+
+          echo "release_version=$release_version" >> "$GITHUB_OUTPUT"
+          echo "release_branch=release/v$release_version" >> "$GITHUB_OUTPUT"
+
+      - name: Bump version
+        run: npm version ${{ steps.release_metadata.outputs.release_version }} -m "Bump version to %s [skip ci]"
+
+      - name: Push release branch and tag
+        run: |
+          git checkout -b "${{ steps.release_metadata.outputs.release_branch }}"
+          git push origin "HEAD:${{ steps.release_metadata.outputs.release_branch }}" --follow-tags
+
+      - name: Open release pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --base main \
+            --head "${{ steps.release_metadata.outputs.release_branch }}" \
+            --title "chore: release v${{ steps.release_metadata.outputs.release_version }}" \
+            --body "Automated release PR for v${{ steps.release_metadata.outputs.release_version }}."
 
   build:
     name: Build
@@ -66,7 +125,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: main
+          ref: ${{ needs.release.outputs.release_branch }}
 
       - name: Setup Node.js
         uses: pagopa/dx/.github/actions/node-setup@main
@@ -85,7 +144,9 @@ jobs:
 
   publish:
     name: Publish to npm
-    needs: build
+    needs:
+      - release
+      - build
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -93,6 +154,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release.outputs.release_branch }}
 
       - name: Download artifact
         uses: pagopa/dx/.github/actions/download-artifact@main
