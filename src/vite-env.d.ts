@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_ANALYTICS_ENABLE: string;
   readonly VITE_ANALYTICS_MOCK: string;
   readonly VITE_ANALYTICS_DEBUG: string;
+  readonly VITE_ANALYTICS_STOP_UTM_PERSISTENCE: string;
   readonly VITE_MIXPANEL_TOKEN: string;
   readonly VITE_GOOGLE_LOGIN_URL: string;
   readonly VITE_URL_PRIVACY_DISCLAIMER: string;

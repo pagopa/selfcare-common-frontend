@@ -17,6 +17,7 @@ export const initAnalytics = (): void => {
         ip: CONFIG.ANALYTCS.LOG_IP,
         property_blacklist: CONFIG.ANALYTCS.PROPERTY_BLACKLIST,
         debug: CONFIG.ANALYTCS.DEBUG,
+        stop_utm_persistence: CONFIG.ANALYTCS.STOP_UTM_PERSISTENCE,
       });
     }
   }

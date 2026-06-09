@@ -16,6 +16,7 @@ export const CONFIG = {
     ENABLE: import.meta.env.VITE_ANALYTICS_ENABLE === 'true',
     MOCK: import.meta.env.VITE_ANALYTICS_MOCK === 'true',
     DEBUG: import.meta.env.VITE_ANALYTICS_DEBUG === 'true',
+    STOP_UTM_PERSISTENCE: import.meta.env.VITE_ANALYTICS_STOP_UTM_PERSISTENCE === 'true',
     TOKEN: (import.meta.env.VITE_MIXPANEL_TOKEN as string) || '',
     API_HOST: 'https://api-eu.mixpanel.com',
     PERSISTENCE: 'localStorage',
