@@ -7,6 +7,7 @@ import { isRight, toError } from 'fp-ts/lib/Either';
 import * as t from 'io-ts';
 import { CONFIG } from '../config/env';
 import { appStateActions } from '../redux/slices/appStateSlice';
+import { withOnSuccess } from './login-utils';
 import { isPagoPaUser } from './storage';
 
 /** To show an error popup to inform of the not valid session */
@@ -37,7 +38,11 @@ export const buildFetchApi = (
   ) => Promise<Response>;
 };
 
-const LOGIN_URL = isPagoPaUser() ? CONFIG.URL_FE.LOGOUT_GOOGLE : CONFIG.URL_FE.LOGOUT;
+/** Resolved when the session turns out to be invalid, and not at import time: the applications
+override CONFIG.URL_FE and write the logged user in the storage inside their own entrypoint, which
+ESM evaluates after this module. */
+const buildInvalidSessionUrl = () =>
+  withOnSuccess(isPagoPaUser() ? CONFIG.URL_FE.LOGOUT_GOOGLE : CONFIG.URL_FE.LOGOUT);
 
 /** Extract the response of a @pagopa/openapi-codegen-ts generated client rest invocation having status code successHttpStatus.
 If notValidTokenHttpStatus is not null and the returned status is equal to notValidTokenHttpStatus, it will call the onRedirectToLogin function and will schedule the redirect towards logout path.
@@ -60,7 +65,8 @@ export const extractResponse = async <R>(
       return response.right.value;
     } else if (notValidTokenHttpStatus && response.right.status === notValidTokenHttpStatus) {
       onRedirectToLogin();
-      window.setTimeout(() => window.location.assign(LOGIN_URL), 2000);
+      const invalidSessionUrl = buildInvalidSessionUrl();
+      window.setTimeout(() => window.location.assign(invalidSessionUrl), 2000);
       return new Promise(() => null);
     } else if (
       notAuthorizedTokenHttpStatus &&

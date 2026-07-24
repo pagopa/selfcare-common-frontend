@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { CONFIG } from '../config/env';
 import { User } from '../model/User';
 import { userActions } from '../redux/slices/userSlice';
+import { withOnSuccess } from '../utils/login-utils';
 import { isPagoPaUser, storageTokenOps, storageUserOps } from '../utils/storage';
 
 const testToken = CONFIG.TEST.JWT;
@@ -36,7 +37,7 @@ export const useLogin = () => {
       // Remove any partial data that might have remained, just for safety
       storageUserOps.delete();
       // Go to the login view
-      globalThis.location.assign(LOGIN_URL);
+      globalThis.location.assign(withOnSuccess(LOGIN_URL));
       // This return is necessary
       return;
     }
