@@ -60,6 +60,19 @@ test('Test no auth session', async () => {
   await waitFor(() => expect(global.window.location.assign).toHaveBeenCalledWith('/auth/login'));
 });
 
+test('Test no auth session brings back to the current page once logged in', async () => {
+  // eslint-disable-next-line functional/immutable-data
+  mockedLocation.pathname = '/onboarding/user';
+  renderApp();
+  await waitFor(() =>
+    expect(global.window.location.assign).toHaveBeenCalledWith(
+      '/auth/login?onSuccess=%2Fonboarding%2Fuser'
+    )
+  );
+  // eslint-disable-next-line functional/immutable-data
+  mockedLocation.pathname = '';
+});
+
 test('Test auth session', async () => {
   const user = mockUser();
   const store = renderApp();

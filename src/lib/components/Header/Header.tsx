@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { CONFIG } from '../../config/env';
 import { buildAssistanceURI } from '../../services/assistanceService';
+import { withOnSuccess } from '../../utils/login-utils';
 import { isPagoPaUser } from '../../utils/storage';
 
 type PartyEntity = PartySwitchItem;
@@ -128,7 +129,7 @@ const Header = ({
           onAssistanceClick={() =>
             onExit(() => window.location.assign(buildAssistanceURI(assistanceEmail)))
           }
-          onLogin={() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGIN))}
+          onLogin={() => onExit(() => window.location.assign(withOnSuccess(CONFIG.URL_FE.LOGIN)))}
           onLogout={
             onLogoutClick ?? (() => onExit(() => window.location.assign(CONFIG.URL_FE.LOGOUT)))
           }
