@@ -1,8 +1,7 @@
-import React, { CSSProperties, Fragment } from 'react';
-import { Alert, Grid, Typography, IconButton, SvgIcon } from '@mui/material';
-import { styled } from '@mui/system';
-import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CloseIcon from '@mui/icons-material/Close';
+import { Alert, Grid, IconButton, SvgIcon, Typography, styled } from '@mui/material';
+import React, { CSSProperties, Fragment } from 'react';
 
 type Props = {
   /** If this component should be displayed or not */

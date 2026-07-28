@@ -1,5 +1,4 @@
-import { Modal, useTheme } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, Modal, useTheme } from '@mui/material';
 import MDSpinner from 'react-md-spinner';
 
 type Props = {
