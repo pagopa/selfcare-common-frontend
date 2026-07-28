@@ -1,5 +1,5 @@
 import { SupervisedUserCircle } from '@mui/icons-material';
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Button, Container, Paper, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import AnalyticsExample from './examples/AnalyticsExample';
 import CustomAlertExample from './examples/CustomAlertExample';
@@ -24,22 +24,35 @@ import './lib/consentManagementConfigure';
 import withLogin from './lib/decorators/withLogin';
 import { useUnloadEventOnExit } from './lib/hooks/useUnloadEventInterceptor';
 
+// Small helper so every demo block looks the same:
+// a labeled card with consistent padding.
+const Section = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <Paper variant="outlined" sx={{ p: 2 }}>
+    <Typography variant="overline" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
+      {title}
+    </Typography>
+    <Box>{children}</Box>
+  </Paper>
+);
+
 const AppExample = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const onExit = useUnloadEventOnExit();
+
   return (
     <ErrorBoundary minHeight="100vh" assistanceEmail="assistenza@selfcare.it">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: '100vh',
-        }}
-      >
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <HeaderExample isLoggedIn={isLoggedIn} onExit={onExit} />
         <UserNotifyHandle />
         <LoadingOverlay />
         <UnloadEventHandler />
+
         <NavigationBar
           showBackComponent={false}
           // eslint-disable-next-line no-console
@@ -55,66 +68,86 @@ const AppExample = () => {
             },
           ]}
         />
+
         <TitleBox title="Title example" subTitle="Subtitle example" />
 
-        <Grid container direction="row">
-          <CustomAvatarExample />
+        <Container maxWidth="lg" sx={{ flexGrow: 1, py: 3 }}>
+          <Stack spacing={3}>
+            {/* Auth toggle — kept out of a card since it drives the rest of the page */}
+            <Box>
+              <Button
+                variant={!isLoggedIn ? 'contained' : 'outlined'}
+                size="small"
+                onClick={() => setIsLoggedIn(!isLoggedIn)}
+              >
+                {isLoggedIn ? 'Logout' : 'Login'}
+              </Button>
+            </Box>
 
-          <Grid item xs={6}>
-            <CustomPaginationExample />
-          </Grid>
-        </Grid>
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+              <Box sx={{ flex: 1 }}>
+                <Section title="Avatar">
+                  <CustomAvatarExample />
+                </Section>
+              </Box>
+              <Box sx={{ flex: 1 }}>
+                <Section title="Pagination">
+                  <CustomPaginationExample />
+                </Section>
+              </Box>
+            </Stack>
 
-        <Grid container direction="row" flexGrow={1} spacing={1} mt={1}>
-          <Grid item xs={2}>
-            <Button
-              variant={!isLoggedIn ? 'contained' : 'outlined'}
-              size="small"
-              onClick={() => {
-                setIsLoggedIn(!isLoggedIn);
-              }}
-            >
-              {isLoggedIn ? 'Logout' : 'Login'}
-            </Button>
-          </Grid>
-          <Grid item xs={1}>
-            <UseLoadingExample />
-          </Grid>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} flexWrap="wrap" useFlexGap>
+              <Section title="Loading">
+                <UseLoadingExample />
+              </Section>
+              <Section title="Filter modal">
+                <FilterModalExample />
+              </Section>
+              <Section title="Session modal">
+                <SessionModalExample />
+              </Section>
+              <Section title="Toast">
+                <ToastExample />
+              </Section>
+            </Stack>
 
-          <Grid item xs={8}>
-            <UseErrorDispatcherExample />
-          </Grid>
+            <Section title="Error dispatcher">
+              <UseErrorDispatcherExample />
+            </Section>
 
-          <Grid item xs={1}>
-            <FilterModalExample />
-          </Grid>
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+              <Box sx={{ flex: 1 }}>
+                <Section title="User notify">
+                  <UseUserNotifyExample />
+                </Section>
+              </Box>
+              <Box sx={{ flex: 1 }}>
+                <Section title="Unload event interceptor">
+                  <UseUnloadEventInterceptorExample />
+                </Section>
+              </Box>
+            </Stack>
 
-          <Grid item xs={1}>
-            <SessionModalExample />
-          </Grid>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+              <Box sx={{ flex: 1 }}>
+                <Section title="Analytics">
+                  <AnalyticsExample />
+                </Section>
+              </Box>
+              <Box sx={{ flex: 1 }}>
+                <Section title="Translation text">
+                  <TranslationTextExample />
+                </Section>
+              </Box>
+            </Stack>
 
-          <Grid item xs={1}>
-            <ToastExample />
-          </Grid>
+            <Section title="Custom alert">
+              <CustomAlertExample />
+            </Section>
+          </Stack>
+        </Container>
 
-          <Grid item xs={4}>
-            <UseUserNotifyExample />
-          </Grid>
-
-          <Grid item xs={3}>
-            <UseUnloadEventInterceptorExample />
-          </Grid>
-
-          <Grid item xs={2}>
-            <AnalyticsExample />
-          </Grid>
-          <Grid item xs={2}>
-            <TranslationTextExample />
-          </Grid>
-        </Grid>
-        <Grid>
-          <CustomAlertExample />
-        </Grid>
         <FooterExample isLoggedIn={isLoggedIn} />
       </Box>
     </ErrorBoundary>

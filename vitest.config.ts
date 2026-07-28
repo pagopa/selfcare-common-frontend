@@ -24,7 +24,6 @@ export default defineConfig({
         'src/examples/**',
         'src/AppExample.tsx',
         'src/lib/utils/fixSwagger20ArraySchemaDef.js',
-        'src/lib/common-polyfill.ts',
         'src/lib/index.ts',
         'src/lib/components/icons/**',
         'src/lib/model/**',
