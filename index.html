@@ -25,12 +25,12 @@
     <link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-384x384.png" />
     <link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-512x512.png" />
 
-    <link href="https://selfcare.pagopa.it/assets/font/selfhostedfonts.css" rel="stylesheet" />
+    <link href="<%- VITE_URL_CDN %>/assets/font/selfhostedfonts.css" rel="stylesheet" />
     <script
-      src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+      src="<%- VITE_ONE_TRUST_BASE_URL %>/scripttemplates/otSDKStub.js"
       type="text/javascript"
       charset="UTF-8"
-      data-domain-script="a8f58d7a-7f6a-4fe6-ac02-f95bac3876d4-test"
+      data-domain-script="<%- VITE_ONETRUST_DOMAIN_ID %>"
     ></script>
   </head>
   <body>

@@ -93,6 +93,7 @@
     "rimraf": "^6.0.1",
     "typescript": "^5.9.2",
     "vite": "^8.1.5",
+    "vite-plugin-html": "^3.2.2",
     "vitest": "4.1.10"
   },
   "resolutions": {
