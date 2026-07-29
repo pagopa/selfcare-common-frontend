@@ -31,7 +31,12 @@ export const CONFIG = {
   },
 
   TEST: {
-    JWT: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmYW1pbHlfbmFtZSI6Im1vY2tlZCIsImZpc2NhbF9udW1iZXIiOiIyMjMzNDQ1Njc4NiIsIm5hbWUiOiJ1c2VyIiwiZnJvbV9hYSI6ZmFsc2UsInVpZCI6IjUwNTRwZWM2LTIyMzMyLTQ1ZDUtOWJkZi0yYmg5NzRhN2MxYzgiLCJsZXZlbCI6IkwyIiwiaWF0IjoxNzEwNzU4Njk0LCJleHAiOjE3MDgyNTMxODl9.qGqULn7A29daBAvc34azOgL5PhLt6Srge0PxopPj_DA',
+    /**
+     * Local/dev-only test token.
+     * Do not commit real tokens in source code. Provide it via `.env.development.local`:
+     *   VITE_TEST_JWT=...
+     */
+    JWT: (import.meta.env.VITE_TEST_JWT as string) || '',
   },
 
   FOOTER: {

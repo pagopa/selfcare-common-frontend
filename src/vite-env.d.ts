@@ -3,6 +3,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_MOCK_USER: string;
+  readonly VITE_TEST_JWT: string;
   readonly VITE_ANALYTICS_ENABLE: string;
   readonly VITE_ANALYTICS_MOCK: string;
   readonly VITE_ANALYTICS_DEBUG: string;

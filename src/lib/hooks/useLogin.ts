@@ -23,8 +23,11 @@ export const useLogin = () => {
 
   const attemptSilentLogin = async () => {
     if (CONFIG.MOCKS.MOCK_USER) {
+
       setUser(mockedUser);
-      storageTokenOps.write(testToken);
+      if (testToken) {
+        storageTokenOps.write(testToken);
+      }
       storageUserOps.write(mockedUser);
       return;
     }
