@@ -8,6 +8,17 @@ import { isPagoPaUser, storageTokenOps, storageUserOps } from '../utils/storage'
 
 const testToken = CONFIG.TEST.JWT;
 
+const warnOnce = (() => {
+  let warned = false;
+  return (message: string) => {
+    if (!warned) {
+      warned = true;
+      // eslint-disable-next-line no-console
+      console.warn(message);
+    }
+  };
+})();
+
 const mockedUser = {
   uid: '0',
   taxCode: 'AAAAAA00A00A000A',
@@ -23,8 +34,21 @@ export const useLogin = () => {
 
   const attemptSilentLogin = async () => {
     if (CONFIG.MOCKS.MOCK_USER) {
+      if (!import.meta.env.DEV) {
+        warnOnce(
+          '[selfcare-common-frontend] CONFIG.MOCKS.MOCK_USER is enabled outside DEV mode. This should be used only for local development.'
+        );
+      }
+      if (!testToken) {
+        warnOnce(
+          '[selfcare-common-frontend] MOCK_USER is enabled but CONFIG.TEST.JWT is empty. Set VITE_TEST_JWT in .env.development.local.'
+        );
+      }
+
       setUser(mockedUser);
-      storageTokenOps.write(testToken);
+      if (testToken) {
+        storageTokenOps.write(testToken);
+      }
       storageUserOps.write(mockedUser);
       return;
     }
