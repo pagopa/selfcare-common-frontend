@@ -1,3 +1,17 @@
+import { isPagoPaUser } from "../utils/storage";
+
+
+const isFromBackstage = isPagoPaUser() || window.location.pathname.endsWith('/google');
+
+/** Appends an `origin=backstage` query param to the given url when the current user/context is coming from Backstage, so that destination pages (e.g. Privacy Policy, Terms and Conditions) can detect it and render the appropriate content/script. */
+const appendBackstageParam = (url: string): string => {
+  if (!url || !isFromBackstage) {
+    return url;
+  }
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}origin=backstage`;
+};
+
 export const CONFIG = {
   URL_FE: {
     LOGIN_GOOGLE: '/auth/google',
@@ -39,11 +53,12 @@ export const CONFIG = {
     JWT: (import.meta.env.VITE_TEST_JWT as string) || '',
   },
 
+
   FOOTER: {
     LINK: {
       PAGOPALINK: 'https://www.pagopa.it/',
-      PRIVACYPOLICY: (import.meta.env.VITE_URL_PRIVACY_DISCLAIMER as string) || '',
-      TERMSANDCONDITIONS: (import.meta.env.VITE_URL_TERMS_AND_CONDITIONS as string) || '',
+      PRIVACYPOLICY: appendBackstageParam((import.meta.env.VITE_URL_PRIVACY_DISCLAIMER as string) || ''),
+      TERMSANDCONDITIONS: appendBackstageParam((import.meta.env.VITE_URL_TERMS_AND_CONDITIONS as string) || ''),
       PROTECTIONOFPERSONALDATA:
         'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
       ABOUTUS: 'https://www.pagopa.it/it/societa/chi-siamo/',
