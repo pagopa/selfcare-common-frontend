@@ -40,13 +40,13 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: pagopa/dx/.github/actions/node-setup@main
+        uses: pagopa/dx/.github/actions/node-setup@5dd06bf87a5b37b0c1515b8c4891b53445f723c7 # main
 
       - name: Install dependencies
         run: yarn install --immutable
@@ -175,13 +175,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
           ref: ${{ needs.release.outputs.release_branch }}
 
       - name: Setup Node.js
-        uses: pagopa/dx/.github/actions/node-setup@main
+        uses: pagopa/dx/.github/actions/node-setup@5dd06bf87a5b37b0c1515b8c4891b53445f723c7 # main
 
       - name: Install dependencies
         run: yarn install --immutable
@@ -190,7 +190,7 @@ jobs:
         run: yarn dist
 
       - name: Upload artifact
-        uses: pagopa/dx/.github/actions/upload-artifact@main
+        uses: pagopa/dx/.github/actions/upload-artifact@5dd06bf87a5b37b0c1515b8c4891b53445f723c7 # main
         with:
           bundle_name: Bundle
           file_path: ./dist
@@ -206,18 +206,18 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ needs.release.outputs.release_branch }}
 
       - name: Download artifact
-        uses: pagopa/dx/.github/actions/download-artifact@main
+        uses: pagopa/dx/.github/actions/download-artifact@5dd06bf87a5b37b0c1515b8c4891b53445f723c7 # main
         with:
           bundle_name: Bundle
           file_path: ./dist
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .node-version
           registry-url: "https://registry.npmjs.org/"
