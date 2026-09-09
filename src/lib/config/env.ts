@@ -12,6 +12,32 @@ const appendBackstageParam = (url: string): string => {
   return `${url}${separator}origin=backstage`;
 };
 
+const currentEnv = (import.meta.env.VITE_ENV as string) || '';
+const isProd = currentEnv === 'PROD';
+
+/**
+ * Computes the Privacy Policy link shown in the footer.
+ * - Backstage context or PROD environment: legacy SPA route (OneTrust), with `origin=backstage` param when applicable.
+ * - Non-backstage, non-PROD (DEV/UAT/local/test): new static CDN page, bypassing the SPA route entirely.
+ *   Falls back to the legacy SPA route (without backstage param) if the static URL env var is not configured.
+ */
+const privacyPolicyUrl = (): string => {
+  const legacyUrl = (import.meta.env.VITE_URL_PRIVACY_DISCLAIMER as string) || '';
+  if (isFromBackstage || isProd) {
+    return appendBackstageParam(legacyUrl);
+  }
+  const staticUrl = (import.meta.env.VITE_URL_PRIVACY_POLICY_STATIC as string) || '';
+  return staticUrl || legacyUrl;
+};
+
+/**
+ * `true` when the Privacy Policy link currently points to the static CDN page (i.e. non-backstage,
+ * non-PROD, with the static URL configured), so consumers can open it in a new tab instead of
+ * navigating away from the SPA. `false` for the legacy SPA route, to preserve the current behavior.
+ */
+const isStaticPrivacyPolicy = (): boolean =>
+  !isFromBackstage && !isProd && !!(import.meta.env.VITE_URL_PRIVACY_POLICY_STATIC as string);
+
 export const CONFIG = {
   URL_FE: {
     LOGIN_GOOGLE: '/auth/google',
@@ -57,7 +83,8 @@ export const CONFIG = {
   FOOTER: {
     LINK: {
       PAGOPALINK: 'https://www.pagopa.it/',
-      PRIVACYPOLICY: appendBackstageParam((import.meta.env.VITE_URL_PRIVACY_DISCLAIMER as string) || ''),
+      PRIVACYPOLICY: privacyPolicyUrl(),
+      PRIVACYPOLICY_OPEN_IN_NEW_TAB: isStaticPrivacyPolicy(),
       TERMSANDCONDITIONS: appendBackstageParam((import.meta.env.VITE_URL_TERMS_AND_CONDITIONS as string) || ''),
       PROTECTIONOFPERSONALDATA:
         'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',

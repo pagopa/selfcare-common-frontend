@@ -73,7 +73,10 @@ export default function Footer({
           label: t('common.footer.preLoginLinks.resources.links.privacyPolicy'),
           href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
           ariaLabel: `${t('common.footer.preLoginLinks.resources.links.privacyPolicy')}: vai al link`,
-          linkType: 'internal',
+          linkType: 'external',
+          onClick: CONFIG.FOOTER.LINK.PRIVACYPOLICY_OPEN_IN_NEW_TAB
+            ? () => window.open(CONFIG.FOOTER.LINK.PRIVACYPOLICY, '_blank', 'noopener,noreferrer')
+            : undefined,
         },
         {
           label: t('common.footer.preLoginLinks.resources.links.certifications'),
@@ -170,6 +173,9 @@ export default function Footer({
       href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
       ariaLabel: `${t('common.footer.postLoginLinks.privacyPolicy')}: vai al link`,
       linkType: 'internal',
+      onClick: CONFIG.FOOTER.LINK.PRIVACYPOLICY_OPEN_IN_NEW_TAB
+        ? () => window.open(CONFIG.FOOTER.LINK.PRIVACYPOLICY, '_blank', 'noopener,noreferrer')
+        : undefined,
     },
     {
       label: t('common.footer.postLoginLinks.protectionofpersonaldata'),
