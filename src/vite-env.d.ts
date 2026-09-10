@@ -12,6 +12,8 @@ interface ImportMetaEnv {
   readonly VITE_GOOGLE_LOGIN_URL: string;
   readonly VITE_URL_PRIVACY_DISCLAIMER: string;
   readonly VITE_URL_TERMS_AND_CONDITIONS: string;
+  readonly VITE_ENV: string;
+  readonly VITE_URL_PRIVACY_POLICY_STATIC: string;
 }
 
 interface ImportMeta {
