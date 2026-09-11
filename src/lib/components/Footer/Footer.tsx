@@ -6,7 +6,7 @@ import {
 } from '@pagopa/mui-italia';
 import { useEffect } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { CONFIG } from '../../config/env';
+import { CONFIG, showStaticPrivacyPolicy } from '../../config/env';
 import i18n from '../../locale/locale-utils';
 import { LANGUAGES, pagoPALink } from './FooterConfig';
 
@@ -74,7 +74,7 @@ export default function Footer({
           href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
           ariaLabel: `${t('common.footer.preLoginLinks.resources.links.privacyPolicy')}: vai al link`,
           linkType: 'external',
-          onClick: CONFIG.FOOTER.LINK.PRIVACYPOLICY_OPEN_IN_NEW_TAB
+          onClick: showStaticPrivacyPolicy()
             ? () => window.open(CONFIG.FOOTER.LINK.PRIVACYPOLICY, '_blank', 'noopener,noreferrer')
             : undefined,
         },
@@ -173,7 +173,7 @@ export default function Footer({
       href: CONFIG.FOOTER.LINK.PRIVACYPOLICY,
       ariaLabel: `${t('common.footer.postLoginLinks.privacyPolicy')}: vai al link`,
       linkType: 'internal',
-      onClick: CONFIG.FOOTER.LINK.PRIVACYPOLICY_OPEN_IN_NEW_TAB
+      onClick: showStaticPrivacyPolicy()
         ? () => window.open(CONFIG.FOOTER.LINK.PRIVACYPOLICY, '_blank', 'noopener,noreferrer')
         : undefined,
     },
