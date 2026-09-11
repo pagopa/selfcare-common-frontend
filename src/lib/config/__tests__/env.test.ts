@@ -30,40 +30,40 @@ describe('CONFIG.FOOTER.LINK.PRIVACYPOLICY', () => {
     vi.stubEnv('VITE_ENV', 'UAT');
     vi.stubEnv('VITE_URL_PRIVACY_POLICY_STATIC', STATIC_URL);
 
-    const { CONFIG } = await import('../env');
+    const { CONFIG, showStaticPrivacyPolicy } = await import('../env');
 
     expect(CONFIG.FOOTER.LINK.PRIVACYPOLICY).toBe(`${LEGACY_URL}?origin=backstage`);
-    expect(CONFIG.FOOTER.LINK.PRIVACYPOLICY_OPEN_IN_NEW_TAB).toBe(false);
+    expect(showStaticPrivacyPolicy()).toBe(false);
   });
 
   it('uses the legacy SPA route without the backstage param in PROD, even when not from backstage', async () => {
     vi.stubEnv('VITE_ENV', 'PROD');
     vi.stubEnv('VITE_URL_PRIVACY_POLICY_STATIC', STATIC_URL);
 
-    const { CONFIG } = await import('../env');
+    const { CONFIG, showStaticPrivacyPolicy } = await import('../env');
 
     expect(CONFIG.FOOTER.LINK.PRIVACYPOLICY).toBe(LEGACY_URL);
-    expect(CONFIG.FOOTER.LINK.PRIVACYPOLICY_OPEN_IN_NEW_TAB).toBe(false);
+    expect(showStaticPrivacyPolicy()).toBe(false);
   });
 
   it('uses the static CDN url in DEV/UAT when not from backstage, and flags it to be opened in a new tab', async () => {
     vi.stubEnv('VITE_ENV', 'UAT');
     vi.stubEnv('VITE_URL_PRIVACY_POLICY_STATIC', STATIC_URL);
 
-    const { CONFIG } = await import('../env');
+    const { CONFIG, showStaticPrivacyPolicy } = await import('../env');
 
     expect(CONFIG.FOOTER.LINK.PRIVACYPOLICY).toBe(STATIC_URL);
-    expect(CONFIG.FOOTER.LINK.PRIVACYPOLICY_OPEN_IN_NEW_TAB).toBe(true);
+    expect(showStaticPrivacyPolicy()).toBe(true);
   });
 
-  it('falls back to the legacy SPA route without the backstage param when the static url is not configured', async () => {
+  it('renders an empty string when the static url is not configured, without falling back to the legacy route', async () => {
     vi.stubEnv('VITE_ENV', 'DEV');
     vi.stubEnv('VITE_URL_PRIVACY_POLICY_STATIC', '');
 
-    const { CONFIG } = await import('../env');
+    const { CONFIG, showStaticPrivacyPolicy } = await import('../env');
 
-    expect(CONFIG.FOOTER.LINK.PRIVACYPOLICY).toBe(LEGACY_URL);
-    expect(CONFIG.FOOTER.LINK.PRIVACYPOLICY_OPEN_IN_NEW_TAB).toBe(false);
+    expect(CONFIG.FOOTER.LINK.PRIVACYPOLICY).toBe('');
+    expect(showStaticPrivacyPolicy()).toBe(true);
   });
 
   it('does not affect TERMSANDCONDITIONS, which always stays on the legacy SPA route', async () => {
