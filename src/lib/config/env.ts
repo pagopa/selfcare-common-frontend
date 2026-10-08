@@ -1,4 +1,5 @@
 import { isPagoPaUser } from "../utils/storage";
+import { getAppArea } from "../utils/utils";
 
 
 const isFromBackstage = isPagoPaUser() || window.location.pathname.endsWith('/google');
@@ -16,7 +17,7 @@ const currentEnv = (import.meta.env.VITE_ENV as string) || '';
 const isProd = currentEnv === 'PROD';
 
 export const showStaticPrivacyPolicy = (): boolean =>
-  !isFromBackstage && !isProd;
+  !isFromBackstage && !isProd && getAppArea() !== 'imprese';
 
 export const CONFIG = {
   URL_FE: {
