@@ -926,10 +926,10 @@
   resolved "https://registry.yarnpkg.com/@oxc-project/types/-/types-0.139.0.tgz#38d76b9dbf934c2a02be174fb32ceebf182fe742"
   integrity sha512-r9gHphtCs+1M7J0pw6Sn/hh/Wpa/iQrOOkrNAlVLF/gHq+/CJmHIWKKUUhdWjcD6CIa8idarspCsASiXCXvFUw==
 
-"@pagopa/mui-italia@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-2.5.0.tgz#b869f758ff21fab5aad5735321333632709aee0d"
-  integrity sha512-wVhv0K3uhptV5m9FgQaAXR1dBg9y2nVcCeASgBs/lIX+QfuRAcybKH9Jhx9sLnLTdsJShumc6+X+HvavdFrSMQ==
+"@pagopa/mui-italia@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-2.7.0.tgz#e612d20ad8d9dc6449e9bfdba99edb0401413fa1"
+  integrity sha512-MEGj613VkMpgviMzmXKXKoKpd0Ij40FvPjjt/UrC1lnBmCObfhs4Wx0LbJwOmY1Y57UcIgDey/EjaEJQWDEJsw==
   dependencies:
     "@fontsource/dm-mono" "^4.5.10"
     "@fontsource/titillium-web" "^4.5.9"
