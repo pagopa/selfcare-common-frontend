@@ -52,5 +52,5 @@ CI (`.github/workflows/code-review.yml`) runs `check:package`, lint, typecheck, 
 - UI is built on MUI 5 and `@pagopa/mui-italia`. Tests of components that render mui-italia components need `<ThemeProvider theme={theme}>` with `theme` from `@pagopa/mui-italia` (see `src/__tests__/App.test.tsx`).
 - Library code may use `import.meta.env.VITE_*`: it is resolved by the consumer's Vite build.
 - i18n: library strings are in `src/lib/locale/{it,en,fr,de,sl}.ts` and merged with the consumer's resources by `configureI18n` in `locale-utils.ts`. Add new keys to every language file.
-- Prettier (`.prettierrc`) and ESLint (`.eslintrc.js`, with `sonarjs` and `functional`) are enforced in CI.
+- Prettier (`.prettierrc`) and ESLint 9 (flat config in `eslint.config.mjs`, with `sonarjs` and `functional`; only `.ts`/`.tsx` files are linted) are enforced in CI.
 - PRs use `.github/PULL_REQUEST_TEMPLATE.md`.
