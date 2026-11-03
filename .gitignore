@@ -59,6 +59,5 @@ yarn-error.log
 .idea
 .vscode
 
-tsconfig.json
 # graphify-axet
 .graphify/
