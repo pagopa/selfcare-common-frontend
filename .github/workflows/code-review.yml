@@ -28,8 +28,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Build
-        run: yarn dist
+      # Builds dist/ and checks that the packed package still exposes every public entry point
+      - name: Build and check package
+        run: yarn check:package
 
   lint:
     name: Lint

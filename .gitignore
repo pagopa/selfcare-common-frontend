@@ -26,6 +26,7 @@ node_modules
 generated
 build
 dist
+.package-check
 local
 dist
 
