@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist",
+    "rootDir": "src",
     "target": "esnext",
     "module": "esnext",
     "lib": [
@@ -37,9 +38,11 @@
     "src/**/*"
   ],
   "exclude": [
-    "__mocks__",
     "node_modules",
-    "**/__tests__/*",
+    "**/__tests__/**",
+    "**/tests/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
     "Dangerfile.ts",
     "src/AppExample.tsx",
     "src/examples/**/*",
