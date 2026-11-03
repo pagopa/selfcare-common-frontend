@@ -13,7 +13,6 @@ yarn test             # vitest run
 yarn test:coverage
 yarn lint             # eslint (yarn lint-autofix to fix)
 yarn dist             # build the npm package into dist/ (tsc -p tsconfigDist.json + static files)
-yarn build            # build the demo app into build/ (not published)
 yarn check:package    # clean build of dist/ + consumer check of the packed package
 ```
 

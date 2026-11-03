@@ -27,10 +27,6 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       open: true,
     },
-    // The demo app must not write to dist/, which is the npm package
-    build: {
-      outDir: 'build',
-    },
     preview: {
       port: 3000,
     },
