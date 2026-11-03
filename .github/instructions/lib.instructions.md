@@ -6,5 +6,5 @@ applyTo: 'src/lib/**,tsconfigDist.json,tsconfigStart.json,package.json,scripts/*
 - When adding a module that consumers should import by path, add it to `scripts/package-entrypoints.json`.
 - Every package imported by `src/lib` must be in `dependencies` (not only `devDependencies`); `yarn check:package` enforces it. The only exceptions are packages needed by shipped scripts that consumers install themselves, listed in `consumerProvidedDependencies` in `scripts/package-entrypoints.json`.
 - Changing `dependencies` changes the Module Federation `shared` config of the consumers, which read them from this `package.json`. Do not move them to `peerDependencies` or change ranges casually.
-- Put new test and mock files in `__tests__` / `__mocks__` folders next to the code.
+- Put new test files in `__tests__` folders next to the code: they are excluded from the package. Files in `src/lib/**/__mocks__` and other test folders are currently published.
 - Verify with `yarn check:package` after changes to `src/lib`, the tsconfig files or `package.json`.
