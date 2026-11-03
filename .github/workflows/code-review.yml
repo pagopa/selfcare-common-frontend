@@ -47,6 +47,10 @@ jobs:
       - name: Lint
         run: yarn lint
 
+      # Type-checks everything, tests and demo app included (dist uses tsconfigDist.json)
+      - name: Typecheck
+        run: yarn typecheck
+
   danger:
     name: Danger CI
     runs-on: ubuntu-latest

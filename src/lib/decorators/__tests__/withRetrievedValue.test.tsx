@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import type { Mock } from 'vitest';
 import useReduxCachedValue from '../../hooks/useReduxCachedValue';
 import withRetrievedValue from '../withRetrievedValue';
 import { Provider } from 'react-redux';
@@ -8,7 +8,7 @@ import { testActions, testSelectors } from '../../../examples/redux/slices/testS
 import { fetchTestData } from '../../../examples/services/testService';
 import TestData from '../../../examples/model/TestData';
 
-let spyFetch: vi.Mock<Promise<Array<TestData>>>;
+let spyFetch: Mock<() => Promise<Array<TestData>>>;
 
 beforeEach(() => {
   spyFetch = vi.fn(fetchTestData);

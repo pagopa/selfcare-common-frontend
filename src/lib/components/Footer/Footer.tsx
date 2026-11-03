@@ -16,7 +16,6 @@ type FooterProps = {
   onExit?: (exitAction: () => void) => void;
 };
 declare const window: any;
-// eslint-disable-next-line sonarjs/cognitive-complexity
 export default function Footer({
   loggedUser,
   productsJsonUrl,

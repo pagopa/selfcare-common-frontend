@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-types
 type StorageValue = string | number | object;
 type StorageValueType = 'string' | 'number' | 'object';
 
