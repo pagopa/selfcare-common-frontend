@@ -1,6 +1,7 @@
 import { initAnalytics, trackAppError, trackEvent } from '../analyticsService';
 import { CONFIG } from '../../config/env';
 import mixpanel from 'mixpanel-browser';
+import type { Mock } from 'vitest';
 import { AppError } from '../../redux/slices/appStateSlice';
 
 const oldConsoleLog = console.log;
@@ -34,8 +35,8 @@ const appError: AppError = {
 };
 const trackErrorTest = () => trackAppError(appError);
 
-let expectedCallback = undefined;
-let expectedTrackOptions = undefined;
+let expectedCallback: unknown = undefined;
+let expectedTrackOptions: { send_immediately: boolean } | undefined = undefined;
 
 describe('test if not init', () => {
   test('test event', () => {
@@ -212,7 +213,7 @@ describe('test regular send library in error', () => {
     CONFIG.ANALYTCS.ENABLE = true;
     CONFIG.ANALYTCS.MOCK = false;
     initAnalytics();
-    (mixpanel.track as vi.Mock).mockImplementation(() => {
+    (mixpanel.track as Mock).mockImplementation(() => {
       throw new Error('DUMMY ERROR');
     });
 
@@ -244,8 +245,8 @@ describe('test regular send library in error', () => {
   });
 
   test('test callback when analytics called it even if in error', () => {
-    (mixpanel.track as vi.Mock).mockImplementation(
-      (_eventName: string, _property: any, _options: any, callback) => {
+    (mixpanel.track as Mock).mockImplementation(
+      (_eventName: string, _property: any, _options: any, callback?: () => void) => {
         if (callback) {
           callback();
         }

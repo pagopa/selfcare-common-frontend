@@ -51,6 +51,7 @@
     "clean:coverage": "rimraf coverage",
     "lint-autofix": "eslint . -c .eslintrc.js --ext .ts,.tsx --fix",
     "lint": "eslint . -c .eslintrc.js --ext .ts,.tsx",
+    "typecheck": "tsc -p tsconfig.json",
     "prettify": "prettier --write \"./**/*.{ts,tsx}\"",
     "version": "auto-changelog -p --config .auto-changelog.json && git add CHANGELOG.md"
   },

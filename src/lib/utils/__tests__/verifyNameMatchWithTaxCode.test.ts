@@ -1,13 +1,13 @@
 import { User } from '../../model/User';
 import { verifyNameMatchWithTaxCode } from './../verifyNameMatchWithTaxCode';
 
-const user: User = {
+const user = {
   name: 'MARIO',
   surname: 'ROSSI',
   uid: 'UID23',
   taxCode: 'RSSMRA88C24A294U',
   email: 'mario.rossi@comunedi.it',
-};
+} satisfies User;
 
 test('test: typing a name leaving the taxCode empty, then no errors will be displayed', () => {
   const result = verifyNameMatchWithTaxCode('LUDOVICO', '');

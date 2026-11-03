@@ -1,5 +1,4 @@
 import { renderHook } from '@testing-library/react';
-import { useRef } from 'react';
 import { useFocus } from '../useFocus';
 
 describe('useFocus', () => {
@@ -110,7 +109,7 @@ describe('useFocus', () => {
   });
 
   it('should handle ref changing from null to element', () => {
-    let currentRef = { current: null };
+    let currentRef: React.RefObject<HTMLElement | null> = { current: null };
 
     const { rerender } = renderHook(
       ({ ref }) => useFocus(ref, ['dependency']),

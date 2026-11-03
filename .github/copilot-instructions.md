@@ -12,6 +12,7 @@ yarn start            # vite dev server on :3000 with the demo app (src/AppExamp
 yarn test             # vitest run
 yarn test:coverage
 yarn lint             # eslint (yarn lint-autofix to fix)
+yarn typecheck        # tsc on tsconfig.json (tests and demo app included)
 yarn dist             # build the npm package into dist/ (tsc -p tsconfigDist.json + static files)
 yarn check:package    # clean build of dist/ + consumer check of the packed package
 ```
@@ -23,7 +24,7 @@ yarn vitest run src/lib/hooks/__tests__/useLoading.test.ts
 yarn vitest run -t "partial test name"
 ```
 
-CI (`.github/workflows/code-review.yml`) runs `check:package`, lint, Danger and `test:coverage`. Releases are made only by the manual `Deploy` workflow, which bumps the version, updates `CHANGELOG.md` and publishes `dist/`; never bump `version` or edit `CHANGELOG.md` by hand.
+CI (`.github/workflows/code-review.yml`) runs `check:package`, lint, typecheck, Danger and `test:coverage`. Releases are made only by the manual `Deploy` workflow, which bumps the version, updates `CHANGELOG.md` and publishes `dist/`; never bump `version` or edit `CHANGELOG.md` by hand.
 
 ## Layout
 
