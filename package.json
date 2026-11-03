@@ -48,6 +48,8 @@
     "cpDistStatic": "copyfiles -u 2 src/lib/index.css src/lib/utils/fixSwagger20ArraySchemaDef.js dist && copyfiles package.json README.md CHANGELOG.md dist",
     "dist": "yarn setTsConfigDist && tsc && yarn cpDistStatic",
     "clean:dist": "rimraf dist",
+    "check:package": "yarn clean:dist && yarn dist && node scripts/check-package.mjs",
+    "clean:package-check": "rimraf .package-check",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "clean:coverage": "rimraf coverage",

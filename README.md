@@ -1,6 +1,10 @@
 # SelfCare's common components & features 
 This library contains [utilities](#utilities), [components](#components), [decorators](#decorators), [custom hooks](#custom-hooks) and [features](#features) built for the selfcare project.
 
+# Package check
+
+`yarn check:package` builds `dist/`, packs it and verifies it as a consumer would: the entry points listed in `scripts/package-entrypoints.json` must type-check and bundle with Vite, and every package imported by the library must be declared in `dependencies`. CI runs it on every PR. When adding a module that consumers import by path, add it to `scripts/package-entrypoints.json`.
+
 # Localization
 This libray has been built using react-i18next and string inside of it are also localizated.
 Actually the library contains the only "it" translation.
