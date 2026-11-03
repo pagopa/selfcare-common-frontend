@@ -3,7 +3,8 @@
 // Run with `yarn check:package` (it builds dist/ first).
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { builtinModules } from 'node:module';
+import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -11,9 +12,11 @@ const workDir = join(root, '.package-check');
 const pkgName = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')).name;
 // Inside the repo so the package's own dependencies resolve from the root node_modules
 const installDir = join(workDir, 'node_modules', ...pkgName.split('/'));
-const { modules, files } = JSON.parse(
-  readFileSync(join(root, 'scripts', 'package-entrypoints.json'), 'utf8')
-);
+const {
+  modules,
+  files,
+  consumerProvidedDependencies = {},
+} = JSON.parse(readFileSync(join(root, 'scripts', 'package-entrypoints.json'), 'utf8'));
 
 const run = (cmd, args, cwd = root) =>
   execFileSync(cmd, args, { cwd, stdio: 'pipe', encoding: 'utf8' });
@@ -53,17 +56,25 @@ writeFileSync(
       jsx: 'react-jsx',
       strict: true,
       noEmit: true,
-      skipLibCheck: true,
+      // Checks the package's own .d.ts; errors from other libraries are filtered out below
+      skipLibCheck: false,
       esModuleInterop: true,
       types: [],
     },
     files: ['consumer.ts', 'css.d.ts'],
   })
 );
+const ownPath = `${relative(workDir, installDir).split(sep).join('/')}/`;
+const isOwnDiagnostic = (diagnostic) =>
+  diagnostic.startsWith(ownPath) || !/^(\.\.\/)*node_modules\//.test(diagnostic);
 try {
-  run(join(root, 'node_modules', '.bin', 'tsc'), ['-p', workDir]);
+  run(join(root, 'node_modules', '.bin', 'tsc'), ['-p', '.', '--pretty', 'false'], workDir);
 } catch (e) {
-  failures.push(`TypeScript resolution failed:\n${e.stdout || e.message}`);
+  // Each diagnostic starts at column 0 with its file path; continuation lines are indented
+  const ownErrors = (e.stdout || e.message).split(/\n(?=\S)/).filter(isOwnDiagnostic);
+  if (ownErrors.length > 0) {
+    failures.push(`TypeScript check failed:\n${ownErrors.join('\n')}`);
+  }
 }
 
 // 3. Every module entry point (and its internal imports) bundles with Vite
@@ -76,6 +87,7 @@ const packageOf = (id) =>
     .slice(0, id.startsWith('@') ? 2 : 1)
     .join('/');
 const externalPackages = new Set();
+const unresolved = [];
 try {
   await build({
     configFile: false,
@@ -85,23 +97,43 @@ try {
       outDir: join(workDir, 'out'),
       emptyOutDir: true,
       lib: { entry: join(workDir, 'consumer.ts'), formats: ['es'], fileName: 'consumer' },
-      rollupOptions: {
-        // Bundle only this package, as a consumer bundler would resolve it; keep its dependencies external
-        external: (id, importer) => {
+    },
+    plugins: [
+      {
+        // Bundle only this package, as a consumer bundler would resolve it. Its dependencies stay
+        // external, but each imported path must still resolve (package exports included).
+        name: 'externalize-dependencies',
+        enforce: 'pre',
+        async resolveId(id, importer) {
           if (!isBare(id) || isOwnModule(id)) {
-            return false;
+            return null;
           }
-          if (importer?.includes(`/node_modules/${pkgName}/`)) {
-            externalPackages.add(packageOf(id));
+          externalPackages.add(packageOf(id));
+          const resolved = await this.resolve(id, importer, { skipSelf: true });
+          if (!resolved) {
+            unresolved.push(`${id} (imported by ${relative(installDir, importer)})`);
           }
-          return true;
+          return { id, external: true };
         },
       },
-    },
+    ],
   });
 } catch (e) {
   failures.push(`Vite build failed:\n${e.message}`);
 }
+unresolved.forEach((entry) => failures.push(`import does not resolve: ${entry}`));
+
+// Shipped scripts (e.g. utils/fixSwagger20ArraySchemaDef.js) are not bundled above: collect their imports
+const importPattern = /(?:require\(\s*|import\s*\(\s*|from\s+|^import\s+)['"]([^'"]+)['"]/gm;
+const isBuiltin = (id) => id.startsWith('node:') || builtinModules.includes(id);
+files
+  .filter((file) => /\.(c|m)?js$/.test(file) && existsSync(join(installDir, file)))
+  .forEach((file) =>
+    [...readFileSync(join(installDir, file), 'utf8').matchAll(importPattern)]
+      .map(([, id]) => id)
+      .filter((id) => isBare(id) && !isBuiltin(id))
+      .forEach((id) => externalPackages.add(packageOf(id)))
+  );
 
 // 4. The package declares everything it imports (otherwise it works here only thanks to devDependencies)
 const packed = JSON.parse(readFileSync(join(installDir, 'package.json'), 'utf8'));
@@ -113,7 +145,7 @@ const declared = new Set(
   })
 );
 [...externalPackages]
-  .filter((name) => !declared.has(name))
+  .filter((name) => !declared.has(name) && !(name in consumerProvidedDependencies))
   .sort()
   .forEach((name) => failures.push(`imported but not declared in dependencies: ${name}`));
 

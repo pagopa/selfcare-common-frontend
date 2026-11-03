@@ -48,5 +48,8 @@
     "lib/utils/verifyNameMatchWithTaxCode",
     "lib/utils/verifySurnameMatchWithTaxCode"
   ],
-  "files": ["index.css", "package.json", "utils/fixSwagger20ArraySchemaDef.js"]
+  "files": ["index.css", "package.json", "utils/fixSwagger20ArraySchemaDef.js"],
+  "consumerProvidedDependencies": {
+    "regex-replace": "Required by utils/fixSwagger20ArraySchemaDef.js, which consumers run in their generate script. Each consumer declares it in its own devDependencies; it is not in dependencies because consumers build their Module Federation shared config from them."
+  }
 }
