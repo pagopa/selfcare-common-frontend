@@ -5,6 +5,24 @@ This library contains [utilities](#utilities), [components](#components), [decor
 
 `yarn check:package` builds `dist/`, packs it and verifies it as a consumer would: the entry points listed in `scripts/package-entrypoints.json` must type-check and bundle with Vite, and every package imported by the library must be declared in `dependencies`. CI runs it on every PR. When adding a module that consumers import by path, add it to `scripts/package-entrypoints.json`.
 
+# Migration to 3.0.0 (react-router v7)
+
+Version 3.0.0 requires `react-router` ^7 (a single package: `react-router-dom` and `history` are no longer used). Apps still on react-router v5 must stay on Common `^2.x`. Upgrade Common and the router in the same PR, and make sure only one copy of `react-router` is installed (`yarn why react-router`), otherwise the router context is not shared and `Header` breaks.
+
+| react-router v5 | react-router v7 |
+| --- | --- |
+| `import … from 'react-router-dom'` | `import … from 'react-router'` |
+| `Switch` + `Route component={X} exact` | `Routes` + `Route element={<X />}` (match is exact by default) |
+| `Redirect` | `<Navigate replace />` |
+| `useHistory().push/replace/goBack` | `useNavigate()` → `navigate(to)`, `navigate(to, { replace: true })`, `navigate(-1)` |
+| `useRouteMatch` | `useMatch` |
+| `Prompt` / `history.block` | `useBlocker` (data router only) |
+
+## Unload event interceptor and the router
+`useUnloadEventInterceptor` no longer uses the router: it only enables/disables the interceptor in the redux store (and the `beforeunload` listener). The blocking of router navigations is now performed by `UnloadEventHandler`, which:
+- with a **data router** (`createBrowserRouter` / `createMemoryRouter` + `RouterProvider`) blocks the navigations to a different path/search/hash while the interceptor is enabled and shows the confirmation pop-up (confirm → navigation proceeds, cancel → stays on the page). `UnloadEventHandler` must be rendered inside the router;
+- with a plain `<BrowserRouter>` / `<MemoryRouter>` **does not block** router navigations (react-router `useBlocker` is not supported there): only `beforeunload` and the exit actions invoked through `useUnloadEventOnExit` / `useUnloadEventLogout` are intercepted. To keep blocking in-app navigations, migrate the app to a data router.
+
 # Localization
 This libray has been built using react-i18next and string inside of it are also localizated.
 Actually the library contains the only "it" translation.

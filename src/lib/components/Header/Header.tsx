@@ -10,7 +10,7 @@ import {
 import { PartySwitchItem } from '@pagopa/mui-italia/components/PartySwitch';
 import { Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { CONFIG } from '../../config/env';
 import { buildAssistanceURI } from '../../services/assistanceService';
 import { withOnSuccess } from '../../utils/login-utils';
