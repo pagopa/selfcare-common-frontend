@@ -1,13 +1,14 @@
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 import { appStateSelectors } from '../lib/redux/slices/appStateSlice';
 import { useUnloadEventInterceptor } from './../lib/hooks/useUnloadEventInterceptor';
 
 export default function UseUnloadEventInterceptorExample() {
   const { registerUnloadEvent, unregisterUnloadEvent } = useUnloadEventInterceptor();
   const unloadEventconfiguration = useSelector(appStateSelectors.selectUnloadEventConfiguration);
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   return !unloadEventconfiguration.enabled ? (
     <Button
@@ -21,10 +22,7 @@ export default function UseUnloadEventInterceptorExample() {
       <Button onClick={() => unregisterUnloadEvent()} variant="contained">
         EndUnloadEventInterceptor
       </Button>
-      <Button
-        onClick={() => history.push(history.location.pathname + 'subpath/')}
-        variant="outlined"
-      >
+      <Button onClick={() => navigate(location.pathname + 'subpath/')} variant="outlined">
         pushRoute
       </Button>
     </>
