@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useStore } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { CONFIG } from '../config/env';
 import { appStateActions } from '../redux/slices/appStateSlice';
 import { appStateSelectors } from './../redux/slices/appStateSlice';
@@ -8,33 +7,18 @@ import { appStateSelectors } from './../redux/slices/appStateSlice';
 /** In order to use this feature you have to use the custom hook useUnloadEventInterceptor, which will return an object having the following keys:
 1.  registerUnloadEvent: an arrow function which takes two optional parameters to customize the title and the description of the pop-up opened when invoking the exitAction function (see below) and enable the functionality.
 2.  unregisterUnloadEvent: an arrow function to call in order to disable this functionality.
+
+The interception of the router navigations (react-router `useBlocker`) is performed by the UnloadEventHandler component and works only when the application uses a data router (`createBrowserRouter` + `RouterProvider`). With a plain `<BrowserRouter>` only the browser `beforeunload` event and the `useUnloadEventOnExit` exit actions are intercepted.
  */
 export const useUnloadEventInterceptor = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const onExit = useUnloadEventOnExit();
-
-  const unblockHistory = useRef<() => void>(() => {});
 
   const registerUnloadEvent = (title?: string, description?: string) => {
     dispatch(appStateActions.enableUnloadEventInterceptor({ title, description }));
-
-    if (history) {
-      // if not using ReactRouter, it will be undefined
-      // eslint-disable-next-line functional/immutable-data
-      unblockHistory.current = history.block((tx) => {
-        onExit(() => {
-          unblockHistory.current();
-          history.push(tx);
-        });
-        return false;
-      });
-    }
   };
 
   const unregisterUnloadEvent = () => {
     dispatch(appStateActions.disableUnloadEventInterceptor());
-    unblockHistory.current();
   };
 
   return {

@@ -1,8 +1,11 @@
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
+import { UNSAFE_DataRouterContext } from 'react-router';
 import { useUnloadEventInterceptor } from '../hooks/useUnloadEventInterceptor';
 import { appStateSelectors, appStateActions } from '../redux/slices/appStateSlice';
 import SessionModal from './SessionModal';
+import UnloadEventRouterBlocker from './UnloadEventRouterBlocker';
 
 /** This feature is based on react-redux library and require to register the reducer build in appStateSlice into the application's redux store.
 It allows to intercept when the user try to exit from the current page and ask him if he wants to continue or not.
@@ -26,14 +29,18 @@ export default function UnloadEventHandler() {
     }
   };
   const { t } = useTranslation();
+  const isDataRouter = useContext(UNSAFE_DataRouterContext) !== null;
   return (
-    <SessionModal
-      open={unloadEventconfiguration.enabled && unloadEventconfiguration.open}
-      title={unloadEventconfiguration.title ?? t('common.unloadEventHandler.title')}
-      message={unloadEventconfiguration.description ?? t('common.unloadEventHandler.message')}
-      onConfirm={onConfirm}
-      onConfirmLabel={t('common.unloadEventHandler.confirmLabel')}
-      handleClose={onClose}
-    />
+    <>
+      {isDataRouter && <UnloadEventRouterBlocker />}
+      <SessionModal
+        open={unloadEventconfiguration.enabled && unloadEventconfiguration.open}
+        title={unloadEventconfiguration.title ?? t('common.unloadEventHandler.title')}
+        message={unloadEventconfiguration.description ?? t('common.unloadEventHandler.message')}
+        onConfirm={onConfirm}
+        onConfirmLabel={t('common.unloadEventHandler.confirmLabel')}
+        handleClose={onClose}
+      />
+    </>
   );
 }
