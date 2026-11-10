@@ -1,7 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
+import { MemoryRouter, RouterProvider, createMemoryRouter } from 'react-router';
 import { createStore } from '../../../examples/redux/store';
 import './../../../examples/locale';
 import UseUnloadEventInterceptorExample from './../../../examples/UseUnloadEventInterceptorExample';
@@ -38,20 +37,40 @@ afterAll(() => {
 const renderApp = (startEnabled: boolean) => {
   const store = createStore();
   const Child = buildChildComponent(startEnabled);
-  const history = createMemoryHistory();
   // Type-safe aliases to avoid TypeScript conflicts
   const ReduxProvider = Provider as any;
-  const RouterProvider = Router as any;
   render(
-    <RouterProvider history={history}>
+    <MemoryRouter>
       <ReduxProvider store={store}>
         <UnloadEventHandler />
         <UseUnloadEventInterceptorExample />
         <Child />
       </ReduxProvider>
-    </RouterProvider>
+    </MemoryRouter>
   );
   return store;
+};
+
+const renderAppWithDataRouter = () => {
+  const store = createStore();
+  const ReduxProvider = Provider as any;
+  const router = createMemoryRouter([
+    {
+      path: '*',
+      element: (
+        <>
+          <UnloadEventHandler />
+          <UseUnloadEventInterceptorExample />
+        </>
+      ),
+    },
+  ]);
+  render(
+    <ReduxProvider store={store}>
+      <RouterProvider router={router} />
+    </ReduxProvider>
+  );
+  return { store, router };
 };
 
 function buildChildComponent(startEnabled: boolean) {
@@ -162,5 +181,30 @@ describe('enabled', () => {
   });
   test('exitStartEnabled', async () => {
     await baseTestStartEnabled('EXIT', 'http://dummyurl');
+  });
+});
+
+describe('data router navigation blocking', () => {
+  test('blocks the navigation, keeps the location on cancel and proceeds on confirm', async () => {
+    const { router } = renderAppWithDataRouter();
+    fireEvent.click(screen.getByText('StartUnloadEventInterceptor'));
+
+    fireEvent.click(screen.getByText('pushRoute'));
+    await screen.findByText('Vuoi uscire dal flusso attuale?');
+    expect(router.state.location.pathname).toBe('/');
+
+    fireEvent.click(screen.getByText('Annulla'));
+    await waitFor(() => expect(screen.queryByText('Vuoi uscire dal flusso attuale?')).toBeNull());
+    expect(router.state.location.pathname).toBe('/');
+
+    fireEvent.click(screen.getByText('pushRoute'));
+    fireEvent.click(await screen.findByText('Esci'));
+    await waitFor(() => expect(router.state.location.pathname).toBe('/subpath/'));
+  });
+
+  test('does not block the navigation when not enabled', async () => {
+    const { router } = renderAppWithDataRouter();
+    await router.navigate('/other');
+    expect(router.state.location.pathname).toBe('/other');
   });
 });
