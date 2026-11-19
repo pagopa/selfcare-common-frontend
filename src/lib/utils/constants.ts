@@ -64,6 +64,7 @@ export const Actions = {
   UploadLogo: 'Selc:UploadLogo',
   UpdateInstitution: 'Selc:UpdateInstitutionData',
   ViewContract: 'Selc:ViewContract',
+  UpdateContract: 'Selc:UpdateContract',
   UpdateGeoTaxonomy: 'Selc:UpdateGeoTaxonomy',
   ViewAccountPage: 'Selc:ViewAccountPage',
   ManageAccountPage: 'Selc:ManageAccountPage',
